@@ -29,4 +29,4 @@ jobs:
 
       # Runs test
       - name: Run a multi-line script
-        run: dotnet test ./Rockatuestilo.DataRepoMain/
+        run: dotnet test 
