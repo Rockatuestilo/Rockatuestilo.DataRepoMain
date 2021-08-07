@@ -12,6 +12,7 @@
     <Company>rockatuestilo</Company>
     <Product>Rockatuestilo.DataRepoMain </Product>
     <AssemblyVersion>1.0.0</AssemblyVersion>
+    <PackageVersion>1.0.0</PackageVersion>
     <FileVersion>1.0.0</FileVersion>
   </PropertyGroup>
 
