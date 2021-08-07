@@ -2,6 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Rockatuestilo.DataRepoMain </PackageId>
+    <Authors>Rockatuestilo.DataRepoMain </Authors>
+    <Copyright>Eddie Krill</Copyright>
+    <PackageProjectUrl>https://rockatuestilo.com/</PackageProjectUrl>
+    <PackageLicenseUrl>https://rockatuestilo.com/</PackageLicenseUrl>
+    <PackageTags>rockatuestilo rock metal</PackageTags>
+    <Company>rockatuestilo</Company>
+    <Product>Rockatuestilo.DataRepoMain </Product>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,8 +36,5 @@
     <Folder Include="Persistence\UnitiesOfWork\" />
     <Folder Include="Migrations\" />
     <Folder Include="Core\Configuration\CacheSystem\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DirectQueriesStandard\DirectQueriesStandard.csproj" />
   </ItemGroup>
 </Project>
