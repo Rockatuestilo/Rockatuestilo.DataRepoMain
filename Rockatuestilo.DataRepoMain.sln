@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rockatuestilo.DataRepoMain.Tests", "Rockatuestilo.DataRepoMain\Rockatuestilo.DataRepoMain.Tests\Rockatuestilo.DataRepoMain.Tests.csproj", "{1545BB5D-9EA9-465D-A524-5B1E9130C687}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UoWRepo", ".\UoWRepo\UoWRepo.csproj", "{329286DC-16F8-49FF-9C66-02E6DDD2EA08}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1545BB5D-9EA9-465D-A524-5B1E9130C687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1545BB5D-9EA9-465D-A524-5B1E9130C687}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1545BB5D-9EA9-465D-A524-5B1E9130C687}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1545BB5D-9EA9-465D-A524-5B1E9130C687}.Release|Any CPU.Build.0 = Release|Any CPU
+		{329286DC-16F8-49FF-9C66-02E6DDD2EA08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{329286DC-16F8-49FF-9C66-02E6DDD2EA08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{329286DC-16F8-49FF-9C66-02E6DDD2EA08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{329286DC-16F8-49FF-9C66-02E6DDD2EA08}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
