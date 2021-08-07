@@ -8,6 +8,10 @@ namespace UoWRepo.Core.Configuration
     public class EFContext: DbContext, ICommonContext
     {
         private readonly string connectionString;
+        
+        public EFContext(DbContextOptions<EFContext> options)
+            : base(options)
+        { }
 
         public EFContext(string connectionString)
         {
@@ -18,6 +22,11 @@ namespace UoWRepo.Core.Configuration
         {
             try
             {
+                if (string.IsNullOrEmpty(connectionString))
+                {
+                    return;
+                }
+
                 optionsBuilder.UseMySql(connectionString,
                     new MariaDbServerVersion(new Version(10, 5, 8)), 
                     mySqlOptions => mySqlOptions
