@@ -23,7 +23,6 @@
     <Folder Include="Persistence\Repositories\" />
     <Folder Include="Core\Configuration\" />
     <Folder Include="Persistence\UnitiesOfWork\" />
-    <Folder Include="Tools\" />
     <Folder Include="Migrations\" />
     <Folder Include="Core\Configuration\CacheSystem\" />
   </ItemGroup>
