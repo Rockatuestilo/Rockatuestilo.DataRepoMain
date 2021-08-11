@@ -61,7 +61,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         public IRepositorySharingSocialNetwork SharingSocialNetwork { get; }
         public int Complete()
         {
-            throw new System.NotImplementedException();
+            return _context.SaveChanges();
         }
         
         public void Dispose()
