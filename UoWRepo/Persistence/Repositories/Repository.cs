@@ -9,6 +9,7 @@ using LinqToDB.Data;
 
 namespace UoWRepo.Persistence.Repositories
 {
+    [Obsolete]
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Core.Domain.TEntity
     {
         protected readonly Linq2DbContext context;

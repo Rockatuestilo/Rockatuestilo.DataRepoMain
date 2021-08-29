@@ -10,6 +10,7 @@ namespace UoWRepo.Persistence.Repositories
 {
     public class RepositoryNews: Repository<NewsEtty>, IRepositoryNews
     {
+        [Obsolete]
         public RepositoryNews(Linq2DbContext context) : base(context)
         {
 
