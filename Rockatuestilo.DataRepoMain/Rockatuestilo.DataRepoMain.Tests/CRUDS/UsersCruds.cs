@@ -76,5 +76,25 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS
             var countShouldBe = result.Count + users.Count;
             Assert.AreEqual(result2.Count, countShouldBe);
         }
+        
+        
+        [Test]
+        public void Test4_SingleOrDefault()
+        {
+            
+            var result = _unitOfWorkEf.Users.SingleOrDefault(x => x.Id == 1);
+
+            Assert.NotNull(result);
+        }
+        
+        
+        [Test]
+        public void Test4_GetAllQueryble()
+        {
+
+            var result = _unitOfWorkEf.Users.GetAllQueryble();
+
+            Assert.NotNull(result);
+        }
     }
 }
