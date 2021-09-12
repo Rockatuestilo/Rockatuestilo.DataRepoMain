@@ -6,6 +6,7 @@ using UoWRepo.Core.Repositories;
 
 namespace UoWRepo.Persistence.Repositories
 {
+    [Obsolete]
     public class MemoryRepositoryNews : MemoryRepository<NewsEtty>, IRepositoryNews
     {
 

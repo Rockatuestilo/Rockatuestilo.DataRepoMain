@@ -8,6 +8,7 @@ using UoWRepo.Core.Repositories;
 namespace UoWRepo.Persistence.Repositories
 {
 
+    [Obsolete]
     public class MemoryRepository<TEntity> : Repository<TEntity> where TEntity : Core.Domain.TEntity
     {
 
