@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Rockatuestilo.DataRepoMain </PackageId>
     <Authors>Rockatuestilo.DataRepoMain </Authors>
@@ -11,9 +11,10 @@
     <PackageTags>rockatuestilo rock metal</PackageTags>
     <Company>rockatuestilo</Company>
     <Product>Rockatuestilo.DataRepoMain </Product>
-    <AssemblyVersion>1.1.19</AssemblyVersion>
-    <PackageVersion>1.1.19</PackageVersion>
-    <FileVersion>1.1.19</FileVersion>
+    <AssemblyVersion>1.2.2</AssemblyVersion>
+    <PackageVersion>1.2.2</PackageVersion>
+    <FileVersion>1.2.2</FileVersion>
+    <LangVersion>9</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
