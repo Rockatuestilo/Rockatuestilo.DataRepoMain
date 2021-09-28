@@ -19,4 +19,8 @@
       <ProjectReference Include="..\..\UoWRepo\UoWRepo.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="TestData\EFSpace" />
+    </ItemGroup>
+
 </Project>
