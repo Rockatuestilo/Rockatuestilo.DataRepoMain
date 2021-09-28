@@ -119,7 +119,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             var sp = _context.DataProvider.GetSchemaProvider();
             var dbSchema = sp.GetSchema(_context);
 
-            if (!dbSchema.Tables.Any(t => t.TableName == "Banners"))
+            if (dbSchema.Tables.Any(t => t.TableName == "Banners"))
             {
                 try
                 {
