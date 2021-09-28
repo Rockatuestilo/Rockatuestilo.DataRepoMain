@@ -83,7 +83,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             
             PendingRegistration = new MemoryRepository<PendingRegistration>(_context, new Repository<PendingRegistration>(_context));
 
-            //DoSomeMigration();
+            DoSomeMigration();
 
         }
 
