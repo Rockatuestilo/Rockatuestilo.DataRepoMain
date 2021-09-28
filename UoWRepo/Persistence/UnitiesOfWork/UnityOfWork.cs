@@ -119,8 +119,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             var sp = _context.DataProvider.GetSchemaProvider();
             var dbSchema = sp.GetSchema(_context);
 
-            if (dbSchema.Tables.Any(t => t.TableName == "Banners"))
-            {
+       
                 try
                 {
                     UpdateDatabase(serviceProvider);
@@ -130,7 +129,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
                     var hhshshs = ex.Message;
                     var hhshshss = ex.InnerException;
                 }
-            }
+            
 
 
         }

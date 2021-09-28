@@ -19,6 +19,10 @@ namespace UoWRepo.Migrations
 
         public override void Up()
         {
+            
+            
+         
+            
             TryDelete("Banners");
             TryDelete("Div_configuration");
             TryDelete("divofpage");
@@ -38,7 +42,10 @@ namespace UoWRepo.Migrations
         {
             try
             {
-                Delete.Table(nameOfTable);
+                if (Schema.Table(nameOfTable).Exists())
+                {
+                    Delete.Table(nameOfTable);
+                }
             }
             catch (Exception e)
             {
