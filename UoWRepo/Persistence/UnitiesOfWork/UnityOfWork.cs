@@ -118,20 +118,8 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             //serviceProvider.
             var sp = _context.DataProvider.GetSchemaProvider();
             var dbSchema = sp.GetSchema(_context);
-            if (!dbSchema.Tables.Any(t => t.TableName == "ArticlesViewForUI"))
-            {
-                try 
-                {
-                    UpdateDatabase(serviceProvider);
-                }
-                catch(Exception ex) 
-                {
-                    var hhshshs = ex.Message;
-                    var hhshshss = ex.InnerException;
-                }
-            }
 
-            if (!dbSchema.Tables.Any(t => t.TableName == "tb_news"))
+            if (!dbSchema.Tables.Any(t => t.TableName == "Banners"))
             {
                 try
                 {
@@ -179,7 +167,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
 
 
             runner.MigrateUp();
-            runner.Up(new AddUIViewArticles());
+            runner.Up(new DeleteUnneededStuff());
         }
 
 
