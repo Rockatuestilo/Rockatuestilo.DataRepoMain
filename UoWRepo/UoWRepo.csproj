@@ -11,9 +11,9 @@
     <PackageTags>rockatuestilo rock metal</PackageTags>
     <Company>rockatuestilo</Company>
     <Product>Rockatuestilo.DataRepoMain </Product>
-    <AssemblyVersion>1.3.5</AssemblyVersion>
-    <PackageVersion>1.3.5</PackageVersion>
-    <FileVersion>1.3.5</FileVersion>
+    <AssemblyVersion>1.3.6</AssemblyVersion>
+    <PackageVersion>1.3.6</PackageVersion>
+    <FileVersion>1.3.6</FileVersion>
     <LangVersion>9</LangVersion>
   </PropertyGroup>
 
@@ -21,8 +21,8 @@
     <PackageReference Include="linq2db" Version="3.4.0" />
     <PackageReference Include="linq2db.MySql" Version="3.4.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.1" />    
-    <PackageReference Include="FluentMigrator" Version="3.2.9" />
-    <PackageReference Include="FluentMigrator.Runner.MySql" Version="3.2.9" />
+    <PackageReference Include="FluentMigrator" Version="3.3.1" />
+    <PackageReference Include="FluentMigrator.Runner.MySql" Version="3.3.1" />
     <PackageReference Include="FluentMigrator.Runner" Version="3.2.9" />
     <PackageReference Include="MySqlConnector" Version="1.3.9" />
     <PackageReference Include="Npgsql" Version="5.0.1.1" />

@@ -18,7 +18,7 @@ namespace UoWRepo.Migrations
 
         public override void Up()
         {
-            var statementCreate = @"
+            /*var statementCreate = @"
 CREATE TABLE `Articles` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Title` varchar(2000) DEFAULT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `Articles` (
 ) ENGINE=InnoDB AUTO_INCREMENT=675 DEFAULT CHARSET=latin1;
             ";
 
-            Execute.Sql(statementCreate);
+            Execute.Sql(statementCreate);*/
         }
     }
 }
