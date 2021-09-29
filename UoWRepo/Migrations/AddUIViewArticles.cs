@@ -18,7 +18,7 @@ namespace UoWRepo.Migrations
 
         public override void Up()
         {
-            Create.Table("ArticlesViewForUI")
+            /*Create.Table("ArticlesViewForUI")
             .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
             .WithColumn("ArticleId").AsInt32().Unique().NotNullable().Unique()
             .WithColumn("UIString").AsString(90000).Nullable()
@@ -26,7 +26,7 @@ namespace UoWRepo.Migrations
             .WithColumn("UpdatedById").AsInt32().NotNullable()
             .WithColumn("CreatedDate").AsDateTime2().NotNullable()
             .WithColumn("UpdatedDate").AsDateTime2().NotNullable()
-            .WithColumn("LastUpdateOfArticle").AsDateTime2().NotNullable();
+            .WithColumn("LastUpdateOfArticle").AsDateTime2().NotNullable();*/
         }
     }
 }
