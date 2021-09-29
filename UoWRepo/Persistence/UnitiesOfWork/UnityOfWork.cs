@@ -83,7 +83,9 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             
             PendingRegistration = new MemoryRepository<PendingRegistration>(_context, new Repository<PendingRegistration>(_context));
 
-            DoSomeMigration();
+            new MigrationsModule(_context.ConfigurationString).DoSomeMigration();
+
+            
 
         }
 
@@ -109,66 +111,8 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         public IRepositorySharedObject SharedObject { get; private set; }
         public IRepositorySharingSocialNetwork SharingSocialNetwork { get; private set; }
 
-        public void DoSomeMigration() 
-        {
-            //var hh = new MigrationBase();
-
-            var serviceProvider = CreateServices(_context.ConnectionString);
-
-            //serviceProvider.
-            var sp = _context.DataProvider.GetSchemaProvider();
-            var dbSchema = sp.GetSchema(_context);
-
        
-                try
-                {
-                    UpdateDatabase(serviceProvider);
-                }
-                catch (Exception ex)
-                {
-                    var hhshshs = ex.Message;
-                    var hhshshss = ex.InnerException;
-                }
-            
-
-
-        }
-
-        private IServiceProvider CreateServices(string connection)
-        {
-
-            //var h= System.Reflection.Assembly.GetExecutingAssembly();
-
-            return new ServiceCollection()// Add common FluentMigrator services
-                .AddFluentMigratorCore()
-                .ConfigureRunner(rb => rb
-                    // Add SQLite support to FluentMigrator
-                    .AddMySql5()
-                    
-                    // Set the connection string
-                    .WithGlobalConnectionString(connection)
-                   // Define the assembly containing the migrations
-                   //.ScanIn(typeof(UoWRepo.Migrations.AddUIViewArticles).Assembly).For.Migrations()
-                   .ScanIn(System.Reflection.Assembly.GetExecutingAssembly()).For.Migrations()
-                   )
-               
-                // Build the service provider
-                .BuildServiceProvider(false);
-        }
-
-        private void UpdateDatabase(IServiceProvider serviceProvider)
-        {
-            // Instantiate the runner
-            var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
-
-            // Execute the migrations
-
-
-
-            runner.MigrateUp();
-            runner.Up(new DeleteUnneededStuff());
-        }
-
+        
 
 
 
@@ -194,5 +138,77 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         {
             _context.Dispose();
         }
+    }
+
+    public class MigrationsModule
+    {
+        private readonly string _connectionString;
+
+        public MigrationsModule(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        public void DoSomeMigration() 
+        {
+            //var hh = new MigrationBase();
+
+            var serviceProvider = CreateServices(_connectionString);
+
+            //serviceProvider.
+            
+
+       
+            try
+            {
+                UpdateDatabase(serviceProvider);
+            }
+            catch (Exception ex)
+            {
+                var hhshshs = ex.Message;
+                var hhshshss = ex.InnerException;
+            }
+            
+
+
+        }
+
+        
+        private IServiceProvider CreateServices(string connection)
+        {
+
+            //var h= System.Reflection.Assembly.GetExecutingAssembly();
+
+            return new ServiceCollection()// Add common FluentMigrator services
+                .AddFluentMigratorCore()
+                .ConfigureRunner(rb => rb
+                    // Add SQLite support to FluentMigrator
+                    .AddMySql5()
+                    
+                    // Set the connection string
+                    .WithGlobalConnectionString(connection)
+                    // Define the assembly containing the migrations
+                    //.ScanIn(typeof(UoWRepo.Migrations.AddUIViewArticles).Assembly).For.Migrations()
+                    .ScanIn(System.Reflection.Assembly.GetExecutingAssembly()).For.Migrations()
+                )
+               
+                // Build the service provider
+                .BuildServiceProvider(false);
+        }
+
+        private void UpdateDatabase(IServiceProvider serviceProvider)
+        {
+            // Instantiate the runner
+            var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
+
+            // Execute the migrations
+
+
+
+            runner.MigrateUp();
+            runner.Up(new DeleteUnneededStuff());
+        }
+
+        
     }
 }
