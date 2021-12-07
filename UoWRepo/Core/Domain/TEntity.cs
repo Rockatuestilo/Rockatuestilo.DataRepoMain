@@ -3,6 +3,7 @@ using System;
 
 namespace UoWRepo.Core.Domain
 {
+    [Obsolete]
     public class TEntity 
     {
         [PrimaryKey, Identity]

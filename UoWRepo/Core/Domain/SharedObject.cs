@@ -3,6 +3,7 @@ using LinqToDB.Mapping;
 
 namespace UoWRepo.Core.Domain
 {
+    [Obsolete]
     [Table(Name = "SharedObject")]
     public class SharedObjectLinqDB : TEntity, ITEntity
     {

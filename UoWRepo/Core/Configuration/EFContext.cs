@@ -28,9 +28,8 @@ namespace UoWRepo.Core.Configuration
                 }
 
                 optionsBuilder.UseMySql(connectionString,
-                    new MariaDbServerVersion(new Version(10, 5, 8)), 
-                    mySqlOptions => mySqlOptions
-                        .CharSetBehavior(CharSetBehavior.NeverAppend));
+                    new MariaDbServerVersion(new Version(10, 5, 8)) 
+                    );
             }
             catch (TypeLoadException exception)
             {
