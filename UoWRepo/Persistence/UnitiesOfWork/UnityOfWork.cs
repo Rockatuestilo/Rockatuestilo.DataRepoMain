@@ -71,7 +71,10 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             //Categories = new RepositoryCategories(_context);
 
 
-            News = new MemoryRepositoryNews(_context, new RepositoryNews(_context));
+            //News = new MemoryRepositoryNews(_context, new RepositoryNews(_context));
+            
+            
+            News = new MemoryRepository<NewsEtty>(_context, new Repository<NewsEtty>(_context));
 
 
             PublicationType = new MemoryRepository<NewsPublicationType>(_context, new Repository<NewsPublicationType>(_context));
@@ -111,10 +114,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         //public IRepositoryHashTags HashTags { get; private set; }
         //public IRepositoryHashTagsNews HashTagsNews { get; private set; }
 
-
-        public IRepositoryNews News { get; private set; }
-        
-        public IMemoryRepository<NewsEtty> NewsV2 { get; private set; }
+        public IMemoryRepository<NewsEtty> News { get; private set; }
         //public IRepositoryGalleries Galleries { get; private set; }
         //public IRepositoryUsers Users { get; private set; }
         public IRepositorySharedObject SharedObject { get; private set; }
