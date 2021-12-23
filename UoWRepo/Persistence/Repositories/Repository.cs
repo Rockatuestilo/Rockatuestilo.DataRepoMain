@@ -47,7 +47,7 @@ namespace UoWRepo.Persistence.Repositories
         }
 
       
-        public IQueryable<TEntity> FindQueryble(Expression<Func<TEntity, bool>> predicate)
+        public virtual IQueryable<TEntity> FindQueryble(Expression<Func<TEntity, bool>> predicate)
         {
             return context.GetTable<TEntity>().Where(predicate).AsQueryable();
         }

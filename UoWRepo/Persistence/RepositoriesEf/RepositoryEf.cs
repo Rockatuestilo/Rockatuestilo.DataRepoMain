@@ -42,7 +42,7 @@ namespace UoWRepo.Persistence.RepositoriesEf
             entities.AddRange(entitiesList);
         }
 
-        public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        public virtual  IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
             return entities.Where(predicate).ToList();
         }
@@ -52,7 +52,7 @@ namespace UoWRepo.Persistence.RepositoriesEf
             return entities.AsQueryable();
         }
 
-        public IQueryable<TEntity> FindQueryble(Expression<Func<TEntity, bool>> predicate)
+        public virtual IQueryable<TEntity> FindQueryble(Expression<Func<TEntity, bool>> predicate)
         {
             return entities.Where(predicate).AsQueryable();
         }
