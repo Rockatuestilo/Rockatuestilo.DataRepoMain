@@ -1,4 +1,5 @@
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
 using Rockatuestilo.DataRepoMain.Tests.TestData.Users;
@@ -13,6 +14,8 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.EF
         public void Setup()
         {
             var value = new ContextGenerator().CreateInMemory();
+            
+            //value.Database.Migrate();
 
             _unitOfWorkEf = new UnityOfWorkEf(value);
             
@@ -25,7 +28,7 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.EF
         [Test]
         public void Test1_add1()
         {
-            var users = new TestDataUsers1().GetData();
+            var users = new TestDataUsers1().GetDataEf();
             
             _unitOfWorkEf.Users.Add(users[0]);
 
@@ -65,7 +68,7 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.EF
         public void Test3_AddMany1()
         {
             
-            var users = new TestDataUsers1().GetData();
+            var users = new TestDataUsers1().GetDataEf();
             var result = _unitOfWorkEf.Users.GetAll().ToList();
             
             _unitOfWorkEf.Users.AddRange(users);
