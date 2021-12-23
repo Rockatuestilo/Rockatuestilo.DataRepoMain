@@ -13,7 +13,7 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS
         [SetUp]
         public void Setup()
         {
-            var value = new ContextGenerator().Create();
+            var value = new ContextGenerator().CreateInMemory();
             _unitOfWorkEf = new UnityOfWorkEf(value);
         }
 

@@ -4,15 +4,15 @@ using Rockatuestilo.DataRepoMain.Tests.DbInit;
 using Rockatuestilo.DataRepoMain.Tests.TestData.Users;
 using UoWRepo.Persistence.UnitiesOfWork;
 
-namespace Rockatuestilo.DataRepoMain.Tests.CRUDS
+namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.EF
 {
-    public class UsersCruds
+    public class UsersCrudsEf
     {
         
         [SetUp]
         public void Setup()
         {
-            var value = new ContextGenerator().Create();
+            var value = new ContextGenerator().CreateInMemory();
 
             _unitOfWorkEf = new UnityOfWorkEf(value);
             
