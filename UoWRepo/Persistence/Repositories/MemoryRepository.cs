@@ -7,8 +7,6 @@ using UoWRepo.Core.Repositories;
 
 namespace UoWRepo.Persistence.Repositories
 {
-
-    [Obsolete]
     public class MemoryRepository<TEntity> : Repository<TEntity> where TEntity : Core.Domain.TEntity
     {
 
@@ -90,6 +88,22 @@ namespace UoWRepo.Persistence.Repositories
                 return liste;
             }
             return result;
+        }
+        
+        public IQueryable<TEntity> FindQueryble(Expression<Func<TEntity, bool>> predicate)
+        {
+            var nameOfEntity= typeof(TEntity).Name;
+            var result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
+            
+            if (result == null) 
+            {
+                var liste = base.GetAll();
+                TestList.Add(nameOfEntity, liste.ToList());
+            }
+            var result2 = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value as IEnumerable<TEntity>;
+
+            var result3 =result2.Where(predicate.Compile()).AsQueryable();
+            return result3;
         }
 
         public override void Remove(TEntity entity)
