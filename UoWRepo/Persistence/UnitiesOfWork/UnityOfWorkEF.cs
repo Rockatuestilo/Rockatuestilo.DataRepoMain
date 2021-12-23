@@ -1,3 +1,4 @@
+using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.Configuration;
 //using UoWRepo.Core.Domain;
 using UoWRepo.Core.EFDomain;
@@ -23,7 +24,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             Users = new RepositoryEf<Users>(_context);
             News = new RepositoryEf<NewsEtty>(_context);
             HashTags = new RepositoryEf<HashTags>(_context);
-            
+
             ArticlesViewForUI = new RepositoryEf<ArticlesViewForUI>(_context);
             
             Categories = new RepositoryEf<Categories>(_context);
