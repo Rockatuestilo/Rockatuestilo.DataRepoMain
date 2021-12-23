@@ -99,5 +99,45 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.EF
 
             Assert.NotNull(result);
         }
+        
+        
+        [Test]
+        public void Test5_GetLastTimeOfEntitySaved()
+        {
+
+            var result = _unitOfWorkEf.Users.GetDateTimeOfCachingOfCurrentEntity();
+
+            Assert.NotNull(result);
+        }
+        
+        [Test]
+        public void Test5_GetLastTimeOfEntityUpdated()
+        {
+
+            var dateResult = _unitOfWorkEf.Users.GetDateTimeOfCachingOfCurrentEntity();
+            
+            
+            var result = _unitOfWorkEf.Users.GetAll().ToList();
+
+            if (result.Count > 0)
+            {
+                var idOfFirstUser = result[0].Id;
+
+                var entitytoBeDeleted = _unitOfWorkEf.Users.FindQueryble(x => x.Id == idOfFirstUser).SingleOrDefault();
+                
+                _unitOfWorkEf.Users.Remove(entitytoBeDeleted);
+
+                _unitOfWorkEf.Complete();
+                
+                var result2 = _unitOfWorkEf.Users.GetAll().ToList();
+                
+                Assert.AreEqual(result.Count, (result2.Count+1));
+                
+            }
+            
+            var dateResult2 = _unitOfWorkEf.Users.GetDateTimeOfCachingOfCurrentEntity();
+
+            Assert.AreNotEqual(dateResult, dateResult2);
+        }
     }
 }

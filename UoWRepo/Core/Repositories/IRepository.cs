@@ -28,4 +28,9 @@ namespace UoWRepo.Core.Repositories
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);        
     }
+
+    public interface IMemoryRepository<TEntity>:IRepository<TEntity> where TEntity : class
+    {
+        DateTime? GetDateTimeOfCachingOfCurrentEntity();
+    }
 }
