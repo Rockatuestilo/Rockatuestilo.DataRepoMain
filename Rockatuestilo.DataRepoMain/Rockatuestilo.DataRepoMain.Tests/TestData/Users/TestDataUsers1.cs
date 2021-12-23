@@ -6,9 +6,15 @@ namespace Rockatuestilo.DataRepoMain.Tests.TestData.Users
 {
     public class TestDataUsers1
     {
-        public List<UoWRepo.Core.EFDomain.Users> GetData()
+        public List<UoWRepo.Core.EFDomain.Users> GetDataEf()
         {
             return JsonConvert.DeserializeObject<List<UoWRepo.Core.EFDomain.Users>>(DataJson());
+
+        }
+        
+        public List<UoWRepo.Core.Domain.Users> GetDataLinq2Db()
+        {
+            return JsonConvert.DeserializeObject<List<UoWRepo.Core.Domain.Users>>(DataJson());
 
         }
         

@@ -11,7 +11,7 @@ namespace Rockatuestilo.DataRepoMain.Tests
         [SetUp]
         public void Setup()
         {
-            var value = new ContextGenerator().Create();
+            var value = new ContextGenerator().CreateInMemory();
 
             unitOfWorkEf = new UnityOfWorkEf(value);
             
