@@ -7,7 +7,7 @@ namespace UoWRepo.Persistence.Repositories
 {
     public class RepositoryHashTags: Repository<HashTags>, IRepositoryHashTags
     {
-        [Obsolete]
+        
         public RepositoryHashTags(Linq2DbContext context) : base(context)
         {
 

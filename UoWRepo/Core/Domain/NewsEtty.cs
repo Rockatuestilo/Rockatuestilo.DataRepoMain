@@ -1,11 +1,12 @@
 ﻿using System;
 using LinqToDB.Mapping;
+using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.Domain
 {
-    [Obsolete]
+    
     [Table(Name = "tb_news")]
-    public class NewsEtty : TEntity, ITEntity
+    public class NewsEtty : TEntity, INewsEtty 
     {
         [PrimaryKey, Identity]
         [Column(Name = "newsID"), NotNull]

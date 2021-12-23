@@ -5,7 +5,7 @@ using UoWRepo.Core.Domain;
 
 namespace UoWRepo.Persistence.Repositories
 {
-    [Obsolete]
+    
     public class RepositoryGalleries: Repository<Galleries>, IRepositoryGalleries
     {
         

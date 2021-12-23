@@ -2,7 +2,6 @@
 
 namespace UoWRepo.Core.Domain
 {
-    [Obsolete]
     public interface ITEntity
     {
          int Id { get; set; }
