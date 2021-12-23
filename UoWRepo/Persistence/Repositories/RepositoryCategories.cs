@@ -5,7 +5,7 @@ using UoWRepo.Core.Domain;
 
 namespace UoWRepo.Persistence.Repositories
 {
-    [Obsolete]
+    
     public class RepositoryCategories: Repository<Categories>, IRepositoryCategories
     {
         public RepositoryCategories(Linq2DbContext context) : base(context)

@@ -5,7 +5,7 @@ using Rockatuestilo.DataRepoMain.Tests.TestData.CategoriesTestCollectionSpace;
 using Rockatuestilo.DataRepoMain.Tests.TestData.Users;
 using UoWRepo.Persistence.UnitiesOfWork;
 
-namespace Rockatuestilo.DataRepoMain.Tests.CRUDS
+namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.EF
 {
     public class CategoriesCruds
     {
@@ -13,7 +13,7 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS
         [SetUp]
         public void Setup()
         {
-            var value = new ContextGenerator().Create();
+            var value = new ContextGenerator().CreateInMemory();
             _unitOfWorkEf = new UnityOfWorkEf(value);
         }
 
@@ -27,7 +27,7 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS
 
             if (result.Count == 0)
             {
-                var users = new TestDataUsers1().GetData();
+                var users = new TestDataUsers1().GetDataEf();
             
                 _unitOfWorkEf.Users.AddRange(users);
                 _unitOfWorkEf.Complete();

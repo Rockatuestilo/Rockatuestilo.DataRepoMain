@@ -4,57 +4,57 @@ using Rockatuestilo.DataRepoMain.Tests.DbInit;
 using Rockatuestilo.DataRepoMain.Tests.TestData.Users;
 using UoWRepo.Persistence.UnitiesOfWork;
 
-namespace Rockatuestilo.DataRepoMain.Tests.CRUDS
+namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.Linq2Db
 {
-    public class UsersCruds
+    public class UsersCrudsLinq2Db
     {
         
         [SetUp]
         public void Setup()
         {
-            var value = new ContextGenerator().Create();
+            /*var value = new ContextGenerator().CreateLinq2DbSqlite();
 
-            _unitOfWorkEf = new UnityOfWorkEf(value);
+            _unitOfWork = new UnityOfWork(value);*/
             
             
         }
         
         
-        private IUnitOfWorkEf _unitOfWorkEf;
+        //private IUnitOfWork _unitOfWork;
         
-        [Test]
+        /*[Test]
         public void Test1_add1()
         {
-            var users = new TestDataUsers1().GetData();
+            var users = new TestDataUsers1().GetDataLinq2Db();
             
-            _unitOfWorkEf.Users.Add(users[0]);
+            _unitOfWork.Users.Add(users[0]);
 
-            var result = _unitOfWorkEf.Users.GetAll().ToList();
+            var result = _unitOfWork.Users.GetAll().ToList();
 
 
             Assert.AreEqual(result.Count, 1);
 
 
-        }
-        
+        }*/
+        /*
         
         [Test]
         public void Test2_delete1()
         {
             
-            var result = _unitOfWorkEf.Users.GetAll().ToList();
+            var result = _unitOfWork.Users.GetAll().ToList();
 
             if (result.Count > 0)
             {
                 var idOfFirstUser = result[0].Id;
 
-                var entitytoBeDeleted = _unitOfWorkEf.Users.FindQueryble(x => x.Id == idOfFirstUser).SingleOrDefault();
+                var entitytoBeDeleted = _unitOfWork.Users.FindQueryble(x => x.Id == idOfFirstUser).SingleOrDefault();
                 
-                _unitOfWorkEf.Users.Remove(entitytoBeDeleted);
+                _unitOfWork.Users.Remove(entitytoBeDeleted);
 
-                _unitOfWorkEf.Complete();
+                _unitOfWork.Complete();
                 
-                var result2 = _unitOfWorkEf.Users.GetAll().ToList();
+                var result2 = _unitOfWork.Users.GetAll().ToList();
                 
                 Assert.AreEqual(result.Count, (result2.Count+1));
                 
@@ -65,13 +65,13 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS
         public void Test3_AddMany1()
         {
             
-            var users = new TestDataUsers1().GetData();
-            var result = _unitOfWorkEf.Users.GetAll().ToList();
+            var users = new TestDataUsers1().GetDataEf();
+            var result = _unitOfWork.Users.GetAll().ToList();
             
-            _unitOfWorkEf.Users.AddRange(users);
-            _unitOfWorkEf.Complete();
+            _unitOfWork.Users.AddRange(users);
+            _unitOfWork.Complete();
             
-            var result2 = _unitOfWorkEf.Users.GetAll().ToList();
+            var result2 = _unitOfWork.Users.GetAll().ToList();
 
             var countShouldBe = result.Count + users.Count;
             Assert.AreEqual(result2.Count, countShouldBe);
@@ -82,7 +82,7 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS
         public void Test4_SingleOrDefault()
         {
             
-            var result = _unitOfWorkEf.Users.SingleOrDefault(x => x.Id == 1);
+            var result = _unitOfWork.Users.SingleOrDefault(x => x.Id == 1);
 
             Assert.NotNull(result);
         }
@@ -92,9 +92,9 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS
         public void Test4_GetAllQueryble()
         {
 
-            var result = _unitOfWorkEf.Users.GetAllQueryble();
+            var result = _unitOfWork.Users.GetAllQueryble();
 
             Assert.NotNull(result);
-        }
+        }*/
     }
 }

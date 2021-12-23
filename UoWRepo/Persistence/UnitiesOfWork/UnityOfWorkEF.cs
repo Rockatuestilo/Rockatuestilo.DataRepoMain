@@ -1,3 +1,4 @@
+using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.Configuration;
 //using UoWRepo.Core.Domain;
 using UoWRepo.Core.EFDomain;
@@ -20,17 +21,19 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             
             _context = context;
 
-            Users = new RepositoryEf<Users>(_context);
+            //Users = new RepositoryEf<Users>(_context);
+            Users = new MemoryRepositoryEF<Users>(_context, new RepositoryEf<Users>(_context));
             News = new RepositoryEf<NewsEtty>(_context);
             HashTags = new RepositoryEf<HashTags>(_context);
-            
+
             ArticlesViewForUI = new RepositoryEf<ArticlesViewForUI>(_context);
             
             Categories = new RepositoryEf<Categories>(_context);
             
             HashTagsNews = new RepositoryEf<HashTagsNews>(_context);
             
-            PublicationType = new RepositoryEf<NewsPublicationType>(_context);
+            //PublicationType = new RepositoryEf<NewsPublicationType>(_context);
+            PublicationType = new MemoryRepositoryEF<NewsPublicationType>(_context, new RepositoryEf<NewsPublicationType>(_context));
             
             Galleries = new RepositoryEf<Galleries>(_context);
             

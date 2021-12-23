@@ -3,8 +3,7 @@ using System;
 
 namespace UoWRepo.Core.Domain
 {
-    [Obsolete]
-    public class TEntity 
+    public class TEntity : UoWRepo.Core.BaseDomain.ITEntity
     {
         [PrimaryKey, Identity]
         [Column(Name = "Id"), NotNull]

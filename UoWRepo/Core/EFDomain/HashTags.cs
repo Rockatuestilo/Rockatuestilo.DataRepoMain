@@ -1,11 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.EFDomain
 {
     [Table("Hashtags")]
-    public class HashTags : TEntity, ITEntity
+    public class HashTags : TEntity, IHashTags
     {
         [Key]
         [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
