@@ -110,10 +110,9 @@ namespace UoWRepo.Persistence.Repositories
             var nameOfEntity= typeof(TEntity).Name;
             var result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
             
-            if (result == null) 
+            if (result == null)
             {
-                var liste = base.GetAll();
-                TestList.Add(nameOfEntity, liste.ToList());
+                AddEntityToCacheAndGetList<TEntity>();
             }
             var result2 = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value as IEnumerable<TEntity>;
 
@@ -149,17 +148,23 @@ namespace UoWRepo.Persistence.Repositories
         
         protected IEnumerable<TEntity> AddEntityToCacheAndGetList<T>()
         {
+            ResetMemory<TEntity>();
             var nameOfEntity= typeof(T).Name;
             var liste = base.GetAll();
-            TestList.Add(nameOfEntity, liste.ToList());
-            testListDateTimes.Add(nameOfEntity, DateTime.Now);
+
+            try
+            {
+                TestList.Add(nameOfEntity, liste.ToList());
+                testListDateTimes.Add(nameOfEntity, DateTime.Now);
+            }
+            catch (Exception)
+            {
+                
+            }
             return liste;
         }
-        
-        
 
-
-        protected void ResetMemory<T>(T entity)
+        protected void ResetMemory<T>()
         {
             var nameOfEntity = typeof(T).Name;
             var result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
@@ -167,6 +172,12 @@ namespace UoWRepo.Persistence.Repositories
             if (result != null)
             {
                 TestList.Remove(nameOfEntity);
+            }
+            
+            var result2 = testListDateTimes.FirstOrDefault(x => x.Key == nameOfEntity).Value;
+            
+            if (result2 != null)
+            {
                 testListDateTimes.Remove(nameOfEntity);
             }
         }
@@ -175,25 +186,14 @@ namespace UoWRepo.Persistence.Repositories
         protected void ResetMemory(TEntity entity)
         {
             var nameOfEntity = typeof(TEntity).Name;
-            var result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
+            ResetMemory<TEntity>();
 
-            if (result != null)
-            {
-                TestList.Remove(nameOfEntity);
-                testListDateTimes.Remove(nameOfEntity);
-            }
+
         }
 
         protected void ResetMemory(IEnumerable<TEntity> entities)
         {
-            var nameOfEntity = typeof(TEntity).Name;
-            var result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
-
-            if (result != null)
-            {
-                TestList.Remove(nameOfEntity);
-                testListDateTimes.Remove(nameOfEntity);
-            }
+            ResetMemory<TEntity>();
         }
 
         public DateTime? GetDateTimeOfCachingOfCurrentEntity()

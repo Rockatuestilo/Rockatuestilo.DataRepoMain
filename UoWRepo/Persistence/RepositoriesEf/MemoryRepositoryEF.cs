@@ -31,7 +31,7 @@ public class MemoryRepositoryEF<TEntity> : RepositoryEf<TEntity>, IMemoryReposit
 
         }
 
-        public override void Add(TEntity entity)
+         public override void Add(TEntity entity)
         {
             ResetMemory(entity);
             base.Add(entity);
@@ -113,10 +113,9 @@ public class MemoryRepositoryEF<TEntity> : RepositoryEf<TEntity>, IMemoryReposit
             var nameOfEntity= typeof(TEntity).Name;
             var result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
             
-            if (result == null) 
+            if (result == null)
             {
-                var liste = base.GetAll();
-                TestList.Add(nameOfEntity, liste.ToList());
+                AddEntityToCacheAndGetList<TEntity>();
             }
             var result2 = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value as IEnumerable<TEntity>;
 
@@ -152,17 +151,15 @@ public class MemoryRepositoryEF<TEntity> : RepositoryEf<TEntity>, IMemoryReposit
         
         protected IEnumerable<TEntity> AddEntityToCacheAndGetList<T>()
         {
+            ResetMemory<TEntity>();
             var nameOfEntity= typeof(T).Name;
             var liste = base.GetAll();
             TestList.Add(nameOfEntity, liste.ToList());
             testListDateTimes.Add(nameOfEntity, DateTime.Now);
             return liste;
         }
-        
-        
 
-
-        protected void ResetMemory<T>(T entity)
+        protected void ResetMemory<T>()
         {
             var nameOfEntity = typeof(T).Name;
             var result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
@@ -170,6 +167,12 @@ public class MemoryRepositoryEF<TEntity> : RepositoryEf<TEntity>, IMemoryReposit
             if (result != null)
             {
                 TestList.Remove(nameOfEntity);
+            }
+            
+            var result2 = testListDateTimes.FirstOrDefault(x => x.Key == nameOfEntity).Value;
+            
+            if (result2 != null)
+            {
                 testListDateTimes.Remove(nameOfEntity);
             }
         }
