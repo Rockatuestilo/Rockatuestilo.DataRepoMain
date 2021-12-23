@@ -21,9 +21,9 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         //IRepositoryHashTagsNews HashTagsNews { get; }
         //IRepositoryNewsPublicationType PublicationType { get; }
 
-        IRepositoryNews News { get; }
+        //IRepositoryNews News { get; }
         
-        IMemoryRepository<NewsEtty> NewsV2 { get; }
+        IMemoryRepository<NewsEtty> News { get; }
 
         IRepositorySharedObject SharedObject { get; }
         IRepositorySharingSocialNetwork SharingSocialNetwork { get; }

@@ -6,7 +6,7 @@ using UoWRepo.Core.Repositories;
 
 namespace UoWRepo.Persistence.Repositories
 {
-    
+    [Obsolete]
     public class MemoryRepositoryNews : MemoryRepository<NewsEtty>, IRepositoryNews
     {
 
@@ -19,11 +19,13 @@ namespace UoWRepo.Persistence.Repositories
             this.repositorynews = repositorynews;
         }
 
+        [Obsolete]
         public IEnumerable<NewsEtty> GetPagesOfNews(int pageIndex, int pageSize = 10)
         {
             return repositorynews.GetPagesOfNews(pageIndex, pageSize);
         }
 
+        [Obsolete]
         public void UpdatePublicationTime(int articleID, DateTime datetime)
         {
             var newsEntity = new NewsEtty();
@@ -31,6 +33,7 @@ namespace UoWRepo.Persistence.Repositories
             repositorynews.UpdatePublicationTime(articleID, datetime);
         }
 
+        [Obsolete]
         public IEnumerable<NewsEtty> GetArticlesByTags(string tagLowered)
         {
             return repositorynews.GetArticlesByTags(tagLowered);
