@@ -111,7 +111,7 @@ namespace UoWRepo.Persistence.RepositoriesEf;
             return result3;
         }
         
-        public override IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        public override IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
             var nameOfEntity= typeof(TEntity).Name;
             var result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;

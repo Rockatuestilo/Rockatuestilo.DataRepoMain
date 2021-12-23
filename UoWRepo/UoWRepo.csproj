@@ -11,9 +11,9 @@
     <PackageTags>rockatuestilo rock metal</PackageTags>
     <Company>rockatuestilo</Company>
     <Product>Rockatuestilo.DataRepoMain </Product>
-    <AssemblyVersion>2.7.1</AssemblyVersion>
-    <PackageVersion>2.7.1</PackageVersion>
-    <FileVersion>2.7.1</FileVersion>
+    <AssemblyVersion>2.7.2</AssemblyVersion>
+    <PackageVersion>2.7.2</PackageVersion>
+    <FileVersion>2.7.2</FileVersion>
     <LangVersion>10</LangVersion>
   </PropertyGroup>
 
