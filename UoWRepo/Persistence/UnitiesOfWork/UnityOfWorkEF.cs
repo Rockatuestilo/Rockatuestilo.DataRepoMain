@@ -22,37 +22,34 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             _context = context;
 
             //Users = new RepositoryEf<Users>(_context);
-            Users = new MemoryRepositoryEF<Users>(_context, new RepositoryEf<Users>(_context));
-            News = new RepositoryEf<NewsEtty>(_context);
-            HashTags = new RepositoryEf<HashTags>(_context);
+            Users = InitObjects<Users>();
+            News = InitObjects<NewsEtty>();
+            HashTags = InitObjects<HashTags>();
+            ArticlesViewForUI = InitObjects<ArticlesViewForUI>();
+            Categories = InitObjects<Categories>();
+            HashTagsNews = InitObjects<HashTagsNews>();
+            
+            PublicationType = InitObjects<NewsPublicationType>();
+            Galleries = InitObjects<Galleries>();
+            
 
-            ArticlesViewForUI = new RepositoryEf<ArticlesViewForUI>(_context);
-            
-            Categories = new RepositoryEf<Categories>(_context);
-            
-            HashTagsNews = new RepositoryEf<HashTagsNews>(_context);
-            
-            //PublicationType = new RepositoryEf<NewsPublicationType>(_context);
-            PublicationType = new MemoryRepositoryEF<NewsPublicationType>(_context, new RepositoryEf<NewsPublicationType>(_context));
-            
-            Galleries = new RepositoryEf<Galleries>(_context);
-            
-            
-            Galleries = new RepositoryEf<Galleries>(_context);
-            Galleries = new RepositoryEf<Galleries>(_context);
-            
-           // PendingRegistration = new MemoryRepository<PendingRegistration>(_context, new Repository<PendingRegistration>(_context));
+
 
         }
 
-        public IRepository<ArticlesViewForUI> ArticlesViewForUI { get; }
-        public IRepository<Categories> Categories { get; }
-        public IRepository<HashTags> HashTags { get; }
-        public IRepository<HashTagsNews> HashTagsNews { get; }
-        public IRepository<NewsPublicationType> PublicationType { get; }
-        public IRepository<Galleries> Galleries { get; }
-        public IRepository<Users> Users { get; }
-        public IRepository<NewsEtty> News { get; }
+        private  MemoryRepositoryEF<T> InitObjects<T>()  where T : BaseTEntity
+        {
+            return new MemoryRepositoryEF<T>(_context, new RepositoryEf<T>(_context));
+        }
+
+        public IMemoryRepository<ArticlesViewForUI> ArticlesViewForUI { get; }
+        public IMemoryRepository<Categories> Categories { get; }
+        public IMemoryRepository<HashTags> HashTags { get; }
+        public IMemoryRepository<HashTagsNews> HashTagsNews { get; }
+        public IMemoryRepository<NewsPublicationType> PublicationType { get; }
+        public IMemoryRepository<Galleries> Galleries { get; }
+        public IMemoryRepository<Users> Users { get; }
+        public IMemoryRepository<NewsEtty> News { get; }
         
         public IRepositorySharedObject SharedObject { get; }
         public IRepositorySharingSocialNetwork SharingSocialNetwork { get; }

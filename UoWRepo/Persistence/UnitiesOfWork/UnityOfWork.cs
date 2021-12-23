@@ -90,16 +90,21 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             
 
         }
-
-        public IRepository<ArticlesViewForUI> ArticlesViewForUI { get; private set; }
-        public IRepository<Categories> Categories { get; private set; }
-        public IRepository<HashTags> HashTags { get; private set; }
-        public IRepository<HashTagsNews> HashTagsNews { get; private set; }
-        public IRepository<NewsPublicationType> PublicationType { get; private set; }
-        public IRepository<Galleries> Galleries { get; private set; }
-        public IRepository<Users> Users { get; private set; }
         
-        public IRepository<PendingRegistration> PendingRegistration { get; private set; }
+        private  MemoryRepository<T> InitObjects<T>()  where T : Core.Domain.TEntity
+        {
+            return new MemoryRepository<T>(_context, new Repository<T>(_context));
+        }
+
+        public IMemoryRepository<ArticlesViewForUI> ArticlesViewForUI { get; private set; }
+        public IMemoryRepository<Categories> Categories { get; private set; }
+        public IMemoryRepository<HashTags> HashTags { get; private set; }
+        public IMemoryRepository<HashTagsNews> HashTagsNews { get; private set; }
+        public IMemoryRepository<NewsPublicationType> PublicationType { get; private set; }
+        public IMemoryRepository<Galleries> Galleries { get; private set; }
+        public IMemoryRepository<Users> Users { get; private set; }
+        
+        public IMemoryRepository<PendingRegistration> PendingRegistration { get; private set; }
 
         //public IRepositoryNewsPublicationType PublicationType { get; private set; }
         //public IRepositoryCategories Categories { get; private set; }
@@ -108,6 +113,8 @@ namespace UoWRepo.Persistence.UnitiesOfWork
 
 
         public IRepositoryNews News { get; private set; }
+        
+        public IMemoryRepository<NewsEtty> NewsV2 { get; private set; }
         //public IRepositoryGalleries Galleries { get; private set; }
         //public IRepositoryUsers Users { get; private set; }
         public IRepositorySharedObject SharedObject { get; private set; }

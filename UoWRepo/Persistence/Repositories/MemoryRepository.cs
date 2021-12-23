@@ -7,7 +7,7 @@ using UoWRepo.Core.Repositories;
 
 namespace UoWRepo.Persistence.Repositories
 {
-    public class MemoryRepository<TEntity> : Repository<TEntity> where TEntity : Core.Domain.TEntity
+    public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<TEntity> where TEntity : Core.Domain.TEntity
     {
 
         protected new readonly Linq2DbContext context;
@@ -17,6 +17,7 @@ namespace UoWRepo.Persistence.Repositories
 
         protected static IDictionary<string, IEnumerable<TEntity>> TestList = new Dictionary<string, IEnumerable<TEntity>>();
         IDictionary<string, IEnumerable<TEntity>> openWith = new Dictionary<string, IEnumerable<TEntity>>();
+        protected static IDictionary<string, DateTime> testListDateTimes = new Dictionary<string, DateTime>();
 
 
         public MemoryRepository(Linq2DbContext context, Repository<TEntity> repository) : base(context)
@@ -27,7 +28,7 @@ namespace UoWRepo.Persistence.Repositories
 
         }
 
-        public override void Add(TEntity entity)
+         public override void Add(TEntity entity)
         {
             ResetMemory(entity);
             base.Add(entity);
@@ -81,11 +82,10 @@ namespace UoWRepo.Persistence.Repositories
             var nameOfEntity= typeof(TEntity).Name;
             var result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
 
-            if (result == null) 
+            if (result == null)
             {
-                var liste = base.GetAll();
-                TestList.Add(nameOfEntity, liste.ToList());
-                return liste;
+                AddEntityToCacheAndGetList<TEntity>();
+                result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
             }
             return result;
         }
@@ -95,10 +95,9 @@ namespace UoWRepo.Persistence.Repositories
             var nameOfEntity= typeof(TEntity).Name;
             var result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
             
-            if (result == null) 
+            if (result == null)
             {
-                var liste = base.GetAll();
-                TestList.Add(nameOfEntity, liste.ToList());
+                AddEntityToCacheAndGetList<TEntity>();
             }
             var result2 = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value as IEnumerable<TEntity>;
 
@@ -146,9 +145,19 @@ namespace UoWRepo.Persistence.Repositories
                 var mm = e.Message;
             }
 
-
-
         }
+        
+        protected IEnumerable<TEntity> AddEntityToCacheAndGetList<T>()
+        {
+            var nameOfEntity= typeof(T).Name;
+            var liste = base.GetAll();
+            TestList.Add(nameOfEntity, liste.ToList());
+            testListDateTimes.Add(nameOfEntity, DateTime.Now);
+            return liste;
+        }
+        
+        
+
 
         protected void ResetMemory<T>(T entity)
         {
@@ -158,6 +167,7 @@ namespace UoWRepo.Persistence.Repositories
             if (result != null)
             {
                 TestList.Remove(nameOfEntity);
+                testListDateTimes.Remove(nameOfEntity);
             }
         }
 
@@ -170,6 +180,7 @@ namespace UoWRepo.Persistence.Repositories
             if (result != null)
             {
                 TestList.Remove(nameOfEntity);
+                testListDateTimes.Remove(nameOfEntity);
             }
         }
 
@@ -181,7 +192,14 @@ namespace UoWRepo.Persistence.Repositories
             if (result != null)
             {
                 TestList.Remove(nameOfEntity);
+                testListDateTimes.Remove(nameOfEntity);
             }
+        }
+
+        public DateTime? GetDateTimeOfCachingOfCurrentEntity()
+        {
+            var nameOfEntity = typeof(TEntity).Name;
+            return testListDateTimes.FirstOrDefault(x => x.Key == nameOfEntity).Value;
         }
     }
 }
