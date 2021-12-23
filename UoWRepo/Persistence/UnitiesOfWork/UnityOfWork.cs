@@ -21,7 +21,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             this.context = context;
         }
         
-        [Obsolete]
+        
 
         public IEnumerable<NewsEtty> GetArticlesPerPageByHashtag(string hashtag, int userLevel, int currentPage, int pageSize) 
         {

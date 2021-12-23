@@ -3,7 +3,7 @@ using LinqToDB.Mapping;
 
 namespace UoWRepo.Core.Domain
 {
-    [Obsolete]
+    
     public class PendingRegistration: TEntity, ITEntity
     {
         [PrimaryKey, Identity]

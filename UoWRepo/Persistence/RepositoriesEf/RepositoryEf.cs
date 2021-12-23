@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.Configuration;
 using UoWRepo.Core.Repositories;
 
 namespace UoWRepo.Persistence.RepositoriesEf
 {
-    public class RepositoryEf<TEntity> : IRepository<TEntity> where TEntity : Core.EFDomain.TEntity
+    public class RepositoryEf<TEntity> : IRepository<TEntity> where TEntity : BaseTEntity
     {
         private DbSet<TEntity> entities;
         protected readonly EFContext context;
@@ -41,7 +42,7 @@ namespace UoWRepo.Persistence.RepositoriesEf
             entities.AddRange(entitiesList);
         }
 
-        public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        public virtual  IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
             return entities.Where(predicate).ToList();
         }
@@ -51,7 +52,7 @@ namespace UoWRepo.Persistence.RepositoriesEf
             return entities.AsQueryable();
         }
 
-        public IQueryable<TEntity> FindQueryble(Expression<Func<TEntity, bool>> predicate)
+        public virtual IQueryable<TEntity> FindQueryble(Expression<Func<TEntity, bool>> predicate)
         {
             return entities.Where(predicate).AsQueryable();
         }

@@ -3,7 +3,7 @@ using LinqToDB.Mapping;
 
 namespace UoWRepo.Core.Domain
 {
-    [Obsolete]
+    
     [Table(Name = "SharingSocialNetwork")]
     public class SharingSocialNetworkLinqDB : TEntity, ITEntity
     {

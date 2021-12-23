@@ -5,7 +5,7 @@ using UoWRepo.Core.Domain;
 
 namespace UoWRepo.Persistence.Repositories
 {
-    [Obsolete]
+    
     public class RepositoryNewsPublicationType : Repository<NewsPublicationType>, IRepositoryNewsPublicationType
     {
         public RepositoryNewsPublicationType(Linq2DbContext context) : base(context)

@@ -3,7 +3,6 @@ using LinqToDB.Mapping;
 
 namespace UoWRepo.Core.Domain
 {
-    [Obsolete]
     [Table(Name = "HashtagsNews")]
     public class HashTagsNews : TEntity, ITEntity
     {

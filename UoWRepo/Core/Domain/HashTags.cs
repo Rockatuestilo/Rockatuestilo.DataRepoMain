@@ -1,11 +1,12 @@
 ﻿using System;
 using LinqToDB.Mapping;
+using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.Domain
 {
-    [Obsolete]
+    
     [Table(Name = "Hashtags")]
-    public class HashTags : TEntity, ITEntity
+    public class HashTags : TEntity, IHashTags
     {
         [PrimaryKey, Identity]
         [Column(Name = "Id"), NotNull]

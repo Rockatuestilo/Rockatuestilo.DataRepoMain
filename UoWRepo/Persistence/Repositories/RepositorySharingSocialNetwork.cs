@@ -5,7 +5,7 @@ using UoWRepo.Core.Domain;
 
 namespace UoWRepo.Persistence.Repositories
 {
-    [Obsolete]
+    
     public class RepositorySharingSocialNetwork: Repository<SharingSocialNetworkLinqDB>, IRepositorySharingSocialNetwork
     {
         public RepositorySharingSocialNetwork(Linq2DbContext context) : base(context)

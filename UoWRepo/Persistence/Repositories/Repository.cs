@@ -9,7 +9,6 @@ using LinqToDB.Data;
 
 namespace UoWRepo.Persistence.Repositories
 {
-    [Obsolete]
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Core.Domain.TEntity
     {
         protected readonly Linq2DbContext context;
@@ -48,7 +47,7 @@ namespace UoWRepo.Persistence.Repositories
         }
 
       
-        public IQueryable<TEntity> FindQueryble(Expression<Func<TEntity, bool>> predicate)
+        public virtual IQueryable<TEntity> FindQueryble(Expression<Func<TEntity, bool>> predicate)
         {
             return context.GetTable<TEntity>().Where(predicate).AsQueryable();
         }

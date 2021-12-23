@@ -4,7 +4,7 @@ using UoWRepo.Core.Repositories;
 
 namespace UoWRepo.Persistence.UnitiesOfWork
 {
-    [Obsolete]
+    
     public interface IUnitOfWork: IDisposable
     {
         IRepository<ArticlesViewForUI> ArticlesViewForUI { get; }

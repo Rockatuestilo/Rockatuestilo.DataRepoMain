@@ -1,16 +1,21 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.Configuration;
 using UoWRepo.Core.Repositories;
+using UoWRepo.Persistence.Repositories;
 
-namespace UoWRepo.Persistence.Repositories
-{
-    public class MemoryRepository<TEntity> : Repository<TEntity> where TEntity : Core.Domain.TEntity
+namespace UoWRepo.Persistence.RepositoriesEf;
+
+
+
+    public class MemoryRepositoryEF<TEntity> : RepositoryEf<TEntity> where TEntity : BaseTEntity
     {
 
-        protected new readonly Linq2DbContext context;
+        
+        protected readonly EFContext context;
         //protected readonly Repository<TEntity> repository;
 
         private readonly IRepository<TEntity> repository;
@@ -19,7 +24,7 @@ namespace UoWRepo.Persistence.Repositories
         IDictionary<string, IEnumerable<TEntity>> openWith = new Dictionary<string, IEnumerable<TEntity>>();
 
 
-        public MemoryRepository(Linq2DbContext context, Repository<TEntity> repository) : base(context)
+        public MemoryRepositoryEF(EFContext context, RepositoryEf<TEntity> repository) : base(context)
         {
             //this.MemoryContext = MemoryContext;
             this.repository = repository;
@@ -106,7 +111,7 @@ namespace UoWRepo.Persistence.Repositories
             return result3;
         }
         
-        public override IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        public override IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
             var nameOfEntity= typeof(TEntity).Name;
             var result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
@@ -184,4 +189,3 @@ namespace UoWRepo.Persistence.Repositories
             }
         }
     }
-}
