@@ -12,11 +12,21 @@ namespace UoWRepo.Persistence.Repositories
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Core.Domain.TEntity
     {
         protected readonly Linq2DbContext context;
-        private IRepository<TEntity> _repositoryImplementation;
+        private string _connectionString;
 
         public Repository(Linq2DbContext context)
         {
             this.context = context;
+        }
+        
+        public Repository(string connectionString)
+        {
+            context = new Linq2DbContext(connectionString);
+        }
+        
+        public Repository(string connectionString, bool onDemand = true)
+        {
+            context = new Linq2DbContext(connectionString);
         }
 
         public virtual void Add(TEntity entity)
