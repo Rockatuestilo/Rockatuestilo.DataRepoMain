@@ -7,7 +7,7 @@ namespace UoWRepo.Migrations
     {
         public AddNewColumnVersionOfNews()
         {
-           // base.ConnectionString = connectionString;
+            //base.ConnectionString = connectionString;
         }
 
         public override void Down()
@@ -19,10 +19,12 @@ namespace UoWRepo.Migrations
         public override void Up()
         {
             var tableName = "tb_news";
+            
+            
 
             var table = Schema.Table(tableName);
 
-            if (table.Exists())
+            if (Schema.Table(tableName).Exists())
             {
                 var column = table.Column("ArticleVersion");
                 if (!column.Exists())

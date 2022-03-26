@@ -11,9 +11,9 @@
     <PackageTags>rockatuestilo rock metal</PackageTags>
     <Company>rockatuestilo</Company>
     <Product>Rockatuestilo.DataRepoMain </Product>
-    <AssemblyVersion>3.2.8</AssemblyVersion>
-    <PackageVersion>3.2.8</PackageVersion>
-    <FileVersion>3.2.8</FileVersion>
+    <AssemblyVersion>3.2.9</AssemblyVersion>
+    <PackageVersion>3.2.9</PackageVersion>
+    <FileVersion>3.2.9</FileVersion>
     <LangVersion>10</LangVersion>
   </PropertyGroup>
 
@@ -21,11 +21,11 @@
     <PackageReference Include="linq2db" Version="3.6.0" />
     <PackageReference Include="linq2db.MySql" Version="3.6.0" />
     <PackageReference Include="linq2db.SQLite" Version="3.6.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />    
-    <PackageReference Include="FluentMigrator" Version="3.3.1" />
-    <PackageReference Include="FluentMigrator.Runner.MySql" Version="3.3.1" />
-    <PackageReference Include="FluentMigrator.Runner" Version="3.3.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />    
+    <PackageReference Include="FluentMigrator" Version="3.3.2" />
+    <PackageReference Include="FluentMigrator.Runner.MySql" Version="3.3.2" />
+    <PackageReference Include="FluentMigrator.Runner" Version="3.3.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.3" />
     <PackageReference Include="MySqlConnector" Version="2.1.0" />
     <PackageReference Include="Npgsql" Version="6.0.1" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0" />
