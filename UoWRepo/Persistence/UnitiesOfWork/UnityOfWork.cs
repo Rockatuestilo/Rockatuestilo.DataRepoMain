@@ -57,26 +57,11 @@ namespace UoWRepo.Persistence.UnitiesOfWork
 
         public UnityOfWork(Linq2DbContext context)
         {
-
-
             _context = context;
-            //News = new RepositoryNews(_context);
-            //Galleries = new RepositoryGalleries(_context);
-            //Users = new RepositoryUsers(_context);
             SharedObject = new RepositorySharedObject(_context);
             SharingSocialNetwork = new RepositorySharingSocialNetwork(_context);
 
-            //ArticlesViewForUI = new Repository<ArticlesViewForUI>(_context);
-            //Categories = new RepositoryCategories(_context);
-            //Categories = new RepositoryCategories(_context);
-
-
-            //News = new MemoryRepositoryNews(_context, new RepositoryNews(_context));
-            
-            
             News = new MemoryRepository<NewsEtty>(_context, new Repository<NewsEtty>(_context));
-
-
             PublicationType = new MemoryRepository<NewsPublicationType>(_context, new Repository<NewsPublicationType>(_context));
             HashTags = new MemoryRepository<HashTags>(_context, new Repository<HashTags>(_context));
             HashTagsNews = new MemoryRepository<HashTagsNews>(_context, new Repository<HashTagsNews>(_context));
@@ -89,9 +74,6 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             PendingRegistration = new MemoryRepository<PendingRegistration>(_context, new Repository<PendingRegistration>(_context));
 
             new MigrationsModule(_context.ConfigurationString).DoSomeMigration();
-
-            
-
         }
         
         private  MemoryRepository<T> InitObjects<T>()  where T : Core.Domain.TEntity
@@ -108,21 +90,10 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         public IMemoryRepository<Users> Users { get; private set; }
         
         public IMemoryRepository<PendingRegistration> PendingRegistration { get; private set; }
-
-        //public IRepositoryNewsPublicationType PublicationType { get; private set; }
-        //public IRepositoryCategories Categories { get; private set; }
-        //public IRepositoryHashTags HashTags { get; private set; }
-        //public IRepositoryHashTagsNews HashTagsNews { get; private set; }
-
         public IMemoryRepository<NewsEtty> News { get; private set; }
-        //public IRepositoryGalleries Galleries { get; private set; }
-        //public IRepositoryUsers Users { get; private set; }
+
         public IRepositorySharedObject SharedObject { get; private set; }
         public IRepositorySharingSocialNetwork SharingSocialNetwork { get; private set; }
-
-       
-        
-
 
 
         public int Complete()

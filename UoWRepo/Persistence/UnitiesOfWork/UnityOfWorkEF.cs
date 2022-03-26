@@ -1,3 +1,4 @@
+using System.ComponentModel.Design.Serialization;
 using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.Configuration;
 //using UoWRepo.Core.Domain;
@@ -31,9 +32,6 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             
             PublicationType = InitObjects<NewsPublicationType>();
             Galleries = InitObjects<Galleries>();
-            
-
-
 
         }
 

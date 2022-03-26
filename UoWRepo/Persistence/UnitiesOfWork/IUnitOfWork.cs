@@ -14,19 +14,11 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         IMemoryRepository<NewsPublicationType> PublicationType { get; }
         IMemoryRepository<Galleries> Galleries { get; }
         IMemoryRepository<Users> Users { get; }
-
-
-        //IRepositoryCategories Categories { get; }
-        //IRepositoryHashTags HashTags { get; }
-        //IRepositoryHashTagsNews HashTagsNews { get; }
-        //IRepositoryNewsPublicationType PublicationType { get; }
-
-        //IRepositoryNews News { get; }
-        
         IMemoryRepository<NewsEtty> News { get; }
-
         IRepositorySharedObject SharedObject { get; }
         IRepositorySharingSocialNetwork SharingSocialNetwork { get; }
+        
+        
 
         int Complete();
     }
