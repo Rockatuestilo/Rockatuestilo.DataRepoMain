@@ -29,7 +29,7 @@ namespace UoWRepo.Migrations
                 var column = table.Column("ArticleVersion");
                 if (!column.Exists())
                 {
-                    Alter.Table(tableName).AddColumn("ArticleVersion").AsString(2).Nullable();
+                    Alter.Table(tableName).AddColumn("ArticleVersion").AsInt32().Nullable();
                 }
             }
         }

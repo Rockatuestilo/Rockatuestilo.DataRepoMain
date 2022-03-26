@@ -101,7 +101,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         {
             try
             {
-                this._context.Execute(@"
+            /*    this._context.Execute(@"
 DROP PROCEDURE IF EXISTS `?`;
 DELIMITER //
 CREATE PROCEDURE `?`()
@@ -113,7 +113,7 @@ DELIMITER ;
 CALL `?`();
 DROP PROCEDURE `?`;
 
-");
+");*/
 
             }
             catch (Exception e)
