@@ -55,7 +55,7 @@ namespace UoWRepo.Core.Domain
         public int HashtagsNewsId { get; set; }
         
         [Column(Name = "ArticleVersion"), Nullable]
-        public int ArticleVersion { get; set; }
+        public string? ArticleVersion { get; set; }
 
     }
 }
