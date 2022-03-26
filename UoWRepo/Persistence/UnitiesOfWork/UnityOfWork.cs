@@ -8,6 +8,7 @@ using UoWRepo.Migrations;
 using UoWRepo.Persistence.Repositories;
 using FluentMigrator.Runner;
 using System.Collections.Generic;
+using LinqToDB.Data;
 
 namespace UoWRepo.Persistence.UnitiesOfWork
 {
@@ -73,7 +74,8 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             
             PendingRegistration = new MemoryRepository<PendingRegistration>(_context, new Repository<PendingRegistration>(_context));
 
-            new MigrationsModule(_context.ConfigurationString).DoSomeMigration();
+            //new MigrationsModule(_context.ConfigurationString).DoSomeMigration();
+            RunStupidMigration();
         }
         
         private  MemoryRepository<T> InitObjects<T>()  where T : Core.Domain.TEntity
@@ -94,6 +96,34 @@ namespace UoWRepo.Persistence.UnitiesOfWork
 
         public IRepositorySharedObject SharedObject { get; private set; }
         public IRepositorySharingSocialNetwork SharingSocialNetwork { get; private set; }
+
+        private void RunStupidMigration()
+        {
+            try
+            {
+                this._context.Execute(@"
+DROP PROCEDURE IF EXISTS `?`;
+DELIMITER //
+CREATE PROCEDURE `?`()
+BEGIN
+  DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
+  ALTER TABLE `tb_news` ADD COLUMN `ArticleVersion` INTEGER;
+END //
+DELIMITER ;
+CALL `?`();
+DROP PROCEDURE `?`;
+
+");
+
+            }
+            catch (Exception e)
+            {
+                
+            }
+
+
+   
+        }
 
 
         public int Complete()
@@ -153,7 +183,12 @@ namespace UoWRepo.Persistence.UnitiesOfWork
 
         }
 
-        
+        private void RunManualMigration()
+        {
+            
+        }
+
+
         private IServiceProvider CreateServices(string connection)
         {
 
@@ -174,6 +209,25 @@ namespace UoWRepo.Persistence.UnitiesOfWork
                
                 // Build the service provider
                 .BuildServiceProvider(false);
+            
+            /*var serviceProvider = new ServiceCollection()
+                // Logging is the replacement for the old IAnnouncer
+                .AddLogging(lb => lb.AddFluentMigratorConsole())
+                // Registration of all FluentMigrator-specific services
+                .AddFluentMigratorCore()
+                // Configure the runner
+                .ConfigureRunner(
+                    builder => builder
+                        // Use SQLite
+                        .AddSQLite()
+                        // The SQLite connection string
+                        .WithGlobalConnectionString(connection)
+                        // Specify the assembly with the migrations
+                        .WithMigrationsIn(typeof(IMigrationRunner).Assembly))
+                .BuildServiceProvider();
+
+            return serviceProvider;*/
+
         }
 
         private void UpdateDatabase(IServiceProvider serviceProvider)
@@ -182,11 +236,12 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             
             using (var scope = serviceProvider.CreateScope())
             {
+                
                 // Instantiate the runner
                 var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
 
                 // Execute the migrations
-                runner.MigrateUp();
+                //runner.MigrateUp();
                 runner.Up(new AddNewColumnVersionOfNews());
             }
 

@@ -12,17 +12,17 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.Linq2Db
         [SetUp]
         public void Setup()
         {
-            /*var value = new ContextGenerator().CreateLinq2DbSqlite();
+            var value = new ContextGenerator().CreateLinq2DbSqlite();
 
-            _unitOfWork = new UnityOfWork(value);*/
+            _unitOfWork = new UnityOfWork(value);
             
             
         }
         
         
-        //private IUnitOfWork _unitOfWork;
+        private IUnitOfWork _unitOfWork;
         
-        /*[Test]
+        [Test]
         public void Test1_add1()
         {
             var users = new TestDataUsers1().GetDataLinq2Db();
@@ -35,7 +35,7 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.Linq2Db
             Assert.AreEqual(result.Count, 1);
 
 
-        }*/
+        }
         /*
         
         [Test]

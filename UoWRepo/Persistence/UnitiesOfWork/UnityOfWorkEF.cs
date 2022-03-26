@@ -1,9 +1,13 @@
+using System;
 using System.ComponentModel.Design.Serialization;
+using FluentMigrator.Runner;
+using Microsoft.Extensions.DependencyInjection;
 using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.Configuration;
 //using UoWRepo.Core.Domain;
 using UoWRepo.Core.EFDomain;
 using UoWRepo.Core.Repositories;
+using UoWRepo.Migrations;
 using UoWRepo.Persistence.Repositories;
 //using UoWRepo.Persistence.Repositories;
 using UoWRepo.Persistence.RepositoriesEf;
@@ -54,6 +58,57 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         public int Complete()
         {
             return _context.SaveChanges();
+        }
+        
+       
+        
+        private IServiceProvider CreateServices(string connection)
+        {
+
+            //var h= System.Reflection.Assembly.GetExecutingAssembly();
+
+            return new ServiceCollection()// Add common FluentMigrator services
+                .AddFluentMigratorCore()
+                .ConfigureRunner(rb => rb
+                    // Add SQLite support to FluentMigrator
+                    .AddMySql5()
+                    
+                    // Set the connection string
+                    .WithGlobalConnectionString(connection)
+                    // Define the assembly containing the migrations
+                    //.ScanIn(typeof(UoWRepo.Migrations.AddNewColumnVersionOfNews).Assembly).For.Migrations()
+                    .ScanIn(System.Reflection.Assembly.GetExecutingAssembly()).For.Migrations()
+                )
+               
+                // Build the service provider
+                .BuildServiceProvider(false);
+        }
+        
+        
+        private void UpdateDatabase(IServiceProvider serviceProvider)
+        {
+            
+            
+            using (var scope = serviceProvider.CreateScope())
+            {
+                // Instantiate the runner
+                var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
+
+                // Execute the migrations
+                runner.MigrateUp();
+                runner.Up(new AddNewColumnVersionOfNews());
+            }
+
+            
+            
+            // Instantiate the runner
+            //var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
+
+            // Execute the migrations
+
+
+
+           
         }
         
         public void Dispose()
