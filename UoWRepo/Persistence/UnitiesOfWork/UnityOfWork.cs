@@ -168,7 +168,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
                     // Set the connection string
                     .WithGlobalConnectionString(connection)
                     // Define the assembly containing the migrations
-                    //.ScanIn(typeof(UoWRepo.Migrations.AddUIViewArticles).Assembly).For.Migrations()
+                    //.ScanIn(typeof(UoWRepo.Migrations.AddNewColumnVersionOfNews).Assembly).For.Migrations()
                     .ScanIn(System.Reflection.Assembly.GetExecutingAssembly()).For.Migrations()
                 )
                
@@ -186,7 +186,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
 
 
             runner.MigrateUp();
-            runner.Up(new DeleteUnneededStuff());
+            runner.Up(new AddNewColumnVersionOfNews());
         }
 
         
