@@ -56,7 +56,7 @@ namespace UoWRepo.Core.EFDomain
         public int? HashtagsNewsId { get; set; }
         
         [Column("ArticleVersion")]
-        public string? ArticleVersion { get; set; }
+        public int? ArticleVersion { get; set; }
 
     }
 }
