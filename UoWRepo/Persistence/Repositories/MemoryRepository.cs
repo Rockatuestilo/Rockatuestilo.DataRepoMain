@@ -7,6 +7,136 @@ using UoWRepo.Core.Repositories;
 
 namespace UoWRepo.Persistence.Repositories
 {
+
+   /* public class MemoryRepository2<TEntity> : IMemoryRepository<TEntity>
+        where TEntity : Core.Domain.TEntity
+    {
+        
+        protected readonly Linq2DbContext context;
+        private readonly IRepository<TEntity> repository;
+        
+        protected static IDictionary<string, IEnumerable<TEntity>> TestList = new Dictionary<string, IEnumerable<TEntity>>();
+        IDictionary<string, IEnumerable<TEntity>> openWith = new Dictionary<string, IEnumerable<TEntity>>();
+        protected static IDictionary<string, DateTime> testListDateTimes = new Dictionary<string, DateTime>();
+        
+        
+        
+        public MemoryRepository2(Linq2DbContext context, Repository<TEntity> repository) 
+        {
+            //this.MemoryContext = MemoryContext;
+            this.repository = repository;
+            this.context = context;
+
+        }
+        
+        
+        public MemoryRepository2(string ConnectionString)
+        {
+
+
+        }
+
+        private void ConnectRepositoryIfNotConnected()
+        {
+            
+        }
+
+
+        public TEntity Get(int id)
+        {
+            var nameOfEntity = typeof(TEntity).Name;
+            var result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
+
+            if (result == null)
+            {
+                var entity = base.Get(id);              
+                return entity;
+            }
+
+            var whatIWasLooking =result.SingleOrDefault(x => x.Id == id);
+
+            if (whatIWasLooking == null)
+            {
+
+                var entity = base.Get(id);
+                return entity;
+            }
+
+
+            return result.SingleOrDefault(x => x.Id == id);
+        }
+
+        public IEnumerable<TEntity> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<TEntity> GetAllQueryble()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<TEntity> FindQueryble(Expression<Func<TEntity, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TEntity LastUpdatedRow()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Add(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int AddWithIdentity(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddRange(IEnumerable<TEntity> entities)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddOrUpdate(Expression<Func<TEntity, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveRange(IEnumerable<TEntity> entities)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DateTime? GetDateTimeOfCachingOfCurrentEntity()
+        {
+            throw new NotImplementedException();
+        }
+    }*/
+
     public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<TEntity> where TEntity : Core.Domain.TEntity
     {
 
@@ -27,6 +157,15 @@ namespace UoWRepo.Persistence.Repositories
             this.context = context;
 
         }
+        
+        /*public MemoryRepository(string ConnectionString) : base(ConnectionString)
+        {
+            //this.MemoryContext = MemoryContext;
+            this.repository = repository;
+            this.context = context;
+
+        }*/
+        
 
          public override void Add(TEntity entity)
         {
