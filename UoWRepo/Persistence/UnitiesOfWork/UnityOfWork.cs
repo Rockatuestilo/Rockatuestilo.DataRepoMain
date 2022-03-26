@@ -178,15 +178,28 @@ namespace UoWRepo.Persistence.UnitiesOfWork
 
         private void UpdateDatabase(IServiceProvider serviceProvider)
         {
+            
+            
+            using (var scope = serviceProvider.CreateScope())
+            {
+                // Instantiate the runner
+                var runner = scope.ServiceProvider.GetRequiredService<IMigrationRunner>();
+
+                // Execute the migrations
+                runner.MigrateUp();
+                runner.Up(new AddNewColumnVersionOfNews());
+            }
+
+            
+            
             // Instantiate the runner
-            var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
+            //var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
             // Execute the migrations
 
 
 
-            runner.MigrateUp();
-            runner.Up(new AddNewColumnVersionOfNews());
+           
         }
 
         
