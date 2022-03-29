@@ -242,6 +242,7 @@ DROP PROCEDURE `?`;
 
                 // Execute the migrations
                 //runner.MigrateUp();
+                runner.Up(new AddUIViewArticles());
                 runner.Up(new AddNewColumnVersionOfNews());
             }
 
