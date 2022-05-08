@@ -1,5 +1,7 @@
+using System.IO;
 using LinqToDB.Data;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Utilities.Collections;
 using UoWRepo.Core.Configuration;
 
 namespace Rockatuestilo.DataRepoMain.Tests.DbInit
@@ -8,21 +10,38 @@ namespace Rockatuestilo.DataRepoMain.Tests.DbInit
     {
         
         
-        public Linq2DbContext CreateLinq2DbSqlite()
+        public (Linq2DbContext, string) CreateLinq2DbSqlite()
         {
-            CreateEFSqlite();
-            return new Linq2DbContext ("SQLite", "Data Source=test.sqlite3");
+            if (File.Exists("test.sqlite3"))
+            {
+                File.Delete("test.sqlite3");
+            }
+
+            var generationScript = CreateEFSqliteAndGetGenerationScript();
+            var linq2DbContext=  new Linq2DbContext ("SQLite", "Data Source=test.sqlite3");
+            
+            
+            using (var db = new Linq2DbContext("SQLite", "Data Source=test.sqlite3"))
+            {
+                var usersList = db.Query<dynamic>(generationScript);
+            }
+            
+
+            return (linq2DbContext, generationScript);
         }
         
-        public EFContext CreateEFSqlite()
+        public string CreateEFSqliteAndGetGenerationScript()
         {
             
             DbContextOptionsBuilder<EFContext> options = new DbContextOptionsBuilder<EFContext>();
             options.UseSqlite("Data Source=test.sqlite3");
+            
             EFContext tourManagerContext = new EFContext(options.Options);
 
+            var generateScript = tourManagerContext.Database.GenerateCreateScript();
 
-            return tourManagerContext;
+
+            return generateScript;
         }
         
         
