@@ -14,8 +14,7 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.Linq2Db
         {
             var value = new ContextGenerator().CreateLinq2DbSqlite();
 
-            _unitOfWork = new UnityOfWork(value);
-            
+            _unitOfWork = new UnityOfWork(value.Item1);
             
         }
         
