@@ -15,6 +15,10 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         IMemoryRepository<Users> Users { get; }
         
         IMemoryRepository<NewsEtty> News { get; }
+        
+        IMemoryRepository<RoleModels> Roles { get; }
+        
+        IMemoryRepository<UsersToRoles> UsersToRoles { get; }
 
 
         //IRepositoryCategories Categories { get; }

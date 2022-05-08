@@ -1,6 +1,7 @@
 ﻿using System;
 using UoWRepo.Core.Domain;
 using UoWRepo.Core.Repositories;
+// ReSharper disable UnusedMemberInSuper.Global
 
 namespace UoWRepo.Persistence.UnitiesOfWork
 {
@@ -15,6 +16,9 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         IMemoryRepository<Galleries> Galleries { get; }
         IMemoryRepository<Users> Users { get; }
         IMemoryRepository<NewsEtty> News { get; }
+        
+        public IMemoryRepository<RoleModels> Roles { get; }
+        public IMemoryRepository<UsersToRoles> UsersToRoles { get; }
         IRepositorySharedObject SharedObject { get; }
         IRepositorySharingSocialNetwork SharingSocialNetwork { get; }
         

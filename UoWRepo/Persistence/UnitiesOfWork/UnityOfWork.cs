@@ -72,13 +72,16 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             Galleries = new MemoryRepository<Galleries>(_context, new Repository<Galleries>(_context));
             Users = new MemoryRepository<Users>(_context, new Repository<Users>(_context));
             
+            Roles = new MemoryRepository<RoleModels>(_context, new Repository<RoleModels>(_context));
+            UsersToRoles = new MemoryRepository<UsersToRoles>(_context, new Repository<UsersToRoles>(_context));
+            
             PendingRegistration = new MemoryRepository<PendingRegistration>(_context, new Repository<PendingRegistration>(_context));
 
             //new MigrationsModule(_context.ConfigurationString).DoSomeMigration();
             RunStupidMigration();
         }
         
-        private  MemoryRepository<T> InitObjects<T>()  where T : Core.Domain.TEntity
+        private  MemoryRepository<T> InitObjects<T>()  where T : TEntity
         {
             return new MemoryRepository<T>(_context, new Repository<T>(_context));
         }
@@ -93,6 +96,8 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         
         public IMemoryRepository<PendingRegistration> PendingRegistration { get; private set; }
         public IMemoryRepository<NewsEtty> News { get; private set; }
+        public IMemoryRepository<RoleModels> Roles { get; }
+        public IMemoryRepository<UsersToRoles> UsersToRoles { get; }
 
         public IRepositorySharedObject SharedObject { get; private set; }
         public IRepositorySharingSocialNetwork SharingSocialNetwork { get; private set; }
