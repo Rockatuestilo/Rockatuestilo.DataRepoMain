@@ -1,27 +1,37 @@
 using System.IO;
 using LinqToDB.Data;
 using Microsoft.EntityFrameworkCore;
-using Org.BouncyCastle.Utilities.Collections;
 using UoWRepo.Core.Configuration;
 
 namespace Rockatuestilo.DataRepoMain.Tests.DbInit
 {
     public class ContextGenerator
     {
+        private readonly string _nameOfFileforDatabase;
         
-        
+        public ContextGenerator()
+        {
+            
+        }
+
+
+        public ContextGenerator(string nameOfFileforDatabase)
+        {
+            _nameOfFileforDatabase = nameOfFileforDatabase;
+        }
+
         public (Linq2DbContext, string) CreateLinq2DbSqlite()
         {
-            if (File.Exists("test.sqlite3"))
+            if (File.Exists(_nameOfFileforDatabase))
             {
-                File.Delete("test.sqlite3");
+                File.Delete(_nameOfFileforDatabase);
             }
 
             var generationScript = CreateEFSqliteAndGetGenerationScript();
-            var linq2DbContext=  new Linq2DbContext ("SQLite", "Data Source=test.sqlite3");
+            var linq2DbContext=  new Linq2DbContext ("SQLite", $"Data Source={_nameOfFileforDatabase}");
             
             
-            using (var db = new Linq2DbContext("SQLite", "Data Source=test.sqlite3"))
+            using (var db = new Linq2DbContext("SQLite", $"Data Source={_nameOfFileforDatabase}"))
             {
                 var usersList = db.Query<dynamic>(generationScript);
             }
@@ -34,7 +44,7 @@ namespace Rockatuestilo.DataRepoMain.Tests.DbInit
         {
             
             DbContextOptionsBuilder<EFContext> options = new DbContextOptionsBuilder<EFContext>();
-            options.UseSqlite("Data Source=test.sqlite3");
+            options.UseSqlite($"Data Source={_nameOfFileforDatabase}");
             
             EFContext tourManagerContext = new EFContext(options.Options);
 
