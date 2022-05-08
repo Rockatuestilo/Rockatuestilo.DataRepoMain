@@ -9,7 +9,5 @@ namespace UoWRepo.Core.Domain
         [Column(Name = "Id"), NotNull]
         public int Id { get; set; }
         public DateTime UpdatedDate { get; set; }
-
-
     }
 }
