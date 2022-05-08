@@ -4,13 +4,9 @@ using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.Domain
 {
-    
     [Table(Name = "Hashtags")]
     public class HashTags : TEntity, IHashTags
     {
-        [PrimaryKey, Identity]
-        [Column(Name = "Id"), NotNull]
-        public int Id { get; set; }
 
         [Column(Name = "HashtagWord"), NotNull]
         public string HashtagWord { get; set; }

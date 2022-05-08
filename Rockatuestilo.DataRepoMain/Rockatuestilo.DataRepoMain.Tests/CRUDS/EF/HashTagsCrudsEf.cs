@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
 using UoWRepo.Core.BaseDomain;
@@ -31,6 +32,10 @@ public class HashTagsCrudsEf
         value.UpdatedDate = DateTime.Now;
         value.CreatedById = 0;
         value.UpdatedById = 0;
+
+        /*var resultJs = JsonConvert.SerializeObject(value);
+
+        var gnngn = JsonConvert.DeserializeObject<HashTagsBase>(resultJs);*/
 
 
         var result = _unitOfWorkEf.HashTags.GetAll().ToList();
