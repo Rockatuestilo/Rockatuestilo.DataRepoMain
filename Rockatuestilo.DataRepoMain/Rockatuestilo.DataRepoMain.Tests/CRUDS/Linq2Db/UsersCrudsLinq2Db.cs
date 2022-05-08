@@ -12,7 +12,7 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.Linq2Db
         [SetUp]
         public void Setup()
         {
-            var value = new ContextGenerator().CreateLinq2DbSqlite();
+            var value = new ContextGenerator("test.sqlite3").CreateLinq2DbSqlite();
 
             _unitOfWork = new UnityOfWork(value.Item1);
             
