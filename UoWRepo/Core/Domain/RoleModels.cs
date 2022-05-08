@@ -4,13 +4,11 @@ using LinqToDB.Mapping;
 namespace UoWRepo.Core.Domain;
 
 [Table(Name = "RoleModels")]
-public class RoleModels: TEntityGuid, ITEntityGuid
+public class RoleModels: TEntity, ITEntity
 {
-    public Guid Guid { get; set; }
-        
     public string RoleName { get; set; }
         
-    public DateTime CreatedDate { get; set; }
+    public DateTime CreatedDate { get; set; } 
         
     public string RoleCode { get; set; }
     public string Description { get; set; }
