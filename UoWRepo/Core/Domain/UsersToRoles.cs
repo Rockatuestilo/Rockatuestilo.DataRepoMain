@@ -4,11 +4,9 @@ using LinqToDB.Mapping;
 namespace UoWRepo.Core.Domain;
 
 [Table(Name = "UsersToRoles")]
-public class UsersToRoles: TEntityGuid, ITEntityGuid
+public class UsersToRoles: TEntity, ITEntity
 {
-    public Guid Guid { get; set; }
-        
     public int User { get; set; }
         
-    public Guid RoleGuid { get; set; }
+    public int RoleGuid { get; set; }
 }
