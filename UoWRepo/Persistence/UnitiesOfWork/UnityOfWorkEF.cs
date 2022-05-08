@@ -21,8 +21,6 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         {
             
             _context = context;
-            
-            _context = context;
 
             //Users = new RepositoryEf<Users>(_context);
             Users = InitObjects<Users>();
@@ -102,17 +100,6 @@ namespace UoWRepo.Persistence.UnitiesOfWork
                 runner.MigrateUp();
                 runner.Up(new AddNewColumnVersionOfNews());
             }
-
-            
-            
-            // Instantiate the runner
-            //var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
-
-            // Execute the migrations
-
-
-
-           
         }
         
         public void Dispose()

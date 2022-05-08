@@ -8,10 +8,6 @@ namespace UoWRepo.Core.EFDomain
     [Table("news_categories")]
     public class Categories : TEntity,  ITEntity
     {
-        [Key]
-        [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
-        [Column("news_categoriesID")]
-        public int Id { get; set; }
 
         [Column("categoryOwner")]
         public int CategoryOwner { get; set; }

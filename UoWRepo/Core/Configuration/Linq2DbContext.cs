@@ -33,5 +33,10 @@ namespace UoWRepo.Core.Configuration
         public ITable<NewsPublicationType> NewsPublicationType { get { return GetTable<NewsPublicationType>(); } }
         
         public ITable<PendingRegistration> PendingRegistration { get { return GetTable<PendingRegistration>(); } }
+        
+        
+        public ITable<RoleModels> RoleModels { get { return GetTable<RoleModels>(); } }
+        
+        public ITable<UsersToRoles> UsersToRoles { get { return GetTable<UsersToRoles>(); } }
     }
 }
