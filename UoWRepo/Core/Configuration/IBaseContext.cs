@@ -21,10 +21,10 @@ public interface IBaseContext<IITableSet>
 }
 
 
-public class SimpleContext: LinqToDB.Data.DataConnection, IBaseContext<ITable>
+/*public class SimpleContext: LinqToDB.Data.DataConnection, IBaseContext<ITable<out >>
 {
     
 
-}
+}*/
 
 
