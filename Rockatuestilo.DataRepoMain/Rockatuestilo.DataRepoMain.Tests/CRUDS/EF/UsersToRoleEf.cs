@@ -24,7 +24,7 @@ public class UsersToRoleEf
   
     
     [Test]
-    public void Test1_add1()
+    public void Test1_AddRole()
     {
         var value =new UsersToRoles();
 
@@ -33,7 +33,7 @@ public class UsersToRoleEf
 
         _unitOfWorkEf.UsersToRoles.Add(value);
 
-        var result = _unitOfWorkEf.Users.GetAll().ToList();
+        var result = _unitOfWorkEf.UsersToRoles.GetAll().ToList();
         Assert.AreEqual(result.Count, 1);
     }
 }
