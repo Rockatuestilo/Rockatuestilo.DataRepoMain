@@ -15,6 +15,7 @@
     <PackageVersion>3.4.14</PackageVersion>
     <FileVersion>3.4.14</FileVersion>
     <LangVersion>10</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
