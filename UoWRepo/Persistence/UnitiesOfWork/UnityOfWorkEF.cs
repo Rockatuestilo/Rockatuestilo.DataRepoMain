@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel.Design.Serialization;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
 using UoWRepo.Core.BaseDomain;
@@ -8,7 +7,6 @@ using UoWRepo.Core.Configuration;
 using UoWRepo.Core.EFDomain;
 using UoWRepo.Core.Repositories;
 using UoWRepo.Migrations;
-using UoWRepo.Persistence.Repositories;
 //using UoWRepo.Persistence.Repositories;
 using UoWRepo.Persistence.RepositoriesEf;
 
@@ -23,8 +21,6 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         {
             
             _context = context;
-            
-            _context = context;
 
             //Users = new RepositoryEf<Users>(_context);
             Users = InitObjects<Users>();
@@ -36,6 +32,10 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             
             PublicationType = InitObjects<NewsPublicationType>();
             Galleries = InitObjects<Galleries>();
+            
+            
+            Roles = InitObjects<RoleModels>();
+            UsersToRoles = InitObjects<UsersToRoles>();
 
         }
 
@@ -52,7 +52,9 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         public IMemoryRepository<Galleries> Galleries { get; }
         public IMemoryRepository<Users> Users { get; }
         public IMemoryRepository<NewsEtty> News { get; }
-        
+        public IMemoryRepository<RoleModels> Roles { get; }
+        public IMemoryRepository<UsersToRoles> UsersToRoles { get; }
+
         public IRepositorySharedObject SharedObject { get; }
         public IRepositorySharingSocialNetwork SharingSocialNetwork { get; }
         public int Complete()
@@ -98,22 +100,11 @@ namespace UoWRepo.Persistence.UnitiesOfWork
                 runner.MigrateUp();
                 runner.Up(new AddNewColumnVersionOfNews());
             }
-
-            
-            
-            // Instantiate the runner
-            //var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
-
-            // Execute the migrations
-
-
-
-           
         }
         
         public void Dispose()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace UoWRepo.Core.Configuration
     public class EFContext: DbContext, ICommonContext
     {
         private readonly string connectionString;
-        
+
         public EFContext(DbContextOptions<EFContext> options)
             : base(options)
         { }
@@ -26,7 +26,7 @@ namespace UoWRepo.Core.Configuration
                 {
                     return;
                 }
-
+                
                 optionsBuilder.UseMySql(connectionString,
                     new MariaDbServerVersion(new Version(10, 5, 8)) 
                     );
@@ -59,6 +59,10 @@ namespace UoWRepo.Core.Configuration
         public DbSet<NewsPublicationType> NewsPublicationType { get; set; }
         
         public DbSet<PendingRegistration> PendingRegistration { get; set; }
+        
+        public DbSet<RoleModels> RoleModels { get; set; }
+        
+        public DbSet<UsersToRoles> UsersToRoles { get; set; }
 
     }
 }

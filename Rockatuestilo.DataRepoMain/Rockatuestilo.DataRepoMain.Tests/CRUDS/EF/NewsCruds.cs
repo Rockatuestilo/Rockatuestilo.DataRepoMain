@@ -37,7 +37,7 @@ public class NewsCruds
         news.Publicationdate = DateTime.Now;
         news.Publicationtype = 0;
         news.Titleforurl = "";
-        news.ArticleVersion = "0";
+        news.ArticleVersion = 0;
         news.CategoryId = 1;
         news.UpdatedDate = DateTime.Now;
         news.HashtagsNewsId = 1;
