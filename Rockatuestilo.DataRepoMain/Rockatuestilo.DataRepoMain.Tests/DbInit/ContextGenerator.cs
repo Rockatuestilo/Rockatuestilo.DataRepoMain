@@ -7,7 +7,7 @@ namespace Rockatuestilo.DataRepoMain.Tests.DbInit
 {
     public class ContextGenerator
     {
-        private readonly string _nameOfFileforDatabase;
+        private readonly string _nameOfFileForDatabase;
         
         public ContextGenerator()
         {
@@ -15,23 +15,23 @@ namespace Rockatuestilo.DataRepoMain.Tests.DbInit
         }
 
 
-        public ContextGenerator(string nameOfFileforDatabase)
+        public ContextGenerator(string nameOfFileForDatabase)
         {
-            _nameOfFileforDatabase = nameOfFileforDatabase;
+            _nameOfFileForDatabase = nameOfFileForDatabase;
         }
 
         public (Linq2DbContext, string) CreateLinq2DbSqlite()
         {
-            if (File.Exists(_nameOfFileforDatabase))
+            if (File.Exists(_nameOfFileForDatabase))
             {
-                File.Delete(_nameOfFileforDatabase);
+                File.Delete(_nameOfFileForDatabase);
             }
 
             var generationScript = CreateEFSqliteAndGetGenerationScript();
-            var linq2DbContext=  new Linq2DbContext ("SQLite", $"Data Source={_nameOfFileforDatabase}");
+            var linq2DbContext=  new Linq2DbContext ("SQLite", $"Data Source={_nameOfFileForDatabase}");
             
             
-            using (var db = new Linq2DbContext("SQLite", $"Data Source={_nameOfFileforDatabase}"))
+            using (var db = new Linq2DbContext("SQLite", $"Data Source={_nameOfFileForDatabase}"))
             {
                 var usersList = db.Query<dynamic>(generationScript);
             }
@@ -44,7 +44,7 @@ namespace Rockatuestilo.DataRepoMain.Tests.DbInit
         {
             
             DbContextOptionsBuilder<EFContext> options = new DbContextOptionsBuilder<EFContext>();
-            options.UseSqlite($"Data Source={_nameOfFileforDatabase}");
+            options.UseSqlite($"Data Source={_nameOfFileForDatabase}");
             
             EFContext tourManagerContext = new EFContext(options.Options);
 
@@ -67,6 +67,21 @@ namespace Rockatuestilo.DataRepoMain.Tests.DbInit
 
             return context;
             //return CreateInMysql();
+        }
+        
+        
+        public Linq2DbContext CreateInMysqlLinq2Db()
+        {
+            //var options = new DbContextOptionsBuilder<EFContext>().
+
+     
+                
+            var context = new Linq2DbContext(_nameOfFileForDatabase);
+            
+            //Server=localhost;Port=3306;Database=cmsbackup5;Uid=cms;Pwd=albanicus$5$;ConnectionTimeout=600;DefaultCommandTimeout=600;SslMode=None;Pooling=true;
+                
+
+            return context;
         }
         
         
