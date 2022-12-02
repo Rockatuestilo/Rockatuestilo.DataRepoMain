@@ -1,6 +1,6 @@
 using System;
 
-namespace UoWRepo.Core.DomainDefinition;
+namespace UoWRepo.Core.BaseDomain;
 
 public interface IBaseTEntity
 {

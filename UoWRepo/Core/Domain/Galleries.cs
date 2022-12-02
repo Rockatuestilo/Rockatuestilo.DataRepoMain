@@ -1,11 +1,12 @@
 ﻿using System;
 using LinqToDB.Mapping;
+using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.Domain
 {
     
     [Table(Name = "galleries")]
-    public class Galleries : TEntity, ITEntity
+    public class Galleries : Linq2DbEntity, ITEntity
     {
         [PrimaryKey, Identity]
         [Column(Name = "galleryID"), NotNull]

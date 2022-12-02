@@ -9,6 +9,7 @@ using UoWRepo.Persistence.Repositories;
 using FluentMigrator.Runner;
 using System.Collections.Generic;
 using LinqToDB.Data;
+using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Persistence.UnitiesOfWork
 {
@@ -62,8 +63,9 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             SharedObject = new RepositorySharedObject(_context);
             SharingSocialNetwork = new RepositorySharingSocialNetwork(_context);
 
-            News = new MemoryRepository<NewsEtty>(_context, new Repository<NewsEtty>(_context));
-            PublicationType = new MemoryRepository<NewsPublicationType>(_context, new Repository<NewsPublicationType>(_context));
+            News = new MemoryRepository<NewsEtty>(_context, new Repository<NewsEtty>(_context)) as MemoryRepository<NewsEtty>;
+
+            PublicationType = new MemoryRepository<NewsPublicationType>(_context, new Repository<NewsPublicationType>(_context)) ;
             HashTags = new MemoryRepository<HashTags>(_context, new Repository<HashTags>(_context));
             HashTagsNews = new MemoryRepository<HashTagsNews>(_context, new Repository<HashTagsNews>(_context));
             Categories = new MemoryRepository<Categories>(_context, new Repository<Categories>(_context));
@@ -81,7 +83,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             RunStupidMigration();
         }
         
-        private  MemoryRepository<T> InitObjects<T>()  where T : TEntity
+        private  MemoryRepository<T> InitObjects<T>()  where T : Linq2DbEntity
         {
             return new MemoryRepository<T>(_context, new Repository<T>(_context));
         }

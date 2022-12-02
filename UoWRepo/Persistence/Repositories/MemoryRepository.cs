@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.Configuration;
 using UoWRepo.Core.Repositories;
 
@@ -137,7 +138,7 @@ namespace UoWRepo.Persistence.Repositories
         }
     }*/
 
-    public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<TEntity> where TEntity : Core.Domain.TEntity
+    public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<TEntity> where TEntity : Core.Domain.Linq2DbEntity, IBaseTEntity
     {
 
         protected new readonly Linq2DbContext context;

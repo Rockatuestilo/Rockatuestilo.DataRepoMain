@@ -1,10 +1,11 @@
 ﻿using System;
 using LinqToDB.Mapping;
+using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.Domain
 {
     [Table(Name = "tb_users")]
-    public class Users : TEntity, ITEntity
+    public class Users : Linq2DbEntity, ITEntity
     {
         [PrimaryKey, Identity]
         [Column(Name = "userID"), NotNull]

@@ -1,11 +1,12 @@
 ﻿using System;
 using LinqToDB.Mapping;
+using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.Domain
 {
     
     [Table(Name = "news_categories")]
-    public class Categories : TEntity,  ITEntity
+    public class Categories : Linq2DbEntity,  ITEntity
     {
         [PrimaryKey, Identity]
         [Column(Name = "news_categoriesID"), NotNull]

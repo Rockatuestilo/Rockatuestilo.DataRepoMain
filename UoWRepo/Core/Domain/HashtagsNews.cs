@@ -1,10 +1,11 @@
 ﻿using System;
 using LinqToDB.Mapping;
+using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.Domain
 {
     [Table(Name = "HashtagsNews")]
-    public class HashTagsNews : TEntity, ITEntity
+    public class HashTagsNews : Linq2DbEntity, ITEntity
     {
         [PrimaryKey, Identity]
         [Column(Name = "Id"), NotNull]
