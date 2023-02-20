@@ -59,6 +59,8 @@ namespace UoWRepo.Core.Configuration
         public DbSet<NewsPublicationType> NewsPublicationType { get; set; }
         
         public DbSet<PendingRegistration> PendingRegistration { get; set; }
+        
+        public DbSet<RoleModels> Roles { get; set; }
 
     }
 }

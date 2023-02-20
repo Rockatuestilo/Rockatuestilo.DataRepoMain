@@ -3,7 +3,7 @@ using LinqToDB.Mapping;
 
 namespace UoWRepo.Core.Domain;
 
-[Table(Name = "RoleModels")]
+[Table(Name = "Roles")]
 public class RoleModels: TEntity, ITEntity
 {
     public string RoleName { get; set; }

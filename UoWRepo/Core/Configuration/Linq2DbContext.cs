@@ -12,26 +12,28 @@ namespace UoWRepo.Core.Configuration
 
         public Linq2DbContext(IDataProvider dataProvider, string connectionString) : base(dataProvider, connectionString) { }
 
-        public ITable<ArticlesViewForUI> ArticlesViewForUI { get { return GetTable<ArticlesViewForUI>(); } }
+        public ITable<ArticlesViewForUI> ArticlesViewForUI { get { return this.GetTable<ArticlesViewForUI>(); } }
 
-        public ITable<NewsEtty> tb_news { get { return GetTable<NewsEtty>(); } }
+        public ITable<NewsEtty> tb_news { get { return this.GetTable<NewsEtty>(); } }
 
-        public ITable<Galleries> Galleries { get { return GetTable<Galleries>(); } }
+        public ITable<Galleries> Galleries { get { return this.GetTable<Galleries>(); } }
 
-        public ITable<Users> Users { get { return GetTable<Users>(); } }
+        public ITable<Users> Users { get { return this.GetTable<Users>(); } }
 
-        public ITable<Categories> Categories { get { return GetTable<Categories>(); } }
+        public ITable<Categories> Categories { get { return this.GetTable<Categories>(); } }
 
-        public ITable<HashTags> HashTags { get { return GetTable<HashTags>(); } }
+        public ITable<HashTags> HashTags { get { return this.GetTable<HashTags>(); } }
 
-        public ITable<HashTagsNews> HashtagsNews { get { return GetTable<HashTagsNews>(); } }
+        public ITable<HashTagsNews> HashtagsNews { get { return this.GetTable<HashTagsNews>(); } }
 
-        public ITable<SharingSocialNetworkLinqDB> SharingSocialNetwork { get { return GetTable<SharingSocialNetworkLinqDB>(); } }
+        public ITable<SharingSocialNetworkLinqDB> SharingSocialNetwork { get { return this.GetTable<SharingSocialNetworkLinqDB>(); } }
 
-        public ITable<SharedObjectLinqDB> SharedObject { get { return GetTable<SharedObjectLinqDB>(); } }
+        public ITable<SharedObjectLinqDB> SharedObject { get { return this.GetTable<SharedObjectLinqDB>(); } }
 
-        public ITable<NewsPublicationType> NewsPublicationType { get { return GetTable<NewsPublicationType>(); } }
+        public ITable<NewsPublicationType> NewsPublicationType { get { return this.GetTable<NewsPublicationType>(); } }
         
-        public ITable<PendingRegistration> PendingRegistration { get { return GetTable<PendingRegistration>(); } }
+        public ITable<PendingRegistration> PendingRegistration { get { return this.GetTable<PendingRegistration>(); } }
+        
+        public ITable<RoleModels> Roles { get { return this.GetTable<RoleModels>(); } }
     }
 }
