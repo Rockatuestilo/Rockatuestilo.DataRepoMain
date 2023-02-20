@@ -138,7 +138,7 @@ namespace UoWRepo.Persistence.Repositories
         }
     }*/
 
-    public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<TEntity> where TEntity : IBaseTEntity
+    public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<TEntity> where TEntity: Core.Domain.Linq2DbEntity, IBaseTEntity
     {
 
         protected new readonly Linq2DbContext context;
