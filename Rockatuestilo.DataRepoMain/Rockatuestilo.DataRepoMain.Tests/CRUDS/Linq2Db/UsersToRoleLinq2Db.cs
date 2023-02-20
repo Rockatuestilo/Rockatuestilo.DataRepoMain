@@ -20,7 +20,7 @@ public class UsersToRoleLinq2Db
         
         var value = new ContextGenerator("test.sqlite1").CreateLinq2DbSqlite();
 
-        _unitOfWork = new UnityOfWork(value);
+        _unitOfWork = new UnityOfWork(value.Item1);
             
     }
     
