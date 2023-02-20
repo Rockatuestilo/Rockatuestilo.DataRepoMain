@@ -76,7 +76,7 @@ namespace Rockatuestilo.DataRepoMain.Tests.DbInit
 
      
                 
-            var context = new Linq2DbContext(_nameOfFileForDatabase);
+            var context = new Linq2DbContext("MySql.Data.MySqlClient", "Server=localhost;Port=13306;Database=test;Uid=root;Pwd=password;charset=utf8;SslMode=Required;Convert Zero Datetime=True; Pooling=true;");
             
             //Server=localhost;Port=3306;Database=cmsbackup5;Uid=cms;Pwd=albanicus$5$;ConnectionTimeout=600;DefaultCommandTimeout=600;SslMode=None;Pooling=true;
                 
@@ -89,7 +89,8 @@ namespace Rockatuestilo.DataRepoMain.Tests.DbInit
         {
             //var options = new DbContextOptionsBuilder<EFContext>().
                 
-            var context = new EFContext("Server=localhost;Port=3306;Database=cmsbackup5;Uid=cms;Pwd=albanicus$5$;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;");
+            var context = new EFContext("Server=localhost;Port=13306;Database=test;Uid=root;Pwd=password;charset=utf8;SslMode=Required;Convert Zero Datetime=True; Pooling=true;");
+            context.Database.EnsureCreated();
             //Server=localhost;Port=3306;Database=cmsbackup5;Uid=cms;Pwd=albanicus$5$;ConnectionTimeout=600;DefaultCommandTimeout=600;SslMode=None;Pooling=true;
                 
 

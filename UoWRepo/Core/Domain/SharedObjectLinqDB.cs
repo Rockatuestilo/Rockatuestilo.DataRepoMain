@@ -1,11 +1,12 @@
 ﻿using System;
 using LinqToDB.Mapping;
+using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.Domain
 {
     
     [Table(Name = "SharedObject")]
-    public class SharedObjectLinqDB : TEntity, ITEntity
+    public class SharedObjectLinqDB : Linq2DbEntity, ITEntity
     {
         [PrimaryKey, Identity]
         [Column(Name = "Id"), NotNull]

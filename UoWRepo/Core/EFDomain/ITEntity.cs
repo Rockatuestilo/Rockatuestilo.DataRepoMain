@@ -1,10 +1,9 @@
 ﻿using System;
+using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.EFDomain
 {
-    public interface ITEntity
+    public interface ITEntity: IBaseTEntity
     {
-         int Id { get; set; }
-         DateTime UpdatedDate { get; set; }
     }
 }

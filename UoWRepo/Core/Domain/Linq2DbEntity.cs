@@ -3,7 +3,7 @@ using System;
 
 namespace UoWRepo.Core.Domain
 {
-    public class TEntity : UoWRepo.Core.BaseDomain.ITEntity
+    public class Linq2DbEntity : BaseDomain.BaseTEntity
     {
         [PrimaryKey, Identity]
         [Column(Name = "Id"), NotNull]

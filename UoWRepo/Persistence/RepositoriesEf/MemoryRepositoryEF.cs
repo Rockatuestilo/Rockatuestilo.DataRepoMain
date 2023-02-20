@@ -79,6 +79,8 @@ public class MemoryRepositoryEF<TEntity> : RepositoryEf<TEntity>, IMemoryReposit
 
             return result.SingleOrDefault(x => x.Id == id);
         }
+        
+        
 
         public override IEnumerable<TEntity> GetAll()
         {

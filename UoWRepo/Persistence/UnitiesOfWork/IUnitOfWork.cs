@@ -1,4 +1,5 @@
 ﻿using System;
+using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.Domain;
 using UoWRepo.Core.Repositories;
 // ReSharper disable UnusedMemberInSuper.Global

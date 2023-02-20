@@ -1,11 +1,12 @@
 ﻿using System;
 using LinqToDB.Mapping;
+using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.Domain
 {
     
     [Table(Name = "SharingSocialNetwork")]
-    public class SharingSocialNetworkLinqDB : TEntity, ITEntity
+    public class SharingSocialNetworkLinqDB : Linq2DbEntity, ITEntity
     {
         [PrimaryKey, Identity]
         [Column(Name = "Id"), NotNull]

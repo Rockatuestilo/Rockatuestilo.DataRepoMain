@@ -12,9 +12,14 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.Linq2Db
         [SetUp]
         public void Setup()
         {
-            var value = new ContextGenerator("test.sqlite3").CreateLinq2DbSqlite();
+            var connection =
+                "Server=localhost;Port=13306;Database=cmsbackup5;Uid=user;Pwd=password;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
+                    
+            var value_0 = new ContextGenerator(connection).CreateInMysql();
+        
+            var value = new ContextGenerator(connection).CreateInMysqlLinq2Db();
 
-            _unitOfWork = new UnityOfWork(value.Item1);
+            _unitOfWork = new UnityOfWork(value);
             
         }
         

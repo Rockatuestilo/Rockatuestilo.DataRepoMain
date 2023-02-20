@@ -15,6 +15,8 @@ public class RolesModelsLinq2Db
         var connection =
             "Server=localhost;Port=13306;Database=cmsbackup5;Uid=user;Pwd=password;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
         
+        var value_0 = new ContextGenerator(connection).CreateInMysql();
+        
         var value = new ContextGenerator(connection).CreateInMysqlLinq2Db();
 
         _unitOfWork = new UnityOfWork(value);

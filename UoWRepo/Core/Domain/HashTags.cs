@@ -6,7 +6,7 @@ namespace UoWRepo.Core.Domain
 {
     
     [Table(Name = "Hashtags")]
-    public class HashTags : TEntity, IHashTags
+    public class HashTags : Linq2DbEntity, IHashTags
     {
         [PrimaryKey, Identity]
         [Column(Name = "Id"), NotNull]

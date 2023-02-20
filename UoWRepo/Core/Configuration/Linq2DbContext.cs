@@ -12,29 +12,30 @@ namespace UoWRepo.Core.Configuration
 
         public Linq2DbContext(IDataProvider dataProvider, string connectionString) : base(dataProvider, connectionString) { }
 
-        public ITable<ArticlesViewForUI> ArticlesViewForUI { get; private set; }
+        public ITable<ArticlesViewForUI> ArticlesViewForUI { get { return this.GetTable<ArticlesViewForUI>(); } }
 
-        public ITable<NewsEtty> tb_news { get; private set; }
+        public ITable<NewsEtty> tb_news { get { return this.GetTable<NewsEtty>(); } }
 
-        public ITable<Galleries> Galleries { get; private set; }
+        public ITable<Galleries> Galleries { get { return this.GetTable<Galleries>(); } }
+
+        public ITable<Users> Users { get { return this.GetTable<Users>(); } }
+
+        public ITable<Categories> Categories { get { return this.GetTable<Categories>(); } }
+
+        public ITable<HashTags> HashTags { get { return this.GetTable<HashTags>(); } }
+
+        public ITable<HashTagsNews> HashtagsNews { get { return this.GetTable<HashTagsNews>(); } }
+
+        public ITable<SharingSocialNetworkLinqDB> SharingSocialNetwork { get { return this.GetTable<SharingSocialNetworkLinqDB>(); } }
+
+        public ITable<SharedObjectLinqDB> SharedObject { get { return this.GetTable<SharedObjectLinqDB>(); } }
+
+        public ITable<NewsPublicationType> NewsPublicationType { get { return this.GetTable<NewsPublicationType>(); } }
         
-        public ITable<Users> Users { get; private set; }
-        public ITable<Categories> Categories { get; private set; }
-
-        public ITable<HashTags> HashTags { get; private set; }
-        public ITable<HashTagsNews> HashtagsNews { get; private set; }
-
-        public ITable<SharingSocialNetworkLinqDB> SharingSocialNetwork { get; private set; }
-
-        public ITable<SharedObjectLinqDB> SharedObject { get; private set; }
-
-        public ITable<NewsPublicationType> NewsPublicationType { get; private set; }
+        public ITable<PendingRegistration> PendingRegistration { get { return this.GetTable<PendingRegistration>(); } }
         
-        public ITable<PendingRegistration> PendingRegistration { get; private set; }
-        
-        
-        public ITable<RoleModels> RoleModels { get; private set; }
-        
+        public ITable<RoleModels> Roles { get { return this.GetTable<RoleModels>(); } }
+
         public ITable<UsersToRoles> UsersToRoles { get; private set; }
     }
 }
