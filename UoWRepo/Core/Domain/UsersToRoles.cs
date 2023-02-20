@@ -1,10 +1,11 @@
 using System;
 using LinqToDB.Mapping;
+using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.Domain;
 
 [Table(Name = "UsersToRoles")]
-public class UsersToRoles: TEntity, ITEntity
+public class UsersToRoles: Linq2DbEntity, ITEntity
 {
     public int User { get; set; }
         

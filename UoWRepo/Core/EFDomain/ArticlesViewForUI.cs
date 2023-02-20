@@ -1,12 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using UoWRepo.Core.BaseDomain;
 
 
 namespace UoWRepo.Core.EFDomain
 {
     [Table("ArticlesViewForUI")]
-    public class ArticlesViewForUI: TEntity, ITEntity
+    public class ArticlesViewForUI: TEntity, IBaseTEntity
     {
         [Column("ArticleId")]
         public int ArticleId { get; set; }

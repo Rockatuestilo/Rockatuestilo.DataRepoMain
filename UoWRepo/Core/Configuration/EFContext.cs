@@ -60,8 +60,7 @@ namespace UoWRepo.Core.Configuration
         
         public DbSet<PendingRegistration> PendingRegistration { get; set; }
         
-        public DbSet<RoleModels> RoleModels { get; set; }
-        
+        public DbSet<RoleModels> Roles { get; set; }
         public DbSet<UsersToRoles> UsersToRoles { get; set; }
 
     }

@@ -1,10 +1,11 @@
 using System;
 using LinqToDB.Mapping;
+using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.Domain
 {
     
-    public class PendingRegistration: TEntity, ITEntity
+    public class PendingRegistration: Linq2DbEntity, ITEntity
     {
         [PrimaryKey, Identity]
         [Column(Name = "PendingId"), NotNull]

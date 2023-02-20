@@ -6,7 +6,7 @@ namespace UoWRepo.Core.Domain
 {
     
     [Table(Name = "tb_news")]
-    public class NewsEtty : TEntity, INewsEtty 
+    public class NewsEtty : Linq2DbEntity, INewsEtty, IBaseTEntity
     {
         [PrimaryKey, Identity]
         [Column(Name = "newsID"), NotNull]
