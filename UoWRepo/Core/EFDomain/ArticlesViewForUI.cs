@@ -8,11 +8,6 @@ namespace UoWRepo.Core.EFDomain
     [Table("ArticlesViewForUI")]
     public class ArticlesViewForUI: TEntity, ITEntity
     {
-        [Key]
-        [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
-        [Column("Id")]
-        public int Id { get; set; }
-
         [Column("ArticleId")]
         public int ArticleId { get; set; }
 

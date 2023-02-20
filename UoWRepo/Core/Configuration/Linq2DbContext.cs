@@ -35,5 +35,7 @@ namespace UoWRepo.Core.Configuration
         public ITable<PendingRegistration> PendingRegistration { get { return this.GetTable<PendingRegistration>(); } }
         
         public ITable<RoleModels> Roles { get { return this.GetTable<RoleModels>(); } }
+
+        public ITable<UsersToRoles> UsersToRoles { get; private set; }
     }
 }

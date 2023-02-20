@@ -4,8 +4,16 @@
         <TargetFramework>net6.0</TargetFramework>
 
         <IsPackable>false</IsPackable>
+
+        <LangVersion>9</LangVersion>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+      <LangVersion>10.0</LangVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+      <LangVersion>10.0</LangVersion>
+    </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="EntityFramework" Version="6.4.4" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.3" />

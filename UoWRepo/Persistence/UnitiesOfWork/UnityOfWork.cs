@@ -96,8 +96,8 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         
         public IMemoryRepository<PendingRegistration> PendingRegistration { get; private set; }
         public IMemoryRepository<NewsEtty> News { get; private set; }
-        public IMemoryRepository<RoleModels> Roles { get; }
-        public IMemoryRepository<UsersToRoles> UsersToRoles { get; }
+        public IMemoryRepository<RoleModels> Roles { get;  private set;}
+        public IMemoryRepository<UsersToRoles> UsersToRoles { get;  private set; }
 
         public IRepositorySharedObject SharedObject { get; private set; }
         public IRepositorySharingSocialNetwork SharingSocialNetwork { get; private set; }
@@ -247,6 +247,7 @@ DROP PROCEDURE `?`;
 
                 // Execute the migrations
                 //runner.MigrateUp();
+                runner.Up(new AddUIViewArticles());
                 runner.Up(new AddNewColumnVersionOfNews());
             }
 

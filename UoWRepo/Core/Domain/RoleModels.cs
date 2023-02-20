@@ -7,6 +7,8 @@ namespace UoWRepo.Core.Domain;
 public class RoleModels: TEntity, ITEntity
 {
     public string RoleName { get; set; }
+    
+    [Column(Name = "CreatedDate"), NotNull]
         
     public DateTime CreatedDate { get; set; } 
         

@@ -9,7 +9,7 @@ namespace UoWRepo.Core.EFDomain
     {
         [Key]
         [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
-        [LinqToDB.Mapping.Column("Id")]
+        [Column("Id")]
         public int Id { get; set; }
         public DateTime UpdatedDate { get; set; }
 
