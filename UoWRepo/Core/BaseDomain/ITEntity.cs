@@ -2,8 +2,6 @@ using System;
 
 namespace UoWRepo.Core.BaseDomain;
 
-public interface ITEntity
+public interface ITEntity: IBaseTEntity
 {
-    int Id { get; set; }
-    DateTime UpdatedDate { get; set; }
 }

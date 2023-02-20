@@ -1,11 +1,12 @@
 ﻿using System;
 using LinqToDB.Mapping;
+using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.Domain
 {
 
     [Table(Name = "ArticlesViewForUI")]
-    public class ArticlesViewForUI: TEntity, ITEntity
+    public class ArticlesViewForUI: Linq2DbEntity, IBaseTEntity
     {
         [Column(Name = "ArticleId"), NotNull]
         public int ArticleId { get; set; }

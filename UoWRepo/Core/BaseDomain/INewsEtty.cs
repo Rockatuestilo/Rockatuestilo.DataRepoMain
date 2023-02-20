@@ -2,7 +2,7 @@ using System;
 
 namespace UoWRepo.Core.BaseDomain;
 
-public interface INewsEtty: ITEntity
+public interface INewsEtty: IBaseTEntity
 {
     public int UserIdOwner { get; set; }
 

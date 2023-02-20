@@ -6,10 +6,11 @@ using UoWRepo.Core.Configuration;
 using UoWRepo.Core.Repositories;
 using LinqToDB;
 using LinqToDB.Data;
+using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Persistence.Repositories
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : Core.Domain.TEntity
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : UoWRepo.Core.Domain.Linq2DbEntity, IBaseTEntity
     {
         protected readonly Linq2DbContext context;
         private string _connectionString;
