@@ -16,7 +16,9 @@ public class UsersToRoleLinq2Db
                     
         //var value_0 = new ContextGenerator(connection).CreateInMysql();
         
-        var value = new ContextGenerator(connection).CreateInMysqlLinq2Db();
+        //var value = new ContextGenerator(connection).CreateInMysqlLinq2Db();
+        
+        var value = new ContextGenerator("test.sqlite1").CreateLinq2DbSqlite();
 
         _unitOfWork = new UnityOfWork(value);
             
