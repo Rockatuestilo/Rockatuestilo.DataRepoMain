@@ -13,6 +13,7 @@
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
       <LangVersion>10.0</LangVersion>
+      <PlatformTarget>AnyCPU</PlatformTarget>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="EntityFramework" Version="6.4.4" />
