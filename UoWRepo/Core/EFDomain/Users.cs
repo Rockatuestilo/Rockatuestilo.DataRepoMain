@@ -13,28 +13,28 @@ namespace UoWRepo.Core.EFDomain
         public int Id { get; set; }
 
         [Column("UserName")]
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         [Column("UserLastName")]
-        public string Userlastname { get; set; }
+        public string UserLastName { get; set; }
 
         [Column("UserLoginName")]
-        public string Userloginname { get; set; }
+        public string UserLoginName { get; set; }
 
         [Column("UserCreatedDate")]
-        public DateTime Usercreateddate { get; set; }
+        public DateTime UserCreatedDate { get; set; }
 
         [Column("UserUpdatedDate")]
         public DateTime UpdatedDate { get; set; }
 
         [Column("UserPassword")]
-        public string Userpassword { get; set; }
+        public string UserPassword { get; set; }
 
         [Column("UserLastLogin")]
-        public DateTime Userlastlogin { get; set; }
+        public DateTime UserLastLogin { get; set; }
 
         [Column("UserRoleLevel")]
-        public int Userrolelevel { get; set; }
+        public int UserRoleLevel { get; set; }
 
         [Column("createdBy")]
         public int CreatedBy { get; set; }

@@ -1,6 +1,5 @@
 using System;
 using LinqToDB.Mapping;
-using UoWRepo.Core.EFDomain;
 using ITEntity = UoWRepo.Core.BaseDomain.ITEntity;
 
 namespace UoWRepo.Core.Domain;

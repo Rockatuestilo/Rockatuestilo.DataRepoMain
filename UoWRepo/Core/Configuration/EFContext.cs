@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using UoWRepo.Core.EFDomain;
 
 namespace UoWRepo.Core.Configuration

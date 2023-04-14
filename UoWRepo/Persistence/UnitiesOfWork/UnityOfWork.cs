@@ -8,8 +8,6 @@ using UoWRepo.Migrations;
 using UoWRepo.Persistence.Repositories;
 using FluentMigrator.Runner;
 using System.Collections.Generic;
-using LinqToDB.Data;
-using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Persistence.UnitiesOfWork
 {
@@ -39,9 +37,9 @@ namespace UoWRepo.Persistence.UnitiesOfWork
                         from ht in context.HashTags
                         join ntN in context.HashtagsNews on ht.Id equals ntN.HashtagId
                         join articles in context.tb_news on ntN.NewsId equals articles.Id
-                        join publictaionTypes in context.NewsPublicationType on articles.Publicationtype equals publictaionTypes.Id
+                        join publictaionTypes in context.NewsPublicationType on articles.PublicationType equals publictaionTypes.Id
                         where ht.HashtagWord == hashtag
-                        where publictaionTypes.Leveluser <= userLevel
+                        where publictaionTypes.LevelUser <= userLevel
                         
                         select new { articles }).Skip(pageSize * (currentPage)).Take(pageSize).Select(x => x.articles).ToList();
 

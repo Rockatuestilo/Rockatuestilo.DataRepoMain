@@ -1,4 +1,3 @@
-using System;
 using LinqToDB.Mapping;
 using UoWRepo.Core.BaseDomain;
 

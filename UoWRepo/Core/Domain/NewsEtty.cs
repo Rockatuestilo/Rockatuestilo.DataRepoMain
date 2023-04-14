@@ -16,40 +16,40 @@ namespace UoWRepo.Core.Domain
         public int UserIdOwner { get; set; }
 
         [Column(Name = "newsTittel"), Nullable]
-        public string Newstittel { get; set; }
+        public string NewsTitle { get; set; }
 
         [Column(Name = "newsContent"), Nullable]
-        public string Newscontent { get; set; }
+        public string NewsContent { get; set; }
 
         [Column(Name = "newsCreatedDate"), NotNull]
-        public DateTime Newscreateddate { get; set; }
+        public DateTime NewsCreatedDate { get; set; }
 
         [Column(Name = "newsLastUpdateDate"), NotNull]
         public DateTime UpdatedDate { get; set; }
 
         [Column(Name = "newsPermission"), Nullable]
-        public int Newspermission { get; set; }
+        public int NewsPermission { get; set; }
 
         [Column(Name = "newsChangedByID"), Nullable]
-        public int Newschangedbyid { get; set; }
+        public int NewsChangedById { get; set; }
 
         [Column(Name = "category_id"), Nullable]
         public int CategoryId { get; set; }
 
         [Column(Name = "publicationType"), Nullable]
-        public int Publicationtype { get; set; } = 0;
+        public int PublicationType { get; set; } = 0;
 
         [Column(Name = "galleryID"), Nullable]
-        public int Galleryid { get; set; }
+        public int GalleryId { get; set; }
 
         [Column(Name = "newsPresentation"), Nullable]
-        public string Newspresentation { get; set; }
+        public string NewsPresentation { get; set; }
 
         [Column(Name = "publicationdate"), NotNull]
-        public DateTime Publicationdate { get; set; }
+        public DateTime PublicationDate { get; set; }
 
         [Column(Name = "titleforURL"), Nullable]
-        public string Titleforurl { get; set; }
+        public string TitleForUrl { get; set; }
 
         [Column(Name = "HashtagsNewsId"), Nullable]
         public int HashtagsNewsId { get; set; }

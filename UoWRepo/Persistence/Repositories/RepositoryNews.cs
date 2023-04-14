@@ -45,7 +45,7 @@ namespace UoWRepo.Persistence.Repositories
         public void UpdatePublicationTime(int articleID, DateTime datetime)
         {
             context.tb_news.Where(x => x.Id == articleID)
-                    .Set(p => p.Publicationdate, DateTime.Now)
+                    .Set(p => p.PublicationDate, DateTime.Now)
                     .Update();
         }
     }

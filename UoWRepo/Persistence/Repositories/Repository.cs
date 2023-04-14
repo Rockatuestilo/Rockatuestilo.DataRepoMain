@@ -44,7 +44,19 @@ namespace UoWRepo.Persistence.Repositories
 
         public virtual void AddOrUpdate(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            var entity = context.GetTable<TEntity>().SingleOrDefault(predicate);
+
+            if (entity == null)
+            {
+                entity = Activator.CreateInstance<TEntity>();
+                predicate.Compile().Invoke(entity);
+                context.Insert(entity);
+            }
+            else
+            {
+                predicate.Compile().Invoke(entity);
+                context.Update(entity);
+            }
         }
 
         public virtual void AddRange(IEnumerable<TEntity> entities)
@@ -76,8 +88,6 @@ namespace UoWRepo.Persistence.Repositories
         {
             return context.GetTable<TEntity>().AsQueryable();
         }
-
-
         public virtual void Remove(TEntity entity)
         {
             context.Delete(entity);

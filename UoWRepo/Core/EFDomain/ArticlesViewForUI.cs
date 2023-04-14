@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using UoWRepo.Core.BaseDomain;
 
@@ -13,10 +12,10 @@ namespace UoWRepo.Core.EFDomain
         public int ArticleId { get; set; }
 
         [Column("UIString")]
-        public string UIString { get; set; }
+        public string UiString { get; set; } = null!;
 
         [Column("CreatedByID")]
-        public int CreatedbyId { get; set; }
+        public int CreatedById { get; set; }
 
         [Column("UpdatedById")]
         public int UpdatedById { get; set; }

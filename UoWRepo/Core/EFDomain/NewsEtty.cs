@@ -17,40 +17,40 @@ namespace UoWRepo.Core.EFDomain
         public int UserIdOwner { get; set; }
 
         [Column("newsTittel"),]
-        public string Newstittel { get; set; }
+        public string NewsTitle { get; set; }
 
         [Column("newsContent"),]
-        public string Newscontent { get; set; }
+        public string NewsContent { get; set; }
 
         [Column("newsCreatedDate")]
-        public DateTime Newscreateddate { get; set; }
+        public DateTime NewsCreatedDate { get; set; }
 
         [Column("newsLastUpdateDate")]
         public DateTime UpdatedDate { get; set; }
 
         [Column("newsPermission"),]
-        public int Newspermission { get; set; }
+        public int NewsPermission { get; set; }
 
         [Column("newsChangedByID"),]
-        public int Newschangedbyid { get; set; }
+        public int NewsChangedById { get; set; }
 
         [Column("category_id"),]
         public int CategoryId { get; set; }
 
         [Column("publicationType"),]
-        public int Publicationtype { get; set; } = 0;
+        public int PublicationType { get; set; } = 0;
 
         [Column("galleryID"),]
-        public int Galleryid { get; set; }
+        public int GalleryId { get; set; }
 
         [Column("newsPresentation"),]
-        public string Newspresentation { get; set; }
+        public string NewsPresentation { get; set; }
 
         [Column("publicationdate")]
-        public DateTime Publicationdate { get; set; }
+        public DateTime PublicationDate { get; set; }
 
         [Column("titleforURL"),]
-        public string Titleforurl { get; set; }
+        public string TitleForUrl { get; set; }
 
         [Column("HashtagsNewsId"),]
         public int? HashtagsNewsId { get; set; }

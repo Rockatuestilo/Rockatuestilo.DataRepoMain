@@ -16,16 +16,16 @@ namespace UoWRepo.Core.Domain
         public int CategoryOwner { get; set; }
 
         [Column(Name = "news_categoryName"), NotNull]
-        public string CategoryName { get; set; }
+        public string CategoryName { get; set; } = null!;
 
         [Column(Name = "levelCategory"), NotNull]
         public int LevelCategory { get; set; }
 
         [Column(Name = "CreatedByID"), NotNull]
-        public int CreatedbyId { get; set; }
+        public int CreatedById { get; set; }
 
         [Column(Name = "UpdatedByID"), NotNull]
-        public int UpdatedbyId { get; set; }
+        public int UpdatedById { get; set; }
 
         [Column(Name = "CreatedDate"), NotNull]
         public DateTime CreatedDate { get; set; }

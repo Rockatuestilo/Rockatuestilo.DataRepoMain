@@ -43,12 +43,6 @@ public class MemoryRepositoryEF<TEntity> : RepositoryEf<TEntity>, IMemoryReposit
             return base.AddWithIdentity(entity);
         }
 
-        public override void AddOrUpdate(Expression<Func<TEntity, bool>> predicate)
-        {
-
-            throw new NotImplementedException();
-        }
-
         public override void AddRange(IEnumerable<TEntity> entities)
         {
             ResetMemory(entities);

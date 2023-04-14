@@ -24,8 +24,6 @@ namespace UoWRepo.Core.Repositories
 
         void Update(BaseTEntity entity);
 
-        void AddOrUpdate(Expression<Func<BaseTEntity, bool>> predicate);
-
         void Remove(BaseTEntity entity);
         void RemoveRange(IEnumerable<BaseTEntity> entities);        
     }
