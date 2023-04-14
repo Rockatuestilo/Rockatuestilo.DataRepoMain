@@ -16,10 +16,10 @@ namespace UoWRepo.Core.Domain
         public int UserIdOwner { get; set; }
 
         [Column(Name = "newsTittel"), Nullable]
-        public string NewsTitle { get; set; }
+        public string? NewsTitle { get; set; }
 
         [Column(Name = "newsContent"), Nullable]
-        public string NewsContent { get; set; }
+        public string? NewsContent { get; set; }
 
         [Column(Name = "newsCreatedDate"), NotNull]
         public DateTime NewsCreatedDate { get; set; }
@@ -43,13 +43,13 @@ namespace UoWRepo.Core.Domain
         public int GalleryId { get; set; }
 
         [Column(Name = "newsPresentation"), Nullable]
-        public string NewsPresentation { get; set; }
+        public string? NewsPresentation { get; set; }
 
         [Column(Name = "publicationdate"), NotNull]
         public DateTime PublicationDate { get; set; }
 
         [Column(Name = "titleforURL"), Nullable]
-        public string TitleForUrl { get; set; }
+        public string? TitleForUrl { get; set; }
 
         [Column(Name = "HashtagsNewsId"), Nullable]
         public int HashtagsNewsId { get; set; }
