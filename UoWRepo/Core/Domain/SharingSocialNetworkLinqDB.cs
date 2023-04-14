@@ -13,10 +13,10 @@ namespace UoWRepo.Core.Domain
         public int Id { get; set; }
 
         [Column(Name = "Nameofsocialnetwork"), NotNull]
-        public string Nameofsocialnetwork { get; set; }
+        public string NameOfSocialnetwork { get; set; }
 
         [Column(Name = "Createddate"), NotNull]
-        public DateTime Createddate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         [Column(Name = "Updateddate"), NotNull]
         public DateTime UpdatedDate { get; set; }

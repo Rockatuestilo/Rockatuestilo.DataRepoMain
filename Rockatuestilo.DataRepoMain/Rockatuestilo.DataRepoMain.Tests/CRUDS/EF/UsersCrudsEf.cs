@@ -1,5 +1,4 @@
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
 using Rockatuestilo.DataRepoMain.Tests.TestData.Users;

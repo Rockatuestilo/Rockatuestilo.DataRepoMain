@@ -1,5 +1,4 @@
-﻿using System;
-using UoWRepo.Core.BaseDomain;
+﻿using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.EFDomain
 {

@@ -158,15 +158,6 @@ namespace UoWRepo.Persistence.Repositories
             this.context = context;
 
         }
-        
-        /*public MemoryRepository(string ConnectionString) : base(ConnectionString)
-        {
-            //this.MemoryContext = MemoryContext;
-            this.repository = repository;
-            this.context = context;
-
-        }*/
-        
 
          public override void Add(TEntity entity)
         {
@@ -178,12 +169,6 @@ namespace UoWRepo.Persistence.Repositories
         {
             ResetMemory(entity);
             return base.AddWithIdentity(entity);
-        }
-
-        public override void AddOrUpdate(Expression<Func<TEntity, bool>> predicate)
-        {
-
-            throw new NotImplementedException();
         }
 
         public override void AddRange(IEnumerable<TEntity> entities)

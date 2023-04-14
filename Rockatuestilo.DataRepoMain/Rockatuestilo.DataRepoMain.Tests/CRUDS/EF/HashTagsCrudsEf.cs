@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
-using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.EFDomain;
 using UoWRepo.Persistence.UnitiesOfWork;
 

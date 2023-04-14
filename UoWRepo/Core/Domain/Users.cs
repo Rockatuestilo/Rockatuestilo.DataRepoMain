@@ -12,28 +12,28 @@ namespace UoWRepo.Core.Domain
         public int Id { get; set; }
 
         [Column(Name = "UserName"), NotNull]
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         [Column(Name = "UserLastName"), NotNull]
-        public string Userlastname { get; set; }
+        public string UserLastName { get; set; }
 
         [Column(Name = "UserLoginName"), NotNull]
-        public string Userloginname { get; set; }
+        public string UserLoginName { get; set; }
 
         [Column(Name = "UserCreatedDate"), NotNull]
-        public DateTime Usercreateddate { get; set; }
+        public DateTime UserCreateDate { get; set; }
 
         [Column(Name = "UserUpdatedDate"), NotNull]
         public DateTime UpdatedDate { get; set; }
 
         [Column(Name = "UserPassword"), NotNull]
-        public string Userpassword { get; set; }
+        public string UserPassword { get; set; }
 
         [Column(Name = "UserLastLogin"), NotNull]
-        public DateTime Userlastlogin { get; set; }
+        public DateTime UserLastLogin { get; set; }
 
         [Column(Name = "UserRoleLevel"), NotNull]
-        public int Userrolelevel { get; set; }
+        public int UserRoleLevel { get; set; }
 
         [Column(Name = "createdBy"), NotNull]
         public int CreatedBy { get; set; }

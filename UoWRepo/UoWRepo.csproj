@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Rockatuestilo.DataRepoMain </PackageId>
     <Authors>Rockatuestilo.DataRepoMain </Authors>
@@ -14,27 +14,31 @@
     <AssemblyVersion>3.5.3</AssemblyVersion>
     <PackageVersion>3.5.3</PackageVersion>
     <FileVersion>3.5.3</FileVersion>
-    <LangVersion>10</LangVersion>
+    <LangVersion>latestmajor</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="linq2db" Version="4.4.1" />
-    <PackageReference Include="linq2db.MySql" Version="4.4.1" />
-    <PackageReference Include="linq2db.SQLite" Version="4.4.1" />
-    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />    
+    <PackageReference Include="linq2db" Version="5.1.1" />
+    <PackageReference Include="linq2db.MySql" Version="5.1.1" />
+    <PackageReference Include="linq2db.SQLite" Version="5.1.1" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />    
     <PackageReference Include="FluentMigrator" Version="3.3.2" />
     <PackageReference Include="FluentMigrator.Runner.MySql" Version="3.3.2" />
     <PackageReference Include="FluentMigrator.Runner" Version="3.3.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="7.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.5" />
     <PackageReference Include="MySqlConnector" Version="2.2.5" />
     <PackageReference Include="Npgsql" Version="7.0.2" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />        
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.3" />    
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.5" />    
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.11" />            
     <PackageReference Include="SQLite" Version="3.13.0" />
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.4" />

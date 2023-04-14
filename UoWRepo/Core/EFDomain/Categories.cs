@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
@@ -19,10 +18,10 @@ namespace UoWRepo.Core.EFDomain
         public int LevelCategory { get; set; }
 
         [Column("CreatedByID")]
-        public int CreatedbyId { get; set; }
+        public int CreatedById { get; set; }
 
         [Column("UpdatedByID")]
-        public int UpdatedbyId { get; set; }
+        public int UpdatedById { get; set; }
 
         [Column("CreatedDate")]
         public DateTime CreatedDate { get; set; }

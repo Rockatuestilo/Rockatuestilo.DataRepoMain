@@ -28,15 +28,15 @@ public class NewsCruds
     {
         var news = new NewsEtty();
 
-        news.Newscontent = "";
-        news.Newscreateddate = DateTime.Now;
-        news.Newschangedbyid = 1;
-        news.Newspermission = 0;
-        news.Newspresentation = "";
-        news.Newstittel = "";
-        news.Publicationdate = DateTime.Now;
-        news.Publicationtype = 0;
-        news.Titleforurl = "";
+        news.NewsContent = "";
+        news.NewsCreatedDate = DateTime.Now;
+        news.NewsChangedById = 1;
+        news.NewsPermission = 0;
+        news.NewsPresentation = "";
+        news.NewsTitle = "";
+        news.PublicationDate = DateTime.Now;
+        news.PublicationType = 0;
+        news.TitleForUrl = "";
         news.ArticleVersion = 0;
         news.CategoryId = 1;
         news.UpdatedDate = DateTime.Now;

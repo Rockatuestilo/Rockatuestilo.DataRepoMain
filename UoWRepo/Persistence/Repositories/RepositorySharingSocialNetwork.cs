@@ -1,5 +1,4 @@
-﻿using System;
-using UoWRepo.Core.Configuration;
+﻿using UoWRepo.Core.Configuration;
 using UoWRepo.Core.Repositories;
 using UoWRepo.Core.Domain;
 

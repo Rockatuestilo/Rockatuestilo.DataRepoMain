@@ -31,12 +31,7 @@ namespace UoWRepo.Persistence.RepositoriesEf
             context.SaveChanges();
             return value.Entity.Id;
         }
-
-        public virtual void AddOrUpdate(Expression<Func<TEntity, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public virtual void AddRange(IEnumerable<TEntity> entitiesList)
         {
             entities.AddRange(entitiesList);

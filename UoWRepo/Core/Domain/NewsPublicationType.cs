@@ -13,19 +13,19 @@ namespace UoWRepo.Core.Domain
         public int Id { get; set; }
 
         [Column(Name = "TypeOfPublication"), NotNull]
-        public string Typeofpublication { get; set; }
+        public string TypeOfPublication { get; set; } = null!;
 
         [Column(Name = "LevelUser"), NotNull]
-        public int Leveluser { get; set; }
+        public int LevelUser { get; set; }
 
         [Column(Name = "CreatedByID"), NotNull]
-        public int Createdbyid { get; set; }
+        public int CreatedById { get; set; }
 
         [Column(Name = "UpdatedByID"), NotNull]
-        public int Updatedbyid { get; set; }
+        public int UpdatedById { get; set; }
 
         [Column(Name = "CreatedDate"), NotNull]
-        public DateTime Createddate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         [Column(Name = "updatedDate"), NotNull]
         public DateTime UpdatedDate { get; set; }
