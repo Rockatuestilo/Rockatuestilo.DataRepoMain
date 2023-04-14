@@ -1,4 +1,3 @@
-using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.EFDomain;
 using UoWRepo.Core.Repositories;
 

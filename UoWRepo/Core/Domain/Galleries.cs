@@ -13,30 +13,30 @@ namespace UoWRepo.Core.Domain
         public int Id { get; set; }
 
         [Column(Name = "galleryOwner"), Nullable]
-        public int Galleryowner { get; set; }
+        public int GalleryOwner { get; set; }
 
         [Column(Name = "galleryName"), Nullable]
-        public string Galleryname { get; set; }
+        public string? GalleryName { get; set; }
 
         [Column(Name = "galleryPath"), NotNull]
-        public string Gallerypath { get; set; }
+        public string GalleryPath { get; set; } = null!;
 
         [Column(Name = "CreatedByID"), Nullable]
-        public int Createdbyid { get; set; }
+        public int? CreatedById { get; set; }
 
         [Column(Name = "UpdatedByID"), Nullable]
-        public int Updatedbyid { get; set; }
+        public int? UpdatedById { get; set; }
 
         [Column(Name = "CreatedDate"), Nullable]
-        public DateTime Createddate { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         [Column(Name = "updatedDate"), Nullable]
-        public DateTime UpdatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
 
         [Column(Name = "categorylevel"), Nullable]
-        public int Categorylevel { get; set; }
+        public int? CategoryLevel { get; set; }
 
         [Column(Name = "publishtype"), Nullable]
-        public int Publishtype { get; set; }
+        public int? PublishType { get; set; }
     }
 }

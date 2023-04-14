@@ -14,30 +14,30 @@ namespace UoWRepo.Core.EFDomain
         public int Id { get; set; }
 
         [Column("galleryOwner")]
-        public int Galleryowner { get; set; }
+        public int GalleryOwner { get; set; }
 
         [Column("galleryName")]
-        public string Galleryname { get; set; }
+        public string GalleryName { get; set; }
 
         [Column("galleryPath")]
-        public string Gallerypath { get; set; }
+        public string GalleryPath { get; set; }
 
         [Column("CreatedByID")]
-        public int Createdbyid { get; set; }
+        public int CreatedById { get; set; }
 
         [Column("UpdatedByID")]
-        public int Updatedbyid { get; set; }
+        public int UpdatedById { get; set; }
 
         [Column("CreatedDate")]
-        public DateTime Createddate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         [Column("updatedDate")]
         public DateTime UpdatedDate { get; set; }
 
         [Column("categorylevel")]
-        public int Categorylevel { get; set; }
+        public int CategoryLevel { get; set; }
 
         [Column("publishtype")]
-        public int Publishtype { get; set; }
+        public int PublishType { get; set; }
     }
 }

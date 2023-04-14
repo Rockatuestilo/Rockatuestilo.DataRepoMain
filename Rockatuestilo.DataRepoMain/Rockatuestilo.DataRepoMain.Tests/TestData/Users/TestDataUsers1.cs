@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.Serialization.Json;
 using Newtonsoft.Json;
 
 namespace Rockatuestilo.DataRepoMain.Tests.TestData.Users

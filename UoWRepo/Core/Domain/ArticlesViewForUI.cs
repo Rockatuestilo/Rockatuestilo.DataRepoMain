@@ -12,10 +12,10 @@ namespace UoWRepo.Core.Domain
         public int ArticleId { get; set; }
 
         [Column(Name = "UIString"), NotNull]
-        public string UIString { get; set; }
+        public string UiString { get; set; } = null!;
 
         [Column(Name = "CreatedByID"), NotNull]
-        public int CreatedbyId { get; set; }
+        public int CreatedById { get; set; } 
 
         [Column(Name = "UpdatedById"), NotNull]
         public int UpdatedById { get; set; }

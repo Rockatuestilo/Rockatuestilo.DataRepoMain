@@ -1,5 +1,4 @@
 using System;
-using Newtonsoft.Json;
 using UoWRepo.Core.EFDomain;
 
 namespace Rockatuestilo.DataRepoMain.Tests.TestData.CategoriesTestCollectionSpace
@@ -12,10 +11,10 @@ namespace Rockatuestilo.DataRepoMain.Tests.TestData.CategoriesTestCollectionSpac
 
             categories.CategoryName = "Conciertos";
             categories.CategoryOwner = 0;
-            categories.CreatedbyId = 0;
+            categories.CreatedById = 0;
             categories.CreatedDate = DateTime.Now;
             categories.LevelCategory = 0;
-            categories.UpdatedbyId = 0;
+            categories.UpdatedById = 0;
             categories.UpdatedDate = DateTime.Now;
 
             return categories;
