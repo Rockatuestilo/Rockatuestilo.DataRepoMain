@@ -4,47 +4,41 @@ using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.Domain
 {
-    [Table(Name = "tb_users")]
+    [Table(Name = "Users")]
     public class Users : Linq2DbEntity, ITEntity
     {
         [PrimaryKey, Identity]
-        [Column(Name = "userID"), NotNull]
-        public int Id { get; set; }
+        [Column(Name = "Id"), NotNull]
+        public new int Id { get; set; }
 
-        [Column(Name = "UserName"), NotNull]
-        public string UserName { get; set; }
+        [Column(Name = "Name"), NotNull]
+        public string Name { get; set; }= null!;
 
-        [Column(Name = "UserLastName"), NotNull]
-        public string UserLastName { get; set; }
+        [Column(Name = "LastName"), NotNull]
+        public string LastName { get; set; }= null!;
 
-        [Column(Name = "UserLoginName"), NotNull]
-        public string UserLoginName { get; set; }
+        [Column(Name = "LoginName"), NotNull]
+        public string LoginName { get; set; }= null!;
 
-        [Column(Name = "UserCreatedDate"), NotNull]
-        public DateTime UserCreateDate { get; set; }
+        [Column(Name = "Password"), NotNull] 
+        public string Password { get; set; } = null!;
 
-        [Column(Name = "UserUpdatedDate"), NotNull]
-        public DateTime UpdatedDate { get; set; }
-
-        [Column(Name = "UserPassword"), NotNull]
-        public string UserPassword { get; set; }
-
-        [Column(Name = "UserLastLogin"), NotNull]
-        public DateTime UserLastLogin { get; set; }
+        [Column(Name = "LastLogin"), NotNull]
+        public DateTime LastLogin { get; set; }
 
         [Column(Name = "UserRoleLevel"), NotNull]
         public int UserRoleLevel { get; set; }
 
-        [Column(Name = "createdBy"), NotNull]
+        [Column(Name = "CreatedBy"), NotNull]
         public int CreatedBy { get; set; }
 
-        [Column(Name = "updatedBy"), NotNull]
+        [Column(Name = "UpdatedBy"), NotNull]
         public int UpdatedBy { get; set; }
 
-        [Column(Name = "email"), Nullable]
-        public string Email { get; set; }
+        [Column(Name = "Email"), Nullable]
+        public string Email { get; set; }= null!;
 
-        [Column(Name = "verifiedaccount"), Nullable]
+        [Column(Name = "VerifiedAccount"), Nullable]
         public bool VerifiedAccount { get; set; }
     }
 }
