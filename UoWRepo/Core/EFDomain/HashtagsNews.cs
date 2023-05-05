@@ -10,7 +10,7 @@ namespace UoWRepo.Core.EFDomain
         [Key]
         [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
         [Column("Id")]
-        public int Id { get; set; }
+        public new int Id { get; set; }
 
         [Column("NewsID")]
         public int NewsId { get; set; }
@@ -24,11 +24,8 @@ namespace UoWRepo.Core.EFDomain
         [Column("UpdatedByID")]
         public int UpdatedById { get; set; }
 
-        [Column("CreatedDate")]
-        public DateTime CreatedDate { get; set; }
-
         [Column("updatedDate")]
-        public DateTime UpdatedDate { get; set; }
+        public new DateTime UpdatedDate { get; set; }
 
         public static explicit operator HashTagsNews(int v)
         {
