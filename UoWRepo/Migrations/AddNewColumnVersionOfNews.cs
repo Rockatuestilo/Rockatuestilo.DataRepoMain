@@ -19,8 +19,6 @@ namespace UoWRepo.Migrations
         public override void Up()
         {
             var tableName = "tb_news";
-            
-            
 
             var table = Schema.Table(tableName);
 
