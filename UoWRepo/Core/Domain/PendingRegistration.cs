@@ -9,7 +9,7 @@ namespace UoWRepo.Core.Domain
     {
         [PrimaryKey, Identity]
         [Column(Name = "PendingId"), NotNull]
-        public int Id { get; set; }
+        public new int Id { get; set; }
 
         [Column(Name = "UserIdTableKey"), NotNull]
         public int UserIdTableKey { get; set; }

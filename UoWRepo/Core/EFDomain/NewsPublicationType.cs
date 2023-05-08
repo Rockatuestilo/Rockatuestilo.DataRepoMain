@@ -10,7 +10,7 @@ namespace UoWRepo.Core.EFDomain
         [Key]
         [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
         [Column("NewsPublicationTypeID")]
-        public int Id { get; set; }
+        public new int Id { get; set; }
 
         [Column("TypeOfPublication")]
         public string TypeOfPublication { get; set; }
@@ -28,6 +28,6 @@ namespace UoWRepo.Core.EFDomain
         public DateTime CreatedDate { get; set; }
 
         [Column("updatedDate")]
-        public DateTime UpdatedDate { get; set; }
+        public new DateTime UpdatedDate { get; set; }
     }
 }
