@@ -7,7 +7,12 @@ namespace UoWRepo.Core.Domain
     {
         [PrimaryKey, Identity]
         [Column(Name = "Id"), NotNull]
-        public int Id { get; set; }
-        public DateTime UpdatedDate { get; set; }
+        public new int Id { get; set; }
+        
+        [Column(Name = "CreatedDate"), NotNull]
+        public virtual DateTime CreatedDate { get; set; }
+        
+        [Column(Name = "UpdatedDate"), NotNull]
+        public override DateTime UpdatedDate { get; set; }
     }
 }

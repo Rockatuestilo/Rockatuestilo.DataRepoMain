@@ -10,8 +10,15 @@ namespace UoWRepo.Core.EFDomain
         [Key]
         [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
         [Column("Id")]
-        public int Id { get; set; }
-        public DateTime UpdatedDate { get; set; }
+        public new int Id { get; set; }
+        
+        [Column("CreatedDate")]
+        public new DateTime CreatedDate { get; set; }
+        
+        [Column("UpdatedDate")]
+        public new DateTime UpdatedDate { get; set; }
+        
+        
 
 
     }

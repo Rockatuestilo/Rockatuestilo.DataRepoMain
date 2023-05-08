@@ -13,7 +13,7 @@ public class MemoryRepositoryEF<TEntity> : RepositoryEf<TEntity>, IMemoryReposit
 {
 
         
-        protected readonly EFContext context;
+        protected new readonly EFContext context;
         //protected readonly Repository<TEntity> repository;
 
         private readonly IRepository<TEntity> repository;

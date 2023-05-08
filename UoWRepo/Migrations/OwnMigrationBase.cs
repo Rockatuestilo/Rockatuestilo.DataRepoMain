@@ -7,7 +7,7 @@ namespace UoWRepo.Migrations
     {
         public OwnMigrationBase()
         {
-            base.ConnectionString = "";
+            ConnectionString = "";
         }
 
         public override void Down()

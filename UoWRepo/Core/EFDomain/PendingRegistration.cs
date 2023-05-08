@@ -10,7 +10,7 @@ namespace UoWRepo.Core.EFDomain
         [Key]
         [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
         [Column("PendingId")]
-        public int Id { get; set; }
+        public new int Id { get; set; }
 
         [Column("UserIdTableKey")]
         public int UserIdTableKey { get; set; }

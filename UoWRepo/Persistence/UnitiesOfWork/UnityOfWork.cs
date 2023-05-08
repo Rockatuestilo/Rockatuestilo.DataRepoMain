@@ -57,9 +57,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
 
         public UnityOfWork(Linq2DbContext context)
         {
-            _context = context;
-            SharedObject = new RepositorySharedObject(_context);
-            SharingSocialNetwork = new RepositorySharingSocialNetwork(_context);
+            _context = context;     
 
             News = new MemoryRepository<NewsEtty>(_context, new Repository<NewsEtty>(_context)) as MemoryRepository<NewsEtty>;
 
@@ -99,8 +97,8 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         public IMemoryRepository<RoleModels> Roles { get;  private set;}
         public IMemoryRepository<UsersToRoles> UsersToRoles { get;  private set; }
 
-        public IRepositorySharedObject SharedObject { get; private set; }
-        public IRepositorySharingSocialNetwork SharingSocialNetwork { get; private set; }
+        //public IRepositorySharedObject SharedObject { get; private set; }
+        //public IRepositorySharingSocialNetwork SharingSocialNetwork { get; private set; }
 
         private void RunStupidMigration()
         {
@@ -249,6 +247,7 @@ DROP PROCEDURE `?`;
                 //runner.MigrateUp();
                 runner.Up(new AddUIViewArticles());
                 runner.Up(new AddNewColumnVersionOfNews());
+                runner.Up(new UpdateDomainUsers());
             }
 
             
@@ -257,10 +256,6 @@ DROP PROCEDURE `?`;
             //var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 
             // Execute the migrations
-
-
-
-           
         }
 
         

@@ -18,9 +18,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         IMemoryRepository<NewsEtty> News { get; }
         
         public IMemoryRepository<RoleModels> Roles { get; }
-        public IMemoryRepository<UsersToRoles> UsersToRoles { get; }
-        IRepositorySharedObject SharedObject { get; }
-        IRepositorySharingSocialNetwork SharingSocialNetwork { get; }
+        public IMemoryRepository<UsersToRoles> UsersToRoles { get; }   
         
         
 

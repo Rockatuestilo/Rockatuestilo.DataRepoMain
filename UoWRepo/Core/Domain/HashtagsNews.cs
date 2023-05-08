@@ -9,7 +9,7 @@ namespace UoWRepo.Core.Domain
     {
         [PrimaryKey, Identity]
         [Column(Name = "Id"), NotNull]
-        public int Id { get; set; }
+        public new int Id { get; set; }
 
         [Column(Name = "NewsID"), NotNull]
         public int NewsId { get; set; }
@@ -23,11 +23,8 @@ namespace UoWRepo.Core.Domain
         [Column(Name = "UpdatedByID"), Nullable]
         public int UpdatedById { get; set; }
 
-        [Column(Name = "CreatedDate"), Nullable]
-        public DateTime CreatedDate { get; set; }
-
         [Column(Name = "updatedDate"), Nullable]
-        public DateTime UpdatedDate { get; set; }
+        public new DateTime UpdatedDate { get; set; }
 
         public static explicit operator HashTagsNews(int v)
         {

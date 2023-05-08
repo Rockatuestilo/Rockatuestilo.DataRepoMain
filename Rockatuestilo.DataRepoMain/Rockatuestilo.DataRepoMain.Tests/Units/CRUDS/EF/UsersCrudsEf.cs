@@ -1,23 +1,28 @@
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
+using Rockatuestilo.DataRepoMain.Tests.FakedData;
 using Rockatuestilo.DataRepoMain.Tests.TestData.Users;
+using UoWRepo.Core.EFDomain;
 using UoWRepo.Persistence.UnitiesOfWork;
 
-namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.EF
+namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.EF
 {
     public class UsersCrudsEf
     {
-        
+        List<Users> bugusUsers = new List<Users>();
+
         [SetUp]
         public void Setup()
         {
-            var value = new ContextGenerator().CreateInMemory();
             
-            //value.Database.Migrate();
+            CreateFakeData createFakeData = new CreateFakeData();
+            bugusUsers = createFakeData.DoByNumberEf();
+            
+            var value = new ContextGenerator().CreateInMemory();
 
             _unitOfWorkEf = new UnityOfWorkEf(value);
-            
             
         }
         
@@ -33,10 +38,7 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.EF
 
             var result = _unitOfWorkEf.Users.GetAll().ToList();
 
-
             Assert.AreEqual(result.Count, 1);
-
-
         }
         
         

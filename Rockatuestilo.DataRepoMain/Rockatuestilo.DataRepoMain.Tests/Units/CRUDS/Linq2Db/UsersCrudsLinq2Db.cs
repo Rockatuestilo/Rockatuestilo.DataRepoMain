@@ -2,9 +2,10 @@ using System.Linq;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
 using Rockatuestilo.DataRepoMain.Tests.TestData.Users;
+using UoWRepo.Core.Configuration;
 using UoWRepo.Persistence.UnitiesOfWork;
 
-namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.Linq2Db
+namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.Linq2Db
 {
     public class UsersCrudsLinq2Db
     {
@@ -12,14 +13,16 @@ namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.Linq2Db
         [SetUp]
         public void Setup()
         {
-            var connection =
-                "Server=localhost;Port=13306;Database=cmsbackup5;Uid=user;Pwd=password;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
-                    
-            var value_0 = new ContextGenerator(connection).CreateInMysql();
+            /*var connection =
+           "Server=localhost;Port=13306;Database=cmsbackup5;Uid=user;Pwd=password;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
+       
+       var value_0 = new ContextGenerator(connection).CreateInMysql();
+       
+       var value = new ContextGenerator(connection).CreateInMysqlLinq2Db();*/
         
-            var value = new ContextGenerator(connection).CreateInMysqlLinq2Db();
+            (Linq2DbContext, string) value = new ContextGenerator("mydb.db").CreateLinq2DbSqlite();
 
-            _unitOfWork = new UnityOfWork(value);
+            _unitOfWork = new UnityOfWork(value.Item1);
             
         }
         

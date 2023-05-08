@@ -10,7 +10,7 @@ namespace UoWRepo.Core.Domain
     {
         [PrimaryKey, Identity]
         [Column(Name = "Id"), NotNull]
-        public int Id { get; set; }
+        public new int Id { get; set; }
 
         [Column(Name = "Nameofsocialnetwork"), NotNull]
         public string NameOfSocialnetwork { get; set; }
@@ -19,6 +19,6 @@ namespace UoWRepo.Core.Domain
         public DateTime CreatedDate { get; set; }
 
         [Column(Name = "Updateddate"), NotNull]
-        public DateTime UpdatedDate { get; set; }
+        public new DateTime UpdatedDate { get; set; }
     }
 }

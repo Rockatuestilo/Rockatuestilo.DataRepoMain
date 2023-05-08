@@ -10,7 +10,7 @@ namespace UoWRepo.Core.Domain
     {
         [PrimaryKey, Identity]
         [Column(Name = "newsID"), NotNull]
-        public int Id { get; set; }
+        public new int Id { get; set; }
 
         [Column(Name = "newsOwner"), NotNull]
         public int UserIdOwner { get; set; }
@@ -25,7 +25,7 @@ namespace UoWRepo.Core.Domain
         public DateTime NewsCreatedDate { get; set; }
 
         [Column(Name = "newsLastUpdateDate"), NotNull]
-        public DateTime UpdatedDate { get; set; }
+        public new DateTime UpdatedDate { get; set; }
 
         [Column(Name = "newsPermission"), Nullable]
         public int NewsPermission { get; set; }

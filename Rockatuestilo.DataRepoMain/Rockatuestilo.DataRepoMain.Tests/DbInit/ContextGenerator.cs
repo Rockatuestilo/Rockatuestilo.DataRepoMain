@@ -29,8 +29,8 @@ namespace Rockatuestilo.DataRepoMain.Tests.DbInit
 
             var generationScript = CreateEFSqliteAndGetGenerationScript();
             var linq2DbContext=  new Linq2DbContext ("SQLite", $"Data Source={_nameOfFileForDatabase}");
-            
-            
+
+
             using (var db = new Linq2DbContext("SQLite", $"Data Source={_nameOfFileForDatabase}"))
             {
                 var usersList = db.Query<dynamic>(generationScript);
