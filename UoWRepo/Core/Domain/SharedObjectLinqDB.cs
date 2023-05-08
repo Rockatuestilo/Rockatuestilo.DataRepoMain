@@ -8,10 +8,6 @@ namespace UoWRepo.Core.Domain
     [Table(Name = "SharedObject")]
     public class SharedObjectLinqDB : Linq2DbEntity, ITEntity
     {
-        [PrimaryKey, Identity]
-        [Column(Name = "Id"), NotNull]
-        public int Id { get; set; }
-
         [Column(Name = "Sharingsocialnetworkid"), NotNull]
         public int Sharingsocialnetworkid { get; set; }
 
@@ -19,10 +15,10 @@ namespace UoWRepo.Core.Domain
         public string Note { get; set; }
 
         [Column(Name = "Createddate"), NotNull]
-        public DateTime Createddate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         [Column(Name = "Updateddate"), NotNull]
-        public DateTime UpdatedDate { get; set; }
+        public new DateTime UpdatedDate { get; set; }
 
         [Column(Name = "IdOfSharedelement"), NotNull]
         public int IdOfSharedelement { get; set; }
