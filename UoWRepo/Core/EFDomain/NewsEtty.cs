@@ -11,7 +11,7 @@ namespace UoWRepo.Core.EFDomain
         [Key]
         [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
         [Column("newsID")]
-        public int Id { get; set; }
+        public new int Id { get; set; }
 
         [Column("newsOwner")]
         public int UserIdOwner { get; set; }
@@ -26,7 +26,7 @@ namespace UoWRepo.Core.EFDomain
         public DateTime NewsCreatedDate { get; set; }
 
         [Column("newsLastUpdateDate")]
-        public DateTime UpdatedDate { get; set; }
+        public new DateTime UpdatedDate { get; set; }
 
         [Column("newsPermission"),]
         public int NewsPermission { get; set; }

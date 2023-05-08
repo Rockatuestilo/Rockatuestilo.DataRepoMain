@@ -29,7 +29,7 @@ namespace UoWRepo.Persistence.Repositories
         public void UpdatePublicationTime(int articleID, DateTime datetime)
         {
             var newsEntity = new NewsEtty();
-            base.ResetMemory<NewsEtty>();
+            ResetMemory<NewsEtty>();
             repositorynews.UpdatePublicationTime(articleID, datetime);
         }
 

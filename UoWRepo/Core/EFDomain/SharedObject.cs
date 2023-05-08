@@ -4,13 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UoWRepo.Core.EFDomain
 {
-    [LinqToDB.Mapping.Table("SharedObject")]
+    [Table("SharedObject")]
     public class SharedObjectLinqDB : TEntity, ITEntity
     {
         [Key]
         [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
         [LinqToDB.Mapping.Column("Id")]
-        public int Id { get; set; }
+        public new int Id { get; set; }
 
         [LinqToDB.Mapping.Column("Sharingsocialnetworkid")]
         public int Sharingsocialnetworkid { get; set; }
@@ -19,10 +19,10 @@ namespace UoWRepo.Core.EFDomain
         public string Note { get; set; }
 
         [LinqToDB.Mapping.Column("Createddate")]
-        public DateTime Createddate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         [LinqToDB.Mapping.Column("Updateddate")]
-        public DateTime UpdatedDate { get; set; }
+        public new DateTime UpdatedDate { get; set; }
 
         [LinqToDB.Mapping.Column("IdOfSharedelement")]
         public int IdOfSharedelement { get; set; }

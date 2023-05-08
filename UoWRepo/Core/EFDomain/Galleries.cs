@@ -11,7 +11,7 @@ namespace UoWRepo.Core.EFDomain
         [Key]
         [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
         [Column("galleryID")]
-        public int Id { get; set; }
+        public new int Id { get; set; }
 
         [Column("galleryOwner")]
         public int GalleryOwner { get; set; }
@@ -32,7 +32,7 @@ namespace UoWRepo.Core.EFDomain
         public DateTime CreatedDate { get; set; }
 
         [Column("updatedDate")]
-        public DateTime UpdatedDate { get; set; }
+        public new DateTime UpdatedDate { get; set; }
 
         [Column("categorylevel")]
         public int CategoryLevel { get; set; }

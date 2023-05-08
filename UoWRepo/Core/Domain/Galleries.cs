@@ -10,7 +10,7 @@ namespace UoWRepo.Core.Domain
     {
         [PrimaryKey, Identity]
         [Column(Name = "galleryID"), NotNull]
-        public int Id { get; set; }
+        public new int Id { get; set; }
 
         [Column(Name = "galleryOwner"), Nullable]
         public int GalleryOwner { get; set; }
@@ -31,7 +31,7 @@ namespace UoWRepo.Core.Domain
         public DateTime? CreatedDate { get; set; }
 
         [Column(Name = "updatedDate"), Nullable]
-        public DateTime? UpdatedDate { get; set; }
+        public new DateTime? UpdatedDate { get; set; }
 
         [Column(Name = "categorylevel"), Nullable]
         public int? CategoryLevel { get; set; }

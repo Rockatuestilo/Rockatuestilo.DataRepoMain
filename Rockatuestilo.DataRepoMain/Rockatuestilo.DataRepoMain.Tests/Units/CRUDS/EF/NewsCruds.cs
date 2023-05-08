@@ -1,22 +1,28 @@
 using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
+using Rockatuestilo.DataRepoMain.Tests.FakedData;
 using UoWRepo.Core.EFDomain;
 using UoWRepo.Persistence.UnitiesOfWork;
 
-namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.EF;
+namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.EF;
 
 [TestFixture]
 public class NewsCruds
 {
-     
+    List<Users> bugusUsers = new List<Users>();
+
     private IUnitOfWorkEf _unitOfWorkEf;
     [SetUp]
     public void Setup()
     {
         var value = new ContextGenerator().CreateInMemory();
+        
+        CreateFakeData createFakeData = new CreateFakeData();
+        bugusUsers = createFakeData.DoByNumberEf(40);
             
-        //value.Database.Migrate();
+      
 
         _unitOfWorkEf = new UnityOfWorkEf(value);
             
@@ -48,3 +54,8 @@ public class NewsCruds
         _unitOfWorkEf.News.Add(news);
     }
 }
+
+
+
+
+

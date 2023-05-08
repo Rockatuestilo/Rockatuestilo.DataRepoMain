@@ -10,7 +10,7 @@ namespace UoWRepo.Core.Domain
     {
         [PrimaryKey, Identity]
         [Column(Name = "NewsPublicationTypeID"), NotNull]
-        public int Id { get; set; }
+        public new int Id { get; set; }
 
         [Column(Name = "TypeOfPublication"), NotNull]
         public string TypeOfPublication { get; set; } = null!;
@@ -28,6 +28,6 @@ namespace UoWRepo.Core.Domain
         public DateTime CreatedDate { get; set; }
 
         [Column(Name = "updatedDate"), NotNull]
-        public DateTime UpdatedDate { get; set; }
+        public new DateTime UpdatedDate { get; set; }
     }
 }

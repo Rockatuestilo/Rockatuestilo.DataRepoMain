@@ -4,48 +4,42 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UoWRepo.Core.EFDomain
 {
-    [Table("tb_users")]
+    [Table("Users")]
     public class Users : TEntity, ITEntity
     {
         [Key]
         [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
-        [Column("userID")]
-        public int Id { get; set; }
+        [Column("Id")]
+        public new int Id { get; set; }
 
-        [Column("UserName")]
-        public string UserName { get; set; }
+        [Column("Name")]
+        public string Name { get; set; }
 
-        [Column("UserLastName")]
-        public string UserLastName { get; set; }
+        [Column("LastName")]
+        public string LastName { get; set; }
 
-        [Column("UserLoginName")]
-        public string UserLoginName { get; set; }
+        [Column("LoginName")]
+        public string LoginName { get; set; }
 
-        [Column("UserCreatedDate")]
-        public DateTime UserCreatedDate { get; set; }
+        [Column("Password")]
+        public string Password { get; set; }
 
-        [Column("UserUpdatedDate")]
-        public DateTime UpdatedDate { get; set; }
-
-        [Column("UserPassword")]
-        public string UserPassword { get; set; }
-
-        [Column("UserLastLogin")]
-        public DateTime UserLastLogin { get; set; }
+        [Column("LastLogin")]
+        public DateTime LastLogin { get; set; }
 
         [Column("UserRoleLevel")]
         public int UserRoleLevel { get; set; }
 
-        [Column("createdBy")]
+        [Column("CreatedBy")]
         public int CreatedBy { get; set; }
 
-        [Column("updatedBy")]
+        [Column("UpdatedBy")]
         public int UpdatedBy { get; set; }
 
-        [Column("email")]
+        [Column("Email")]
         public string Email { get; set; }
 
-        [Column("verifiedaccount")]
+        
         public bool VerifiedAccount { get; set; }
     }
 }

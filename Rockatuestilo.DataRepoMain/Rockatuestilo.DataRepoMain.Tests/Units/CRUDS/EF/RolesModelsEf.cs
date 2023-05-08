@@ -1,8 +1,10 @@
+using System.Linq;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
+using Rockatuestilo.DataRepoMain.Tests.TestData.Roles;
 using UoWRepo.Persistence.UnitiesOfWork;
 
-namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.EF;
+namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.EF;
 
 public class RolesModelsEf
 {
@@ -21,12 +23,13 @@ public class RolesModelsEf
     [Test]
     public void Test1_add1()
     {
-        /*var roleModelsList = new TestDataRoles1().GetFirstExample();
+        var roleModelsList = new TestDataRoles1().GetRolesStaticEf();
             
-        _unitOfWorkEf.Roles.Add(roleModelsList[0]);
+        _unitOfWorkEf.Roles.AddRange(roleModelsList);
+        _unitOfWorkEf.Complete();
 
-        var result = _unitOfWork.Users.GetAll().ToList();
-        Assert.AreEqual(result.Count, 1);*/
+        var result = _unitOfWorkEf.Roles.GetAll().ToList();
+        Assert.Greater(result.Count, 0);
     }
 
 }

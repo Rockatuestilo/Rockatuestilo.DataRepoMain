@@ -4,6 +4,7 @@ namespace UoWRepo.Core.BaseDomain;
 
 public abstract class BaseTEntity: IBaseTEntity
 {
-    public int Id { get; set; }
-    public DateTime UpdatedDate { get; set; }
+    public virtual int Id { get; set; }
+    public virtual DateTime CreatedDate { get; set; }
+    public virtual DateTime UpdatedDate { get; set; }
 }

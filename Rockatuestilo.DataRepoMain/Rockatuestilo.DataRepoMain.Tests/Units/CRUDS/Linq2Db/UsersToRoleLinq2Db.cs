@@ -1,10 +1,11 @@
+using System;
 using System.Linq;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
 using UoWRepo.Core.Domain;
 using UoWRepo.Persistence.UnitiesOfWork;
 
-namespace Rockatuestilo.DataRepoMain.Tests.CRUDS.Linq2Db;
+namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.Linq2Db;
 
 public class UsersToRoleLinq2Db
 {
@@ -33,10 +34,15 @@ public class UsersToRoleLinq2Db
 
         value.User = 1;
         value.RoleGuid = 1;
+        value.CreatedDate = DateTime.Now;
+        value.UpdatedDate = DateTime.Now;
+        
+        
 
         _unitOfWork.UsersToRoles.Add(value);
+        _unitOfWork.Complete();
 
-        var result = _unitOfWork.Users.GetAll().ToList();
+        var result = _unitOfWork.UsersToRoles.GetAll().ToList();
         Assert.AreEqual(result.Count, 1);
     }
 }
