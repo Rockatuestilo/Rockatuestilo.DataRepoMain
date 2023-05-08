@@ -23,9 +23,6 @@ namespace UoWRepo.Core.EFDomain
         [Column("CreatedDate")]
         public DateTime CreatedDate { get; set; }
 
-        [Column("UpdatedDate")]
-        public DateTime UpdatedDate { get; set; }
-
         [Column("LastUpdateOfArticle")]
         public DateTime LastUpdateOfArticle { get; set; }
     }
