@@ -11,9 +11,9 @@
     <PackageTags>rockatuestilo rock metal</PackageTags>
     <Company>rockatuestilo</Company>
     <Product>Rockatuestilo.DataRepoMain </Product>
-    <AssemblyVersion>4.0.1</AssemblyVersion>
-    <PackageVersion>4.0.1</PackageVersion>
-    <FileVersion>4.0.1</FileVersion>
+    <AssemblyVersion>4.1.1</AssemblyVersion>
+    <PackageVersion>4.1.1</PackageVersion>
+    <FileVersion>4.1.1</FileVersion>
     <LangVersion>latestmajor</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -51,7 +51,6 @@
     <Folder Include="Persistence\Repositories\" />
     <Folder Include="Core\Configuration\" />
     <Folder Include="Persistence\UnitiesOfWork\" />
-    <Folder Include="Migrations\" />
     <Folder Include="Core\Configuration\CacheSystem\" />
   </ItemGroup>
 </Project>
