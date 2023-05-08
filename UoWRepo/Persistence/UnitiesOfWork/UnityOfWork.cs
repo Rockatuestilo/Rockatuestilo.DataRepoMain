@@ -58,7 +58,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         public UnityOfWork(Linq2DbContext context)
         {
             _context = context;     
-
+            new MigrationsModule(_context.ConfigurationString).DoSomeMigration();
             News = new MemoryRepository<NewsEtty>(_context, new Repository<NewsEtty>(_context)) as MemoryRepository<NewsEtty>;
 
             PublicationType = new MemoryRepository<NewsPublicationType>(_context, new Repository<NewsPublicationType>(_context)) ;
@@ -75,7 +75,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             
             PendingRegistration = new MemoryRepository<PendingRegistration>(_context, new Repository<PendingRegistration>(_context));
 
-            //new MigrationsModule(_context.ConfigurationString).DoSomeMigration();
+            //
             RunStupidMigration();
         }
         
