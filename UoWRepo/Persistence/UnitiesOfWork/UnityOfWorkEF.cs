@@ -55,8 +55,8 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         public IMemoryRepository<RoleModels> Roles { get; }
         public IMemoryRepository<UsersToRoles> UsersToRoles { get; }
 
-        public IRepositorySharedObject SharedObject { get; }
-        public IRepositorySharingSocialNetwork SharingSocialNetwork { get; }
+        //public IRepositorySharedObject SharedObject { get; }
+        //public IRepositorySharingSocialNetwork SharingSocialNetwork { get; }
         public int Complete()
         {
             return _context.SaveChanges();
