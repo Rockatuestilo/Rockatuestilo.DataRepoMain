@@ -20,7 +20,7 @@ public class CreateFakeDataNews
                 //.RuleFor(a => a.HashtagsNewsId, f => f.Random.Int(0,2))
                 .RuleFor(a => a.NewsChangedById, f => f.Random.Int(0,2))
                 .RuleFor(a => a.NewsContent, f => f.Lorem.Paragraph())
-                .RuleFor(a => a.NewsCreatedDate, f => f.Date.Past())
+                .RuleFor(a => a.CreatedDate, f => f.Date.Past())
                 .RuleFor(a => a.NewsPermission, f => f.Random.Int(0,2))
                 .RuleFor(a => a.NewsPresentation, f => f.Lorem.Sentence())
                 .RuleFor(a => a.NewsTitle, f => f.Lorem.Sentence())

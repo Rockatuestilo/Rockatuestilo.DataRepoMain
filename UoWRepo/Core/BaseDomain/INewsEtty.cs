@@ -10,7 +10,7 @@ public interface INewsEtty: IBaseTEntity
 
     public string NewsContent { get; set; }
 
-    public DateTime NewsCreatedDate { get; set; }
+    public DateTime CreatedDate { get; set; }
 
     public int NewsPermission { get; set; }
 

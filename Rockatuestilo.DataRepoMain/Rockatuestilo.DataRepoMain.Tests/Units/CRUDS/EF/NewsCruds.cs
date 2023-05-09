@@ -35,7 +35,7 @@ public class NewsCruds
         var news = new NewsEtty();
 
         news.NewsContent = "";
-        news.NewsCreatedDate = DateTime.Now;
+        news.CreatedDate = DateTime.Now;
         news.NewsChangedById = 1;
         news.NewsPermission = 0;
         news.NewsPresentation = "";
