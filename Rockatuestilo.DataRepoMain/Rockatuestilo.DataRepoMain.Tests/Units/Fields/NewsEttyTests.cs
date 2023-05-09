@@ -69,10 +69,10 @@ public class NewsEttyTests
     {
         // Arrange
         DateTime expected = DateTime.UtcNow;
-        var news = new NewsEtty { NewsCreatedDate = expected };
+        var news = new NewsEtty { CreatedDate = expected };
 
         // Act
-        DateTime actual = news.NewsCreatedDate;
+        DateTime actual = news.CreatedDate;
 
         // Assert
         Assert.AreEqual(expected, actual);

@@ -22,7 +22,7 @@ namespace UoWRepo.Core.Domain
         public string? NewsContent { get; set; }
 
         [Column(Name = "newsCreatedDate"), NotNull]
-        public DateTime NewsCreatedDate { get; set; }
+        public new DateTime CreatedDate { get; set; }
 
         [Column(Name = "newsLastUpdateDate"), NotNull]
         public new DateTime UpdatedDate { get; set; }
