@@ -12,8 +12,8 @@ public class TestDataRoles1
         return result.ConvertAll(x => new UoWRepo.Core.EFDomain.RoleModels()
         {
             Active = x.Active,
-            RoleName = x.Name,
-            RoleCode = x.Code,
+            Name = x.Name,
+            Code = x.Code,
             Description = x.Description
         });
         
