@@ -7,16 +7,11 @@ namespace UoWRepo.Core.Domain;
 [Table(Name = "Roles")]
 public class RoleModels: Linq2DbEntity, ITEntity
 {
-
-    [Column(Name = "RoleName"), NotNull]
-    public string RoleName { get; set; } = null!;
-
-    [Column(Name = "CreatedDate"), NotNull]
+    [Column(Name = "Name"), NotNull]
+    public string Name { get; set; } = null!;
         
-    public DateTime CreatedDate { get; set; } 
-        
-    [Column(Name = "RoleCode"), NotNull]
-    public string RoleCode { get; set; }
+    [Column(Name = "Code"), NotNull]
+    public string Code { get; set; }
     
     [Column(Name = "Description"), NotNull]
     public string Description { get; set; }
