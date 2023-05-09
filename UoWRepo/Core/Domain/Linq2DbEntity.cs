@@ -10,9 +10,9 @@ namespace UoWRepo.Core.Domain
         public new int Id { get; set; }
         
         [Column(Name = "CreatedDate"), NotNull]
-        public virtual DateTime CreatedDate { get; set; }
+        public virtual DateTime CreatedDate { get; set; } = DateTime.Now;
         
         [Column(Name = "UpdatedDate"), NotNull]
-        public override DateTime UpdatedDate { get; set; }
+        public override DateTime UpdatedDate { get; set; } = DateTime.Now;
     }
 }

@@ -1,5 +1,9 @@
-﻿using LinqToDB;
+﻿using System.Configuration;
+using LinqToDB;
+using LinqToDB.Common;
+using LinqToDB.Data;
 using LinqToDB.DataProvider;
+using LinqToDB.Reflection;
 using UoWRepo.Core.Domain;
 
 namespace UoWRepo.Core.Configuration
@@ -37,5 +41,12 @@ namespace UoWRepo.Core.Configuration
         public ITable<RoleModels> Roles { get { return this.GetTable<RoleModels>(); } }
 
         public ITable<UsersToRoles> UsersToRoles { get; private set; }
+        
+        // method for rawsql
+        public T ExecuteRaw<T>(string sql)
+        {
+            
+            return this.Execute<T>(sql);
+        }
     }
 }

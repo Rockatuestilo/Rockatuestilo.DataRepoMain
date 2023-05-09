@@ -12,8 +12,8 @@ public class TestDataRoles1
         return result.ConvertAll(x => new UoWRepo.Core.EFDomain.RoleModels()
         {
             Active = x.Active,
-            RoleName = x.RoleName,
-            RoleCode = x.RoleCode,
+            Name = x.Name,
+            Code = x.Code,
             Description = x.Description
         });
         
@@ -26,8 +26,8 @@ public class TestDataRoles1
         RoleModels adminRole = new RoleModels()
         {
             Active = true,
-            RoleName = "Administrator",
-            RoleCode = "Admin",
+            Name = "Administrator",
+            Code = "Admin",
             Description = "This role has full access to the system."
         };
 
@@ -35,8 +35,8 @@ public class TestDataRoles1
         RoleModels editorRole = new RoleModels()
         {
             Active = true,
-            RoleName = "Editor",
-            RoleCode = "Editor",
+            Name = "Editor",
+            Code = "Editor",
             Description = "This role can create, edit, and publish articles."
         };
 
@@ -44,8 +44,8 @@ public class TestDataRoles1
         RoleModels writerRole = new RoleModels()
         {
             Active = true,
-            RoleName = "Writer",
-            RoleCode = "Writer",
+            Name = "Writer",
+            Code = "Writer",
             Description = "This role can create and edit their own articles, but not publish them."
         };
 
@@ -53,8 +53,8 @@ public class TestDataRoles1
         RoleModels reviewerRole = new RoleModels()
         {
             Active = true,
-            RoleName = "Reviewer",
-            RoleCode = "Reviewer",
+            Name = "Reviewer",
+            Code = "Reviewer",
             Description = "This role can review articles and send them back to writers for revision."
         };
 
@@ -62,8 +62,8 @@ public class TestDataRoles1
         RoleModels readerRole = new RoleModels()
         {
             Active = true,
-            RoleName = "Reader",
-            RoleCode = "Reader",
+            Name = "Reader",
+            Code = "Reader",
             Description = "This role can only read published articles."
         };
 

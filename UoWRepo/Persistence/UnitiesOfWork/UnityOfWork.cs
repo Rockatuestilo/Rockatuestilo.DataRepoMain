@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using UoWRepo.Core.Configuration;
 using UoWRepo.Core.Domain;
@@ -7,49 +6,13 @@ using UoWRepo.Core.Repositories;
 using UoWRepo.Migrations;
 using UoWRepo.Persistence.Repositories;
 using FluentMigrator.Runner;
-using System.Collections.Generic;
+using LinqToDB;
+using MySql.Data.MySqlClient;
+using UoWRepo.Migrations.Manual;
 
 namespace UoWRepo.Persistence.UnitiesOfWork
 {
     //TODO: test this
-    public class ArticlesHomeUnityOfWork 
-    {
-        private readonly Linq2DbContext context;
-
-        public ArticlesHomeUnityOfWork(Linq2DbContext context)
-        {
-            this.context = context;
-        }
-        
-        
-
-        public IEnumerable<NewsEtty> GetArticlesPerPageByHashtag(string hashtag, int userLevel, int currentPage, int pageSize) 
-        {
-
-            /*var types = context.NewsPublicationType.Where(x => x.Leveluser <= userLevel);
-            ResultArticles = (from p in ResultArticles
-                              join t in types on p.Publicationtype equals t.Id
-                              select new { p }).Select(x => x.p);*/
-
-            var arts =
-                        (
-
-                        from ht in context.HashTags
-                        join ntN in context.HashtagsNews on ht.Id equals ntN.HashtagId
-                        join articles in context.tb_news on ntN.NewsId equals articles.Id
-                        join publictaionTypes in context.NewsPublicationType on articles.PublicationType equals publictaionTypes.Id
-                        where ht.HashtagWord == hashtag
-                        where publictaionTypes.LevelUser <= userLevel
-                        
-                        select new { articles }).Skip(pageSize * (currentPage)).Take(pageSize).Select(x => x.articles).ToList();
-
-            return arts;
-
-
-
-
-        }
-    }
 
     public class UnityOfWork: IUnitOfWork
     {
@@ -58,7 +21,9 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         public UnityOfWork(Linq2DbContext context)
         {
             _context = context;     
-            new MigrationsModule(_context.ConfigurationString).DoSomeMigration();
+            //new MigrationsModule(_context.ConfigurationString).DoSomeMigration();
+            new RunFirstMigration(context);
+            //RunStupidMigration();
             News = new MemoryRepository<NewsEtty>(_context, new Repository<NewsEtty>(_context)) as MemoryRepository<NewsEtty>;
 
             PublicationType = new MemoryRepository<NewsPublicationType>(_context, new Repository<NewsPublicationType>(_context)) ;
@@ -76,7 +41,20 @@ namespace UoWRepo.Persistence.UnitiesOfWork
             PendingRegistration = new MemoryRepository<PendingRegistration>(_context, new Repository<PendingRegistration>(_context));
 
             //
-            RunStupidMigration();
+            
+        }
+
+        private void RunMysqlDirectly(string connectionString, string script)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+    
+                MySqlCommand command = new MySqlCommand(script, connection);
+                command.ExecuteNonQuery();
+    
+                connection.Close();
+            }
         }
         
         private  MemoryRepository<T> InitObjects<T>()  where T : Linq2DbEntity
@@ -97,38 +75,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork
         public IMemoryRepository<RoleModels> Roles { get;  private set;}
         public IMemoryRepository<UsersToRoles> UsersToRoles { get;  private set; }
 
-        //public IRepositorySharedObject SharedObject { get; private set; }
-        //public IRepositorySharingSocialNetwork SharingSocialNetwork { get; private set; }
-
-        private void RunStupidMigration()
-        {
-            try
-            {
-            /*    this._context.Execute(@"
-DROP PROCEDURE IF EXISTS `?`;
-DELIMITER //
-CREATE PROCEDURE `?`()
-BEGIN
-  DECLARE CONTINUE HANDLER FOR SQLEXCEPTION BEGIN END;
-  ALTER TABLE `tb_news` ADD COLUMN `ArticleVersion` INTEGER;
-END //
-DELIMITER ;
-CALL `?`();
-DROP PROCEDURE `?`;
-
-");*/
-
-            }
-            catch (Exception e)
-            {
-                
-            }
-
-
-   
-        }
-
-
+     
         public int Complete()
         {          
             if (_context.Transaction != null)
@@ -164,14 +111,8 @@ DROP PROCEDURE `?`;
 
         public void DoSomeMigration() 
         {
-            //var hh = new MigrationBase();
-
             var serviceProvider = CreateServices(_connectionString);
-
-            //serviceProvider.
             
-
-       
             try
             {
                 UpdateDatabase(serviceProvider);
@@ -181,9 +122,6 @@ DROP PROCEDURE `?`;
                 var hhshshs = ex.Message;
                 var hhshshss = ex.InnerException;
             }
-            
-
-
         }
 
         private void RunManualMigration()
@@ -194,8 +132,6 @@ DROP PROCEDURE `?`;
 
         private IServiceProvider CreateServices(string connection)
         {
-
-            //var h= System.Reflection.Assembly.GetExecutingAssembly();
 
             return new ServiceCollection()// Add common FluentMigrator services
                 .AddFluentMigratorCore()
@@ -212,31 +148,10 @@ DROP PROCEDURE `?`;
                
                 // Build the service provider
                 .BuildServiceProvider(false);
-            
-            /*var serviceProvider = new ServiceCollection()
-                // Logging is the replacement for the old IAnnouncer
-                .AddLogging(lb => lb.AddFluentMigratorConsole())
-                // Registration of all FluentMigrator-specific services
-                .AddFluentMigratorCore()
-                // Configure the runner
-                .ConfigureRunner(
-                    builder => builder
-                        // Use SQLite
-                        .AddSQLite()
-                        // The SQLite connection string
-                        .WithGlobalConnectionString(connection)
-                        // Specify the assembly with the migrations
-                        .WithMigrationsIn(typeof(IMigrationRunner).Assembly))
-                .BuildServiceProvider();
-
-            return serviceProvider;*/
-
         }
 
         private void UpdateDatabase(IServiceProvider serviceProvider)
         {
-            
-            
             using (var scope = serviceProvider.CreateScope())
             {
                 
@@ -250,12 +165,6 @@ DROP PROCEDURE `?`;
                 runner.Up(new UpdateDomainUsers());
             }
 
-            
-            
-            // Instantiate the runner
-            //var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
-
-            // Execute the migrations
         }
 
         

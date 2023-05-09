@@ -7,11 +7,6 @@ namespace UoWRepo.Core.EFDomain
     [Table("Users")]
     public class Users : TEntity, ITEntity
     {
-        [Key]
-        [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
-        [Column("Id")]
-        public new int Id { get; set; }
-
         [Column("Name")]
         public string Name { get; set; }
 

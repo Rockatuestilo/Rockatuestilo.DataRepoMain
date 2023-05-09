@@ -50,7 +50,6 @@
     <Folder Include="Persistence\" />
     <Folder Include="Persistence\Repositories\" />
     <Folder Include="Core\Configuration\" />
-    <Folder Include="Persistence\UnitiesOfWork\" />
     <Folder Include="Core\Configuration\CacheSystem\" />
   </ItemGroup>
 </Project>

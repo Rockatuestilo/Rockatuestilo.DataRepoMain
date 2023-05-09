@@ -36,7 +36,7 @@ public class UsersToRoleEf
         var rolesExisting = _unitOfWorkEf.Roles.GetAll().ToList();
         
         // get a list of the roles that are in roleModelsList but not in rolesExisting
-        var rolesToBeAdded = roleModelsList.Where(x => rolesExisting.All(y => y.RoleCode != x.RoleCode)).ToList();
+        var rolesToBeAdded = roleModelsList.Where(x => rolesExisting.All(y => y.Code != x.Code)).ToList();
         
         // add roles
         _unitOfWorkEf.Roles.AddRange(rolesToBeAdded);
