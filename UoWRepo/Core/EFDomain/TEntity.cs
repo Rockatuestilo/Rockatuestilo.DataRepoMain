@@ -13,10 +13,10 @@ namespace UoWRepo.Core.EFDomain
         public new int Id { get; set; }
         
         [Column("CreatedDate")]
-        public new DateTime CreatedDate { get; set; }
+        public new DateTime CreatedDate { get; set; } = DateTime.Now;
         
         [Column("UpdatedDate")]
-        public new DateTime UpdatedDate { get; set; }
+        public new DateTime UpdatedDate { get; set; } = DateTime.Now;
         
         
 
