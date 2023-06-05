@@ -49,7 +49,7 @@ public class ArticlesViewForUICrudsLinq2Db
     {
         
         var connection =
-            "Server=localhost;Port=3306;Database=cmsbackup602;Uid=root;Pwd=blueberrywater4;ConnectionTimeout=600;DefaultCommandTimeout=600; Convert Zero Datetime=True;sqlservermode=True;SslMode=None;Pooling=true;";
+            "Server=localhost;Port=3306;Database=cmsbackup602;Uid=root;Pwd=blueberrywater4;ConnectionTimeout=600;DefaultCommandTimeout=600; Convert Zero Datetime=True;sqlservermode=True;allowPublicKeyRetrieval=true;SslMode=None;Pooling=true;";
         
         /*var value_0 = new ContextGenerator(connection).CreateInMysql();
         
