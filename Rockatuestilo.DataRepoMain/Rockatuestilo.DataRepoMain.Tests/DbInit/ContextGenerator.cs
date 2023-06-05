@@ -70,13 +70,15 @@ namespace Rockatuestilo.DataRepoMain.Tests.DbInit
         }
         
         
-        public Linq2DbContext CreateInMysqlLinq2Db()
+        public Linq2DbContext CreateInMysqlLinq2Db(string connectionString)
         {
             //var options = new DbContextOptionsBuilder<EFContext>().
 
      
                 
-            var context = new Linq2DbContext("MySql.Data.MySqlClient", "Server=localhost;Port=13306;Database=test;Uid=root;Pwd=password;charset=utf8;SslMode=Required;Convert Zero Datetime=True; Pooling=true;");
+            //var context = new Linq2DbContext("MySql.Data.MySqlClient", "Server=localhost;Port=13306;Database=test;Uid=root;Pwd=password;charset=utf8;SslMode=Required;Convert Zero Datetime=True; Pooling=true;");
+            
+            var context = new Linq2DbContext("MySql.Data.MySqlClient", connectionString);
             
             //Server=localhost;Port=3306;Database=cmsbackup5;Uid=cms;Pwd=albanicus$5$;ConnectionTimeout=600;DefaultCommandTimeout=600;SslMode=None;Pooling=true;
                 
