@@ -1,14 +1,11 @@
-﻿using System.Configuration;
-using LinqToDB;
-using LinqToDB.Common;
+﻿using LinqToDB;
 using LinqToDB.Data;
 using LinqToDB.DataProvider;
-using LinqToDB.Reflection;
 using UoWRepo.Core.Domain;
 
 namespace UoWRepo.Core.Configuration
 {
-    public class Linq2DbContext: LinqToDB.Data.DataConnection, ICommonContext
+    public class Linq2DbContext: DataConnection, ICommonContext
     {
         public Linq2DbContext(string connectionString) : base(connectionString) { }
 

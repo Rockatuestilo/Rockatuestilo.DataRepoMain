@@ -48,7 +48,6 @@
     <Folder Include="Core\Domain\" />
     <Folder Include="Core\Repositories\" />
     <Folder Include="Persistence\" />
-    <Folder Include="Persistence\Repositories\" />
     <Folder Include="Core\Configuration\" />
     <Folder Include="Core\Configuration\CacheSystem\" />
   </ItemGroup>

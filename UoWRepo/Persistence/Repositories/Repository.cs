@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using UoWRepo.Core.Configuration;
 using UoWRepo.Core.Repositories;
 using LinqToDB;
@@ -10,6 +11,8 @@ using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Persistence.Repositories
 {
+   
+    
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : Core.Domain.Linq2DbEntity, IBaseTEntity
     {
         protected readonly Linq2DbContext context;
@@ -113,5 +116,5 @@ namespace UoWRepo.Persistence.Repositories
         {
             return context.GetTable<TEntity>().OrderByDescending(x => x.UpdatedDate).FirstOrDefault();
         }  
-    }   
+    }
 }

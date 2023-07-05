@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using UoWRepo.Core.BaseDomain;
+using UoWRepo.Core.EFDomain;
 
 namespace UoWRepo.Core.Repositories
 {
@@ -32,4 +34,13 @@ namespace UoWRepo.Core.Repositories
     {
         DateTime? GetDateTimeOfCachingOfCurrentEntity();
     }
+    
+    
+    public interface IRepositoryAsQueryable<BaseTEntity> where BaseTEntity :  IBaseTEntity
+    {
+        Task<TEntity?> Get(int id);
+        IQueryable<BaseTEntity> GetAllAsQueryble();
+        IEnumerable<BaseTEntity> SingleOrDefaultAsync(Expression<Func<BaseTEntity, bool>> predicate);
+    }
+
 }
