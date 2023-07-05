@@ -1,11 +1,10 @@
-﻿namespace UoWRepo.Core.Configuration.CacheSystem
+﻿namespace UoWRepo.Core.Configuration.CacheSystem;
+
+public interface ICacheFactory
 {
-    public interface ICacheFactory
-    {
-        void ResetCache();
+    void ResetCache();
 
-        void ResetEntity();
+    void ResetEntity();
 
-        void GetListOfEntities();
-    }
+    void GetListOfEntities();
 }

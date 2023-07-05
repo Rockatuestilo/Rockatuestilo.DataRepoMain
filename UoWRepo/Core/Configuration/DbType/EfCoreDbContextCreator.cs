@@ -10,7 +10,7 @@ public class EfCoreDbContextCreator
         switch (linqDatabaseType)
         {
             case LinqDatabaseType.SQLite:
-                
+
                 options = new DbContextOptionsBuilder<EFContext>()
                     .UseSqlite($"Data Source={connectionString}")
                     .Options;
@@ -27,5 +27,4 @@ public class EfCoreDbContextCreator
                 return new EFContext(options);
         }
     }
-    
 }

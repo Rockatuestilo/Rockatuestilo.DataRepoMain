@@ -6,83 +6,77 @@ namespace UoWRepo.Migrations.Manual;
 
 public class RunFirstMigration
 {
-    private Linq2DbContext _context;
+    private readonly Linq2DbContext _context;
 
     public RunFirstMigration(Linq2DbContext context)
     {
         _context = context;
         RunStupidMigration();
-        
     }
-    
+
     private void RunMysqlDirectly(string connectionString, string script)
     {
-        
-        using (MySqlConnection connection = new MySqlConnection(connectionString))
+        using (var connection = new MySqlConnection(connectionString))
         {
             connection.Open();
-    
-            MySqlCommand command = new MySqlCommand(script, connection);
+
+            var command = new MySqlCommand(script, connection);
             command.ExecuteNonQuery();
-    
+
             connection.Close();
         }
     }
-    
-    
+
+
     private void RunStupidMigration()
+    {
+        try
         {
-            try
-            {
-                var rawSQLGetDatabase = @"SELECT DATABASE() as db";
-                var dataBase = _context.ExecuteRaw<object>(rawSQLGetDatabase);
-                // get version 
-                var rawSQLGetVersion = @"
+            var rawSQLGetDatabase = @"SELECT DATABASE() as db";
+            var dataBase = _context.ExecuteRaw<object>(rawSQLGetDatabase);
+            // get version 
+            var rawSQLGetVersion = @"
 USE " + dataBase + @";
 SELECT 
 Version
 FROM VersionInfo
 ORDER BY Version Desc
 Limit 1;";
-                var version = _context.ExecuteRaw<int>(rawSQLGetVersion);
+            var version = _context.ExecuteRaw<int>(rawSQLGetVersion);
 
-                if (version > 0)
-                {
-                    return;
-                }
-               
-                var rawSqlDoesTableExists = @"SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '" + dataBase + @"' AND table_name = 'Users';";
-                var table = _context.ExecuteRaw<int>(rawSqlDoesTableExists);
+            if (version > 0) return;
 
-                if (table > 0)
+            var rawSqlDoesTableExists = @"SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '" +
+                                        dataBase + @"' AND table_name = 'Users';";
+            var table = _context.ExecuteRaw<int>(rawSqlDoesTableExists);
+
+            if (table > 0)
+            {
+                // sql to see is Users have lines
+                var rawSqlDoesTableHaveLines = @"SELECT COUNT(*) FROM Users;";
+                var lines = _context.ExecuteRaw<int>(rawSqlDoesTableHaveLines);
+                if (lines == 0)
                 {
-                    // sql to see is Users have lines
-                    var rawSqlDoesTableHaveLines = @"SELECT COUNT(*) FROM Users;";
-                    var lines = _context.ExecuteRaw<int>(rawSqlDoesTableHaveLines);
-                    if (lines == 0)
-                    {
-                        // delete Users table
-                        var rawSQLDelete = @"DROP TABLE Users;";
-                        _context.ExecuteRaw<object>(rawSQLDelete);
-                        // change table name
-                        var rawSQLRename = @"ALTER TABLE tb_users RENAME TO Users;";
-                        _context.ExecuteRaw<object>(rawSQLRename);
-                    }
-                    
-                }
-                else
-                {
+                    // delete Users table
+                    var rawSQLDelete = @"DROP TABLE Users;";
+                    _context.ExecuteRaw<object>(rawSQLDelete);
                     // change table name
                     var rawSQLRename = @"ALTER TABLE tb_users RENAME TO Users;";
                     _context.ExecuteRaw<object>(rawSQLRename);
                 }
-                
-                
-                
-                // change column names
-                
-                
-                var rawSQL_01 = @"
+            }
+            else
+            {
+                // change table name
+                var rawSQLRename = @"ALTER TABLE tb_users RENAME TO Users;";
+                _context.ExecuteRaw<object>(rawSQLRename);
+            }
+
+
+            // change column names
+
+
+            var rawSQL_01 = @"
 USE " + dataBase + @";
           ALTER TABLE `Users` 
 
@@ -91,7 +85,7 @@ CHANGE COLUMN `UserUpdatedDate` `UserUpdatedDate` TIMESTAMP NOT NULL DEFAULT CUR
 ;
                 ";
 
-                var rawSQL = @"
+            var rawSQL = @"
 USE " + dataBase + @";
           ALTER TABLE `Users` 
 CHANGE COLUMN `userID` `Id` INT NOT NULL AUTO_INCREMENT ,
@@ -108,15 +102,15 @@ CHANGE COLUMN `email` `Email` VARCHAR(255) NULL DEFAULT NULL ,
 CHANGE COLUMN `verifiedaccount` `VerifiedAccount` BIT(1) NULL DEFAULT b'0' 
 ;
                 ";
-                RunMysqlDirectly(_context.ConnectionString, rawSQL_01);
-                RunMysqlDirectly(_context.ConnectionString, rawSQL);
-                
-                // Create script to set version like this INSERT INTO `cmsbackup1004`.`VersionInfo`
-                //(`Version`)
-                //VALUES
-                  //  (<{Version: }>);
-                
-                var rawSQLToAddColumns = @"
+            RunMysqlDirectly(_context.ConnectionString, rawSQL_01);
+            RunMysqlDirectly(_context.ConnectionString, rawSQL);
+
+            // Create script to set version like this INSERT INTO `cmsbackup1004`.`VersionInfo`
+            //(`Version`)
+            //VALUES
+            //  (<{Version: }>);
+
+            var rawSQLToAddColumns = @"
 USE " + dataBase + @";
 ALTER TABLE tb_role
 CHANGE COLUMN `roleID` `Id` INT NOT NULL AUTO_INCREMENT ,
@@ -129,28 +123,23 @@ ADD COLUMN `UpdatedDate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 ADD UNIQUE INDEX `roleName_UNIQUE` (`Name` ASC) VISIBLE,
 ADD UNIQUE INDEX `RoleCode_UNIQUE` (`Code` ASC) VISIBLE;
 ";
-                RunMysqlDirectly(_context.ConnectionString, rawSQLToAddColumns);
-                
-                // change name of tb_role to Roles
-                var rawSQLRenameRole = @"
+            RunMysqlDirectly(_context.ConnectionString, rawSQLToAddColumns);
+
+            // change name of tb_role to Roles
+            var rawSQLRenameRole = @"
 USE " + dataBase + @";
 ALTER TABLE tb_role RENAME TO Roles;";
-                RunMysqlDirectly(_context.ConnectionString, rawSQLRenameRole);
-                
-                
-                var rawSQLVersion = @"
+            RunMysqlDirectly(_context.ConnectionString, rawSQLRenameRole);
+
+
+            var rawSQLVersion = @"
 
 USE " + dataBase + @";
-          insert into VersionInfo (Version) values ("+1+");";
-                RunMysqlDirectly(_context.ConnectionString, rawSQLVersion);
-
-            }
-            catch (Exception e)
-            {
-                
-            }
-
-
-   
+          insert into VersionInfo (Version) values (" + 1 + ");";
+            RunMysqlDirectly(_context.ConnectionString, rawSQLVersion);
         }
+        catch (Exception e)
+        {
+        }
+    }
 }

@@ -1,6 +1,5 @@
-﻿namespace UoWRepo.Core.Configuration
+﻿namespace UoWRepo.Core.Configuration;
+
+public interface ICommonContext
 {
-    public interface ICommonContext
-    {
-    }
 }

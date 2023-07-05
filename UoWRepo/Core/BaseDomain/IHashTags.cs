@@ -2,7 +2,7 @@ using System;
 
 namespace UoWRepo.Core.BaseDomain;
 
-public interface IHashTags: ITEntity
+public interface IHashTags : ITEntity
 {
     public string HashtagWord { get; set; }
 

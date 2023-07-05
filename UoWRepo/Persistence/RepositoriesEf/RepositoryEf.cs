@@ -7,91 +7,88 @@ using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.Configuration;
 using UoWRepo.Core.Repositories;
 
-namespace UoWRepo.Persistence.RepositoriesEf
+namespace UoWRepo.Persistence.RepositoriesEf;
+
+public class RepositoryEf<TEntity> : IRepository<TEntity> where TEntity : BaseTEntity
 {
-    public class RepositoryEf<TEntity> : IRepository<TEntity> where TEntity : BaseTEntity
+    protected readonly EFContext context;
+    private readonly DbSet<TEntity> entities;
+
+    public RepositoryEf(EFContext context)
     {
-        private DbSet<TEntity> entities;
-        protected readonly EFContext context;
+        this.context = context;
+        entities = context.Set<TEntity>();
+    }
 
-        public RepositoryEf(EFContext context)
-        {
-            this.context = context;
-            entities = context.Set < TEntity > ();  
-        }
+    public virtual void Add(TEntity entity)
+    {
+        AddWithIdentity(entity);
+    }
 
-        public virtual void Add(TEntity entity)
-        {
-            AddWithIdentity(entity);
-        }
+    public virtual int AddWithIdentity(TEntity entity)
+    {
+        var value = entities.Add(entity);
+        context.SaveChanges();
+        return value.Entity.Id;
+    }
 
-        public virtual int AddWithIdentity(TEntity entity)
-        {
-            var value = entities.Add(entity);
-            context.SaveChanges();
-            return value.Entity.Id;
-        }
-        
-        public virtual void AddRange(IEnumerable<TEntity> entitiesList)
-        {
-            entities.AddRange(entitiesList);
-        }
+    public virtual void AddRange(IEnumerable<TEntity> entitiesList)
+    {
+        entities.AddRange(entitiesList);
+    }
 
-        public virtual  IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
-        {
-            return entities.Where(predicate).ToList();
-        }
+    public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+    {
+        return entities.Where(predicate).ToList();
+    }
 
-        public IQueryable<TEntity> GetAllQueryble()
-        {
-            return entities.AsQueryable();
-        }
+    public IQueryable<TEntity> GetAllQueryble()
+    {
+        return entities.AsQueryable();
+    }
 
-        public virtual IQueryable<TEntity> FindQueryble(Expression<Func<TEntity, bool>> predicate)
-        {
-            return entities.Where(predicate).AsQueryable();
-        }
+    public virtual IQueryable<TEntity> FindQueryble(Expression<Func<TEntity, bool>> predicate)
+    {
+        return entities.Where(predicate).AsQueryable();
+    }
 
-        public virtual TEntity Get(int id)
-        {
-            return entities.SingleOrDefault(x => x.Id == id);
-        }
+    public virtual TEntity Get(int id)
+    {
+        return entities.SingleOrDefault(x => x.Id == id);
+    }
 
-        public virtual IEnumerable<TEntity> GetAll()
-        {
-            
-            
-            return entities.ToList();
-        }
+    public virtual IEnumerable<TEntity> GetAll()
+    {
+        return entities.ToList();
+    }
 
-        public virtual void Remove(TEntity entity)
-        {
-            entities.Remove(entity);
-        }
+    public virtual void Remove(TEntity entity)
+    {
+        entities.Remove(entity);
+    }
 
-        public virtual void RemoveRange(IEnumerable<TEntity> entitiesList)
-        {
-            //throw new NotImplementedException();
-            //context.HashtagsNews.Where(x => entities.Select(i => i.Id).Contains(x.Id)).Delete();
-            //entities.RemoveRange(entitiesList);
-        }
+    public virtual void RemoveRange(IEnumerable<TEntity> entitiesList)
+    {
+        //throw new NotImplementedException();
+        //context.HashtagsNews.Where(x => entities.Select(i => i.Id).Contains(x.Id)).Delete();
+        //entities.RemoveRange(entitiesList);
+    }
 
-        public virtual TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
-        {
-            return entities.SingleOrDefault(predicate);
-        }
+    public virtual TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
+    {
+        return entities.SingleOrDefault(predicate);
+    }
 
-        public virtual void Update(TEntity entity)
-        {
-            //FIXME:
-            entities.Update(entity);
+    public virtual void Update(TEntity entity)
+    {
+        //FIXME:
+        entities.Update(entity);
 
-            //MAYBE: context.SaveChanges();
-        }
+        //MAYBE: context.SaveChanges();
+    }
 
-        public virtual TEntity LastUpdatedRow()
-        {
-            return entities.OrderByDescending(x => x.UpdatedDate).FirstOrDefault();
-        }
+    public virtual TEntity LastUpdatedRow()
+    {
+        return entities.OrderByDescending(x => x.UpdatedDate).FirstOrDefault();
     }
 }

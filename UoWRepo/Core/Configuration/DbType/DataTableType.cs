@@ -3,12 +3,12 @@ namespace UoWRepo.Core.Configuration.DbType;
 public enum LinqDatabaseType
 {
     MySQL,
-    SQLite,
+    SQLite
 }
 
 public enum EFCoreType
 {
     MySQL,
     SQLite,
-    InMemory,
+    InMemory
 }

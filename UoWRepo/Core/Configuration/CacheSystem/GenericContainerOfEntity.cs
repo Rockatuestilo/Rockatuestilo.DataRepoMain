@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace UoWRepo.Core.Configuration.CacheSystem
+namespace UoWRepo.Core.Configuration.CacheSystem;
+
+public class GenericContainerOfEntity<T>
 {
-    public class GenericContainerOfEntity<T>
+    private List<List<T>> Ts = new();
+
+
+    public void GetFromMyList()
     {
-        List<List<T>> Ts = new List<List<T>>();
-
-
-        public void GetFromMyList() 
-        {
-             
-        }
     }
 }
