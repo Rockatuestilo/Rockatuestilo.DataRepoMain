@@ -90,10 +90,7 @@ public class UsersCrudsEf
         var result = _unitOfWorkEf.Users.GetAll().ToList();
 
         _unitOfWorkEf.Users.AddRange(users);
-        _unitOfWorkEf.Complete();
-
         var result2 = _unitOfWorkEf.Users.GetAll().ToList();
-
         var countShouldBe = result.Count + users.Count;
         Assert.AreEqual(result2.Count, countShouldBe);
     }
