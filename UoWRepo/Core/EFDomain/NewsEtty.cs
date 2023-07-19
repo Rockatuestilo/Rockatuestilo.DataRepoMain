@@ -2,61 +2,43 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+namespace UoWRepo.Core.EFDomain;
 
-namespace UoWRepo.Core.EFDomain
+[Table("tb_news")]
+public class NewsEtty : TEntity, ITEntity
 {
-    [Table("tb_news")]
-    public class NewsEtty : TEntity, ITEntity
-    {
-        [Key]
-        [DatabaseGenerated (DatabaseGeneratedOption.Identity)]
-        [Column("newsID")]
-        public new int Id { get; set; }
+    [Column("newsOwner")] public int UserIdOwner { get; set; }
 
-        [Column("newsOwner")]
-        public int UserIdOwner { get; set; }
+    [Column("newsTittel")] public string NewsTitle { get; set; }
 
-        [Column("newsTittel"),]
-        public string NewsTitle { get; set; }
+    [Column("newsContent")] public string NewsContent { get; set; }
 
-        [Column("newsContent"),]
-        public string NewsContent { get; set; }
+    [Column("newsPermission")] public int NewsPermission { get; set; }
 
-        [Column("newsCreatedDate")]
-        public DateTime CreatedDate { get; set; }
+    [Column("newsChangedByID")] public int NewsChangedById { get; set; }
 
-        [Column("newsLastUpdateDate")]
-        public new DateTime UpdatedDate { get; set; }
+    [Column("category_id")] public int CategoryId { get; set; }
 
-        [Column("newsPermission"),]
-        public int NewsPermission { get; set; }
+    [Column("publicationType")] public int PublicationType { get; set; } = 0;
 
-        [Column("newsChangedByID"),]
-        public int NewsChangedById { get; set; }
+    [Column("galleryID")] public int GalleryId { get; set; }
 
-        [Column("category_id"),]
-        public int CategoryId { get; set; }
+    [Column("newsPresentation")] public string NewsPresentation { get; set; }
 
-        [Column("publicationType"),]
-        public int PublicationType { get; set; } = 0;
+    [Column("publicationdate")] public DateTime PublicationDate { get; set; }
 
-        [Column("galleryID"),]
-        public int GalleryId { get; set; }
+    [Column("titleforURL")] public string TitleForUrl { get; set; }
 
-        [Column("newsPresentation"),]
-        public string NewsPresentation { get; set; }
+    [Column("HashtagsNewsId")] public int? HashtagsNewsId { get; set; }
 
-        [Column("publicationdate")]
-        public DateTime PublicationDate { get; set; }
+    [Column("ArticleVersion")] public int? ArticleVersion { get; set; }
 
-        [Column("titleforURL"),]
-        public string TitleForUrl { get; set; }
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Column("newsID")]
+    public new int Id { get; set; }
 
-        [Column("HashtagsNewsId"),]
-        public int? HashtagsNewsId { get; set; }
-        
-        [Column("ArticleVersion")]
-        public int? ArticleVersion { get; set; }
+    [Column("newsCreatedDate")] public DateTime CreatedDate { get; set; }
 
-    }
+    [Column("newsLastUpdateDate")] public new DateTime UpdatedDate { get; set; }
 }

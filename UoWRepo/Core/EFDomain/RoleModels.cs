@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -6,16 +5,15 @@ using Microsoft.EntityFrameworkCore;
 namespace UoWRepo.Core.EFDomain;
 
 [Table("Roles")]
-[Index(nameof(RoleModels.Name), IsUnique = true)]
-[Index(nameof(RoleModels.Code), IsUnique = true)]
-public class RoleModels: TEntity, ITEntity
+[Index(nameof(Name), IsUnique = true)]
+[Index(nameof(Code), IsUnique = true)]
+public class RoleModels : TEntity, ITEntity
 {
     // needs to be unique
-    [Required]
-    public string Name { get; set; }
+    [Required] public string Name { get; set; }
 
     public string Code { get; set; }
-    
+
     public string Description { get; set; }
 
     public bool Active { get; set; }

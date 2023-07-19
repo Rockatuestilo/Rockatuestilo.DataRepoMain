@@ -4,32 +4,33 @@ using System.Linq;
 using System.Linq.Expressions;
 using UoWRepo.Core.BaseDomain;
 
-namespace UoWRepo.Core.Repositories
+namespace UoWRepo.Core.Repositories;
+
+public interface IRepository<BaseTEntity> where BaseTEntity : IBaseTEntity
 {
-    public interface IRepository<BaseTEntity> where BaseTEntity :  IBaseTEntity
-    {
-        BaseTEntity Get(int id);
-        IEnumerable<BaseTEntity> GetAll();
-        IEnumerable<BaseTEntity> Find(Expression<Func<BaseTEntity, bool>> predicate);
-        
-        IQueryable<BaseTEntity> GetAllQueryble();
-        IQueryable<BaseTEntity> FindQueryble(Expression<Func<BaseTEntity, bool>> predicate);
+    BaseTEntity Get(int id);
+    IEnumerable<BaseTEntity> GetAll();
+    
+    IEnumerable<BaseTEntity> GetAllWithQueue();
+    IEnumerable<BaseTEntity> Find(Expression<Func<BaseTEntity, bool>> predicate);
 
-        BaseTEntity SingleOrDefault(Expression<Func<BaseTEntity, bool>> predicate);
-        BaseTEntity LastUpdatedRow();
+    IQueryable<BaseTEntity> GetAllQueryble();
+    IQueryable<BaseTEntity> FindQueryble(Expression<Func<BaseTEntity, bool>> predicate);
 
-        void Add(BaseTEntity entity);
-        int AddWithIdentity(BaseTEntity entity);
-        void AddRange(IEnumerable<BaseTEntity> entities);
+    BaseTEntity SingleOrDefault(Expression<Func<BaseTEntity, bool>> predicate);
+    BaseTEntity LastUpdatedRow();
 
-        void Update(BaseTEntity entity);
+    void Add(BaseTEntity entity);
+    int AddWithIdentity(BaseTEntity entity);
+    void AddRange(IEnumerable<BaseTEntity> entities);
 
-        void Remove(BaseTEntity entity);
-        void RemoveRange(IEnumerable<BaseTEntity> entities);        
-    }
+    void Update(BaseTEntity entity);
 
-    public interface IMemoryRepository<TEntity>:IRepository<TEntity> where TEntity : IBaseTEntity
-    {
-        DateTime? GetDateTimeOfCachingOfCurrentEntity();
-    }
+    void Remove(BaseTEntity entity);
+    void RemoveRange(IEnumerable<BaseTEntity> entities);
+}
+
+public interface IMemoryRepository<TEntity> : IRepository<TEntity> where TEntity : IBaseTEntity
+{
+    DateTime? GetDateTimeOfCachingOfCurrentEntity();
 }

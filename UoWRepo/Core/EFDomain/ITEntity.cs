@@ -1,8 +1,7 @@
 ﻿using UoWRepo.Core.BaseDomain;
 
-namespace UoWRepo.Core.EFDomain
+namespace UoWRepo.Core.EFDomain;
+
+public interface ITEntity : IBaseTEntity
 {
-    public interface ITEntity: IBaseTEntity
-    {
-    }
 }

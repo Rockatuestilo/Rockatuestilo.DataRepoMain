@@ -1,30 +1,29 @@
 using UoWRepo.Core.EFDomain;
 using UoWRepo.Core.Repositories;
 
-namespace UoWRepo.Persistence.UnitiesOfWork
+namespace UoWRepo.Persistence.UnitiesOfWork;
+
+public interface IUnitOfWorkEf
 {
-    public interface IUnitOfWorkEf
-    {
-        IMemoryRepository<ArticlesViewForUI> ArticlesViewForUI { get; }
-        IMemoryRepository<Categories> Categories { get; }
-        IMemoryRepository<HashTags> HashTags { get; }
-        IMemoryRepository<HashTagsNews> HashTagsNews { get; }
-        IMemoryRepository<NewsPublicationType> PublicationType { get; }
-        IMemoryRepository<Galleries> Galleries { get; }
-        IMemoryRepository<Users> Users { get; }
-        
-        IMemoryRepository<NewsEtty> News { get; }
-        
-        IMemoryRepository<RoleModels> Roles { get; }
-        
-        IMemoryRepository<UsersToRoles> UsersToRoles { get; }
+    IMemoryRepository<ArticlesViewForUI> ArticlesViewForUI { get; }
+    IMemoryRepository<Categories> Categories { get; }
+    IMemoryRepository<HashTags> HashTags { get; }
+    IMemoryRepository<HashTagsNews> HashTagsNews { get; }
+    IMemoryRepository<NewsPublicationType> PublicationType { get; }
+    IMemoryRepository<Galleries> Galleries { get; }
+    IMemoryRepository<Users> Users { get; }
+
+    IMemoryRepository<NewsEtty> News { get; }
+
+    IMemoryRepository<RoleModels> Roles { get; }
+
+    IMemoryRepository<UsersToRoles> UsersToRoles { get; }
 
 
-        //IRepositoryCategories Categories { get; }
-        //IRepositoryHashTags HashTags { get; }
-        //IRepositoryHashTagsNews HashTagsNews { get; }
-        //IRepositoryNewsPublicationType PublicationType { get; }
+    //IRepositoryCategories Categories { get; }
+    //IRepositoryHashTags HashTags { get; }
+    //IRepositoryHashTagsNews HashTagsNews { get; }
+    //IRepositoryNewsPublicationType PublicationType { get; }
 
-        int Complete();
-    }
+    int Complete();
 }

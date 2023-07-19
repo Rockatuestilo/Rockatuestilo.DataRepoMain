@@ -5,9 +5,11 @@ namespace UoWRepo.Core.Domain;
 
 public class TEntityGuid : ITEntityGuid
 {
-    [PrimaryKey, Identity]
-    [Column(Name = "Guid"), NotNull]
+    [PrimaryKey]
+    [Identity]
+    [Column(Name = "Guid")]
+    [NotNull]
     public Guid Guid { get; set; }
-        
+
     public DateTime UpdatedDate { get; set; }
 }
