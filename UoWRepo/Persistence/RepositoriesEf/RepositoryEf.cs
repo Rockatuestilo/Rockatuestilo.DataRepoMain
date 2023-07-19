@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.Configuration;
 using UoWRepo.Core.Repositories;
+using UoWRepo.Persistence.Repositories;
 
 namespace UoWRepo.Persistence.RepositoriesEf;
 
@@ -35,6 +36,14 @@ public class RepositoryEf<TEntity> : IRepository<TEntity> where TEntity : BaseTE
     public virtual void AddRange(IEnumerable<TEntity> entitiesList)
     {
         entities.AddRange(entitiesList);
+    }
+    public static readonly ContextQueue contextQueue = new ContextQueue();
+    public virtual IEnumerable<TEntity> GetAllWithQueue()
+    {
+        
+        var val = contextQueue.Queue(() => entities.ToList()).Result;
+        //return context.GetTable<TEntity>().AsParallel();
+        return val;
     }
 
     public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)

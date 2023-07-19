@@ -11,6 +11,10 @@ using UoWRepo.Core.Repositories;
 
 namespace UoWRepo.Persistence.Repositories;
 
+
+using System;
+using System.Collections.Generic;
+
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbEntity, IBaseTEntity
 {
     protected readonly Linq2DbContext context;
@@ -48,6 +52,8 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
         context.BulkCopy(entities);
     }
 
+    
+
     public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
     {
         return context.GetTable<TEntity>().Where(predicate).ToList();
@@ -67,6 +73,14 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
     public virtual IEnumerable<TEntity> GetAll()
     {
         return context.GetTable<TEntity>().ToList();
+    }
+    public static readonly ContextQueue contextQueue = new ContextQueue();
+    public virtual IEnumerable<TEntity> GetAllWithQueue()
+    {
+        
+        var val = contextQueue.Queue(() => context.GetTable<TEntity>().ToList()).Result;
+        
+        return val;
     }
 
     public virtual IQueryable<TEntity> GetAllQueryble()

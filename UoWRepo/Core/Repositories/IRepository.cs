@@ -10,6 +10,8 @@ public interface IRepository<BaseTEntity> where BaseTEntity : IBaseTEntity
 {
     BaseTEntity Get(int id);
     IEnumerable<BaseTEntity> GetAll();
+    
+    IEnumerable<BaseTEntity> GetAllWithQueue();
     IEnumerable<BaseTEntity> Find(Expression<Func<BaseTEntity, bool>> predicate);
 
     IQueryable<BaseTEntity> GetAllQueryble();

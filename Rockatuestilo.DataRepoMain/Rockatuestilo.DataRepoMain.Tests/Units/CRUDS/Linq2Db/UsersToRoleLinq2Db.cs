@@ -15,13 +15,13 @@ public class UsersToRoleLinq2Db
     public void Setup()
     {
         var connection =
-            "Server=localhost;Port=13306;Database=cmsbackup5;Uid=user;Pwd=password;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
+            "Server=localhost;Port=13306;Database=cmsbackup604_test;Uid=root;Pwd=blueberrywater4;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
 
         //var value_0 = new ContextGenerator(connection).CreateInMysql();
 
         //var value = new ContextGenerator(connection).CreateInMysqlLinq2Db();
 
-        var value = new ContextGenerator("test.sqlite1").CreateLinq2DbSqlite();
+        var value = new ContextGenerator(connection).CreateContextAndStringByEnvironment("mysql");
 
         _unitOfWork = new UnityOfWork(value.Item1);
     }

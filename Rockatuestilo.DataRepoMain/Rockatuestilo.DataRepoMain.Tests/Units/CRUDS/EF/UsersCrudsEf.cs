@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
 using Rockatuestilo.DataRepoMain.Tests.FakedData;
@@ -35,6 +36,29 @@ public class UsersCrudsEf
         var result = _unitOfWorkEf.Users.GetAll().ToList();
 
         Assert.AreEqual(result.Count, 1);
+    }
+    
+    [Test]
+    public void Test2_retrieveListInParallel()
+    {
+        var users = new TestDataUsers1().GetDataEf();
+
+        _unitOfWorkEf.Users.Add(users[0]);
+
+        List<UoWRepo.Core.EFDomain.Users> result1 = null;
+        List<Users> result2 = null;
+
+        // Execute the retrieval of the list in parallel
+        var task1 = Task.Run(() => _unitOfWorkEf.Users.GetAllWithQueue().ToList());
+        var task2 = Task.Run(() => _unitOfWorkEf.Users.GetAllWithQueue().ToList());
+
+        Task.WaitAll(task1, task2);
+
+        result1 = task1.Result;
+        result2 = task2.Result;
+
+        Assert.AreEqual(result1.Count, 1);
+        Assert.AreEqual(result2.Count, 1);
     }
 
 

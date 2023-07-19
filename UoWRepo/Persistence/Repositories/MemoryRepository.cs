@@ -215,6 +215,22 @@ public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<
 
         return result;
     }
+    
+  
+    public override  IEnumerable<TEntity> GetAllWithQueue()
+    {
+        var nameOfEntity = typeof(TEntity).Name;
+        var result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
+
+        if (result == null)
+        {
+            
+            var val = contextQueue.Queue(() => AddEntityToCacheAndGetList<TEntity>()).Result;
+            result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
+        }
+
+        return result;
+    }
 
     public override IQueryable<TEntity> FindQueryble(Expression<Func<TEntity, bool>> predicate)
     {
@@ -275,7 +291,7 @@ public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<
     {
         ResetMemory<TEntity>();
         var nameOfEntity = typeof(T).Name;
-        var liste = base.GetAll();
+        var liste = base.GetAllWithQueue();
 
         try
         {

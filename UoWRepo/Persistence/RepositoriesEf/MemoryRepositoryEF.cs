@@ -86,6 +86,23 @@ public class MemoryRepositoryEF<TEntity> : RepositoryEf<TEntity>, IMemoryReposit
 
         return result;
     }
+    
+    public override IEnumerable<TEntity> GetAllWithQueue()
+    {
+        var nameOfEntity = typeof(TEntity).Name;
+        var result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
+        if (result == null)
+        {
+            //AddEntityToCacheAndGetList<TEntity>();
+            var val = contextQueue.Queue(() => AddEntityToCacheAndGetList<TEntity>()).Result;
+            
+            result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
+        }
+
+        return result;
+    }
+    
+    
 
     public override IQueryable<TEntity> FindQueryble(Expression<Func<TEntity, bool>> predicate)
     {
@@ -146,7 +163,7 @@ public class MemoryRepositoryEF<TEntity> : RepositoryEf<TEntity>, IMemoryReposit
     {
         ResetMemory<TEntity>();
         var nameOfEntity = typeof(T).Name;
-        var liste = base.GetAll();
+        var liste = base.GetAllWithQueue();
         TestList.Add(nameOfEntity, liste.ToList());
         testListDateTimes.Add(nameOfEntity, DateTime.Now);
         return liste;
