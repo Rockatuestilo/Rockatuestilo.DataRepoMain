@@ -13,12 +13,14 @@ public class ContextQueue
     private static readonly SemaphoreSlim semaphoreGeneric = new SemaphoreSlim(1);
 
     private readonly ConcurrentDictionary<string, SemaphoreSlim> methodSemaphores = new ConcurrentDictionary<string, SemaphoreSlim>();
+    private readonly ConcurrentDictionary<string, SemaphoreSlim> methodSemaphoresInput = new ConcurrentDictionary<string, SemaphoreSlim>();
+    private readonly ConcurrentDictionary<string, SemaphoreSlim> methodSemaphoresGeneric = new ConcurrentDictionary<string, SemaphoreSlim>();
     
     public async Task<TOutput> Queue<TInput, TOutput>(Func<TInput, TOutput> method, TInput input)
     {
         var methodName = method.Method.ToString();
 
-        await semaphore.WaitAsync();
+        await semaphoreInput.WaitAsync();
 
         if (!methodSemaphores.ContainsKey(methodName))
         {
@@ -28,7 +30,7 @@ public class ContextQueue
         var methodSemaphore = methodSemaphores[methodName];
 
         await methodSemaphore.WaitAsync();
-        semaphore.Release();
+        semaphoreInput.Release();
 
         try
         {
@@ -40,18 +42,46 @@ public class ContextQueue
         }
     }
     
+    public async Task<TOutput> Queue<TOutput>(Func<TOutput> method, int waitMilliseconds=0)
+    {
+        var methodName = method.Method.ToString();
+
+        await semaphoreGeneric.WaitAsync();
+
+        if (!methodSemaphoresGeneric.ContainsKey(methodName))
+        {
+            methodSemaphoresGeneric[methodName] = new SemaphoreSlim(1);
+        }
+
+        var methodSemaphore = methodSemaphoresGeneric[methodName];
+
+        await methodSemaphore.WaitAsync();
+        semaphoreGeneric.Release();
+
+        try
+        {
+            await Task.Delay(waitMilliseconds);
+            return await Task.Run(method);
+        }
+        finally
+        {
+            methodSemaphore.Release();
+        }
+    }
+
+    
     public async Task<TOutput> Queue<TOutput>(Func<TOutput> method)
     {
         var methodName = method.Method.ToString();
 
         await semaphoreGeneric.WaitAsync();
 
-        if (!methodSemaphores.ContainsKey(methodName))
+        if (!methodSemaphoresGeneric.ContainsKey(methodName))
         {
-            methodSemaphores[methodName] = new SemaphoreSlim(1);
+            methodSemaphoresGeneric[methodName] = new SemaphoreSlim(1);
         }
 
-        var methodSemaphore = methodSemaphores[methodName];
+        var methodSemaphore = methodSemaphoresGeneric[methodName];
 
         await methodSemaphore.WaitAsync();
         semaphoreGeneric.Release();

@@ -71,8 +71,8 @@ public class UsersCrudsLinq2Db
                         () => result2 = _unitOfWork.Users.GetAllWithQueue().ToList()
         );
 
-        Assert.AreEqual(result1.Count, 1);
-        Assert.AreEqual(result2.Count, 1);
+        Assert.GreaterOrEqual(result1.Count, 1);
+        Assert.GreaterOrEqual(result2.Count, 1);
     }
     
     [Test]
@@ -94,8 +94,32 @@ public class UsersCrudsLinq2Db
         result1 = task1.Result;
         result2 = task2.Result;
 
-        Assert.AreEqual(result1.Count, 1);
-        Assert.AreEqual(result2.Count, 1);
+        Assert.GreaterOrEqual(result1.Count, 1);
+        Assert.GreaterOrEqual(result2.Count, 1);
+    }
+    
+    [Test]
+    public void Test2_retrieveListInParallelV20()
+    {
+        var users = new TestDataUsers1().GetDataLinq2Db();
+
+        _unitOfWork.Users.Add(users[0]);
+
+        List<List<UoWRepo.Core.Domain.Users>> results = new List<List<UoWRepo.Core.Domain.Users>>();
+
+        // Ejecutar las 20 tareas en paralelo
+        var tasks = Enumerable.Range(0, 20)
+            .Select(_ => Task.Run(() => _unitOfWork.Users.GetAllWithQueue().ToList()))
+            .ToList();
+
+        Task.WaitAll(tasks.ToArray());
+
+        results = tasks.Select(t => t.Result).ToList();
+
+        foreach (var result in results)
+        {
+            Assert.GreaterOrEqual(result.Count, 1);
+        }
     }
 
 

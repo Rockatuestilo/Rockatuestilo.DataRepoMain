@@ -37,13 +37,11 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
 
     public virtual void Add(TEntity entity)
     {
-        context.BeginTransaction();
         context.Insert(entity);
     }
 
     public virtual int AddWithIdentity(TEntity entity)
     {
-        context.BeginTransaction();
         return context.InsertWithInt32Identity(entity);
     }
 
@@ -51,8 +49,6 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
     {
         context.BulkCopy(entities);
     }
-
-    
 
     public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
     {
@@ -77,6 +73,13 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
     public static readonly ContextQueue contextQueue = new ContextQueue();
     public virtual IEnumerable<TEntity> GetAllWithQueue()
     {
+        /*context.Connection.StateChange += (sender, args) =>
+        {
+            if (args.CurrentState == System.Data.ConnectionState.Open)
+            {
+                contextQueue.SetContext(context);
+            }
+        };*/
         
         var val = contextQueue.Queue(() => context.GetTable<TEntity>().ToList()).Result;
         
@@ -105,7 +108,6 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
 
     public virtual void Update(TEntity entity)
     {
-        context.BeginTransaction();
         context.Update(entity);
     }
 
