@@ -1,17 +1,19 @@
-using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace UoWRepo.Core.EFDomain;
 
-public class RoleModels: TEntity, ITEntity
+[Table("Roles")]
+[Index(nameof(Name), IsUnique = true)]
+[Index(nameof(Code), IsUnique = true)]
+public class RoleModels : TEntity, ITEntity
 {
-    [Required]
-    public string RoleName { get; set; }
-        
-    public DateTime CreatedDate { get; set; } 
-        
-    public string RoleCode { get; set; }
-    
+    // needs to be unique
+    [Required] public string Name { get; set; }
+
+    public string Code { get; set; }
+
     public string Description { get; set; }
 
     public bool Active { get; set; }

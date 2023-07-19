@@ -9,6 +9,8 @@ namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.EF;
 
 public class HashTagsCrudsEf
 {
+    private IUnitOfWorkEf _unitOfWorkEf;
+
     [SetUp]
     public void Setup()
     {
@@ -16,13 +18,10 @@ public class HashTagsCrudsEf
         _unitOfWorkEf = new UnityOfWorkEf(value);
     }
 
-    private IUnitOfWorkEf _unitOfWorkEf;
-    
-            
+
     [Test]
     public void Test1_add1()
     {
-
         var value = new HashTags();
         value.Allowed = 1;
         value.CreatedDate = DateTime.Now;
@@ -37,7 +36,7 @@ public class HashTagsCrudsEf
         if (result.Count == 0)
         {
             //var users = new TestDataUsers1().GetDataEf();
-            
+
             _unitOfWorkEf.HashTags.Add(value);
             _unitOfWorkEf.Complete();
         }
@@ -47,7 +46,5 @@ public class HashTagsCrudsEf
         Assert.AreEqual(result.Count, 1);
 
         //IHashTags hashTags = result[0];
-
     }
-
 }

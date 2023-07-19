@@ -1,100 +1,177 @@
+using System;
 using System.IO;
 using LinqToDB.Data;
 using Microsoft.EntityFrameworkCore;
 using UoWRepo.Core.Configuration;
 
-namespace Rockatuestilo.DataRepoMain.Tests.DbInit
+namespace Rockatuestilo.DataRepoMain.Tests.DbInit;
+
+public class ContextGenerator
 {
-    public class ContextGenerator
+    private readonly string _nameOfFileForDatabaseOrStringConnection;
+
+    public ContextGenerator()
     {
-        private readonly string _nameOfFileForDatabase;
+    }
+    
+    public ContextGenerator(string nameOfFileForDatabaseOrStringConnection)
+    {
+        _nameOfFileForDatabaseOrStringConnection = nameOfFileForDatabaseOrStringConnection;
+    }
+
+    private static bool Created = false;
+    
+    public (Linq2DbContext, string) CreateContextAndStringByEnvironment(string environment = "SQLite")
+    {
         
-        public ContextGenerator()
+        
+        environment = environment.ToLower();
+        
+        if (environment == "SQLite".ToLower())
+        {
+            return CreateLinq2DbSqlite();
+        }
+        else if (environment == "MySQL".ToLower())
         {
             
+            
+            return CreateLinq2DbMysql();
+        }
+        /*else if (environment == "InMemory")
+        {
+            return CreateInMemoryLinq2Db();
+        }*/
+        
+        return CreateLinq2DbSqlite();
+    }
+
+    private (Linq2DbContext, string) CreateLinq2DbMysql()
+    {
+        var cc = "server=localhost;user=root;password=blueberrywater4;database=cmsbackup604_test;Pooling=true;";
+        if (Created)
+        {
+            var linq2DbContext_ = new Linq2DbContext("MySql.Data.MySqlClient",$"{cc}");
+        
+            return (linq2DbContext_, "");
+        }
+
+        Created = true;
+        
+        var generationScript = CreateAndGetGenerationScriptForMySQL();
+        
+       
+        
+        
+        /*using (var db = new Linq2DbContext("MySql.Data.MySqlClient",$"{cc}"))
+        {
+            var usersList = db.Query<dynamic>(generationScript);
+        }*/
+        
+        var linq2DbContext = new Linq2DbContext("MySql.Data.MySqlClient",$"{cc}");
+        
+        return (linq2DbContext, generationScript);
+    }
+
+
+    public (Linq2DbContext, string) CreateLinq2DbSqlite()
+    {
+        if (File.Exists(_nameOfFileForDatabaseOrStringConnection)) File.Delete(_nameOfFileForDatabaseOrStringConnection);
+
+        var generationScript = CreateAndGetGenerationScriptForEFSqlite();
+        var linq2DbContext = new Linq2DbContext("SQLite", $"Data Source={_nameOfFileForDatabaseOrStringConnection}");
+
+
+        using (var db = new Linq2DbContext("SQLite", $"Data Source={_nameOfFileForDatabaseOrStringConnection}"))
+        {
+            var usersList = db.Query<dynamic>(generationScript);
         }
 
 
-        public ContextGenerator(string nameOfFileForDatabase)
-        {
-            _nameOfFileForDatabase = nameOfFileForDatabase;
-        }
+        return (linq2DbContext, generationScript);
+    }
 
-        public (Linq2DbContext, string) CreateLinq2DbSqlite()
-        {
-            if (File.Exists(_nameOfFileForDatabase))
-            {
-                File.Delete(_nameOfFileForDatabase);
-            }
+    public string CreateAndGetGenerationScriptForEFSqlite()
+    {
+        var options = new DbContextOptionsBuilder<EFContext>();
+        options.UseSqlite($"Data Source={_nameOfFileForDatabaseOrStringConnection}");
 
-            var generationScript = CreateEFSqliteAndGetGenerationScript();
-            var linq2DbContext=  new Linq2DbContext ("SQLite", $"Data Source={_nameOfFileForDatabase}");
+        var tourManagerContext = new EFContext(options.Options);
+
+        var generateScript = tourManagerContext.Database.GenerateCreateScript();
 
 
-            using (var db = new Linq2DbContext("SQLite", $"Data Source={_nameOfFileForDatabase}"))
-            {
-                var usersList = db.Query<dynamic>(generationScript);
-            }
-            
-
-            return (linq2DbContext, generationScript);
-        }
+        return generateScript;
+    }
+    
+    public string CreateAndGetGenerationScriptForMySQL()
+    {
+        var connectionString = "server=localhost;user=root;password=blueberrywater4;database=cmsbackup604_test";
+        var serverVersion = new MySqlServerVersion(new Version(8, 0, 31));
         
-        public string CreateEFSqliteAndGetGenerationScript()
-        {
-            
-            DbContextOptionsBuilder<EFContext> options = new DbContextOptionsBuilder<EFContext>();
-            options.UseSqlite($"Data Source={_nameOfFileForDatabase}");
-            
-            EFContext tourManagerContext = new EFContext(options.Options);
+        var options = new DbContextOptionsBuilder<EFContext>();
+        /*options.UseMySql(
+            ServerVersion.AutoDetect(
+                "Server=localhost;Port=3306;Database=cmsbackup604;user=root;password=blueberrywater4"));*/
 
-            var generateScript = tourManagerContext.Database.GenerateCreateScript();
-
-
-            return generateScript;
-        }
-        
-        
-        public EFContext CreateInMemory()
-        {
-            var options = new DbContextOptionsBuilder<EFContext>()
-                .UseInMemoryDatabase(databaseName: "Test").Options;
-
-            var context = new EFContext(options);
+        options.UseMySql(connectionString, serverVersion);
             
             
-                
 
-            return context;
-            //return CreateInMysql();
-        }
-        
-        
-        public Linq2DbContext CreateInMysqlLinq2Db()
-        {
-            //var options = new DbContextOptionsBuilder<EFContext>().
+        var tourManagerContext = new EFContext(options.Options);
 
-     
-                
-            var context = new Linq2DbContext("MySql.Data.MySqlClient", "Server=localhost;Port=13306;Database=test;Uid=root;Pwd=password;charset=utf8;SslMode=Required;Convert Zero Datetime=True; Pooling=true;");
-            
-            //Server=localhost;Port=3306;Database=cmsbackup5;Uid=cms;Pwd=albanicus$5$;ConnectionTimeout=600;DefaultCommandTimeout=600;SslMode=None;Pooling=true;
-                
+        var canConnect = tourManagerContext.Database.CanConnect();
 
-            return context;
-        }
-        
-        
-        public EFContext CreateInMysql()
-        {
-            //var options = new DbContextOptionsBuilder<EFContext>().
-                
-            var context = new EFContext("Server=localhost;Port=13306;Database=test;Uid=root;Pwd=password;charset=utf8;SslMode=Required;Convert Zero Datetime=True; Pooling=true;");
-            context.Database.EnsureCreated();
-            //Server=localhost;Port=3306;Database=cmsbackup5;Uid=cms;Pwd=albanicus$5$;ConnectionTimeout=600;DefaultCommandTimeout=600;SslMode=None;Pooling=true;
-                
+        tourManagerContext.Database.EnsureDeleted();
 
-            return context;
-        }
+        var generateScridpt = tourManagerContext.Database.EnsureCreated();
+        var generateScript = tourManagerContext.Database.GenerateCreateScript();
+        
+        generateScript = generateScript.Replace("ALTER DATABASE", "CREATE DATABASE");
+
+
+        return generateScript;
+    }
+
+
+    public EFContext CreateInMemory()
+    {
+        var options = new DbContextOptionsBuilder<EFContext>()
+            .UseInMemoryDatabase("Test").Options;
+
+        var context = new EFContext(options);
+
+
+        return context;
+        //return CreateInMysql();
+    }
+
+
+    public Linq2DbContext CreateInMysqlLinq2Db()
+    {
+        //var options = new DbContextOptionsBuilder<EFContext>().
+
+
+        var context = new Linq2DbContext("MySql.Data.MySqlClient",
+            "Server=localhost;Port=13306;Database=test;Uid=root;Pwd=password;charset=utf8;SslMode=Required;Convert Zero Datetime=True; Pooling=true;");
+
+        //Server=localhost;Port=3306;Database=cmsbackup5;Uid=cms;Pwd=albanicus$5$;ConnectionTimeout=600;DefaultCommandTimeout=600;SslMode=None;Pooling=true;
+
+
+        return context;
+    }
+
+
+    public EFContext CreateInMysql()
+    {
+        //var options = new DbContextOptionsBuilder<EFContext>().
+
+        var context =
+            new EFContext(
+                "Server=localhost;Port=13306;Database=test;Uid=root;Pwd=password;charset=utf8;SslMode=Required;Convert Zero Datetime=True; Pooling=true;");
+        context.Database.EnsureCreated();
+        //Server=localhost;Port=3306;Database=cmsbackup5;Uid=cms;Pwd=albanicus$5$;ConnectionTimeout=600;DefaultCommandTimeout=600;SslMode=None;Pooling=true;
+
+
+        return context;
     }
 }

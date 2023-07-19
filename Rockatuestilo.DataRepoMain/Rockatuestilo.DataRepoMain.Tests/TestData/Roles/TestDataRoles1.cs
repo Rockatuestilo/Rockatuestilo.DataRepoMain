@@ -1,72 +1,71 @@
 using System.Collections.Generic;
-using UoWRepo.Core.Domain;
+using UoWRepo.Core.EFDomain;
 
 namespace Rockatuestilo.DataRepoMain.Tests.TestData.Roles;
 
 public class TestDataRoles1
 {
-    public List<UoWRepo.Core.EFDomain.RoleModels> GetRolesStaticEf()
+    public List<RoleModels> GetRolesStaticEf()
     {
         var result = GetRolesStatic();
-        
-        return result.ConvertAll(x => new UoWRepo.Core.EFDomain.RoleModels()
+
+        return result.ConvertAll(x => new RoleModels
         {
             Active = x.Active,
-            RoleName = x.RoleName,
-            RoleCode = x.RoleCode,
+            Name = x.Name,
+            Code = x.Code,
             Description = x.Description
         });
-        
     }
-    
-    
-    public List<RoleModels> GetRolesStatic()
+
+
+    public List<UoWRepo.Core.Domain.RoleModels> GetRolesStatic()
     {
         // Admin role has full access to the system
-        RoleModels adminRole = new RoleModels()
+        var adminRole = new UoWRepo.Core.Domain.RoleModels
         {
             Active = true,
-            RoleName = "Administrator",
-            RoleCode = "Admin",
+            Name = "Administrator",
+            Code = "Admin",
             Description = "This role has full access to the system."
         };
 
 // Editor role can create, edit, and publish articles
-        RoleModels editorRole = new RoleModels()
+        var editorRole = new UoWRepo.Core.Domain.RoleModels
         {
             Active = true,
-            RoleName = "Editor",
-            RoleCode = "Editor",
+            Name = "Editor",
+            Code = "Editor",
             Description = "This role can create, edit, and publish articles."
         };
 
 // Writer role can create and edit their own articles, but not publish them
-        RoleModels writerRole = new RoleModels()
+        var writerRole = new UoWRepo.Core.Domain.RoleModels
         {
             Active = true,
-            RoleName = "Writer",
-            RoleCode = "Writer",
+            Name = "Writer",
+            Code = "Writer",
             Description = "This role can create and edit their own articles, but not publish them."
         };
 
 // Reviewer role can review articles and send them back to writers for revision
-        RoleModels reviewerRole = new RoleModels()
+        var reviewerRole = new UoWRepo.Core.Domain.RoleModels
         {
             Active = true,
-            RoleName = "Reviewer",
-            RoleCode = "Reviewer",
+            Name = "Reviewer",
+            Code = "Reviewer",
             Description = "This role can review articles and send them back to writers for revision."
         };
 
 // Reader role can only read published articles
-        RoleModels readerRole = new RoleModels()
+        var readerRole = new UoWRepo.Core.Domain.RoleModels
         {
             Active = true,
-            RoleName = "Reader",
-            RoleCode = "Reader",
+            Name = "Reader",
+            Code = "Reader",
             Description = "This role can only read published articles."
         };
 
-        return new List<RoleModels>() { adminRole, editorRole, writerRole, reviewerRole, readerRole };
+        return new List<UoWRepo.Core.Domain.RoleModels> { adminRole, editorRole, writerRole, reviewerRole, readerRole };
     }
 }

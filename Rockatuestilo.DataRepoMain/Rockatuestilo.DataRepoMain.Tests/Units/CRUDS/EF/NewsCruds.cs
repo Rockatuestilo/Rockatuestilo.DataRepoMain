@@ -11,31 +11,29 @@ namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.EF;
 [TestFixture]
 public class NewsCruds
 {
-    List<Users> bugusUsers = new List<Users>();
-
-    private IUnitOfWorkEf _unitOfWorkEf;
     [SetUp]
     public void Setup()
     {
         var value = new ContextGenerator().CreateInMemory();
-        
-        CreateFakeData createFakeData = new CreateFakeData();
+
+        var createFakeData = new CreateFakeData();
         bugusUsers = createFakeData.DoByNumberEf(40);
-            
-      
+
 
         _unitOfWorkEf = new UnityOfWorkEf(value);
-            
-            
     }
 
-    [Test] 
+    private List<Users> bugusUsers = new();
+
+    private IUnitOfWorkEf _unitOfWorkEf;
+
+    [Test]
     public void Test1_CreateUser()
     {
         var news = new NewsEtty();
 
         news.NewsContent = "";
-        news.NewsCreatedDate = DateTime.Now;
+        news.CreatedDate = DateTime.Now;
         news.NewsChangedById = 1;
         news.NewsPermission = 0;
         news.NewsPresentation = "";
@@ -48,14 +46,8 @@ public class NewsCruds
         news.UpdatedDate = DateTime.Now;
         news.HashtagsNewsId = 1;
         news.UserIdOwner = 1;
-        
-        
-        
+
+
         _unitOfWorkEf.News.Add(news);
     }
 }
-
-
-
-
-

@@ -2,7 +2,7 @@ using System;
 
 namespace UoWRepo.Core.BaseDomain;
 
-public interface INewsEtty: IBaseTEntity
+public interface INewsEtty : IBaseTEntity
 {
     public int UserIdOwner { get; set; }
 
@@ -10,7 +10,7 @@ public interface INewsEtty: IBaseTEntity
 
     public string NewsContent { get; set; }
 
-    public DateTime NewsCreatedDate { get; set; }
+    public DateTime CreatedDate { get; set; }
 
     public int NewsPermission { get; set; }
 

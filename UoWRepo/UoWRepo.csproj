@@ -1,56 +1,54 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>Rockatuestilo.DataRepoMain </PackageId>
-    <Authors>Rockatuestilo.DataRepoMain </Authors>
-    <Copyright>Eddie Krill</Copyright>
-    <PackageProjectUrl>https://rockatuestilo.com/</PackageProjectUrl>
-    <PackageLicenseUrl>https://rockatuestilo.com/</PackageLicenseUrl>
-    <PackageTags>rockatuestilo rock metal</PackageTags>
-    <Company>rockatuestilo</Company>
-    <Product>Rockatuestilo.DataRepoMain </Product>
-    <AssemblyVersion>4.1.1</AssemblyVersion>
-    <PackageVersion>4.1.1</PackageVersion>
-    <FileVersion>4.1.1</FileVersion>
-    <LangVersion>latestmajor</LangVersion>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>Rockatuestilo.DataRepoMain</PackageId>
+        <Authors>Rockatuestilo.DataRepoMain</Authors>
+        <Copyright>Eddie Krill</Copyright>
+        <PackageProjectUrl>https://rockatuestilo.com/</PackageProjectUrl>
+        <PackageLicenseUrl>https://rockatuestilo.com/</PackageLicenseUrl>
+        <PackageTags>rockatuestilo rock metal</PackageTags>
+        <Company>rockatuestilo</Company>
+        <Product>Rockatuestilo.DataRepoMain</Product>
+        <AssemblyVersion>4.2.01</AssemblyVersion>
+        <PackageVersion>4.2.01</PackageVersion>
+        <FileVersion>4.2.01</FileVersion>
+        <LangVersion>latestmajor</LangVersion>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="linq2db" Version="5.1.1" />
-    <PackageReference Include="linq2db.MySql" Version="5.1.1" />
-    <PackageReference Include="linq2db.SQLite" Version="5.1.1" />
-    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />    
-    <PackageReference Include="FluentMigrator" Version="3.3.2" />
-    <PackageReference Include="FluentMigrator.Runner.MySql" Version="3.3.2" />
-    <PackageReference Include="FluentMigrator.Runner" Version="3.3.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="7.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.5" />
-    <PackageReference Include="MySqlConnector" Version="2.2.5" />
-    <PackageReference Include="Npgsql" Version="7.0.2" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />        
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.5" />    
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.11" />            
-    <PackageReference Include="SQLite" Version="3.13.0" />
-    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.4" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\" />
-    <Folder Include="Core\Domain\" />
-    <Folder Include="Core\Repositories\" />
-    <Folder Include="Persistence\" />
-    <Folder Include="Persistence\Repositories\" />
-    <Folder Include="Core\Configuration\" />
-    <Folder Include="Persistence\UnitiesOfWork\" />
-    <Folder Include="Core\Configuration\CacheSystem\" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="linq2db" Version="5.2.2" />
+        <PackageReference Include="linq2db.MySql" Version="5.2.2" />
+        <PackageReference Include="linq2db.SQLite" Version="5.2.2" />
+        <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.9" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
+        <PackageReference Include="FluentMigrator" Version="3.3.2"/>
+        <PackageReference Include="FluentMigrator.Runner.MySql" Version="3.3.2"/>
+        <PackageReference Include="FluentMigrator.Runner" Version="3.3.2"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.9" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="7.0.9" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.9" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.9" />
+        <PackageReference Include="MySqlConnector" Version="2.2.6" />
+        <PackageReference Include="Npgsql" Version="7.0.4" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.9" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.11"/>
+        <PackageReference Include="SQLite" Version="3.13.0"/>
+        <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.5" />
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Core\"/>
+        <Folder Include="Core\Domain\"/>
+        <Folder Include="Core\Repositories\"/>
+        <Folder Include="Persistence\"/>
+        <Folder Include="Core\Configuration\"/>
+        <Folder Include="Core\Configuration\CacheSystem\"/>
+    </ItemGroup>
 </Project>

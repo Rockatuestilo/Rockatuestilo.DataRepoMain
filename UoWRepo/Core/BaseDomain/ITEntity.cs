@@ -1,5 +1,5 @@
 namespace UoWRepo.Core.BaseDomain;
 
-public interface ITEntity: IBaseTEntity
+public interface ITEntity : IBaseTEntity
 {
 }
