@@ -164,14 +164,36 @@ public class ContextGenerator
     public EFContext CreateInMysql()
     {
         //var options = new DbContextOptionsBuilder<EFContext>().
+        
+        var connection =
+            "Server=localhost;Port=13306;Database=cmsbackup_test;Uid=root;Pwd=blueberrywater4;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
 
-        var context =
+
+        /*var context =
             new EFContext(
-                "Server=localhost;Port=13306;Database=test;Uid=root;Pwd=password;charset=utf8;SslMode=Required;Convert Zero Datetime=True; Pooling=true;");
-        context.Database.EnsureCreated();
+                "Server=localhost;Port=13306;Database=cmsbackup_tests;Uid=root;Pwd=password;charset=utf8;SslMode=Required;Convert Zero Datetime=True; Pooling=true;");#
+            */
+            
+            
+            
+        var serverVersion = new MySqlServerVersion(new Version(8, 0, 31));
+        
+        var options = new DbContextOptionsBuilder<EFContext>();
+        /*options.UseMySql(
+            ServerVersion.AutoDetect(
+                "Server=localhost;Port=3306;Database=cmsbackup604;user=root;password=blueberrywater4"));*/
+
+        options.UseMySql(connection, serverVersion);
+            
+            
+
+        var tourManagerContext = new EFContext(options.Options);
+        
+        tourManagerContext.Database.EnsureDeleted();
+        tourManagerContext.Database.EnsureCreated();
         //Server=localhost;Port=3306;Database=cmsbackup5;Uid=cms;Pwd=albanicus$5$;ConnectionTimeout=600;DefaultCommandTimeout=600;SslMode=None;Pooling=true;
 
 
-        return context;
+        return tourManagerContext;
     }
 }

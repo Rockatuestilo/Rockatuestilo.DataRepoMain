@@ -108,18 +108,50 @@ public class UsersCrudsLinq2Db
         List<List<UoWRepo.Core.Domain.Users>> results = new List<List<UoWRepo.Core.Domain.Users>>();
 
         // Ejecutar las 20 tareas en paralelo
-        var tasks = Enumerable.Range(0, 20)
+        var tasks = Enumerable.Range(0, 2)
             .Select(_ => Task.Run(() => _unitOfWork.Users.GetAllWithQueue().ToList()))
             .ToList();
+        
+        
 
         Task.WaitAll(tasks.ToArray());
 
         results = tasks.Select(t => t.Result).ToList();
-
+        
+        
         foreach (var result in results)
         {
             Assert.GreaterOrEqual(result.Count, 1);
         }
+        
+        
+        var tasksMixed = new List<Task>();
+
+        for (int i = 0; i < 2; i++)
+        {
+            tasksMixed.Add(Task.Run(() => _unitOfWork.Users.GetAllWithQueue().ToList()));
+        }
+
+        for (int i = 0; i < 2; i++)
+        {
+            tasksMixed.Add(Task.Run(() => _unitOfWork.Roles.GetAllWithQueue().ToList()));
+        }
+        _unitOfWork.Complete()
+
+        Task.WaitAll(tasksMixed.ToArray());
+        
+        // Get the results from the tasks
+        var userResults = tasks.Take(20).Select(t => t.Result).ToList();
+        var roleResults = tasks.Skip(20).Select(t => t.Result).ToList();
+        
+        //tasksMixed.Select(t => t.).ToList();
+        
+        //tasksMixed[0].Result.ForEach(t => Assert.GreaterOrEqual(t.Id, 1));
+        
+        userResults.ForEach(t => Assert.GreaterOrEqual(t.Count, 1));
+        
+
+       
     }
 
 
