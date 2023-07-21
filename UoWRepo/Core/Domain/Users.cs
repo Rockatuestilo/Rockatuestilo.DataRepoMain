@@ -25,7 +25,7 @@ public class Users : Linq2DbEntity, ITEntity
 
     [Column(Name = "UpdatedBy")] [NotNull] public int UpdatedBy { get; set; }
 
-    [Column(Name = "Email")] [Nullable] public string Email { get; set; } = null!;
+    [Column(Name = "Email")] [Nullable] public string? Email { get; set; }
 
     [Column(Name = "VerifiedAccount")]
     [Nullable]

@@ -82,6 +82,65 @@ public class UsersCrudsEf
             Assert.AreEqual(result.Count, result2.Count + 1);
         }
     }
+    
+    [Test]
+    public void Test2_retrieveListInParallelV20()
+    {
+        var users = new TestDataUsers1().GetDataEf();
+
+        _unitOfWorkEf.Users.Add(users[0]);
+
+        List<List<Users>> results = new List<List<Users>>();
+
+        // Ejecutar las 20 tareas en paralelo
+        var tasks = Enumerable.Range(0, 2)
+            .Select(_ => Task.Run(() => _unitOfWorkEf.Users.GetAllWithQueue().ToList()))
+            .ToList();
+        
+        
+
+        Task.WaitAll(tasks.ToArray());
+
+        results = tasks.Select(t => t.Result).ToList();
+        
+        
+        foreach (var result in results)
+        {
+            Assert.GreaterOrEqual(result.Count, 1);
+        }
+        
+        
+        var tasksMixed = new List<Task>();
+
+        for (int i = 0; i < 40; i++)
+        {
+            tasksMixed.Add( _unitOfWorkEf.Users.GetAllAsync());
+            //tasksMixed.Add( _unitOfWorkEf.Users.GetAllAsync());
+            //tasksMixed.Add(Task.Run(() => _unitOfWorkEf.Users.GetAllWithQueue().ToList()));
+        }
+
+        for (int i = 0; i < 2; i++)
+        {
+            tasksMixed.Add(Task.Run(() => _unitOfWorkEf.Roles.GetAllWithQueue().ToList()));
+        }
+
+        _unitOfWorkEf.Complete();
+
+        Task.WaitAll(tasksMixed.ToArray());
+        
+        // Get the results from the tasks
+        var userResults = tasks.Take(40).Select(t => t.Result).ToList();
+        var roleResults = tasks.Take(20).Select(t => t.Result).ToList();
+        
+        //tasksMixed.Select(t => t.).ToList();
+        
+        //tasksMixed[0].Result.ForEach(t => Assert.GreaterOrEqual(t.Id, 1));
+        
+        userResults.ForEach(t => Assert.GreaterOrEqual(t.Count, 1));
+        
+
+       
+    }
 
     [Test]
     public void Test3_AddMany1()

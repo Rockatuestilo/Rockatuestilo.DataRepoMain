@@ -14,7 +14,7 @@ public class CategoriesCruds
     [SetUp]
     public void Setup()
     {
-        var value = new ContextGenerator().CreateInMemory();
+        var value = new ContextGenerator().CreateInMysql();
         _unitOfWorkEf = new UnityOfWorkEf(value);
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.NetworkInformation;
+using System.Threading.Tasks;
 using LinqToDB;
 using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.Configuration;
@@ -164,6 +165,42 @@ public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<
     }
 
     protected IEnumerable<TEntity> AddEntityToCacheAndGetList<T>()
+    {
+        ResetMemory<TEntity>();
+        var nameOfEntity = typeof(T).Name;
+        var liste = base.GetAll();
+
+        try
+        {
+            TestList.Add(nameOfEntity, liste.ToList());
+            testListDateTimes.Add(nameOfEntity, DateTime.Now);
+        }
+        catch (Exception)
+        {
+        }
+
+        return liste;
+    }
+    
+    protected async Task<IEnumerable<TEntity>> AddEntityToCacheAndGetListAsync<T>()
+    {
+        ResetMemory<TEntity>();
+        var nameOfEntity = typeof(T).Name;
+        var liste = await this.GetAllAsync();
+
+        try
+        {
+            TestList.Add(nameOfEntity, liste.ToList());
+            testListDateTimes.Add(nameOfEntity, DateTime.Now);
+        }
+        catch (Exception)
+        {
+        }
+
+        return liste;
+    }
+    
+    protected IEnumerable<TEntity> AddEntityToCacheAndGetListQueue<T>()
     {
         ResetMemory<TEntity>();
         var nameOfEntity = typeof(T).Name;

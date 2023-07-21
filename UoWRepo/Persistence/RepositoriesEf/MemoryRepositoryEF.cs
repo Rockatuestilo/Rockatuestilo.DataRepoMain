@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.Configuration;
 using UoWRepo.Core.Repositories;
@@ -87,6 +88,20 @@ public class MemoryRepositoryEF<TEntity> : RepositoryEf<TEntity>, IMemoryReposit
         return result;
     }
     
+    public override async Task<IEnumerable<TEntity>> GetAllAsync()
+    {
+        var nameOfEntity = typeof(TEntity).Name;
+        var result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
+
+        if (result == null)
+        {
+            await AddEntityToCacheAndGetListAsync<TEntity>();
+            result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
+        }
+
+        return result;
+    }
+    
     public override IEnumerable<TEntity> GetAllWithQueue()
     {
         var nameOfEntity = typeof(TEntity).Name;
@@ -94,7 +109,7 @@ public class MemoryRepositoryEF<TEntity> : RepositoryEf<TEntity>, IMemoryReposit
         if (result == null)
         {
             //AddEntityToCacheAndGetList<TEntity>();
-            var val = contextQueue.Queue(() => AddEntityToCacheAndGetList<TEntity>()).Result;
+            var val = contextQueue.Queue(() => AddEntityToCacheAndGetListQueue<TEntity>()).Result;
             
             result = TestList.FirstOrDefault(x => x.Key == nameOfEntity).Value;
         }
@@ -163,9 +178,53 @@ public class MemoryRepositoryEF<TEntity> : RepositoryEf<TEntity>, IMemoryReposit
     {
         ResetMemory<TEntity>();
         var nameOfEntity = typeof(T).Name;
+        var liste = base.GetAll();
+
+        try
+        {
+            TestList.Add(nameOfEntity, liste.ToList());
+            testListDateTimes.Add(nameOfEntity, DateTime.Now);
+        }
+        catch (Exception)
+        {
+        }
+
+        return liste;
+    }
+    
+    protected async Task<IEnumerable<TEntity>> AddEntityToCacheAndGetListAsync<T>()
+    {
+        ResetMemory<TEntity>();
+        var nameOfEntity = typeof(T).Name;
+        var liste = await base.GetAllAsync();
+
+        try
+        {
+            TestList.Add(nameOfEntity, liste.ToList());
+            testListDateTimes.Add(nameOfEntity, DateTime.Now);
+        }
+        catch (Exception)
+        {
+        }
+
+        return liste;
+    }
+    
+    protected IEnumerable<TEntity> AddEntityToCacheAndGetListQueue<T>()
+    {
+        ResetMemory<TEntity>();
+        var nameOfEntity = typeof(T).Name;
         var liste = base.GetAllWithQueue();
-        TestList.Add(nameOfEntity, liste.ToList());
-        testListDateTimes.Add(nameOfEntity, DateTime.Now);
+
+        try
+        {
+            TestList.Add(nameOfEntity, liste.ToList());
+            testListDateTimes.Add(nameOfEntity, DateTime.Now);
+        }
+        catch (Exception)
+        {
+        }
+
         return liste;
     }
 

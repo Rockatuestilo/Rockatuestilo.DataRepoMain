@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.Configuration;
@@ -38,6 +39,14 @@ public class RepositoryEf<TEntity> : IRepository<TEntity> where TEntity : BaseTE
         entities.AddRange(entitiesList);
     }
     public static readonly ContextQueue contextQueue = new ContextQueue();
+    public async virtual Task<IEnumerable<TEntity>> GetAllAsync()
+    {
+        var list = await entities.ToListAsync();
+        
+        
+        return list;
+    }
+
     public virtual IEnumerable<TEntity> GetAllWithQueue()
     {
         
@@ -45,16 +54,18 @@ public class RepositoryEf<TEntity> : IRepository<TEntity> where TEntity : BaseTE
         //return context.GetTable<TEntity>().AsParallel();
         return val;
     }
+    
+    public IQueryable<TEntity> GetAllQueryble()
+    {
+        return entities.AsQueryable();
+    }
 
     public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
     {
         return entities.Where(predicate).ToList();
     }
 
-    public IQueryable<TEntity> GetAllQueryble()
-    {
-        return entities.AsQueryable();
-    }
+   
 
     public virtual IQueryable<TEntity> FindQueryble(Expression<Func<TEntity, bool>> predicate)
     {
