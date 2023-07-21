@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.Repositories;
@@ -10,6 +11,8 @@ public interface IRepository<BaseTEntity> where BaseTEntity : IBaseTEntity
 {
     BaseTEntity Get(int id);
     IEnumerable<BaseTEntity> GetAll();
+    
+    Task<IEnumerable<BaseTEntity>> GetAllAsync();
     
     IEnumerable<BaseTEntity> GetAllWithQueue();
     IEnumerable<BaseTEntity> Find(Expression<Func<BaseTEntity, bool>> predicate);

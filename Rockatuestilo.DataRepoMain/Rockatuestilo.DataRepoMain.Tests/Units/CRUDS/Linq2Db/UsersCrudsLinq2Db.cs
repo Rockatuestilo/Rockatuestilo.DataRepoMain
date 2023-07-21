@@ -129,14 +129,15 @@ public class UsersCrudsLinq2Db
 
         for (int i = 0; i < 2; i++)
         {
-            tasksMixed.Add(Task.Run(() => _unitOfWork.Users.GetAllWithQueue().ToList()));
+            tasksMixed.Add( _unitOfWork.Users.GetAllAsync());
         }
 
         for (int i = 0; i < 2; i++)
         {
             tasksMixed.Add(Task.Run(() => _unitOfWork.Roles.GetAllWithQueue().ToList()));
         }
-        _unitOfWork.Complete()
+
+        _unitOfWork.Complete();
 
         Task.WaitAll(tasksMixed.ToArray());
         

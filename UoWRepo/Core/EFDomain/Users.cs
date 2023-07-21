@@ -22,7 +22,7 @@ public class Users : TEntity, ITEntity
 
     [Column("UpdatedBy")] public int UpdatedBy { get; set; }
 
-    [Column("Email")] public string Email { get; set; }
+    [Column("Email")] public string? Email { get; set; }
 
 
     public bool VerifiedAccount { get; set; }

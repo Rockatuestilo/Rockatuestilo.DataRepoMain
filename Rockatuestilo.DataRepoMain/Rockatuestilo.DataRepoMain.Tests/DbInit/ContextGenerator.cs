@@ -166,7 +166,7 @@ public class ContextGenerator
         //var options = new DbContextOptionsBuilder<EFContext>().
         
         var connection =
-            "Server=localhost;Port=13306;Database=cmsbackup_test;Uid=root;Pwd=blueberrywater4;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
+            "Server=localhost;Port=3306;Database=cmsbackup_test;Uid=root;Pwd=blueberrywater4;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
 
 
         /*var context =

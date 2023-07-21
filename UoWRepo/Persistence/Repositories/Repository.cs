@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using LinqToDB;
 using LinqToDB.Data;
 using UoWRepo.Core.BaseDomain;
@@ -70,6 +71,12 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
     {
         return context.GetTable<TEntity>().ToList();
     }
+
+    public async Task<IEnumerable<TEntity>> GetAllAsync()
+    {
+        return await Task.Run(() => context.GetTable<TEntity>().ToList());
+    }
+
     public static readonly ContextQueue contextQueue = new ContextQueue();
     public virtual IEnumerable<TEntity> GetAllWithQueue()
     {
