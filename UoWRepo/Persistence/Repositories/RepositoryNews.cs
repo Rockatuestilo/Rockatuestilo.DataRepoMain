@@ -8,6 +8,8 @@ using UoWRepo.Core.Repositories;
 
 namespace UoWRepo.Persistence.Repositories;
 
+[Obsolete]
+
 public class RepositoryNews : Repository<NewsEtty>, IRepositoryNews
 {
     public RepositoryNews(Linq2DbContext context) : base(context)
