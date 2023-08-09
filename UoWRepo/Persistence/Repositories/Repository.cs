@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 using LinqToDB;
 using LinqToDB.Data;
@@ -36,6 +35,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
         context = new Linq2DbContext(connectionString);
     }
 
+    [Obsolete("Use AddAsync instead")]
     public virtual void Add(TEntity entity)
     {
         context.Insert(entity);
@@ -77,20 +77,43 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
         return await Task.Run(() => context.GetTable<TEntity>().ToList());
     }
 
+    public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate)
+    {
+        return await Task.Run(() =>context.GetTable<TEntity>().Where(predicate).ToList());
+    }
+
+    public async Task AddRangeAsync(IEnumerable<TEntity> entities)
+    {
+        await Task.Run(() => context.BulkCopy(entities));
+    }
+
+    public async Task<TEntity> UpdateAsync(TEntity entity)
+    {
+        await Task.Run( () => context.Update(entity));
+        return entity;
+    }
+
+    public async Task RemoveAsync(TEntity entity)
+    {
+        await Task.Run(() => context.Delete(entity));
+    }
+
+    public async Task RemoveRangeAsync(IEnumerable<TEntity> entities)
+    {
+        await Task.Run(() => context.HashtagsNews.Where(x => entities.Select(i => i.Id).Contains(x.Id)).Delete());
+    }
+
     public static readonly ContextQueue contextQueue = new ContextQueue();
     public virtual IEnumerable<TEntity> GetAllWithQueue()
     {
-        /*context.Connection.StateChange += (sender, args) =>
-        {
-            if (args.CurrentState == System.Data.ConnectionState.Open)
-            {
-                contextQueue.SetContext(context);
-            }
-        };*/
-        
         var val = contextQueue.Queue(() => context.GetTable<TEntity>().ToList()).Result;
         
         return val;
+    }
+
+    public Task RemoveRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
     }
 
     public virtual IQueryable<TEntity> GetAllQueryble()
@@ -106,6 +129,31 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
     public virtual void RemoveRange(IEnumerable<TEntity> entities)
     {
         context.HashtagsNews.Where(x => entities.Select(i => i.Id).Contains(x.Id)).Delete();
+    }
+
+    public Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task RemoveAsync(TEntity entity, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
     }
 
     public virtual TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
