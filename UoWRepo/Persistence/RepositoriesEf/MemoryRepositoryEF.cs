@@ -178,7 +178,7 @@ public class MemoryRepositoryEF<TEntity> : RepositoryEf<TEntity>, IMemoryReposit
     {
         ResetMemory<TEntity>();
         var nameOfEntity = typeof(T).Name;
-        var liste = base.GetAll();
+        var liste = base.GetAllWithQueue();
 
         try
         {

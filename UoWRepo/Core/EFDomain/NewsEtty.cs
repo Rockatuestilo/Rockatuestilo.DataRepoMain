@@ -9,9 +9,9 @@ public class NewsEtty : TEntity, ITEntity
 {
     [Column("newsOwner")] public int UserIdOwner { get; set; }
 
-    [Column("newsTittel")] public string NewsTitle { get; set; }
+    [Column("newsTittel")] public string? NewsTitle { get; set; }
 
-    [Column("newsContent")] public string NewsContent { get; set; }
+    [Column("newsContent")] public string? NewsContent { get; set; }
 
     [Column("newsPermission")] public int NewsPermission { get; set; }
 
@@ -27,7 +27,7 @@ public class NewsEtty : TEntity, ITEntity
 
     [Column("publicationdate")] public DateTime PublicationDate { get; set; }
 
-    [Column("titleforURL")] public string TitleForUrl { get; set; }
+    [Column("titleforURL")] public string? TitleForUrl { get; set; }
 
     [Column("HashtagsNewsId")] public int? HashtagsNewsId { get; set; }
 
