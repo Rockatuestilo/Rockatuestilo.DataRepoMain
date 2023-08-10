@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using LinqToDB;
 using Microsoft.EntityFrameworkCore;
 using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.Configuration;
@@ -59,12 +58,12 @@ public class RepositoryEf<TEntity> : IRepository<TEntity> where TEntity : BaseTE
         await entities.AddRangeAsync(incomingEntities);
     }
     
-    public async Task<TEntity> UpdateAsync(TEntity entity)
+    public async Task<TEntity> UpdateAndSaveAsync(TEntity entity)
     {
         return await Task.Run(()=> entities.Update(entity).Entity);
     }
 
-    public async Task RemoveAsync(TEntity entity)
+    public async Task RemoveAndSaveAsync(TEntity entity)
     {
         await Task.Run(()=> entities.Remove(entity));
     }
@@ -127,29 +126,35 @@ public class RepositoryEf<TEntity> : IRepository<TEntity> where TEntity : BaseTE
         //entities.RemoveRange(entitiesList);
     }
 
-    public Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationTokens = default)
     {
-        throw new NotImplementedException();
+        return await entities.ToListAsync(cancellationTokens);
     }
 
-    public Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await entities.Where(predicate).ToListAsync(cancellationToken);
+    
     }
 
-    public Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+    public async Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        await this.entities.AddRangeAsync(entities, cancellationToken);
+        //await context.AddRangeAsync(entities, cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
     }
 
-    public Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public async Task<TEntity> UpdateAndSaveAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        entities.Update(entity);
+        await context.SaveChangesAsync(cancellationToken);
+        return entity;
     }
 
-    public Task RemoveAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public async Task RemoveAndSaveAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        entities.Remove(entity);
+        await context.SaveChangesAsync(cancellationToken);
     }
 
     public virtual TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
