@@ -37,9 +37,9 @@ public interface IRepository<BaseTEntity> where BaseTEntity : IBaseTEntity
     Task<IEnumerable<BaseTEntity>> FindAsync(Expression<Func<BaseTEntity, bool>> predicate, CancellationToken cancellationToken = default);
     
     Task AddRangeAsync(IEnumerable<BaseTEntity> entities, CancellationToken cancellationToken = default);
-    Task<BaseTEntity> UpdateAsync(BaseTEntity entity, CancellationToken cancellationToken = default);
+    Task<BaseTEntity> UpdateAndSaveAsync(BaseTEntity entity, CancellationToken cancellationToken = default);
     
-    Task RemoveAsync(BaseTEntity entity, CancellationToken cancellationToken = default);
+    Task RemoveAndSaveAsync(BaseTEntity entity, CancellationToken cancellationToken = default);
     
     Task RemoveRangeAsync(IEnumerable<BaseTEntity> entities , CancellationToken cancellationToken = default);
 

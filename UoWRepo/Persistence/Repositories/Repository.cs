@@ -146,12 +146,12 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
         throw new NotImplementedException();
     }
 
-    public Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public Task<TEntity> UpdateAndSaveAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
 
-    public Task RemoveAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public Task RemoveAndSaveAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
