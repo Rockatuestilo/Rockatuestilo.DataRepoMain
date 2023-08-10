@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UoWRepo.Core.EFDomain;
@@ -19,4 +20,9 @@ public class Categories : TEntity, ITEntity
     [Column("CreatedDate")] public DateTime CreatedDate { get; set; }
 
     [Column("updatedDate")] public new DateTime UpdatedDate { get; set; }
+    
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Column("news_categoriesID")]
+    public new int Id { get; set; }
 }
