@@ -78,7 +78,7 @@ public class RepositoryEf<TEntity> : IRepository<TEntity> where TEntity : BaseTE
     {
         
         var val = contextQueue.Queue(() => entities.ToList()).Result;
-        //return context.GetTable<TEntity>().AsParallel();
+        
         return val;
     }
 
