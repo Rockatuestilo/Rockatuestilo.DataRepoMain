@@ -11,7 +11,7 @@ public class RunFirstMigration
     public RunFirstMigration(Linq2DbContext context)
     {
         _context = context;
-        RunStupidMigration();
+        //RunStupidMigration();
     }
 
     private void RunMysqlDirectly(string connectionString, string script)
