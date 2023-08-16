@@ -12,15 +12,15 @@ public interface INewsEtty : IBaseTEntity
 
     public DateTime CreatedDate { get; set; }
 
-    public int NewsPermission { get; set; }
+    public int? NewsPermission { get; set; }
 
-    public int NewsChangedById { get; set; }
+    public int? NewsChangedById { get; set; }
 
-    public int CategoryId { get; set; }
+    public int? CategoryId { get; set; }
 
-    public int PublicationType { get; set; }
+    public int? PublicationType { get; set; }
 
-    public int GalleryId { get; set; }
+    public int? GalleryId { get; set; }
 
     public string NewsPresentation { get; set; }
 
@@ -28,5 +28,5 @@ public interface INewsEtty : IBaseTEntity
 
     public string TitleForUrl { get; set; }
 
-    public int HashtagsNewsId { get; set; }
+    public int? HashtagsNewsId { get; set; }
 }
