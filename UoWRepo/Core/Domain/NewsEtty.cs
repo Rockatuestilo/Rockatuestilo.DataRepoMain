@@ -37,23 +37,23 @@ public class NewsEtty : Linq2DbEntity, INewsEtty, IBaseTEntity
 
     [Column(Name = "newsPermission")]
     [Nullable]
-    public int NewsPermission { get; set; }
+    public int? NewsPermission { get; set; }
 
     [Column(Name = "newsChangedByID")]
     [Nullable]
-    public int NewsChangedById { get; set; }
+    public int? NewsChangedById { get; set; }
 
     [Column(Name = "category_id")]
     [Nullable]
-    public int CategoryId { get; set; }
+    public int? CategoryId { get; set; }
 
     [Column(Name = "publicationType")]
     [Nullable]
-    public int PublicationType { get; set; } = 0;
+    public int? PublicationType { get; set; } = 0;
 
     [Column(Name = "galleryID")]
     [Nullable]
-    public int GalleryId { get; set; }
+    public int? GalleryId { get; set; }
 
     [Column(Name = "newsPresentation")]
     [Nullable]
@@ -69,5 +69,5 @@ public class NewsEtty : Linq2DbEntity, INewsEtty, IBaseTEntity
 
     [Column(Name = "HashtagsNewsId")]
     [Nullable]
-    public int HashtagsNewsId { get; set; }
+    public int? HashtagsNewsId { get; set; }
 }

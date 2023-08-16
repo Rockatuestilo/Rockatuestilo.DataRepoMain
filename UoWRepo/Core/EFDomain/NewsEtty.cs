@@ -1,27 +1,35 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.EFDomain;
 
+//public class NewsEtty : Linq2DbEntity, INewsEtty, IBaseTEntity
+
 [Table("tb_news")]
-public class NewsEtty : TEntity, ITEntity
+public class NewsEtty : TEntity,INewsEtty, ITEntity
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Column("newsID")]
+    public new int Id { get; set; }
+    
     [Column("newsOwner")] public int UserIdOwner { get; set; }
 
     [Column("newsTittel")] public string? NewsTitle { get; set; }
 
     [Column("newsContent")] public string? NewsContent { get; set; }
 
-    [Column("newsPermission")] public int NewsPermission { get; set; }
+    [Column("newsPermission")] public int? NewsPermission { get; set; }
 
-    [Column("newsChangedByID")] public int NewsChangedById { get; set; }
+    [Column("newsChangedByID")] public int? NewsChangedById { get; set; }
 
-    [Column("category_id")] public int CategoryId { get; set; }
+    [Column("category_id")] public int? CategoryId { get; set; }
 
-    [Column("publicationType")] public int PublicationType { get; set; } = 0;
+    [Column("publicationType")] public int? PublicationType { get; set; } = 0;
 
-    [Column("galleryID")] public int GalleryId { get; set; }
+    [Column("galleryID")] public int? GalleryId { get; set; }
 
     [Column("newsPresentation")] public string NewsPresentation { get; set; }
 
@@ -33,10 +41,7 @@ public class NewsEtty : TEntity, ITEntity
 
     [Column("ArticleVersion")] public int? ArticleVersion { get; set; }
 
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [Column("newsID")]
-    public new int Id { get; set; }
+    
 
     [Column("newsCreatedDate")] public DateTime CreatedDate { get; set; }
 
