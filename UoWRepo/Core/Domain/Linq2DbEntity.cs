@@ -20,3 +20,21 @@ public class Linq2DbEntity : BaseTEntity
     [NotNull]
     public override DateTime UpdatedDate { get; set; } = DateTime.Now;
 }
+
+
+public class Linq2DbGuidEntity : BaseTEntity
+{
+    [PrimaryKey]
+    [Identity]
+    [Column(Name = "Id")]
+    [NotNull]
+    public new int Id { get; set; }
+
+    [Column(Name = "CreatedDate")]
+    [NotNull]
+    public virtual DateTime CreatedDate { get; set; } = DateTime.Now;
+
+    [Column(Name = "UpdatedDate")]
+    [NotNull]
+    public override DateTime UpdatedDate { get; set; } = DateTime.Now;
+}

@@ -34,3 +34,30 @@ public class HashTagsNews : Linq2DbEntity, ITEntity
         throw new NotImplementedException();
     }
 }
+
+
+[Table(Name = "MediaObject")]
+public class MediaObject : Linq2DbEntity, ITEntity
+{
+    [PrimaryKey]
+    [Identity]
+    [Column(Name = "Id")]
+    [NotNull]
+    public new int Id { get; set; }
+    
+    [Column(Name = "CreatedByID")]
+    [NotNull]
+    public int CreatedById { get; set; }
+
+    [Column(Name = "UpdatedByID")]
+    [NotNull]
+    public int UpdatedById { get; set; }
+    
+    [Column(Name = "Level")]
+    [NotNull]
+    public int Level { get; set; }
+    
+    [Column(Name = "Content")]
+    [NotNull]
+    public string Content { get; set; }
+}
