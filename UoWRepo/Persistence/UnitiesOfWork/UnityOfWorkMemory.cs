@@ -13,11 +13,98 @@ using UoWRepo.Persistence.Repositories;
 namespace UoWRepo.Persistence.UnitiesOfWork;
 //TODO: test this
 
+
 public class UnityOfWork : IUnitOfWork
 {
     private readonly Linq2DbContext _context;
 
     public UnityOfWork(Linq2DbContext context)
+    {
+        _context = context;
+        //new MigrationsModule(_context.ConfigurationString).DoSomeMigration();
+        new RunFirstMigration(context);
+        //RunStupidMigration();
+        News = new MemoryRepository<NewsEtty>(_context, new Repository<NewsEtty>(_context));
+
+        PublicationType =
+            new MemoryRepository<NewsPublicationType>(_context, new Repository<NewsPublicationType>(_context));
+        HashTags = new MemoryRepository<HashTags>(_context, new Repository<HashTags>(_context));
+        HashTagsNews = new MemoryRepository<HashTagsNews>(_context, new Repository<HashTagsNews>(_context));
+        Categories = new MemoryRepository<Categories>(_context, new Repository<Categories>(_context));
+        ArticlesViewForUI =
+            new MemoryRepository<ArticlesViewForUI>(_context, new Repository<ArticlesViewForUI>(_context));
+
+        Galleries = new MemoryRepository<Galleries>(_context, new Repository<Galleries>(_context));
+        Users = new MemoryRepository<Users>(_context, new Repository<Users>(_context));
+
+        Roles = new MemoryRepository<RoleModels>(_context, new Repository<RoleModels>(_context));
+        UsersToRoles = new MemoryRepository<UsersToRoles>(_context, new Repository<UsersToRoles>(_context));
+
+        PendingRegistration =
+            new MemoryRepository<PendingRegistration>(_context, new Repository<PendingRegistration>(_context));
+
+        //
+    }
+
+    public IMemoryRepository<PendingRegistration> PendingRegistration { get; private set; }
+
+    public IMemoryRepository<ArticlesViewForUI> ArticlesViewForUI { get; }
+    public IMemoryRepository<Categories> Categories { get; }
+    public IMemoryRepository<HashTags> HashTags { get; }
+    public IMemoryRepository<HashTagsNews> HashTagsNews { get; }
+    public IMemoryRepository<NewsPublicationType> PublicationType { get; }
+    public IMemoryRepository<Galleries> Galleries { get; }
+    public IMemoryRepository<Users> Users { get; }
+    public IMemoryRepository<NewsEtty> News { get; }
+    public IMemoryRepository<RoleModels> Roles { get; }
+    public IMemoryRepository<UsersToRoles> UsersToRoles { get; }
+
+
+    public int Complete()
+    {
+        if (_context.Transaction != null)
+            try
+            {
+                _context.Transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                var hhh = ex.Message;
+            }
+
+        return 0;
+    }
+
+    public void Dispose()
+    {
+        _context.Dispose();
+    }
+
+    private void RunMysqlDirectly(string connectionString, string script)
+    {
+        using (var connection = new MySqlConnection(connectionString))
+        {
+            connection.Open();
+
+            var command = new MySqlCommand(script, connection);
+            command.ExecuteNonQuery();
+
+            connection.Close();
+        }
+    }
+
+    private MemoryRepository<T> InitObjects<T>() where T : Linq2DbEntity
+    {
+        return new MemoryRepository<T>(_context, new Repository<T>(_context));
+    }
+}
+
+
+public class UnityOfWorkMemory : IUnitOfWorkMemory
+{
+    private readonly Linq2DbContext _context;
+
+    public UnityOfWorkMemory(Linq2DbContext context)
     {
         _context = context;
         //new MigrationsModule(_context.ConfigurationString).DoSomeMigration();

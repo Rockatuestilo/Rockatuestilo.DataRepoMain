@@ -131,7 +131,8 @@ public class RepositoryEf<TEntity> : IRepository<TEntity> where TEntity : BaseTE
         return await entities.ToListAsync(cancellationTokens);
     }
 
-    public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+    public async Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate,
+        CancellationToken cancellationToken = default)
     {
         return await entities.Where(predicate).ToListAsync(cancellationToken);
     

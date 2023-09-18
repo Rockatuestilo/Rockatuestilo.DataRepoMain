@@ -6,6 +6,7 @@ using LinqToDB;
 using LinqToDB.Data;
 using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.Configuration;
+using UoWRepo.Core.Configuration.ParallelRunning;
 using UoWRepo.Core.Domain;
 using UoWRepo.Core.Repositories;
 
@@ -67,16 +68,19 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
         return context.GetTable<TEntity>().SingleOrDefault(x => x.Id == id);
     }
 
+    [SemaphoreActions(1)]
     public virtual IEnumerable<TEntity> GetAll()
     {
         return context.GetTable<TEntity>().ToList();
     }
 
+    [SemaphoreActions(1)]
     public async Task<IEnumerable<TEntity>> GetAllAsync()
     {
         return await Task.Run(() => context.GetTable<TEntity>().ToList());
     }
 
+    [SemaphoreActions(1)]
     public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate)
     {
         return await Task.Run(() =>context.GetTable<TEntity>().Where(predicate).ToList());
@@ -85,6 +89,11 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
     public async Task AddRangeAsync(IEnumerable<TEntity> entities)
     {
         await Task.Run(() => context.BulkCopy(entities));
+    }
+    
+    public async Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+    {
+        await context.BulkCopyAsync(entities);
     }
 
     public async Task<TEntity> UpdateAsync(TEntity entity)
@@ -128,7 +137,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
 
     public virtual void RemoveRange(IEnumerable<TEntity> entities)
     {
-        context.HashtagsNews.Where(x => entities.Select(i => i.Id).Contains(x.Id)).Delete();
+        context.GetTable<TEntity>().Where(x => entities.Select(i => i.Id).Contains(x.Id)).Delete();
     }
 
     public Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
@@ -136,15 +145,16 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
+    public Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var result = context.GetTable<TEntity>().Where(predicate).ToListAsync(cancellationToken);
+
+        return result;
+
+
     }
 
-    public Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
+   
 
     public Task<TEntity> UpdateAndSaveAsync(TEntity entity, CancellationToken cancellationToken = default)
     {

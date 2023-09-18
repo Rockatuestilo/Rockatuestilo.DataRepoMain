@@ -34,7 +34,8 @@ public interface IRepository<BaseTEntity> where BaseTEntity : IBaseTEntity
 
     // Asynchronous Methods
     Task<IEnumerable<BaseTEntity>> GetAllAsync( CancellationToken cancellationToken = default);
-    Task<IEnumerable<BaseTEntity>> FindAsync(Expression<Func<BaseTEntity, bool>> predicate, CancellationToken cancellationToken = default);
+    Task<List<BaseTEntity>> FindAsync(Expression<Func<BaseTEntity, bool>> predicate,
+        CancellationToken cancellationToken = default);
     
     Task AddRangeAsync(IEnumerable<BaseTEntity> entities, CancellationToken cancellationToken = default);
     Task<BaseTEntity> UpdateAndSaveAsync(BaseTEntity entity, CancellationToken cancellationToken = default);
