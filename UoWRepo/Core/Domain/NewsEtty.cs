@@ -17,7 +17,8 @@ public class NewsEtty : Linq2DbEntity, INewsEtty, IBaseTEntity
     [NotNull]
     public new int Id { get; set; }
 
-    [Column(Name = "newsOwner")] [NotNull] public int UserIdOwner { get; set; }
+    [Column(Name = "newsOwner")] 
+    [NotNull] public int UserIdOwner { get; set; }
 
     [Column(Name = "newsTittel")]
     [Nullable]
