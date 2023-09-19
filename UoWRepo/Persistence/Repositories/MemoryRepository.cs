@@ -155,6 +155,7 @@ public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<
         catch (Exception e)
         {
             var mm = e.Message;
+            Console.WriteLine(mm);
         }
     }
 
