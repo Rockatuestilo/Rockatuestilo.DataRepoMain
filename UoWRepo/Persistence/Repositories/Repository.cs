@@ -150,15 +150,14 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
         var result = context.GetTable<TEntity>().Where(predicate).ToListAsync(cancellationToken);
 
         return result;
-
-
     }
 
    
 
-    public Task<TEntity> UpdateAndSaveAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public async Task<TEntity> UpdateAndSaveAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        await Task.Run( () => context.Update(entity));
+        return entity;
     }
 
     public Task RemoveAndSaveAsync(TEntity entity, CancellationToken cancellationToken = default)
