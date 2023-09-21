@@ -10,10 +10,7 @@ namespace UoWRepo.Core.Configuration;
 
 public class Linq2DbContext : DataConnection, ICommonContext
 {
-    public Linq2DbContext(string connectionString) : base(connectionString)
-    {
-    }
-
+   
     public Linq2DbContext(string providerName, string connectionString) : base(providerName, connectionString)
     {
     }

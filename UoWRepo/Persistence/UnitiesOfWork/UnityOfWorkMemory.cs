@@ -17,12 +17,13 @@ namespace UoWRepo.Persistence.UnitiesOfWork;
 public class UnityOfWork : IUnitOfWork
 {
     private readonly Linq2DbContext _context;
+    private readonly string _connectionString;
 
     public UnityOfWork(Linq2DbContext context)
     {
         _context = context;
         //new MigrationsModule(_context.ConfigurationString).DoSomeMigration();
-        new RunFirstMigration(context);
+        //new RunFirstMigration(context);
         //RunStupidMigration();
         News = new MemoryRepository<NewsEtty>(_context, new Repository<NewsEtty>(_context));
 
@@ -44,25 +45,84 @@ public class UnityOfWork : IUnitOfWork
             new MemoryRepository<PendingRegistration>(_context, new Repository<PendingRegistration>(_context));
 
         //
+        InitProperties();
+    }
+    
+    public UnityOfWork(string connectionString)
+    {
+        //_context = new Linq2DbContext("MySql.Data.MySqlClient", connectionString);
+        _connectionString = connectionString;
+        //new MigrationsModule(_context.ConfigurationString).DoSomeMigration();
+        //new RunFirstMigration(context);
+        //RunStupidMigration();
+        InitPropertiesConnectionString();
+        
+
+        //
+    }
+    
+    private void InitProperties()
+    {
+        News = new MemoryRepository<NewsEtty>(_context, new Repository<NewsEtty>(_context));
+
+        PublicationType =
+            new MemoryRepository<NewsPublicationType>(_context, new Repository<NewsPublicationType>(_context));
+        HashTags = new MemoryRepository<HashTags>(_context, new Repository<HashTags>(_context));
+        HashTagsNews = new MemoryRepository<HashTagsNews>(_context, new Repository<HashTagsNews>(_context));
+        Categories = new MemoryRepository<Categories>(_context, new Repository<Categories>(_context));
+        ArticlesViewForUI =
+            new MemoryRepository<ArticlesViewForUI>(_context, new Repository<ArticlesViewForUI>(_context));
+
+        Galleries = new MemoryRepository<Galleries>(_context, new Repository<Galleries>(_context));
+        Users = new MemoryRepository<Users>(_context, new Repository<Users>(_context));
+
+        Roles = new MemoryRepository<RoleModels>(_context, new Repository<RoleModels>(_context));
+        UsersToRoles = new MemoryRepository<UsersToRoles>(_context, new Repository<UsersToRoles>(_context));
+
+        PendingRegistration =
+            new MemoryRepository<PendingRegistration>(_context, new Repository<PendingRegistration>(_context));
+
+    }
+    
+    private void InitPropertiesConnectionString()
+    {
+        News = new MemoryRepository<NewsEtty>(_connectionString);
+
+        PublicationType =
+            new MemoryRepository<NewsPublicationType>(_connectionString);
+        HashTags = new MemoryRepository<HashTags>(_connectionString);
+        HashTagsNews = new MemoryRepository<HashTagsNews>(_connectionString);
+        Categories = new MemoryRepository<Categories>(_connectionString);
+        ArticlesViewForUI =
+            new MemoryRepository<ArticlesViewForUI>(_connectionString);
+
+        Galleries = new MemoryRepository<Galleries>(_connectionString);
+        Users = new MemoryRepository<Users>(_connectionString);
+
+        Roles = new MemoryRepository<RoleModels>(_connectionString);
+        UsersToRoles = new MemoryRepository<UsersToRoles>(_connectionString);
+
+        PendingRegistration =
+            new MemoryRepository<PendingRegistration>(_connectionString);
     }
 
     public IMemoryRepository<PendingRegistration> PendingRegistration { get; private set; }
 
-    public IMemoryRepository<ArticlesViewForUI> ArticlesViewForUI { get; }
-    public IMemoryRepository<Categories> Categories { get; }
-    public IMemoryRepository<HashTags> HashTags { get; }
-    public IMemoryRepository<HashTagsNews> HashTagsNews { get; }
-    public IMemoryRepository<NewsPublicationType> PublicationType { get; }
-    public IMemoryRepository<Galleries> Galleries { get; }
-    public IMemoryRepository<Users> Users { get; }
-    public IMemoryRepository<NewsEtty> News { get; }
-    public IMemoryRepository<RoleModels> Roles { get; }
-    public IMemoryRepository<UsersToRoles> UsersToRoles { get; }
+    public IMemoryRepository<ArticlesViewForUI> ArticlesViewForUI { get;private set; }
+    public IMemoryRepository<Categories> Categories { get;private set; }
+    public IMemoryRepository<HashTags> HashTags { get; private set;}
+    public IMemoryRepository<HashTagsNews> HashTagsNews { get; private set;}
+    public IMemoryRepository<NewsPublicationType> PublicationType { get; private set;}
+    public IMemoryRepository<Galleries> Galleries { get; private set;}
+    public IMemoryRepository<Users> Users { get; private set;}
+    public IMemoryRepository<NewsEtty> News { get; private set;}
+    public IMemoryRepository<RoleModels> Roles { get; private set;}
+    public IMemoryRepository<UsersToRoles> UsersToRoles { get; private set;}
 
 
     public int Complete()
     {
-        if (_context.Transaction != null)
+        if (_context?.Transaction != null)
             try
             {
                 _context.Transaction.Commit();

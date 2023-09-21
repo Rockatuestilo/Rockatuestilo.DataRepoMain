@@ -11,13 +11,59 @@ namespace UoWRepo.Persistence.UnitiesOfWork;
 public class UnityOfWorkLinq : IUnitOfWorkLinq
 {
     private readonly Linq2DbContext _context;
+    private readonly string _connectionString;
 
     public UnityOfWorkLinq(Linq2DbContext context)
     {
         _context = context;
         //new MigrationsModule(_context.ConfigurationString).DoSomeMigration();
-        new RunFirstMigration(context);
+        //new RunFirstMigration(context);
         //RunStupidMigration();
+        InitProperties();
+        
+
+        //
+    }
+    
+    
+    public UnityOfWorkLinq(string connectionString)
+    {
+        _context = new Linq2DbContext("MySql.Data.MySqlClient", connectionString);
+        
+        _connectionString = connectionString;
+        //new MigrationsModule(_context.ConfigurationString).DoSomeMigration();
+        //new RunFirstMigration(context);
+        //RunStupidMigration();
+        InitPropertiesConnectionString();
+        
+
+        //
+    }
+    
+    private void InitPropertiesConnectionString()
+    {
+        News = new Repository<NewsEtty>(_connectionString);
+
+        PublicationType =
+            new Repository<NewsPublicationType>(_connectionString);
+        HashTags = new Repository<HashTags>(_connectionString);
+        HashTagsNews = new Repository<HashTagsNews>(_connectionString);
+        Categories = new Repository<Categories>(_connectionString);
+        ArticlesViewForUI =
+            new Repository<ArticlesViewForUI>(_connectionString);
+
+        Galleries = new Repository<Galleries>(_connectionString);
+        Users = new Repository<Users>(_connectionString);
+
+        Roles = new Repository<RoleModels>(_connectionString);
+        UsersToRoles = new Repository<UsersToRoles>(_connectionString);
+
+        PendingRegistration =
+            new Repository<PendingRegistration>(_connectionString);
+    }
+
+    private void InitProperties()
+    {
         News = new Repository<NewsEtty>(_context);
 
         PublicationType =
@@ -36,27 +82,25 @@ public class UnityOfWorkLinq : IUnitOfWorkLinq
 
         PendingRegistration =
             new Repository<PendingRegistration>(_context);
-
-        //
     }
 
     public IRepository<PendingRegistration> PendingRegistration { get; private set; }
 
-    public IRepository<ArticlesViewForUI> ArticlesViewForUI { get; }
-    public IRepository<Categories> Categories { get; }
-    public IRepository<HashTags> HashTags { get; }
-    public IRepository<HashTagsNews> HashTagsNews { get; }
-    public IRepository<NewsPublicationType> PublicationType { get; }
-    public IRepository<Galleries> Galleries { get; }
-    public IRepository<Users> Users { get; }
-    public IRepository<NewsEtty> News { get; }
-    public IRepository<RoleModels> Roles { get; }
-    public IRepository<UsersToRoles> UsersToRoles { get; }
+    public IRepository<ArticlesViewForUI> ArticlesViewForUI { get; private set;}
+    public IRepository<Categories> Categories { get; private set;}
+    public IRepository<HashTags> HashTags { get; private set;}
+    public IRepository<HashTagsNews> HashTagsNews { get; private set;}
+    public IRepository<NewsPublicationType> PublicationType { get; private set;}
+    public IRepository<Galleries> Galleries { get; private set;}
+    public IRepository<Users> Users { get; private set;}
+    public IRepository<NewsEtty> News { get; private set;}
+    public IRepository<RoleModels> Roles { get; private set;}
+    public IRepository<UsersToRoles> UsersToRoles { get;private set; }
 
 
     public int Complete()
     {
-        if (_context.Transaction != null)
+        if (_context?.Transaction != null)
             try
             {
                 _context.Transaction.Commit();

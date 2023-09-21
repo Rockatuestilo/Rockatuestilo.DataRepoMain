@@ -33,7 +33,7 @@ public interface IRepository<BaseTEntity> where BaseTEntity : IBaseTEntity
     void RemoveRange(IEnumerable<BaseTEntity> entities);
 
     // Asynchronous Methods
-    Task<IEnumerable<BaseTEntity>> GetAllAsync( CancellationToken cancellationToken = default);
+    Task<List<BaseTEntity>> GetAllAsync(CancellationToken cancellationToken = default);
     Task<List<BaseTEntity>> FindAsync(Expression<Func<BaseTEntity, bool>> predicate,
         CancellationToken cancellationToken = default);
     

@@ -18,136 +18,143 @@ using System.Collections.Generic;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbEntity, IBaseTEntity
 {
-    protected readonly Linq2DbContext context;
+    protected readonly Linq2DbContext _context;
     private string _connectionString;
 
     public Repository(Linq2DbContext context)
     {
-        this.context = context;
+        _context = context;
     }
-
-    public Repository(string connectionString)
+    
+    public Repository(string  connectionString)
     {
-        context = new Linq2DbContext(connectionString);
+        _context = new Linq2DbContext("MySql.Data.MySqlClient", connectionString);
     }
-
+   
     public Repository(string connectionString, bool onDemand = true)
     {
-        context = new Linq2DbContext(connectionString);
+        _context = new Linq2DbContext("MySql.Data.MySqlClient", connectionString);
     }
 
     [Obsolete("Use AddAsync instead")]
     public virtual void Add(TEntity entity)
     {
-        context.Insert(entity);
+        _context.Insert(entity);
     }
 
     public virtual int AddWithIdentity(TEntity entity)
     {
-        return context.InsertWithInt32Identity(entity);
+        return _context.InsertWithInt32Identity(entity);
     }
 
     public virtual void AddRange(IEnumerable<TEntity> entities)
     {
-        context.BulkCopy(entities);
+        _context.BulkCopy(entities);
     }
 
     public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
     {
-        return context.GetTable<TEntity>().Where(predicate).ToList();
+        return _context.GetTable<TEntity>().Where(predicate).ToList();
     }
 
 
     public virtual IQueryable<TEntity> FindQueryble(Expression<Func<TEntity, bool>> predicate)
     {
-        return context.GetTable<TEntity>().Where(predicate).AsQueryable();
+        return _context.GetTable<TEntity>().Where(predicate).AsQueryable();
     }
 
     public virtual TEntity Get(int id)
     {
-        return context.GetTable<TEntity>().SingleOrDefault(x => x.Id == id);
+        return _context.GetTable<TEntity>().SingleOrDefault(x => x.Id == id);
     }
 
     [SemaphoreActions(1)]
     public virtual IEnumerable<TEntity> GetAll()
     {
-        return context.GetTable<TEntity>().ToList();
+        return _context.GetTable<TEntity>().ToList();
     }
 
     [SemaphoreActions(1)]
     public async Task<IEnumerable<TEntity>> GetAllAsync()
     {
-        return await Task.Run(() => context.GetTable<TEntity>().ToList());
+        return await Task.Run(() => _context.GetTable<TEntity>().ToList());
     }
 
     [SemaphoreActions(1)]
     public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate)
     {
-        return await Task.Run(() =>context.GetTable<TEntity>().Where(predicate).ToList());
+        return await Task.Run(() =>_context.GetTable<TEntity>().Where(predicate).ToList());
     }
 
     public async Task AddRangeAsync(IEnumerable<TEntity> entities)
     {
-        await Task.Run(() => context.BulkCopy(entities));
+        await Task.Run(() => _context.BulkCopy(entities));
     }
     
     public async Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
     {
-        await context.BulkCopyAsync(entities);
+        await _context.BulkCopyAsync(entities);
     }
 
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
-        await Task.Run( () => context.Update(entity));
+        await Task.Run( () => _context.Update(entity));
         return entity;
     }
 
     public async Task RemoveAsync(TEntity entity)
     {
-        await Task.Run(() => context.Delete(entity));
+        await Task.Run(() => _context.Delete(entity));
     }
 
     public async Task RemoveRangeAsync(IEnumerable<TEntity> entities)
     {
-        await Task.Run(() => context.HashtagsNews.Where(x => entities.Select(i => i.Id).Contains(x.Id)).Delete());
+        await Task.Run(() => _context.HashtagsNews.Where(x => entities.Select(i => i.Id).Contains(x.Id)).Delete());
     }
 
     public static readonly ContextQueue contextQueue = new ContextQueue();
     public virtual IEnumerable<TEntity> GetAllWithQueue()
     {
-        var val = contextQueue.Queue(() => context.GetTable<TEntity>().ToList()).Result;
+        var val = contextQueue.Queue(() => _context.GetTable<TEntity>().ToList()).Result;
         
         return val;
     }
 
+    public Task RemoveAndSaveAsync(TEntity entity, CancellationToken cancellationToken = default)
+    {
+         return _context.DeleteAsync(entity);
+    }
+
     public Task RemoveRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return _context.DeleteAsync(entities);
     }
 
     public virtual IQueryable<TEntity> GetAllQueryble()
     {
-        return context.GetTable<TEntity>().AsQueryable();
+        return _context.GetTable<TEntity>().AsQueryable();
     }
 
     public virtual void Remove(TEntity entity)
     {
-        context.Delete(entity);
+        _context.Delete(entity);
     }
 
     public virtual void RemoveRange(IEnumerable<TEntity> entities)
     {
-        context.GetTable<TEntity>().Where(x => entities.Select(i => i.Id).Contains(x.Id)).Delete();
+        _context.GetTable<TEntity>().Where(x => entities.Select(i => i.Id).Contains(x.Id)).Delete();
     }
 
-    public Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
+    public Task<List<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var result = _context.GetTable<TEntity>().ToListAsync(cancellationToken);
+
+        return result;
     }
 
     public Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
     {
-        var result = context.GetTable<TEntity>().Where(predicate).ToListAsync(cancellationToken);
+        var result = _context.GetTable<TEntity>().Where(predicate).ToListAsync(cancellationToken);
 
         return result;
     }
@@ -156,44 +163,39 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
 
     public async Task<TEntity> UpdateAndSaveAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
-        await Task.Run( () => context.Update(entity));
+        await Task.Run( () => _context.Update(entity));
         return entity;
     }
-
-    public Task RemoveAndSaveAsync(TEntity entity, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
-
+    
     public virtual TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
     {
-        return context.GetTable<TEntity>().SingleOrDefault(predicate);
+        return _context.GetTable<TEntity>().SingleOrDefault(predicate);
     }
 
     public virtual void Update(TEntity entity)
     {
-        context.Update(entity);
+        _context.Update(entity);
     }
 
     public virtual TEntity LastUpdatedRow()
     {
-        return context.GetTable<TEntity>().OrderByDescending(x => x.UpdatedDate).FirstOrDefault();
+        return _context.GetTable<TEntity>().OrderByDescending(x => x.UpdatedDate).FirstOrDefault();
     }
 
     public virtual void AddOrUpdate(Expression<Func<TEntity, bool>> predicate)
     {
-        var entity = context.GetTable<TEntity>().SingleOrDefault(predicate);
+        var entity = _context.GetTable<TEntity>().SingleOrDefault(predicate);
 
         if (entity == null)
         {
             entity = Activator.CreateInstance<TEntity>();
             predicate.Compile().Invoke(entity);
-            context.Insert(entity);
+            _context.Insert(entity);
         }
         else
         {
             predicate.Compile().Invoke(entity);
-            context.Update(entity);
+            _context.Update(entity);
         }
     }
 }

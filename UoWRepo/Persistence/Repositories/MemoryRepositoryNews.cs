@@ -17,6 +17,11 @@ public class MemoryRepositoryNews : MemoryRepository<NewsEtty>, IRepositoryNews
         //this.MemoryContext = MemoryContext;
         this.repositorynews = repositorynews;
     }
+    
+    public MemoryRepositoryNews(string connectionString, RepositoryNews repositorynews) : base(connectionString, repositorynews)
+    {
+        this.repositorynews = repositorynews;
+    }
 
     [Obsolete]
     public IEnumerable<NewsEtty> GetPagesOfNews(int pageIndex, int pageSize = 10)

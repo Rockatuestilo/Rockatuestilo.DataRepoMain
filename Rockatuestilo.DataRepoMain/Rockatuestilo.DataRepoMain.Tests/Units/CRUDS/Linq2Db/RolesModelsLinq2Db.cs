@@ -9,6 +9,7 @@ namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.Linq2Db;
 public class RolesModelsLinq2Db
 {
     private IUnitOfWork _unitOfWork;
+    private IUnitOfWorkLinq _unitOfWorkLinq;
 
     [SetUp]
     public void Setup()
@@ -26,6 +27,10 @@ public class RolesModelsLinq2Db
         
         var connection =
             "Server=localhost;Port=13306;Database=cmsbackup604_test;Uid=root;Pwd=blueberrywater4;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
+        
+        var connection2 = "server=localhost;user=root;password=blueberrywater4;database=cmsbackup604_test;Pooling=true;";
+        var connection3 =
+            "Server=localhost;Port=3306;Database=cmsbackup604_test;Uid=cms;blueberrywater4;ConnectionTimeout=600;DefaultCommandTimeout=600; Convert Zero Datetime=True;SslMode=None;Pooling=true;";
 
         //var value_0 = new ContextGenerator(connection).CreateInMysql();
 
@@ -33,7 +38,8 @@ public class RolesModelsLinq2Db
 
         var value = new ContextGenerator(connection).CreateContextAndStringByEnvironment("mysql");
 
-        _unitOfWork = new UnityOfWork(value.Item1);
+        _unitOfWork = new UnityOfWork(connection2);
+        //_unitOfWorkLinq = new UnityOfWorkLinq(value.Item2);
     }
 
     [Test]
@@ -43,6 +49,36 @@ public class RolesModelsLinq2Db
 
 
         _unitOfWork.Roles.AddRange(roleModelsList);
+        _unitOfWork.Complete();
+
+        var result = _unitOfWork.Roles.GetAll().ToList();
+        Assert.Greater(result.Count, 0);
+    }
+    
+    [Test]
+    public void Test2_GetAny()
+    {
+        _unitOfWork.Roles.GetAll();
+        _unitOfWork.Complete();
+
+        var result = _unitOfWork.Roles.GetAll().ToList();
+        Assert.Greater(result.Count, 0);
+    }
+    
+    [Test]
+    public void Test1_DeleteAll_AndAddAgain()
+    {
+        var roleModelsList = new TestDataRoles1().GetRolesStatic();
+
+
+        _unitOfWork.Roles.GetAll();
+        
+        _unitOfWork.Roles.RemoveRange(_unitOfWork.Roles.GetAll());
+
+        _unitOfWork.Complete();
+        _unitOfWork.Roles.AddRange(roleModelsList);
+        
+        
         _unitOfWork.Complete();
 
         var result = _unitOfWork.Roles.GetAll().ToList();

@@ -126,7 +126,7 @@ public class RepositoryEf<TEntity> : IRepository<TEntity> where TEntity : BaseTE
         //entities.RemoveRange(entitiesList);
     }
 
-    public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationTokens = default)
+    public async Task<List<TEntity>> GetAllAsync(CancellationToken cancellationTokens = default)
     {
         return await entities.ToListAsync(cancellationTokens);
     }
