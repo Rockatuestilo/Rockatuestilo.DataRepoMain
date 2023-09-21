@@ -25,10 +25,10 @@ public class UnityOfWork : IUnitOfWork
         //new MigrationsModule(_context.ConfigurationString).DoSomeMigration();
         //new RunFirstMigration(context);
         //RunStupidMigration();
-        News = new MemoryRepository<NewsEtty>(_context, new Repository<NewsEtty>(_context));
+        News = new MemoryRepository<NewsEtty>(_context);
 
         PublicationType =
-            new MemoryRepository<NewsPublicationType>(_context, new Repository<NewsPublicationType>(_context));
+            new MemoryRepository<NewsPublicationType>(_context);
         HashTags = new MemoryRepository<HashTags>(_context, new Repository<HashTags>(_context));
         HashTagsNews = new MemoryRepository<HashTagsNews>(_context, new Repository<HashTagsNews>(_context));
         Categories = new MemoryRepository<Categories>(_context, new Repository<Categories>(_context));

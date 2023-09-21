@@ -35,6 +35,13 @@ public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<
         this.repository = repository;
     }
     
+    public MemoryRepository(Linq2DbContext context) : base(context)
+    {
+        //this.MemoryContext = MemoryContext;
+        this.repository = new Repository<TEntity>(context);
+        InitRepository();
+    }
+    
     public MemoryRepository(string connectionString, Repository<TEntity> repository) : base(connectionString)
     {
         //this.MemoryContext = MemoryContext;
@@ -54,46 +61,60 @@ public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<
         
     }
     
+    public Repository<TEntity> InitRepository()
+    {
+        lock (this.repository)
+        {
+            if (this.repository == null)
+            {
+                return new Repository<TEntity>(_connectionString, true);
+            }
+        return (Repository<TEntity>) this.repository;
+
+            
+        }
+    }
+    
     /* BEGIN: actions that need base*/
 
     public override void Add(TEntity entity)
     {
-        this.repository = new Repository<TEntity>(_connectionString, true);
+        this.repository = InitRepository();
         ResetMemory(entity);
         base.Add(entity);
     }
 
     public override int AddWithIdentity(TEntity entity)
     {
-        this.repository = new Repository<TEntity>(_connectionString, true);
+        this.repository = InitRepository();
         ResetMemory(entity);
         return base.AddWithIdentity(entity);
     }
 
     public override void AddRange(IEnumerable<TEntity> entities)
     {
-        this.repository = new Repository<TEntity>(_connectionString, true);
+        this.repository = InitRepository();
         ResetMemory(entities);
         base.AddRange(entities);
     }
     
     public override void Remove(TEntity entity)
     {
-        this.repository = new Repository<TEntity>(_connectionString, true);
+        this.repository = InitRepository();
         ResetMemory(entity);
         base.Remove(entity);
     }
     
     public override void RemoveRange(IEnumerable<TEntity> entities)
     {
-        this.repository = new Repository<TEntity>(_connectionString, true);
+        this.repository = InitRepository();
         ResetMemory(entities);
         base.RemoveRange(entities);
     }
     
     public override void Update(TEntity entity)
     {
-        this.repository = new Repository<TEntity>(_connectionString, true);
+        this.repository = InitRepository();
         ResetMemory(entity);
         try
         {
@@ -109,7 +130,7 @@ public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<
     {
         ResetMemory<TEntity>();
         var nameOfEntity = typeof(T).Name;
-        this.repository = new Repository<TEntity>(_connectionString, true);
+        this.repository = InitRepository();
         var liste = base.GetAll();
 
         try
@@ -135,7 +156,7 @@ public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<
 
         if (result == null)
         {
-            this.repository = new Repository<TEntity>(_connectionString, true);
+            this.repository = InitRepository();
             var entity = base.Get(id);
             return entity;
         }
@@ -144,7 +165,7 @@ public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<
 
         if (whatIWasLooking == null)
         {
-            this.repository = new Repository<TEntity>(_connectionString, true);
+            this.repository = InitRepository();
             var entity = base.Get(id);
             return entity;
         }
@@ -218,7 +239,7 @@ public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<
     protected async Task<IEnumerable<TEntity>> AddEntityToCacheAndGetListAsync<T>()
     {
         ResetMemory<TEntity>();
-        this.repository = new Repository<TEntity>(_connectionString, true);
+        this.repository = InitRepository();
         var nameOfEntity = typeof(T).Name;
         var liste = await this.GetAllAsync();
 
@@ -238,7 +259,7 @@ public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<
     {
         ResetMemory<TEntity>();
         var nameOfEntity = typeof(T).Name;
-        this.repository = new Repository<TEntity>(_connectionString, true);
+        this.repository = InitRepository();
         var liste = base.GetAllWithQueue();
 
         try

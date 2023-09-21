@@ -38,7 +38,7 @@ public class RolesModelsLinq2Db
 
         var value = new ContextGenerator(connection).CreateContextAndStringByEnvironment("mysql");
 
-        _unitOfWork = new UnityOfWork(connection2);
+        _unitOfWork = new UnityOfWork(value.Item1);
         //_unitOfWorkLinq = new UnityOfWorkLinq(value.Item2);
     }
 
