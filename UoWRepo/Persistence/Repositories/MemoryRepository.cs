@@ -32,7 +32,7 @@ public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<
 
     public MemoryRepository(Linq2DbContext context, Repository<TEntity> repository) : base(context)
     {
-        //this.MemoryContext = MemoryContext;
+        
         this.repository = repository;
     }
     
@@ -55,7 +55,7 @@ public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<
         this.repository = new Repository<TEntity>(connectionString, onDemand);
     }
     
-    public MemoryRepository(string connectionString) : base(connectionString)
+    public MemoryRepository(string connectionString) : base()
     {
         _connectionString = connectionString;
         //this.MemoryContext = MemoryContext;
@@ -68,10 +68,20 @@ public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<
         
         if (this.repository == null)
         {
-            return new Repository<TEntity>(_connectionString, true);
+            var db = new Linq2DbContext("MySql.Data.MySqlClient", _connectionString);
+            
+            var result = new Repository<TEntity>(db);
+            base._context = db;
+            return result;
+        }
+        if ( base._context == null)
+        {
+            var db = new Linq2DbContext("MySql.Data.MySqlClient", _connectionString);
+            base._context = db;
         }
        
-        return (Repository<TEntity>) this.repository;
+        var result2 = (Repository<TEntity>) this.repository;
+        return result2;
     }
     
     /* BEGIN: actions that need base*/

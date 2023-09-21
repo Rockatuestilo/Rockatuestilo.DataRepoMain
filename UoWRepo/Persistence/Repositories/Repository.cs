@@ -18,12 +18,17 @@ using System.Collections.Generic;
 
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbEntity, IBaseTEntity
 {
-    protected readonly Linq2DbContext _context;
+    protected Linq2DbContext _context;
     private string _connectionString;
 
     public Repository(Linq2DbContext context)
     {
         _context = context;
+    }
+    
+    public Repository()
+    {
+        //_context = new Linq2DbContext("MySql.Data.MySqlClient", connectionString);
     }
     
     public Repository(string  connectionString)

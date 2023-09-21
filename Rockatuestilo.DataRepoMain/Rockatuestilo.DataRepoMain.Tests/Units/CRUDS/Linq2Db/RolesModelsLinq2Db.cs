@@ -56,7 +56,7 @@ public class RolesModelsLinq2Db
     }
     
     [Test]
-    public void Test2_GetAny()
+    public void Test2_GetAll()
     {
         _unitOfWork.Roles.GetAll();
         _unitOfWork.Complete();
@@ -66,7 +66,17 @@ public class RolesModelsLinq2Db
     }
     
     [Test]
-    public void Test1_DeleteAll_AndAddAgain()
+    public void Test3_Find()
+    {
+        var result =_unitOfWork.Roles.Find(x => x.Id == 1).ToList();
+        _unitOfWork.Complete();
+
+        
+        Assert.Greater(result.Count, 0);
+    }
+    
+    [Test]
+    public void Test4_DeleteAll_AndAddAgain()
     {
         var roleModelsList = new TestDataRoles1().GetRolesStatic();
 
