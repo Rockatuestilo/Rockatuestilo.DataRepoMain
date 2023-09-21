@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using LinqToDB;
 using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.Configuration;
+using UoWRepo.Core.Configuration.ParallelRunning;
 using UoWRepo.Core.Domain;
 using UoWRepo.Core.Repositories;
 
@@ -61,18 +62,16 @@ public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<
         
     }
     
+    [SemaphoreActions(1)]
     public Repository<TEntity> InitRepository()
     {
-        lock (this.repository)
+        
+        if (this.repository == null)
         {
-            if (this.repository == null)
-            {
-                return new Repository<TEntity>(_connectionString, true);
-            }
-        return (Repository<TEntity>) this.repository;
-
-            
+            return new Repository<TEntity>(_connectionString, true);
         }
+       
+        return (Repository<TEntity>) this.repository;
     }
     
     /* BEGIN: actions that need base*/
