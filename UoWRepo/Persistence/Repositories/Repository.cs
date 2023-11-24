@@ -19,7 +19,7 @@ using System.Collections.Generic;
 public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbEntity, IBaseTEntity
 {
     protected Linq2DbContext _context;
-    private string _connectionString;
+    private static string _connectionString;
 
     public Repository(Linq2DbContext context)
     {
@@ -39,6 +39,11 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbE
     public Repository(string connectionString, bool onDemand = true)
     {
         _context = new Linq2DbContext("MySql.Data.MySqlClient", connectionString);
+    }
+
+    private void ColdInit()
+    {
+        _context = new Linq2DbContext("MySql.Data.MySqlClient", _connectionString);
     }
 
     [Obsolete("Use AddAsync instead")]

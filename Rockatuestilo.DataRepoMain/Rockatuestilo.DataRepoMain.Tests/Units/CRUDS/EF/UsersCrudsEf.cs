@@ -22,7 +22,7 @@ public class UsersCrudsEf
         var createFakeData = new CreateFakeData();
         bugusUsers = createFakeData.DoByNumberEf();
 
-        var value = new ContextGenerator().CreateInMemory();
+        var value = new ContextGenerator().CreateInMysql();
 
         _unitOfWorkEf = new UnityOfWorkEf(value);
     }
@@ -37,6 +37,18 @@ public class UsersCrudsEf
         var result = _unitOfWorkEf.Users.GetAll().ToList();
 
         Assert.AreEqual(result.Count, 1);
+    }
+    
+    [Test]
+    public void Test1_add1_2()
+    {
+        var users = new TestDataUsers1().GetDataEf();
+        _unitOfWorkEf.Users.Add(users[0]);
+        _unitOfWorkEf.Complete();
+
+
+        Assert.Catch<Exception>(() => _unitOfWorkEf.Users.Add(users[0]));
+
     }
     
     [Test]

@@ -31,7 +31,7 @@ public class RepositoryEf<TEntity> : IRepository<TEntity> where TEntity : BaseTE
     public virtual int AddWithIdentity(TEntity entity)
     {
         var value = entities.Add(entity);
-        context.SaveChanges();
+        var fg =context.SaveChanges();
         return value.Entity.Id;
     }
 
