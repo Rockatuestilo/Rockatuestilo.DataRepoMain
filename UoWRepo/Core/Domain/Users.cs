@@ -11,7 +11,8 @@ public class Users : Linq2DbEntity, ITEntity
 
     [Column(Name = "LastName")] [NotNull] public string LastName { get; set; } = null!;
 
-    [Column(Name = "LoginName")] [NotNull] public string LoginName { get; set; } = null!;
+    [Column(Name = "LoginName")]
+    [NotNull] public string LoginName { get; set; } = null!;
 
     [Column(Name = "Password")] [NotNull] public string Password { get; set; } = null!;
 

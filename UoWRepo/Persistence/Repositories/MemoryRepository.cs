@@ -212,6 +212,12 @@ public class MemoryRepository<TEntity> : Repository<TEntity>, IMemoryRepository<
 
         return result;
     }
+    
+    public override IQueryable<TEntity> GetAllQueryble()
+    {
+        this.repository = InitRepository();
+        return base.GetAllQueryble();
+    }
 
     public override IQueryable<TEntity> FindQueryble(Expression<Func<TEntity, bool>> predicate)
     {

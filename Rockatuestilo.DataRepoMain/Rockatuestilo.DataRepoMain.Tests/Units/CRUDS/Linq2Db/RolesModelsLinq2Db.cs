@@ -58,10 +58,17 @@ public class RolesModelsLinq2Db
     [Test]
     public void Test2_GetAll()
     {
-        _unitOfWork.Roles.GetAll();
+        var result = _unitOfWork.Roles.GetAll().ToList();
+        Assert.Greater(result.Count, 0);
+    }
+    
+    [Test]
+    public void Test2_GetAllQueryble()
+    {
+        var result =_unitOfWork.Roles.GetAllQueryble().ToList();
         _unitOfWork.Complete();
 
-        var result = _unitOfWork.Roles.GetAll().ToList();
+        
         Assert.Greater(result.Count, 0);
     }
     
