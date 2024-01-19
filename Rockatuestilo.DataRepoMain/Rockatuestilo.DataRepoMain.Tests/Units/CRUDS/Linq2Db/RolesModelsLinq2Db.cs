@@ -2,6 +2,7 @@ using System.Linq;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
 using Rockatuestilo.DataRepoMain.Tests.TestData.Roles;
+using UoWRepo.Api;
 using UoWRepo.Persistence.UnitiesOfWork;
 
 namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.Linq2Db;
@@ -10,6 +11,7 @@ public class RolesModelsLinq2Db
 {
     private IUnitOfWork _unitOfWork;
     private IUnitOfWorkLinq _unitOfWorkLinq;
+    private UnitOfWorkMultiOrm _unitOfWorkMultiOrm;
 
     [SetUp]
     public void Setup()
@@ -39,6 +41,7 @@ public class RolesModelsLinq2Db
         var value = new ContextGenerator(connection).CreateContextAndStringByEnvironment("mysql");
 
         _unitOfWork = new UnityOfWork(connection2);
+        _unitOfWorkMultiOrm = new UnitOfWorkMultiOrm(_unitOfWorkLinq);
         //_unitOfWorkLinq = new UnityOfWorkLinq(value.Item2);
     }
 

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
 using Rockatuestilo.DataRepoMain.Tests.TestData.Users;
+using UoWRepo.Api;
 using UoWRepo.Persistence.UnitiesOfWork;
 
 namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.Linq2Db;
@@ -35,17 +36,25 @@ public class UsersCrudsLinq2Db
         var value = new ContextGenerator(connection).CreateContextAndStringByEnvironment("mysql");
 
         _unitOfWork = new UnityOfWork(value.Item1);
+        _unitOfWorkMultiOrm = new UnitOfWorkMultiOrm(value.Item1);
     }
 
 
     private IUnitOfWork _unitOfWork;
+    private UnitOfWorkMultiOrm _unitOfWorkMultiOrm;
 
     [Test]
     public void Test1_add1()
     {
         var users = new TestDataUsers1().GetDataLinq2Db();
+        
+        // map to json and back to object
+        var usersJson = Newtonsoft.Json.JsonConvert.SerializeObject(users);
+        var usersJson2 = Newtonsoft.Json.JsonConvert.DeserializeObject<List<UsersModelApi>>(usersJson);
+        
+        
 
-        _unitOfWork.Users.Add(users[0]);
+        _unitOfWorkMultiOrm.Users.Add(usersJson2[0]);
         _unitOfWork.Complete();
 
         var result = _unitOfWork.Users.GetAll().ToList();

@@ -16,9 +16,9 @@ namespace UoWRepo.Persistence.Repositories;
 using System;
 using System.Collections.Generic;
 
-public class Repository<TEntity> : IRepository<TEntity> where TEntity : Linq2DbEntity, IBaseTEntity
+public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseTEntity, IBaseTEntity
 {
-    protected Linq2DbContext _context;
+    public Linq2DbContext _context;
     private static string _connectionString;
 
     public Repository(Linq2DbContext context)
