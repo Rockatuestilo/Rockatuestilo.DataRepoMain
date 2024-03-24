@@ -17,7 +17,9 @@ public class HashTags : Linq2DbEntity, IHashTags
     [NotNull]
     public string HashtagWord { get; set; }
 
-    [Column(Name = "Allowed")] [NotNull] public byte Allowed { get; set; }
+    [Column(Name = "Allowed")] 
+    [NotNull] 
+    public byte Allowed { get; set; }
 
     [Column(Name = "CreatedByID")]
     [NotNull]
