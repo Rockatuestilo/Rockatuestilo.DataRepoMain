@@ -47,6 +47,7 @@
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Core\"/>
+        <Folder Include="Core\Configuration\Domain\" />
         <Folder Include="Core\Domain\"/>
         <Folder Include="Core\Repositories\"/>
         <Folder Include="Persistence\"/>
