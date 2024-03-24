@@ -53,6 +53,7 @@ public class ArticleDataModel : TEntity, IArticleDataModel, ITEntity
     public int? HashtagsId { get; set; } // Updated property name to HashtagsId
 
     [Column("ArticleVersion")] // Column name ArticleVersion remains unchanged
+    [StringLength(2)]
     public string? ArticleVersion { get; set; } // Assuming ArticleVersion is a string based on the previous correction. Update type if necessary.
 
     [Column("CreatedDate")] // Column name CreatedDate remains unchanged

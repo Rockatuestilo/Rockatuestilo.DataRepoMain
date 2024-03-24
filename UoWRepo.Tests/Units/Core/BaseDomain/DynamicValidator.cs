@@ -31,7 +31,7 @@ public static class DynamicValidator
                     var stringValue = value as string;
                     if (stringValue != null && stringValue.Length > stringLength.MaximumLength)
                     {
-                        validationErrors.Add($"{property.Name} exceeds maximum length of {stringLength.MaximumLength}.");
+                        validationErrors.Add($"{property.Name} exceeds maximum length of {stringLength.MaximumLength}. Current length: {stringValue.Length}.");
                     }
                 }
 

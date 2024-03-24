@@ -9,6 +9,7 @@ namespace UoWRepo.Core.Domain;
 public class ArticleDataModel : Linq2DbEntity, IArticleDataModel, IBaseTEntity
 {
     [Column(Name = "ArticleVersion")]
+    [StringLength(2)]
     [Nullable]
     public string? ArticleVersion { get; set; } // Assuming ArticleVersion is a string. Update type if necessary.
 
