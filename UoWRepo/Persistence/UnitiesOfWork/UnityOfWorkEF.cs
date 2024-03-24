@@ -25,7 +25,7 @@ public class UnityOfWorkEf : IUnitOfWorkEf
         Users = InitObjects<Users>();
         News = InitObjects<NewsEtty>();
         HashTags = InitObjects<HashTags>();
-        ArticlesViewForUI = InitObjects<ArticlesViewForUI>();
+        ArticlesViewForUI = InitObjects<ArticlesViewForUi>();
         Categories = InitObjects<Categories>();
         HashTagsNews = InitObjects<HashTagsNews>();
 
@@ -37,7 +37,7 @@ public class UnityOfWorkEf : IUnitOfWorkEf
         UsersToRoles = InitObjects<UsersToRoles>();
     }
 
-    public IMemoryRepository<ArticlesViewForUI> ArticlesViewForUI { get; }
+    public IMemoryRepository<ArticlesViewForUi> ArticlesViewForUI { get; }
     public IMemoryRepository<Categories> Categories { get; }
     public IMemoryRepository<HashTags> HashTags { get; }
     public IMemoryRepository<HashTagsNews> HashTagsNews { get; }

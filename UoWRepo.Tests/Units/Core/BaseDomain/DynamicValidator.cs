@@ -36,6 +36,10 @@ public static class DynamicValidator
                 }
 
                 // Add more attribute checks as needed (e.g., Range, CustomAttributes, etc.)
+                if (attribute is System.ComponentModel.DataAnnotations.RangeAttribute range && value is int intValue && (intValue < (int)range.Minimum || intValue > (int)range.Maximum))
+                {
+                    validationErrors.Add($"{property.Name} is out of range.");
+                }
             }
 
             // DateTime validity check (example of a specific type check without attribute)

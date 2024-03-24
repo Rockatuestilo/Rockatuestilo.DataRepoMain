@@ -19,7 +19,7 @@ public class Linq2DbContext : DataConnection, ICommonContext
     {
     }
 
-    public ITable<ArticlesViewForUI> ArticlesViewForUI => this.GetTable<ArticlesViewForUI>();
+    public ITable<ArticlesViewForUi> ArticlesViewForUI => this.GetTable<ArticlesViewForUi>();
 
     public ITable<NewsEtty> tb_news => this.GetTable<NewsEtty>();
 

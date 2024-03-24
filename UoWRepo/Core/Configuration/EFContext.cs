@@ -18,7 +18,7 @@ public class EFContext : DbContext, ICommonContext
         this.connectionString = connectionString;
     }
 
-    public DbSet<ArticlesViewForUI> ArticlesViewForUI { get; set; }
+    public DbSet<ArticlesViewForUi> ArticlesViewForUI { get; set; }
 
     public DbSet<NewsEtty> NewsEtty { get; set; }
 

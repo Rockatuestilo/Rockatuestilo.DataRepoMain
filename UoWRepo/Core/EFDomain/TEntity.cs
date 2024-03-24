@@ -7,6 +7,7 @@ namespace UoWRepo.Core.EFDomain;
 
 public class TEntity : BaseTEntity
 {
+    [Range(0, int.MaxValue, ErrorMessage = "The value for ArticleId must be greater than -1.")]
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Column("Id")]
