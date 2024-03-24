@@ -6,7 +6,7 @@ using UoWRepo.Core.BaseDomain;
 namespace UoWRepo.Core.Domain;
 
 [Table(Name = "Articles")] // Updated table name
-public class ArticleEntity : Linq2DbEntity, IArticleDataModel, IBaseTEntity
+public class ArticleDataModel : Linq2DbEntity, IArticleDataModel, IBaseTEntity
 {
     [Column(Name = "ArticleVersion")]
     [Nullable]

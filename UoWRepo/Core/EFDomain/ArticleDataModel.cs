@@ -6,7 +6,7 @@ using UoWRepo.Core.BaseDomain;
 namespace UoWRepo.Core.EFDomain;
 
 [Table("Articles")] // Updated table name to Articles
-public class ArticleEntity : TEntity, IArticleDataModel, ITEntity
+public class ArticleDataModel : TEntity, IArticleDataModel, ITEntity
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

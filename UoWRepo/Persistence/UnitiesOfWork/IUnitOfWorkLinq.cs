@@ -9,6 +9,8 @@ namespace UoWRepo.Persistence.UnitiesOfWork;
 
 public interface IUnitOfWorkLinq : IDisposable
 {
+    IRepository<ArticleDataModel> ArticleDataModel { get; }
+    
     IRepository<ArticlesViewForUi> ArticlesViewForUI { get; }
     IRepository<Categories> Categories { get; }
     IRepository<HashTags> HashTags { get; }

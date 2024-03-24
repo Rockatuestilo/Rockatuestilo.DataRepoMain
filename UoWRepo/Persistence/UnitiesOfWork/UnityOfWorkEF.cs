@@ -35,8 +35,11 @@ public class UnityOfWorkEf : IUnitOfWorkEf
 
         Roles = InitObjects<RoleModels>();
         UsersToRoles = InitObjects<UsersToRoles>();
+        ArticleDataModel = InitObjects<ArticleDataModel>();
+        
     }
 
+    public IMemoryRepository<ArticleDataModel> ArticleDataModel { get; }
     public IMemoryRepository<ArticlesViewForUi> ArticlesViewForUI { get; }
     public IMemoryRepository<Categories> Categories { get; }
     public IMemoryRepository<HashTags> HashTags { get; }
