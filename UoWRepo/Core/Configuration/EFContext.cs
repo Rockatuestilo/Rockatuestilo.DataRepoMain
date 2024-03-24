@@ -1,6 +1,19 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using UoWRepo.Core.EFDomain;
+using ArticlesViewForUi = UoWRepo.Core.EFDomain.ArticlesViewForUi;
+using Categories = UoWRepo.Core.EFDomain.Categories;
+using Galleries = UoWRepo.Core.EFDomain.Galleries;
+using HashTags = UoWRepo.Core.EFDomain.HashTags;
+using HashTagsNews = UoWRepo.Core.EFDomain.HashTagsNews;
+using NewsEtty = UoWRepo.Core.EFDomain.NewsEtty;
+using NewsPublicationType = UoWRepo.Core.EFDomain.NewsPublicationType;
+using PendingRegistration = UoWRepo.Core.EFDomain.PendingRegistration;
+using RoleModels = UoWRepo.Core.EFDomain.RoleModels;
+using SharedObjectLinqDB = UoWRepo.Core.EFDomain.SharedObjectLinqDB;
+using SharingSocialNetworkLinqDB = UoWRepo.Core.EFDomain.SharingSocialNetworkLinqDB;
+using Users = UoWRepo.Core.EFDomain.Users;
+using UsersToRoles = UoWRepo.Core.EFDomain.UsersToRoles;
 
 namespace UoWRepo.Core.Configuration;
 
@@ -19,6 +32,8 @@ public class EFContext : DbContext, ICommonContext
     }
 
     public DbSet<ArticlesViewForUi> ArticlesViewForUI { get; set; }
+    
+    public DbSet<ArticleDataModel> ArticleDataModel { get; set; }
 
     public DbSet<NewsEtty> NewsEtty { get; set; }
 

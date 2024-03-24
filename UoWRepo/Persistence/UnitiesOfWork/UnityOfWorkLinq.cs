@@ -82,10 +82,13 @@ public class UnityOfWorkLinq : IUnitOfWorkLinq
 
         PendingRegistration =
             new Repository<PendingRegistration>(_context);
+        
+        ArticleDataModel = new Repository<ArticleDataModel>(_context);
     }
 
     public IRepository<PendingRegistration> PendingRegistration { get; private set; }
 
+    public IRepository<ArticleDataModel> ArticleDataModel { get; private set; }
     public IRepository<ArticlesViewForUi> ArticlesViewForUI { get; private set;}
     public IRepository<Categories> Categories { get; private set;}
     public IRepository<HashTags> HashTags { get; private set;}
