@@ -17,6 +17,7 @@ public class NewsEtty : TEntity,INewsEtty, ITEntity
     
     [Column("newsOwner")] public int UserIdOwner { get; set; }
 
+    [StringLength(2000)]
     [Column("newsTittel")] public string? NewsTitle { get; set; }
 
     [Column("newsContent")] public string? NewsContent { get; set; }

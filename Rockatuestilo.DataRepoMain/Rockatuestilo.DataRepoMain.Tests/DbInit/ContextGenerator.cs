@@ -166,7 +166,7 @@ public class ContextGenerator
         //var options = new DbContextOptionsBuilder<EFContext>().
         
         var connection =
-            "Server=localhost;Port=3306;Database=cmsbackup_test;Uid=root;Pwd=blueberrywater4;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
+            "Server=localhost;Port=3306;charset=utf8;Database=cmsbackup_version_2023_12_28_0;charset=utf8;Uid=root;Pwd=blueberrywater4;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
 
 
         /*var context =
@@ -189,8 +189,8 @@ public class ContextGenerator
 
         var tourManagerContext = new EFContext(options.Options);
         
-        tourManagerContext.Database.EnsureDeleted();
-        tourManagerContext.Database.EnsureCreated();
+        //tourManagerContext.Database.EnsureDeleted();
+        //tourManagerContext.Database.EnsureCreated();
         //Server=localhost;Port=3306;Database=cmsbackup5;Uid=cms;Pwd=albanicus$5$;ConnectionTimeout=600;DefaultCommandTimeout=600;SslMode=None;Pooling=true;
 
 
