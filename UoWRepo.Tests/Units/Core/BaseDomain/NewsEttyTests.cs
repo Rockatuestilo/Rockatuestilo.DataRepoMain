@@ -3,7 +3,7 @@ using UoWRepo.Core.BaseDomain;
 using NewsEttyLinq2DB = UoWRepo.Core.Domain.NewsEtty; // Adjust namespace based on your project structure
 using NewsEttyEfCore = UoWRepo.Core.EFDomain.NewsEtty;
 
-namespace UoWRepo.Tests.Units.Core.Domain;
+namespace UoWRepo.Tests.Units.Core.BaseDomain;
 
 public class NewsEttyTests
 {

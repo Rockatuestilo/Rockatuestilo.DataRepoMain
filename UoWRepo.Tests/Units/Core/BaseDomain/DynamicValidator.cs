@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace UoWRepo.Tests.Units.Core.Domain;
+namespace UoWRepo.Tests.Units.Core.BaseDomain;
 
 public static class DynamicValidator
 {
