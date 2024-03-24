@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UoWRepo", ".\UoWRepo\UoWRep
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigrationHelper", "MigrationHelper\MigrationHelper.csproj", "{1B1A18C6-9824-4EA3-9E91-152BF2DB4C0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UoWRepo.Tests", "UoWRepo.Tests\UoWRepo.Tests.csproj", "{EBC824C0-B824-45CF-8719-8303E3AC30B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{1B1A18C6-9824-4EA3-9E91-152BF2DB4C0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B1A18C6-9824-4EA3-9E91-152BF2DB4C0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B1A18C6-9824-4EA3-9E91-152BF2DB4C0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBC824C0-B824-45CF-8719-8303E3AC30B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBC824C0-B824-45CF-8719-8303E3AC30B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBC824C0-B824-45CF-8719-8303E3AC30B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBC824C0-B824-45CF-8719-8303E3AC30B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
