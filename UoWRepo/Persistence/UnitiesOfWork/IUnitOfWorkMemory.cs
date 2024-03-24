@@ -7,7 +7,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork;
 
 public interface IUnitOfWork : IDisposable
 {
-    IMemoryRepository<ArticlesViewForUI> ArticlesViewForUI { get; }
+    IMemoryRepository<ArticlesViewForUi> ArticlesViewForUI { get; }
     IMemoryRepository<Categories> Categories { get; }
     IMemoryRepository<HashTags> HashTags { get; }
     IMemoryRepository<HashTagsNews> HashTagsNews { get; }
@@ -26,7 +26,7 @@ public interface IUnitOfWork : IDisposable
 
 public interface IUnitOfWorkMemory : IDisposable
 {
-    IMemoryRepository<ArticlesViewForUI> ArticlesViewForUI { get; }
+    IMemoryRepository<ArticlesViewForUi> ArticlesViewForUI { get; }
     IMemoryRepository<Categories> Categories { get; }
     IMemoryRepository<HashTags> HashTags { get; }
     IMemoryRepository<HashTagsNews> HashTagsNews { get; }

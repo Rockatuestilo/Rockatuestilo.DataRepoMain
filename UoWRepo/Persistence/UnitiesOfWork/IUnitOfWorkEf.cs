@@ -5,7 +5,7 @@ namespace UoWRepo.Persistence.UnitiesOfWork;
 
 public interface IUnitOfWorkEf
 {
-    IMemoryRepository<ArticlesViewForUI> ArticlesViewForUI { get; }
+    IMemoryRepository<ArticlesViewForUi> ArticlesViewForUI { get; }
     IMemoryRepository<Categories> Categories { get; }
     IMemoryRepository<HashTags> HashTags { get; }
     IMemoryRepository<HashTagsNews> HashTagsNews { get; }

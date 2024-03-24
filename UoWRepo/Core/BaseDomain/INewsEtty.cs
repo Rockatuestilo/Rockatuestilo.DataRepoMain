@@ -29,4 +29,7 @@ public interface INewsEtty : IBaseTEntity
     public string TitleForUrl { get; set; }
 
     public int? HashtagsNewsId { get; set; }
+    
+    public int? ArticleVersion { get; set; }
+
 }

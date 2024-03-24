@@ -33,7 +33,7 @@ public class UnityOfWork : IUnitOfWork
         HashTagsNews = new MemoryRepository<HashTagsNews>(_context, new Repository<HashTagsNews>(_context));
         Categories = new MemoryRepository<Categories>(_context, new Repository<Categories>(_context));
         ArticlesViewForUI =
-            new MemoryRepository<ArticlesViewForUI>(_context, new Repository<ArticlesViewForUI>(_context));
+            new MemoryRepository<ArticlesViewForUi>(_context, new Repository<ArticlesViewForUi>(_context));
 
         Galleries = new MemoryRepository<Galleries>(_context, new Repository<Galleries>(_context));
         Users = new MemoryRepository<Users>(_context, new Repository<Users>(_context));
@@ -71,7 +71,7 @@ public class UnityOfWork : IUnitOfWork
         HashTagsNews = new MemoryRepository<HashTagsNews>(_context, new Repository<HashTagsNews>(_context));
         Categories = new MemoryRepository<Categories>(_context, new Repository<Categories>(_context));
         ArticlesViewForUI =
-            new MemoryRepository<ArticlesViewForUI>(_context, new Repository<ArticlesViewForUI>(_context));
+            new MemoryRepository<ArticlesViewForUi>(_context, new Repository<ArticlesViewForUi>(_context));
 
         Galleries = new MemoryRepository<Galleries>(_context, new Repository<Galleries>(_context));
         Users = new MemoryRepository<Users>(_context, new Repository<Users>(_context));
@@ -94,7 +94,7 @@ public class UnityOfWork : IUnitOfWork
         HashTagsNews = new MemoryRepository<HashTagsNews>(_connectionString);
         Categories = new MemoryRepository<Categories>(_connectionString);
         ArticlesViewForUI =
-            new MemoryRepository<ArticlesViewForUI>(_connectionString);
+            new MemoryRepository<ArticlesViewForUi>(_connectionString);
 
         Galleries = new MemoryRepository<Galleries>(_connectionString);
         Users = new MemoryRepository<Users>(_connectionString);
@@ -108,7 +108,7 @@ public class UnityOfWork : IUnitOfWork
 
     public IMemoryRepository<PendingRegistration> PendingRegistration { get; private set; }
 
-    public IMemoryRepository<ArticlesViewForUI> ArticlesViewForUI { get;private set; }
+    public IMemoryRepository<ArticlesViewForUi> ArticlesViewForUI { get;private set; }
     public IMemoryRepository<Categories> Categories { get;private set; }
     public IMemoryRepository<HashTags> HashTags { get; private set;}
     public IMemoryRepository<HashTagsNews> HashTagsNews { get; private set;}
@@ -178,7 +178,7 @@ public class UnityOfWorkMemory : IUnitOfWorkMemory
         HashTagsNews = new MemoryRepository<HashTagsNews>(_context, new Repository<HashTagsNews>(_context));
         Categories = new MemoryRepository<Categories>(_context, new Repository<Categories>(_context));
         ArticlesViewForUI =
-            new MemoryRepository<ArticlesViewForUI>(_context, new Repository<ArticlesViewForUI>(_context));
+            new MemoryRepository<ArticlesViewForUi>(_context, new Repository<ArticlesViewForUi>(_context));
 
         Galleries = new MemoryRepository<Galleries>(_context, new Repository<Galleries>(_context));
         Users = new MemoryRepository<Users>(_context, new Repository<Users>(_context));
@@ -194,7 +194,7 @@ public class UnityOfWorkMemory : IUnitOfWorkMemory
 
     public IMemoryRepository<PendingRegistration> PendingRegistration { get; private set; }
 
-    public IMemoryRepository<ArticlesViewForUI> ArticlesViewForUI { get; }
+    public IMemoryRepository<ArticlesViewForUi> ArticlesViewForUI { get; }
     public IMemoryRepository<Categories> Categories { get; }
     public IMemoryRepository<HashTags> HashTags { get; }
     public IMemoryRepository<HashTagsNews> HashTagsNews { get; }

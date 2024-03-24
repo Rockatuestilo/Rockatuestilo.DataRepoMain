@@ -50,7 +50,7 @@ public class UnityOfWorkLinq : IUnitOfWorkLinq
         HashTagsNews = new Repository<HashTagsNews>(_connectionString);
         Categories = new Repository<Categories>(_connectionString);
         ArticlesViewForUI =
-            new Repository<ArticlesViewForUI>(_connectionString);
+            new Repository<ArticlesViewForUi>(_connectionString);
 
         Galleries = new Repository<Galleries>(_connectionString);
         Users = new Repository<Users>(_connectionString);
@@ -72,7 +72,7 @@ public class UnityOfWorkLinq : IUnitOfWorkLinq
         HashTagsNews = new Repository<HashTagsNews>(_context);
         Categories = new Repository<Categories>(_context);
         ArticlesViewForUI =
-            new Repository<ArticlesViewForUI>(_context);
+            new Repository<ArticlesViewForUi>(_context);
 
         Galleries = new Repository<Galleries>(_context);
         Users = new Repository<Users>(_context);
@@ -86,7 +86,7 @@ public class UnityOfWorkLinq : IUnitOfWorkLinq
 
     public IRepository<PendingRegistration> PendingRegistration { get; private set; }
 
-    public IRepository<ArticlesViewForUI> ArticlesViewForUI { get; private set;}
+    public IRepository<ArticlesViewForUi> ArticlesViewForUI { get; private set;}
     public IRepository<Categories> Categories { get; private set;}
     public IRepository<HashTags> HashTags { get; private set;}
     public IRepository<HashTagsNews> HashTagsNews { get; private set;}

@@ -1,13 +1,18 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using LinqToDB.Mapping;
 using UoWRepo.Core.BaseDomain;
+using ITEntity = UoWRepo.Core.EFDomain.ITEntity;
 
 namespace UoWRepo.Core.Domain;
 
 [Table(Name = "ArticlesViewForUI")]
-public class ArticlesViewForUI : Linq2DbEntity, IBaseTEntity
+public class ArticlesViewForUi : Linq2DbEntity, IArticlesViewForUi, ITEntity
 {
-    [Column(Name = "ArticleId")] [NotNull] public int ArticleId { get; set; }
+    [Range(0, int.MaxValue, ErrorMessage = "The value for ArticleId must be greater than -1.")]
+    [Column(Name = "ArticleId")] 
+    [NotNull]
+    public int ArticleId { get; set; }
 
     [Column(Name = "UIString")] [NotNull] public string UiString { get; set; } = null!;
 

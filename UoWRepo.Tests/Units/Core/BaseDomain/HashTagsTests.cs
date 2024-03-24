@@ -3,16 +3,13 @@ using HashTags = UoWRepo.Core.Domain.HashTags; // Adjust namespace based on your
 using Hashtagsv2 = UoWRepo.Core.EFDomain.HashTags;
 // Adjust namespace based on your project structure
 
-namespace UoWRepo.Tests.Units.Core.Domain
+namespace UoWRepo.Tests.Units.Core.BaseDomain
 {
     [TestFixture]
     public class HashTagsTests
     {
         public IHashTags GetHashTagVersion1()
         {
-            
-            
-            
             return new HashTags
             {
                 Id = 1,

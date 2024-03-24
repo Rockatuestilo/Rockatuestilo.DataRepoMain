@@ -1,4 +1,4 @@
-namespace UoWRepo.Tests.Units.Core.Domain;
+namespace UoWRepo.Tests.Units.Core.BaseDomain;
 
 [TestFixture]
 public class DomainCommonTests
