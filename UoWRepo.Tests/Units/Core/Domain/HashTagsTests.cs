@@ -10,9 +10,6 @@ namespace UoWRepo.Tests.Units.Core.Domain
     {
         public IHashTags GetHashTagVersion1()
         {
-            
-            
-            
             return new HashTags
             {
                 Id = 1,
