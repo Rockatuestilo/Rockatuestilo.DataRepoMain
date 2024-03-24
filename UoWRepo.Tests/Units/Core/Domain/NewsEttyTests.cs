@@ -13,7 +13,7 @@ public class NewsEttyTests
         var faker = new Faker();
         
         var val = new Faker<T>();
-        
+
         val
             // faker for index property that can be between 1 and 1000000
             .RuleFor(o => o.Id, f => f.Random.Number(1, 1000000))
@@ -44,9 +44,12 @@ public class NewsEttyTests
             .RuleFor(o => o.PublicationDate, f => f.Date.Between(new DateTime(2020, 1, 1), new DateTime(2025, 1, 1)))
             // faker for Title For Url for max 500 characters
             //.RuleFor(o => o.TitleForUrl, f => f.Lorem.Sentence(500))
-            .RuleFor(o => o.TitleForUrl, _ =>faker.Random.String2(500))
+            .RuleFor(o => o.TitleForUrl, _ => faker.Random.String2(500))
             // faker for Hashtags News ID that can be between 1 and 1000000
-            .RuleFor(o => o.HashtagsNewsId, f => f.Random.Number(1, 1000000));
+            .RuleFor(o => o.HashtagsNewsId, f => f.Random.Number(1, 1000000))
+            // faker for Article Version that can be between 1 and 1000000 and null
+            .RuleFor(o => o.ArticleVersion, f => f.Random.Bool() ? (int?)null : f.Random.Number(1, 1000000));
+
         
         var testOrder = val.Generate(count);
         return testOrder.Cast<INewsEtty>().ToList();
@@ -90,7 +93,10 @@ public class NewsEttyTests
             //.RuleFor(o => o.TitleForUrl, f => f.Lorem.Sentence(500))
             .RuleFor(o => o.TitleForUrl, _ =>faker.Random.String2(501))
             // faker for Hashtags News ID that can be between 1 and 1000000
-            .RuleFor(o => o.HashtagsNewsId, f => f.Random.Number(1, 1000000));
+            .RuleFor(o => o.HashtagsNewsId, f => f.Random.Number(1, 1000000))
+            // faker for Article Version that can be between 1 and 1000000 and null
+            .RuleFor(o => o.ArticleVersion, f => f.Random.Bool() ? (int?)null : f.Random.Number(1, 1000000));
+
         
         var testOrder = val.Generate(50);
         return testOrder.Cast<INewsEtty>().ToList();
