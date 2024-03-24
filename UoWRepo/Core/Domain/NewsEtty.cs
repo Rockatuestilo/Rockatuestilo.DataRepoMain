@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using LinqToDB.Mapping;
 using UoWRepo.Core.BaseDomain;
 
@@ -20,6 +21,7 @@ public class NewsEtty : Linq2DbEntity, INewsEtty, IBaseTEntity
     [Column(Name = "newsOwner")] 
     [NotNull] public int UserIdOwner { get; set; }
 
+    [StringLength(2000)]
     [Column(Name = "newsTittel")]
     [Nullable]
     public string? NewsTitle { get; set; }
@@ -56,6 +58,7 @@ public class NewsEtty : Linq2DbEntity, INewsEtty, IBaseTEntity
     [Nullable]
     public int? GalleryId { get; set; }
 
+    [StringLength(2000)]
     [Column(Name = "newsPresentation")]
     [Nullable]
     public string? NewsPresentation { get; set; }
@@ -64,6 +67,7 @@ public class NewsEtty : Linq2DbEntity, INewsEtty, IBaseTEntity
     [NotNull]
     public DateTime PublicationDate { get; set; }
 
+    [StringLength(500)]
     [Column(Name = "titleforURL")]
     [Nullable]
     public string? TitleForUrl { get; set; }
