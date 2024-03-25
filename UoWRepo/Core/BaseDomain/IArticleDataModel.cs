@@ -28,7 +28,7 @@ public interface IArticleDataModel : IBaseTEntity
 
     public string TitleForUrl { get; set; }
 
-    public int? HashtagsId { get; set; }
+    public int? HashtagsArticleId { get; set; }
 
     public string ArticleVersion { get; set; } // Assuming version could be a string like "1.0", "2.0", etc.
 }
