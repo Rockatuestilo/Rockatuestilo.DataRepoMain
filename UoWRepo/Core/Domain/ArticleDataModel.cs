@@ -74,7 +74,7 @@ public class ArticleDataModel : Linq2DbEntity, IArticleDataModel, IBaseTEntity
     //[Unique] // Mark this field as unique. Note: [Unique] is not a standard DataAnnotations attribute. You may need a custom validation or handle it differently depending on your ORM.
     public string? TitleForUrl { get; set; } // Property name corrected and updated
 
-    [Column(Name = "HashtagsId")] // Updated column name
+    [Column(Name = "HashtagsArticleId")] // Updated column name
     [Nullable]
-    public int? HashtagsId { get; set; } // Property name updated
+    public int? HashtagsArticleId { get; set; } // Property name updated
 }

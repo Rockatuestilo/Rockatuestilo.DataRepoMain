@@ -49,8 +49,8 @@ public class ArticleDataModel : TEntity, IArticleDataModel, ITEntity
     [Column("TitleForUrl")] // Corrected and updated column name to TitleForUrl
     public string? TitleForUrl { get; set; } // Updated property name to TitleForUrl and made nullable
 
-    [Column("HashtagsId")] // Updated column name to HashtagsId
-    public int? HashtagsId { get; set; } // Updated property name to HashtagsId
+    [Column("HashtagsArticleId")] // Updated column name to HashtagsId
+    public int? HashtagsArticleId { get; set; } // Updated property name to HashtagsId
 
     [Column("ArticleVersion")] // Column name ArticleVersion remains unchanged
     [StringLength(2)]
