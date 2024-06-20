@@ -25,12 +25,20 @@ public class RolesModelsLinq2Db
 
         _unitOfWork = new UnityOfWork(value.Item1);*/
         
-        var connection =
-            "Server=localhost;Port=13306;Database=cmsbackup604_test;Uid=root;Pwd=blueberrywater4;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
         
-        var connection2 = "server=localhost;user=root;password=blueberrywater4;database=cmsbackup604_test;Pooling=true;";
+        var database = "cmsbackup_t1";
+        var user = "root";
+        var password = "blueberrywater4";
+        var server = "localhost";
+        var port = "3306";
+            
+        
+        var connection =
+            $"Server={server};Port={port};Database={database};Uid={user};Pwd={password};charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
+        
+        var connection2 = $"server={server};user={user};password={password};database={database};Pooling=true;";
         var connection3 =
-            "Server=localhost;Port=3306;Database=cmsbackup604_test;Uid=cms;blueberrywater4;ConnectionTimeout=600;DefaultCommandTimeout=600; Convert Zero Datetime=True;SslMode=None;Pooling=true;";
+            $"Server={server};Port={port};Database={database};Uid={user};{password};ConnectionTimeout=600;DefaultCommandTimeout=600; Convert Zero Datetime=True;SslMode=None;Pooling=true;";
 
         //var value_0 = new ContextGenerator(connection).CreateInMysql();
 

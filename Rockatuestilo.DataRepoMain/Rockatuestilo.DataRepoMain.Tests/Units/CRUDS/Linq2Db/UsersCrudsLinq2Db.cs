@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
 using Rockatuestilo.DataRepoMain.Tests.TestData.Users;
+using UoWRepo.Core.LinqDomain;
 using UoWRepo.Persistence.UnitiesOfWork;
 
 namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.Linq2Db;
@@ -62,8 +63,8 @@ public class UsersCrudsLinq2Db
         _unitOfWork.Users.Add(users[0]);
         _unitOfWork.Complete();
 
-        List<UoWRepo.Core.Domain.Users> result1 = null;
-        List<UoWRepo.Core.Domain.Users> result2 = null;
+        List<Users> result1 = null;
+        List<Users> result2 = null;
 
         // Execute the retrieval of the list in parallel
         Parallel.Invoke(
@@ -82,8 +83,8 @@ public class UsersCrudsLinq2Db
 
         _unitOfWork.Users.Add(users[0]);
 
-        List<UoWRepo.Core.Domain.Users> result1 = null;
-        List<UoWRepo.Core.Domain.Users> result2 = null;
+        List<Users> result1 = null;
+        List<Users> result2 = null;
 
         // Execute the retrieval of the list in parallel
         var task1 = Task.Run(() => _unitOfWork.Users.GetAllWithQueue().ToList());
@@ -105,7 +106,7 @@ public class UsersCrudsLinq2Db
 
         _unitOfWork.Users.Add(users[0]);
 
-        List<List<UoWRepo.Core.Domain.Users>> results = new List<List<UoWRepo.Core.Domain.Users>>();
+        List<List<Users>> results = new List<List<Users>>();
 
         // Ejecutar las 20 tareas en paralelo
         var tasks = Enumerable.Range(0, 2)
