@@ -4,7 +4,7 @@ using LinqToDB.Mapping;
 using UoWRepo.Core.BaseDomain;
 using ITEntity = UoWRepo.Core.EFDomain.ITEntity;
 
-namespace UoWRepo.Core.Domain;
+namespace UoWRepo.Core.LinqDomain;
 
 [Table(Name = "ArticlesViewForUI")]
 public class ArticlesViewForUi : Linq2DbEntity, IArticlesViewForUi, ITEntity

@@ -57,6 +57,9 @@ public class EFContext : DbContext, ICommonContext
 
     public DbSet<RoleModels> Roles { get; set; }
     public DbSet<UsersToRoles> UsersToRoles { get; set; }
+    
+    public DbSet<TypeAssociation> TypeAssociation { get; set; }
+    public DbSet<Associations> Associations { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

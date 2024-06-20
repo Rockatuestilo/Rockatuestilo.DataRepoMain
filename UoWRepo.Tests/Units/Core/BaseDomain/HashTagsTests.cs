@@ -1,5 +1,5 @@
 using UoWRepo.Core.BaseDomain;
-using HashTags = UoWRepo.Core.Domain.HashTags; // Adjust namespace based on your project structure
+using HashTags = UoWRepo.Core.LinqDomain.HashTags; // Adjust namespace based on your project structure
 using Hashtagsv2 = UoWRepo.Core.EFDomain.HashTags;
 // Adjust namespace based on your project structure
 

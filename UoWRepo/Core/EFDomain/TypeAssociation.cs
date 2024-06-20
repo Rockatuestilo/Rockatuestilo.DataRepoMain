@@ -4,12 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace UoWRepo.Core.EFDomain;
 
 [Table("Types")]
-public class TypeAssociation
+public class TypeAssociation: TEntityGuid, ITEntityGuid
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [Column("TypeId")]
-    public int TypeId { get; set; }
+
 
     [Column("TypeName")]
     public string TypeName { get; set; }

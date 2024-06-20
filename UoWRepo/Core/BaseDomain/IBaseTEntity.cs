@@ -8,3 +8,10 @@ public interface IBaseTEntity
     public DateTime CreatedDate { get; set; }
     public DateTime UpdatedDate { get; set; }
 }
+
+public interface IBaseGuidTEntity
+{
+    public Guid Guid { get; set; }
+    public DateTime CreatedDate { get; set; }
+    public DateTime UpdatedDate { get; set; }
+}

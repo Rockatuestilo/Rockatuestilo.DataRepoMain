@@ -1,13 +1,14 @@
 using System;
 using MySql.Data.MySqlClient;
 using UoWRepo.Core.Configuration;
-using UoWRepo.Core.Domain;
+using UoWRepo.Core.LinqDomain;
 using UoWRepo.Core.Repositories;
 using UoWRepo.Migrations.Manual;
 using UoWRepo.Persistence.Repositories;
 
 namespace UoWRepo.Persistence.UnitiesOfWork;
 
+[Obsolete("Use UnityOfWorkEF instead")]
 public class UnityOfWorkLinq : IUnitOfWorkLinq
 {
     private readonly Linq2DbContext _context;

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UoWRepo.Core.Configuration;
-using UoWRepo.Core.Domain;
+using UoWRepo.Core.LinqDomain;
 
 namespace UoWRepo.Persistence.UnitiesOfWork;
 

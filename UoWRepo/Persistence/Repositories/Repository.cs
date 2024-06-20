@@ -7,7 +7,7 @@ using LinqToDB.Data;
 using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.Configuration;
 using UoWRepo.Core.Configuration.ParallelRunning;
-using UoWRepo.Core.Domain;
+using UoWRepo.Core.LinqDomain;
 using UoWRepo.Core.Repositories;
 
 namespace UoWRepo.Persistence.Repositories;

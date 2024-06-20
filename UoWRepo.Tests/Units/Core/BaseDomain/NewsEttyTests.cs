@@ -1,6 +1,6 @@
 using Bogus;
 using UoWRepo.Core.BaseDomain;
-using NewsEttyLinq2DB = UoWRepo.Core.Domain.NewsEtty; // Adjust namespace based on your project structure
+using NewsEttyLinq2DB = UoWRepo.Core.LinqDomain.NewsEtty; // Adjust namespace based on your project structure
 using NewsEttyEfCore = UoWRepo.Core.EFDomain.NewsEtty;
 
 namespace UoWRepo.Tests.Units.Core.BaseDomain;

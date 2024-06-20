@@ -2,7 +2,7 @@
 using LinqToDB.Mapping;
 using UoWRepo.Core.BaseDomain;
 
-namespace UoWRepo.Core.Domain;
+namespace UoWRepo.Core.LinqDomain;
 
 [Table(Name = "news_categories")]
 public class Categories : Linq2DbEntity, ITEntity
