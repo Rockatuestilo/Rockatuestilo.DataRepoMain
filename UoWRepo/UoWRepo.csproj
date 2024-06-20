@@ -35,15 +35,15 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="8.0.6" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.6" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.6" />
-        <PackageReference Include="MySql.Data" Version="8.2.0" />
-        <PackageReference Include="MySqlConnector" Version="2.3.4" />
+        <PackageReference Include="MySql.Data" Version="8.4.0" />
+        <PackageReference Include="MySqlConnector" Version="2.3.7" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="Npgsql" Version="8.0.1" />
-        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.0-beta.2" />
+        <PackageReference Include="Npgsql" Version="8.0.3" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
         <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.6" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.11"/>
         <PackageReference Include="SQLite" Version="3.13.0"/>
-        <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.7" />
+        <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.8" />
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Core\"/>
