@@ -6,7 +6,7 @@ using UoWRepo.Persistence.UnitiesOfWork;
 
 namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.Linq2Db;
 
-public class RolesModelsLinq2Db
+public class AssociationsLinq2Db
 {
     private IUnitOfWork _unitOfWork;
     private IUnitOfWorkLinq _unitOfWorkLinq;

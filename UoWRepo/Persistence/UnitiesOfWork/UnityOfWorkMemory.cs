@@ -4,7 +4,7 @@ using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
 using UoWRepo.Core.Configuration;
-using UoWRepo.Core.Domain;
+using UoWRepo.Core.LinqDomain;
 using UoWRepo.Core.Repositories;
 using UoWRepo.Migrations;
 using UoWRepo.Migrations.Manual;

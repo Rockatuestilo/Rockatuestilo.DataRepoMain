@@ -1,7 +1,7 @@
 using System;
 using LinqToDB.Mapping;
 
-namespace UoWRepo.Core.Domain;
+namespace UoWRepo.Core.LinqDomain;
 
 public class TEntityGuid : ITEntityGuid
 {

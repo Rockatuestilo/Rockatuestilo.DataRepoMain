@@ -121,6 +121,10 @@ public class RepositoryEf<TEntity> : IRepository<TEntity> where TEntity : BaseTE
 
     public virtual void RemoveRange(IEnumerable<TEntity> entitiesList)
     {
+        entities.RemoveRange(entitiesList);
+        
+        
+        
         //throw new NotImplementedException();
         //context.HashtagsNews.Where(x => entities.Select(i => i.Id).Contains(x.Id)).Delete();
         //entities.RemoveRange(entitiesList);

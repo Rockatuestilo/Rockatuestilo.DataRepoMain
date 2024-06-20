@@ -1,9 +1,9 @@
 using System;
 
-namespace UoWRepo.Core.Domain;
+namespace UoWRepo.Core.LinqDomain;
 
 public interface ITEntityGuid
 {
-    Guid Guid { get; set; }
+    public Guid Guid { get; set; }
     DateTime UpdatedDate { get; set; }
 }

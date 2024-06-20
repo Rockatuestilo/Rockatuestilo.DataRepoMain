@@ -9,6 +9,15 @@ public interface IUnitOfWorkEf
     IMemoryRepository<ArticlesViewForUi> ArticlesViewForUI { get; }
     IMemoryRepository<Categories> Categories { get; }
     IMemoryRepository<HashTags> HashTags { get; }
+    
+    //IMemoryRepository<Associations> Associations { get; }
+    //IMemoryRepository<TypeAssociation> TypeAssociations { get; }
+    
+    IRepositoryGuid<Associations> Associations { get; }
+    
+    IRepositoryGuid<TypeAssociation> TypeAssociations { get; }
+    
+    
     IMemoryRepository<HashTagsNews> HashTagsNews { get; }
     IMemoryRepository<NewsPublicationType> PublicationType { get; }
     IMemoryRepository<Galleries> Galleries { get; }

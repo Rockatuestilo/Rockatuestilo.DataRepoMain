@@ -1,10 +1,19 @@
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.EFDomain;
 
-public class TEntityGuid : Domain.ITEntityGuid
+public class TEntityGuid : BaseGuidTEntity
 {
-    public Guid Guid { get; set; }
+    
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Column("Guid")]
+    public new Guid Guid { get; set; }
 
-    public DateTime UpdatedDate { get; set; }
+    [Column("CreatedDate")] public new DateTime CreatedDate { get; set; } = DateTime.Now;
+
+    [Column("UpdatedDate")] public new DateTime UpdatedDate { get; set; } = DateTime.Now;
 }

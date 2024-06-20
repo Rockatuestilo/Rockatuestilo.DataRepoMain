@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Bogus;
 using UoWRepo.Core.BaseDomain;
-using UoWRepo.Core.Domain;
+using UoWRepo.Core.LinqDomain;
 
 namespace UoWRepo.Tests.Units.Core.BaseDomain;
 

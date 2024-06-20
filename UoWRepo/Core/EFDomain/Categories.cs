@@ -26,3 +26,4 @@ public class Categories : TEntity, ITEntity
     [Column("news_categoriesID")]
     public new int Id { get; set; }
 }
+

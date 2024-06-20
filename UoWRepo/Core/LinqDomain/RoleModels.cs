@@ -1,7 +1,7 @@
 using LinqToDB.Mapping;
 using UoWRepo.Core.BaseDomain;
 
-namespace UoWRepo.Core.Domain;
+namespace UoWRepo.Core.LinqDomain;
 
 [Table(Name = "Roles")]
 public class RoleModels : Linq2DbEntity, ITEntity

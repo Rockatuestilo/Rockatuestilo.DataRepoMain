@@ -2,22 +2,16 @@
 using LinqToDB.Mapping;
 using UoWRepo.Core.BaseDomain;
 
-namespace UoWRepo.Core.Domain;
+namespace UoWRepo.Core.LinqDomain;
 
-[Table(Name = "news_categories")]
-public class Categories : Linq2DbEntity, ITEntity
+[Table(Name = "NewsPublicationType")]
+public class NewsPublicationType : Linq2DbEntity, ITEntity
 {
-    [Column(Name = "categoryOwner")]
+    [Column(Name = "TypeOfPublication")]
     [NotNull]
-    public int CategoryOwner { get; set; }
+    public string TypeOfPublication { get; set; } = null!;
 
-    [Column(Name = "news_categoryName")]
-    [NotNull]
-    public string CategoryName { get; set; } = null!;
-
-    [Column(Name = "levelCategory")]
-    [NotNull]
-    public int LevelCategory { get; set; }
+    [Column(Name = "LevelUser")] [NotNull] public int LevelUser { get; set; }
 
     [Column(Name = "CreatedByID")]
     [NotNull]
@@ -29,9 +23,13 @@ public class Categories : Linq2DbEntity, ITEntity
 
     [PrimaryKey]
     [Identity]
-    [Column(Name = "news_categoriesID")]
+    [Column(Name = "NewsPublicationTypeID")]
     [NotNull]
     public new int Id { get; set; }
+
+    [Column(Name = "CreatedDate")]
+    [NotNull]
+    public DateTime CreatedDate { get; set; }
 
     [Column(Name = "updatedDate")]
     [NotNull]

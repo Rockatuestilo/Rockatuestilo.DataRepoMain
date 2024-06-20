@@ -37,13 +37,24 @@ public class UnityOfWorkEf : IUnitOfWorkEf
         UsersToRoles = InitObjects<UsersToRoles>();
         ArticleDataModel = InitObjects<ArticleDataModel>();
         
+        Associations = InitObjectsGuid<Associations>();
+        TypeAssociations = InitObjectsGuid<TypeAssociation>();
+        
     }
 
     public IMemoryRepository<ArticleDataModel> ArticleDataModel { get; }
     public IMemoryRepository<ArticlesViewForUi> ArticlesViewForUI { get; }
     public IMemoryRepository<Categories> Categories { get; }
     public IMemoryRepository<HashTags> HashTags { get; }
+    
+    //public IMemoryRepository<Associations> Associations { get; }
+    
+    //public IMemoryRepository<TypeAssociation> TypeAssociations { get; }
     public IMemoryRepository<HashTagsNews> HashTagsNews { get; }
+    
+    public IRepositoryGuid<Associations> Associations { get; }
+    
+    public IRepositoryGuid<TypeAssociation> TypeAssociations { get; }
     public IMemoryRepository<NewsPublicationType> PublicationType { get; }
     public IMemoryRepository<Galleries> Galleries { get; }
     public IMemoryRepository<Users> Users { get; }
@@ -61,6 +72,12 @@ public class UnityOfWorkEf : IUnitOfWorkEf
     private MemoryRepositoryEF<T> InitObjects<T>() where T : BaseTEntity
     {
         return new MemoryRepositoryEF<T>(_context, new RepositoryEf<T>(_context));
+    }
+    
+    private RepositoryEfGuid<T> InitObjectsGuid<T>() where T : BaseGuidTEntity
+    {
+        //return new RepositoryEfGuid<T>(_context, new RepositoryEfGuid<T>(_context));
+        return new RepositoryEfGuid<T>(_context);
     }
 
 

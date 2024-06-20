@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using LinqToDB.Mapping;
 using UoWRepo.Core.BaseDomain;
 
-namespace UoWRepo.Core.Domain;
+namespace UoWRepo.Core.LinqDomain;
 
 [Table(Name = "tb_news")]
 public class NewsEtty : Linq2DbEntity, INewsEtty, IBaseTEntity

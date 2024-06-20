@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UoWRepo.Core.Configuration;
-using UoWRepo.Core.Domain;
+using UoWRepo.Core.LinqDomain;
 using UoWRepo.Core.Repositories;
 
 namespace UoWRepo.Persistence.Repositories;

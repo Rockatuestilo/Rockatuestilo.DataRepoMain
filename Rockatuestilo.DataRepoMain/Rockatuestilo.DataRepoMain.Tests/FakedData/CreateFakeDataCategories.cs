@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using UoWRepo.Core.Domain;
+using UoWRepo.Core.LinqDomain;
 
 namespace Rockatuestilo.DataRepoMain.Tests.FakedData;
 

@@ -2,7 +2,7 @@ using System;
 using LinqToDB.Mapping;
 using UoWRepo.Core.BaseDomain;
 
-namespace UoWRepo.Core.Domain;
+namespace UoWRepo.Core.LinqDomain;
 
 [Table(Name = "UsersToRoles")]
 public class UsersToRoles : Linq2DbEntity, ITEntity

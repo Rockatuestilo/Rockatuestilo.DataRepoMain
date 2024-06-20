@@ -1,7 +1,7 @@
 ﻿using LinqToDB;
 using LinqToDB.Data;
 using LinqToDB.DataProvider;
-using UoWRepo.Core.Domain;
+using UoWRepo.Core.LinqDomain;
 
 namespace UoWRepo.Core.Configuration;
 

@@ -2,7 +2,7 @@
 using LinqToDB.Mapping;
 using UoWRepo.Core.BaseDomain;
 
-namespace UoWRepo.Core.Domain;
+namespace UoWRepo.Core.LinqDomain;
 
 [Table(Name = "galleries")]
 public class Galleries : Linq2DbEntity, ITEntity

@@ -1,5 +1,5 @@
 ﻿using System;
-using UoWRepo.Core.Domain;
+using UoWRepo.Core.LinqDomain;
 using UoWRepo.Core.Repositories;
 
 // ReSharper disable UnusedMemberInSuper.Global

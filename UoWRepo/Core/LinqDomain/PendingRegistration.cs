@@ -2,7 +2,7 @@ using System;
 using LinqToDB.Mapping;
 using UoWRepo.Core.BaseDomain;
 
-namespace UoWRepo.Core.Domain;
+namespace UoWRepo.Core.LinqDomain;
 
 public class PendingRegistration : Linq2DbEntity, ITEntity
 {

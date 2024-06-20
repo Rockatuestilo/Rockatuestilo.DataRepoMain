@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
-using UoWRepo.Core.Domain;
+using UoWRepo.Core.LinqDomain;
 using UoWRepo.Persistence.UnitiesOfWork;
 
 namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.Linq2Db;
