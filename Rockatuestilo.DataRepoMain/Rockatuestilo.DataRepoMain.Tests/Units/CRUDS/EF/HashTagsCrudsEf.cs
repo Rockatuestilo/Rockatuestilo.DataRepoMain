@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
+using Rockatuestilo.DataRepoMain.Tests.Tools.Contexts;
 using UoWRepo.Core.EFDomain;
 using UoWRepo.Persistence.UnitiesOfWork;
 
@@ -14,8 +15,7 @@ public class HashTagsCrudsEf
     [SetUp]
     public void Setup()
     {
-        var value = new ContextGenerator().CreateInMemory();
-        _unitOfWorkEf = new UnityOfWorkEf(value);
+        _unitOfWorkEf = ContextCreator.CreateContextEFCoreInMemory();
     }
 
 
