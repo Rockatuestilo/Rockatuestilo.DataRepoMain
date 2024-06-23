@@ -54,7 +54,7 @@ public class ContextGenerator
         //var options = new DbContextOptionsBuilder<EFContext>().
         
         var connection =
-            "Server=localhost;Port=3306;charset=utf8;Database=cmsbackup_version_2023_12_28_0;charset=utf8;Uid=root;Pwd=blueberrywater4;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
+            "Server=localhost;Port=3306;charset=utf8;Database=BLAZARES_V1;charset=utf8;Uid=root;Pwd=blueberrywater4;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
         
         if(!string.IsNullOrEmpty(connectionString))
         {
@@ -97,7 +97,7 @@ public class ContextGenerator
         //var options = new DbContextOptionsBuilder<EFContext>().
         
         var connection =
-            "Server=localhost;Port=3306;charset=utf8;Database=cmsbackup_version_2023_12_28_0;charset=utf8;Uid=root;Pwd=blueberrywater4;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
+            "Server=localhost;Port=3306;charset=utf8;Database=BLAZARES_V1;charset=utf8;Uid=root;Pwd=blueberrywater4;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
 
 
         /*var context =
