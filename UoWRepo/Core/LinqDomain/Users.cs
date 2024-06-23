@@ -4,6 +4,7 @@ using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.LinqDomain;
 
+[Obsolete("This class is deprecated. Use BaseTEntity instead.")]
 [Table(Name = "Users")]
 public class Users : Linq2DbEntity, ITEntity
 {
