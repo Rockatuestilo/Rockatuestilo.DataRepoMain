@@ -1,12 +1,11 @@
 using System;
 using System.Linq;
 using NUnit.Framework;
-using Rockatuestilo.DataRepoMain.Tests.DbInit;
 using Rockatuestilo.DataRepoMain.Tests.Tools.Contexts;
 using UoWRepo.Core.EFDomain;
 using UoWRepo.Persistence.UnitiesOfWork;
 
-namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.EF;
+namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.EF.ByEntities;
 
 public class HashTagsCrudsEf
 {

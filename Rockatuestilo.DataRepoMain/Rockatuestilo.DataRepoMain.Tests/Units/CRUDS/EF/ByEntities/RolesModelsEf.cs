@@ -4,7 +4,7 @@ using Rockatuestilo.DataRepoMain.Tests.DbInit;
 using Rockatuestilo.DataRepoMain.Tests.TestData.Roles;
 using UoWRepo.Persistence.UnitiesOfWork;
 
-namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.EF;
+namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.EF.ByEntities;
 
 public class RolesModelsEf
 {

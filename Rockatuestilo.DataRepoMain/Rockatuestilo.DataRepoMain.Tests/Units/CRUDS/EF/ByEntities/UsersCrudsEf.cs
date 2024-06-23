@@ -9,7 +9,7 @@ using Rockatuestilo.DataRepoMain.Tests.TestData.Users;
 using UoWRepo.Core.EFDomain;
 using UoWRepo.Persistence.UnitiesOfWork;
 
-namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.EF;
+namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.EF.ByEntities;
 
 public class UsersCrudsEf
 {
@@ -17,15 +17,30 @@ public class UsersCrudsEf
     private List<Users> bugusUsers = new();
 
     [SetUp]
-    public void Setup()
+    public IUnitOfWorkEf Setup(IUnitOfWorkEf unitOfWorkEf = null)
     {
-        var createFakeData = new CreateFakeData();
-        bugusUsers = createFakeData.DoByNumberEf();
+        if (unitOfWorkEf != null)
+        {
+            _unitOfWorkEf = unitOfWorkEf;
+            return _unitOfWorkEf;
+        }
 
-        var value = new ContextGenerator().CreateInMysql();
+        var value = new ContextGenerator().CreateInMemory();
 
         _unitOfWorkEf = new UnityOfWorkEf(value);
+        return _unitOfWorkEf;
     }
+    
+    [Test]
+    public void Test1_TryGetAnyUsersWithoutErrors()
+    {
+        var all = _unitOfWorkEf.Users.GetAll().ToList();
+        
+        Assert.NotNull(all);
+        
+        Assert.Pass();
+    }
+
 
     [Test]
     public void Test1_add1()

@@ -6,21 +6,24 @@ using Rockatuestilo.DataRepoMain.Tests.FakedData;
 using UoWRepo.Core.EFDomain;
 using UoWRepo.Persistence.UnitiesOfWork;
 
-namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.EF;
+namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.EF.ByEntities;
 
 [TestFixture]
 public class NewsCruds
 {
     [SetUp]
-    public void Setup()
+    public IUnitOfWorkEf Setup(IUnitOfWorkEf unitOfWorkEf = null)
     {
+        if (unitOfWorkEf != null)
+        {
+            _unitOfWorkEf = unitOfWorkEf;
+            return _unitOfWorkEf;
+        }
+
         var value = new ContextGenerator().CreateInMemory();
 
-        var createFakeData = new CreateFakeData();
-        bugusUsers = createFakeData.DoByNumberEf(40);
-
-
         _unitOfWorkEf = new UnityOfWorkEf(value);
+        return _unitOfWorkEf;
     }
 
     private List<Users> bugusUsers = new();
@@ -28,7 +31,7 @@ public class NewsCruds
     private IUnitOfWorkEf _unitOfWorkEf;
 
     [Test]
-    public void Test1_CreateUser()
+    public void Test1_AddNews()
     {
         var news = new NewsEtty();
 
