@@ -1,8 +1,10 @@
+using System;
 using LinqToDB.Mapping;
 using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.LinqDomain;
 
+[Obsolete("This class is deprecated. Use BaseTEntity instead.")]
 [Table(Name = "Roles")]
 public class RoleModels : Linq2DbEntity, ITEntity
 {

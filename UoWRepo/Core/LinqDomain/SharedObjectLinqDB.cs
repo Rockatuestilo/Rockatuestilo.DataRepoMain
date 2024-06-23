@@ -4,6 +4,7 @@ using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.LinqDomain;
 
+[Obsolete("This class is deprecated. Use BaseTEntity instead.")]
 [Table(Name = "SharedObject")]
 public class SharedObjectLinqDB : Linq2DbEntity, ITEntity
 {
