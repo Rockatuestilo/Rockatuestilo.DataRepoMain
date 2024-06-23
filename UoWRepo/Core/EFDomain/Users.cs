@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,14 +10,18 @@ namespace UoWRepo.Core.EFDomain;
 [Index(nameof(Email), IsUnique = true)]
 public class Users : TEntity, ITEntity
 {
+    [Required]
     [Column("Name")] public string Name { get; set; }
 
+    [Required]
     [Column("LastName")] public string LastName { get; set; }
 
+    [Required]
     [Column("LoginName")]
     
     public string LoginName { get; set; }
 
+    [Required]
     [Column("Password")] public string Password { get; set; }
 
     [Column("LastLogin")] public DateTime LastLogin { get; set; }
@@ -28,7 +33,9 @@ public class Users : TEntity, ITEntity
     [Column("UpdatedBy")] public int UpdatedBy { get; set; }
 
     [Column("Email")] public string? Email { get; set; }
-
-
+    // NOT NULL
+    [Required]
+    [Column("GUID")]
+    public Guid Guid { get; set; }
     public bool VerifiedAccount { get; set; }
 }

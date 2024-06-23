@@ -5,7 +5,7 @@ using Rockatuestilo.DataRepoMain.Tests.TestData.CategoriesTestCollectionSpace;
 using Rockatuestilo.DataRepoMain.Tests.TestData.Users;
 using UoWRepo.Persistence.UnitiesOfWork;
 
-namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.EF;
+namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.EF.ByEntities;
 
 public class CategoriesCruds
 {

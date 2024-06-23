@@ -42,7 +42,14 @@ public class NewsEtty : TEntity,INewsEtty, ITEntity
 
     [Column("ArticleVersion")] public int? ArticleVersion { get; set; }
 
+    [Required]
+    [Column("OwnerUsersGuid")] 
+    public Guid OwnerUsersGuid { get; set; }
     
+    // NOT NULL
+    [Required]
+    [Column("GUID")]
+    public Guid Guid { get; set; }
 
     [Column("newsCreatedDate")] public DateTime CreatedDate { get; set; }
 
