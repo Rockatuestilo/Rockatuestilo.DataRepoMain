@@ -60,14 +60,16 @@ public class RolesModelsLinq2Db
         _unitOfWork.Complete();
 
         var result = _unitOfWork.Roles.GetAll().ToList();
-        Assert.Greater(result.Count, 0);
+     
+        Assert.That(result.Count, Is.GreaterThan(0));
     }
     
     [Test]
     public void Test2_GetAll()
     {
         var result = _unitOfWork.Roles.GetAll().ToList();
-        Assert.Greater(result.Count, 0);
+
+        Assert.That(result.Count, Is.GreaterThan(0));
     }
     
     [Test]
@@ -76,8 +78,7 @@ public class RolesModelsLinq2Db
         var result =_unitOfWork.Roles.GetAllQueryble().ToList();
         _unitOfWork.Complete();
 
-        
-        Assert.Greater(result.Count, 0);
+        Assert.That(result.Count, Is.GreaterThan(0));
     }
     
     [Test]
@@ -86,8 +87,8 @@ public class RolesModelsLinq2Db
         var result =_unitOfWork.Roles.Find(x => x.Id == 1).ToList();
         _unitOfWork.Complete();
 
-        
-        Assert.Greater(result.Count, 0);
+        Assert.That(result.Count, Is.GreaterThan(0));
+ 
     }
     
     [Test]
@@ -107,6 +108,6 @@ public class RolesModelsLinq2Db
         _unitOfWork.Complete();
 
         var result = _unitOfWork.Roles.GetAll().ToList();
-        Assert.Greater(result.Count, 0);
+        Assert.That(result.Count, Is.GreaterThan(0));
     }
 }

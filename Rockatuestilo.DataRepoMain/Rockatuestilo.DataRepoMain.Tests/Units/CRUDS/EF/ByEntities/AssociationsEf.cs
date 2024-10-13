@@ -80,13 +80,14 @@ public class AssociationsEf
         typeAssociation.TypeName = "news";
 
         var result = _unitOfWorkEf.Associations.GetAll().ToList();
-        Assert.AreEqual(result.Count, 0);
+ 
+        Assert.That(result.Count, Is.EqualTo(0));
 
         if (result.Count == 0)
         {
             _unitOfWorkEf.TypeAssociations.Add(typeAssociation);
             var savedTypeAssociation = _unitOfWorkEf.TypeAssociations.GetAll().FirstOrDefault();
-            Assert.NotNull(savedTypeAssociation?.TypeName);
+            Assert.That(savedTypeAssociation?.TypeName, Is.Not.Null);
             value.AssociatedGuid = savedTypeAssociation!.Guid;
             
 
@@ -96,7 +97,7 @@ public class AssociationsEf
 
         result = _unitOfWorkEf.Associations.GetAll().ToList();
 
-        Assert.AreEqual(result.Count, 1);
+        Assert.That(result.Count, Is.GreaterThan(1));
 
         //IHashTags hashTags = result[0];
     }

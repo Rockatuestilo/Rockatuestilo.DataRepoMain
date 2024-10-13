@@ -42,7 +42,8 @@ public class HashTagsCrudsEf
 
         result = _unitOfWorkEf.HashTags.GetAll().ToList();
 
-        Assert.AreEqual(result.Count, 1);
+       
+        Assert.That(result.Count, Is.EqualTo(1));
 
         //IHashTags hashTags = result[0];
     }

@@ -18,7 +18,7 @@ public class NewsEttyTests
         var actual = news.Id;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -32,7 +32,7 @@ public class NewsEttyTests
         var actual = news.UserIdOwner;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -46,7 +46,7 @@ public class NewsEttyTests
         var actual = news.NewsTitle;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -60,7 +60,7 @@ public class NewsEttyTests
         var actual = news.NewsContent;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -74,7 +74,7 @@ public class NewsEttyTests
         var actual = news.CreatedDate;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -88,7 +88,7 @@ public class NewsEttyTests
         var actual = news.UpdatedDate;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -102,7 +102,7 @@ public class NewsEttyTests
         var actual = news.NewsPermission;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -116,7 +116,7 @@ public class NewsEttyTests
         var actual = news.NewsChangedById;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -130,7 +130,7 @@ public class NewsEttyTests
         var actual = news.CategoryId;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -144,7 +144,7 @@ public class NewsEttyTests
         var actual = news.PublicationType;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -158,7 +158,7 @@ public class NewsEttyTests
         var actual = news.GalleryId;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
 
@@ -173,7 +173,7 @@ public class NewsEttyTests
         var actual = news.NewsPresentation;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -187,7 +187,7 @@ public class NewsEttyTests
         var actual = news.PublicationDate;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -201,7 +201,7 @@ public class NewsEttyTests
         var actual = news.TitleForUrl;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -215,7 +215,7 @@ public class NewsEttyTests
         var actual = news.HashtagsNewsId;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -229,6 +229,6 @@ public class NewsEttyTests
         var actual = news.ArticleVersion;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 }

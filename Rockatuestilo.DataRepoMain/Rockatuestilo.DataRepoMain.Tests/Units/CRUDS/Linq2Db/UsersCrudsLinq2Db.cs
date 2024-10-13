@@ -52,7 +52,7 @@ public class UsersCrudsLinq2Db
         var result = _unitOfWork.Users.GetAll().ToList();
 
 
-        Assert.AreEqual(result.Count, 1);
+        Assert.That(result.Count, Is.EqualTo(1));
     }
     
     [Test]
@@ -71,9 +71,8 @@ public class UsersCrudsLinq2Db
             () => result1 = _unitOfWork.Users.GetAllWithQueue().ToList(),
                         () => result2 = _unitOfWork.Users.GetAllWithQueue().ToList()
         );
-
-        Assert.GreaterOrEqual(result1.Count, 1);
-        Assert.GreaterOrEqual(result2.Count, 1);
+        Assert.That(result1.Count, Is.GreaterThanOrEqualTo(1));
+        Assert.That(result2.Count, Is.GreaterThanOrEqualTo(1));
     }
     
     [Test]
@@ -95,8 +94,8 @@ public class UsersCrudsLinq2Db
         result1 = task1.Result;
         result2 = task2.Result;
 
-        Assert.GreaterOrEqual(result1.Count, 1);
-        Assert.GreaterOrEqual(result2.Count, 1);
+        Assert.That(result1.Count, Is.GreaterThanOrEqualTo(1));
+        Assert.That(result2.Count, Is.GreaterThanOrEqualTo(1));
     }
     
     [Test]
@@ -122,7 +121,7 @@ public class UsersCrudsLinq2Db
         
         foreach (var result in results)
         {
-            Assert.GreaterOrEqual(result.Count, 1);
+            Assert.That(result.Count, Is.GreaterThanOrEqualTo(1));
         }
         
         
@@ -150,7 +149,7 @@ public class UsersCrudsLinq2Db
         
         //tasksMixed[0].Result.ForEach(t => Assert.GreaterOrEqual(t.Id, 1));
         
-        userResults.ForEach(t => Assert.GreaterOrEqual(t.Count, 1));
+        userResults.ForEach(t => Assert.That(t.Count, Is.GreaterThanOrEqualTo(1)));
         
 
        

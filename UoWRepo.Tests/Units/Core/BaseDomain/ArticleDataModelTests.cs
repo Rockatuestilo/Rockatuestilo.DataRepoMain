@@ -138,8 +138,8 @@ public class ArticleDataModelTests
 
 
             // Assert are equal
-            Assert.IsTrue(isValidLinq2DB);
-            Assert.IsTrue(isValidEfCore);
+            Assert.That(isValidLinq2DB, Is.True);
+            Assert.That(isValidEfCore, Is.True);
         }
     }
     
@@ -186,8 +186,8 @@ public class ArticleDataModelTests
 
 
             // Assert are equal
-            Assert.IsFalse(isValidLinq2DB);
-            Assert.IsFalse(isValidEfCore);
+            Assert.That(isValidLinq2DB, Is.False);
+            Assert.That(isValidEfCore, Is.False);
         }
     }
     

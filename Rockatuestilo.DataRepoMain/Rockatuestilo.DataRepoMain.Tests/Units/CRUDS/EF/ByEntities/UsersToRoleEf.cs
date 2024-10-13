@@ -84,29 +84,28 @@ public class UsersToRoleEf
         _unitOfWorkEf.Complete();
 
         var usersToRolesList = _unitOfWorkEf.UsersToRoles.GetAll().ToList();
-        Assert.GreaterOrEqual(usersToRolesList.Count, users.Count);
+        Assert.That(usersToRolesList.Count, Is.GreaterThanOrEqualTo(users.Count)); 
 
         // get roles unique rolesguids
         var uniqueRolesGuids = usersToRolesList.Select(x => x.RoleGuid).Distinct().ToList();
-        Assert.AreEqual(uniqueRolesGuids.Count, roles.Count);
+        Assert.That(uniqueRolesGuids.Count, Is.EqualTo(roles.Count)); 
 
         // get random user
         var randomUser = users[new Random().Next(0, users.Count)];
 
         // get roles of random user
         var rolesOfRandomUser = usersToRolesList.Where(x => x.User == randomUser.Id).ToList();
-        Assert.GreaterOrEqual(rolesOfRandomUser.Count, 1);
+        Assert.That(rolesOfRandomUser.Count, Is.GreaterThanOrEqualTo(1)); 
 
         // get random usersToRoles
         var randomUsersToRoles = rolesOfRandomUser[new Random().Next(0, rolesOfRandomUser.Count)];
 
-
         //verify that randomUsersToRoles has roles and existent user
-        Assert.IsNotNull(randomUsersToRoles.RoleGuid);
-        Assert.IsNotNull(randomUsersToRoles.User);
+        Assert.That(randomUsersToRoles.RoleGuid, Is.Not.Null); 
+        Assert.That(randomUsersToRoles.User, Is.Not.Null); 
 
         var userToBeTest = users.SingleOrDefault(x => x.Id == randomUsersToRoles.User);
-        Assert.IsNotNull(userToBeTest);
+        Assert.That(userToBeTest, Is.Not.Null); 
     }
 
 
@@ -169,29 +168,28 @@ public class UsersToRoleEf
         _unitOfWorkEf.Complete();
 
         var usersToRolesList = _unitOfWorkEf.UsersToRoles.GetAll().ToList();
-        Assert.GreaterOrEqual(usersToRolesList.Count, users.Count);
+        Assert.That(usersToRolesList.Count, Is.GreaterThanOrEqualTo(users.Count)); 
 
         // get roles unique rolesguids
         var uniqueRolesGuids = usersToRolesList.Select(x => x.RoleGuid).Distinct().ToList();
-        Assert.AreEqual(uniqueRolesGuids.Count, roles.Count);
+        Assert.That(uniqueRolesGuids.Count, Is.EqualTo(roles.Count)); 
 
         // get random user
         var randomUser = users[new Random().Next(0, users.Count)];
 
         // get roles of random user
         var rolesOfRandomUser = usersToRolesList.Where(x => x.User == randomUser.Id).ToList();
-        Assert.GreaterOrEqual(rolesOfRandomUser.Count, 1);
+        Assert.That(rolesOfRandomUser.Count, Is.GreaterThanOrEqualTo(1)); 
 
         // get random usersToRoles
         var randomUsersToRoles = rolesOfRandomUser[new Random().Next(0, rolesOfRandomUser.Count)];
 
-
         //verify that randomUsersToRoles has roles and existent user
-        Assert.IsNotNull(randomUsersToRoles.RoleGuid);
-        Assert.IsNotNull(randomUsersToRoles.User);
+        Assert.That(randomUsersToRoles.RoleGuid, Is.Not.Null); 
+        Assert.That(randomUsersToRoles.User, Is.Not.Null); 
 
         var userToBeTest = users.SingleOrDefault(x => x.Id == randomUsersToRoles.User);
-        Assert.IsNotNull(userToBeTest);
+        Assert.That(userToBeTest, Is.Not.Null); 
     }
 
     [Test]
@@ -205,7 +203,7 @@ public class UsersToRoleEf
         var actual = usersToRoles.User;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -219,7 +217,7 @@ public class UsersToRoleEf
         var actual = usersToRoles.RoleGuid;
 
         // Assert
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     public List<List<T>> SplitList<T>(List<T> list, int n)

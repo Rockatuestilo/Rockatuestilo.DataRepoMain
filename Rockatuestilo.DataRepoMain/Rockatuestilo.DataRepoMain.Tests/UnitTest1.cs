@@ -19,6 +19,6 @@ public class Tests
     [Test]
     public void Test1_CreateUnity()
     {
-        Assert.NotNull(unitOfWorkEf);
+        Assert.That(unitOfWorkEf, Is.Not.Null);
     }
 }

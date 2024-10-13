@@ -17,7 +17,7 @@ public class DomainCommonTests
         foreach (var propertyV1 in propertiesV1)
         {
             var propertyV2 = propertiesV2.FirstOrDefault(p => p.Name == propertyV1.Name);
-            Assert.IsNotNull(propertyV2, $"Property {propertyV1.Name} is not found in HashTags version 2.");
+            Assert.That(propertyV2, Is.Not.Null, $"Property {propertyV1.Name} is not found in HashTags version 2.");
 
             // Check type
             Assert.That(propertyV2!.PropertyType, Is.EqualTo(propertyV1.PropertyType), $"Property types for {propertyV1.Name} do not match.");

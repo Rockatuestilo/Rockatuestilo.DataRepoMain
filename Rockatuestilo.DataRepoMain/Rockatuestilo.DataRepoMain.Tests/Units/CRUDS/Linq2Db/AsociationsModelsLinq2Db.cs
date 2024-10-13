@@ -60,14 +60,14 @@ public class AssociationsLinq2Db
         _unitOfWork.Complete();
 
         var result = _unitOfWork.Roles.GetAll().ToList();
-        Assert.Greater(result.Count, 0);
+        Assert.That(result.Count, Is.GreaterThan(0));
     }
     
     [Test]
     public void Test2_GetAll()
     {
         var result = _unitOfWork.Roles.GetAll().ToList();
-        Assert.Greater(result.Count, 0);
+        Assert.That(result.Count, Is.GreaterThan(0));
     }
     
     [Test]
@@ -77,7 +77,7 @@ public class AssociationsLinq2Db
         _unitOfWork.Complete();
 
         
-        Assert.Greater(result.Count, 0);
+        Assert.That(result.Count, Is.GreaterThan(0));
     }
     
     [Test]
@@ -87,7 +87,7 @@ public class AssociationsLinq2Db
         _unitOfWork.Complete();
 
         
-        Assert.Greater(result.Count, 0);
+        Assert.That(result.Count, Is.GreaterThan(0));
     }
     
     [Test]
@@ -107,6 +107,6 @@ public class AssociationsLinq2Db
         _unitOfWork.Complete();
 
         var result = _unitOfWork.Roles.GetAll().ToList();
-        Assert.Greater(result.Count, 0);
+        Assert.That(result.Count, Is.GreaterThan(0));
     }
 }
