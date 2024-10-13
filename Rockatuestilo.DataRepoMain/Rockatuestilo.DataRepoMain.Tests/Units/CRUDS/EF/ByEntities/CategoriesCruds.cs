@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
@@ -10,12 +11,25 @@ namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.EF.ByEntities;
 public class CategoriesCruds
 {
     private IUnitOfWorkEf _unitOfWorkEf;
+    private UsersCrudsEf _usersCrudsEf = new();
 
     [SetUp]
     public void Setup()
     {
         var value = new ContextGenerator().CreateInMysql();
         _unitOfWorkEf = new UnityOfWorkEf(value);
+    
+        _usersCrudsEf.SetupManual(_unitOfWorkEf);
+        _usersCrudsEf.Test1_TryGetAnyUsersWithoutErrors();
+    }
+    
+    // add teardown
+    [TearDown]
+    public void TearDown()
+    {
+        _usersCrudsEf.TearDown();
+        
+        _unitOfWorkEf = null;
     }
 
     [Test]
@@ -60,6 +74,11 @@ public class CategoriesCruds
 
         Assert.AreEqual(category1.UpdatedById, savedCategory.UpdatedById);
         Assert.AreEqual(category1.UpdatedDate, savedCategory.UpdatedDate);
+        Assert.AreEqual(category1.Guid, savedCategory.Guid);
+        
+        // and guid not empty
+        Assert.AreNotEqual(category1.Guid, Guid.Empty);
+        
 
         var savedCategory2 = _unitOfWorkEf.Categories.Find(x => x.CategoryName == savedCategory.CategoryName)
             .FirstOrDefault();
@@ -119,17 +138,5 @@ public class CategoriesCruds
         Assert.AreEqual(savedCategory2.Id, savedCategory.Id);
     }
 
-    [TearDown]
-    public void DeleteEverything()
-    {
-        var users = _unitOfWorkEf.Users.GetAll().ToList();
-
-        foreach (var user in users)
-        {
-            _unitOfWorkEf.Users.Remove(user);
-            _unitOfWorkEf.Complete();
-        }
-
-        users = _unitOfWorkEf.Users.GetAll().ToList();
-    }
+   
 }
