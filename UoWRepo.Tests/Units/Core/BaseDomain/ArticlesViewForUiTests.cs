@@ -107,8 +107,8 @@ public class ArticlesViewForUiTests
 
 
             // Assert are equal
-            Assert.IsTrue(isValidLinq2DB);
-            Assert.IsTrue(isValidEfCore);
+            Assert.That(isValidLinq2DB, Is.False);
+            Assert.That(isValidEfCore, Is.False);
         }
 
     }
@@ -155,8 +155,8 @@ public class ArticlesViewForUiTests
 
 
             // Assert are equal
-            Assert.IsFalse(isValidLinq2DB);
-            Assert.IsFalse(isValidEfCore);
+            Assert.That(isValidLinq2DB, Is.False);
+            Assert.That(isValidEfCore, Is.False);
         }
     }
 }

@@ -29,6 +29,7 @@ public class RolesModelsEf
         _unitOfWorkEf.Complete();
 
         var result = _unitOfWorkEf.Roles.GetAll().ToList();
-        Assert.Greater(result.Count, 0);
+        Assert.That(result.Count, Is.GreaterThan(0));
+
     }
 }

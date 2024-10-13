@@ -37,7 +37,7 @@ public class GalleriesCruds
 
      
 
-        Assert.AreEqual(result.Count, 1);
+        Assert.That(result.Count, Is.EqualTo(1));
 
         //IHashTags hashTags = result[0];
     }

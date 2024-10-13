@@ -41,6 +41,6 @@ public class UsersToRoleLinq2Db
         _unitOfWork.Complete();
 
         var result = _unitOfWork.UsersToRoles.GetAll().ToList();
-        Assert.AreEqual(result.Count, 1);
+        Assert.That(result.Count, Is.EqualTo(1));
     }
 }

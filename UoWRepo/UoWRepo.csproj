@@ -26,24 +26,23 @@
         <PackageReference Include="linq2db" Version="5.4.1" />
         <PackageReference Include="linq2db.MySql" Version="5.4.1" />
         <PackageReference Include="linq2db.SQLite" Version="5.4.1" />
-        <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="8.0.6" />
+        <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="8.0.10" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
         <PackageReference Include="FluentMigrator" Version="5.2.0" />
         <PackageReference Include="FluentMigrator.Runner.MySql" Version="5.2.0" />
         <PackageReference Include="FluentMigrator.Runner" Version="5.2.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="8.0.6" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="8.0.6" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="8.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="8.0.10" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.6" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.6" />
         <PackageReference Include="MySql.Data" Version="8.4.0" />
         <PackageReference Include="MySqlConnector" Version="2.3.7" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="Npgsql" Version="8.0.3" />
+        <PackageReference Include="Npgsql" Version="8.0.4" />
         <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
-        <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.6" />
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.10" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.11"/>
         <PackageReference Include="SQLite" Version="3.13.0"/>
-        <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.8" />
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Core\"/>

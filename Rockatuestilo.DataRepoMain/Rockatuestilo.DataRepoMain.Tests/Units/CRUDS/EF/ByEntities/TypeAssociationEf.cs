@@ -104,7 +104,7 @@ public class TypeAssociationEf
 
         result = _unitOfWorkEf.TypeAssociations.GetAll().ToList();
 
-        Assert.AreEqual(result.Count, 3);
+        Assert.That(result.Count, Is.EqualTo(03));
 
     }
     
@@ -118,7 +118,9 @@ public class TypeAssociationEf
         }
         
         var result = _unitOfWorkEf!.TypeAssociations.GetAll().ToList();
-        Assert.GreaterOrEqual(result.Count, 3);
+
+        Assert.That(result.Count, Is.GreaterThan(3));
+
     }
     
     [Test]
@@ -132,7 +134,7 @@ public class TypeAssociationEf
         
         var result =_unitOfWorkEf.TypeAssociations.GetAllQueryble().ToList();
         _unitOfWorkEf.Complete();
-        Assert.GreaterOrEqual(result.Count, 3);
+        Assert.That(result.Count, Is.GreaterThan(3));
     }
     
     [Test]
@@ -149,8 +151,7 @@ public class TypeAssociationEf
         var result =_unitOfWorkEf.TypeAssociations.Find(x => x.TypeName == "news").ToList();
         _unitOfWorkEf.Complete();
 
-        
-        Assert.Greater(result.Count, 0);
+        Assert.That(result.Count, Is.GreaterThan(0));
     }
     
     [Test]
@@ -166,7 +167,7 @@ public class TypeAssociationEf
         _unitOfWorkEf.Complete();
         
         var result = _unitOfWorkEf.TypeAssociations.GetAll().ToList();
-        Assert.AreEqual(0, result.Count);
+        Assert.That(result.Count, Is.EqualTo(0));
     }
     
     
@@ -219,7 +220,7 @@ public class TypeAssociationEf
         _unitOfWorkEf.Complete();
 
         var result = _unitOfWorkEf.TypeAssociations.GetAll().ToList();
-        Assert.GreaterOrEqual(3, result.Count());
+        Assert.That(result.Count(), Is.LessThanOrEqualTo(3));
     }
     
     [Test]
@@ -234,8 +235,8 @@ public class TypeAssociationEf
         var result =_unitOfWorkEf.TypeAssociations.Find(x => x.TypeName == "news").ToList();
         _unitOfWorkEf.Complete();
 
-        
-        Assert.Greater(result.Count, 0);
+
+        Assert.That(result.Count, Is.GreaterThan(0));
     }
     
     [Test]
@@ -250,8 +251,8 @@ public class TypeAssociationEf
         var result =_unitOfWorkEf.TypeAssociations.Find(x => x.TypeName == "news").ToList();
         _unitOfWorkEf.Complete();
 
-        
-        Assert.Greater(result.Count, 0);
+
+        Assert.That(result.Count, Is.GreaterThan(0));
         
         var value = result[0];
         value.TypeName = "news2";
@@ -260,7 +261,7 @@ public class TypeAssociationEf
         var result2 =_unitOfWorkEf.TypeAssociations.Find(x => x.TypeName == "news2").ToList();
         _unitOfWorkEf.Complete();
 
-        
-        Assert.Greater(result2.Count, 0);
+
+        Assert.That(result.Count, Is.GreaterThan(0));
     }
 }

@@ -60,7 +60,7 @@ public class UsersCrudsEf
     {
         var all = _unitOfWorkEf.Users.GetAll().ToList();
         
-        Assert.NotNull(all);
+        Assert.That(all, Is.Not.Null);
         
         Assert.Pass();
     }
@@ -75,7 +75,7 @@ public class UsersCrudsEf
 
         var result = _unitOfWorkEf.Users.GetAll().ToList();
 
-        Assert.AreEqual(result.Count, 1);
+        Assert.That(result.Count, Is.EqualTo(1));
     }
     
     [Test]
@@ -109,8 +109,9 @@ public class UsersCrudsEf
         result1 = task1.Result;
         result2 = task2.Result;
 
-        Assert.AreEqual(result1.Count, 1);
-        Assert.AreEqual(result2.Count, 1);
+        Assert.That(result1.Count, Is.EqualTo(1));
+        Assert.That(result2.Count, Is.EqualTo(1));
+  
     }
 
 
@@ -131,7 +132,7 @@ public class UsersCrudsEf
 
             var result2 = _unitOfWorkEf.Users.GetAll().ToList();
 
-            Assert.AreEqual(result.Count, result2.Count + 1);
+            Assert.That(result.Count, Is.EqualTo(result2.Count + 1));
         }
     }
     
@@ -168,7 +169,7 @@ public class UsersCrudsEf
         
         foreach (var result in results)
         {
-            Assert.GreaterOrEqual(result.Count, 1);
+            Assert.That(result.Count, Is.GreaterThanOrEqualTo(1));
         }
         
         
@@ -198,7 +199,7 @@ public class UsersCrudsEf
         
         //tasksMixed[0].Result.ForEach(t => Assert.GreaterOrEqual(t.Id, 1));
         
-        userResults.ForEach(t => Assert.GreaterOrEqual(t.Count, 1));
+        userResults.ForEach(t =>Assert.That(t.Count, Is.GreaterThanOrEqualTo(1)));
         
 
        
@@ -213,7 +214,7 @@ public class UsersCrudsEf
         _unitOfWorkEf.Users.AddRange(users);
         var result2 = _unitOfWorkEf.Users.GetAll().ToList();
         var countShouldBe = result.Count + users.Count;
-        Assert.GreaterOrEqual( users.Count, result2.Count);
+        Assert.That(users.Count, Is.GreaterThanOrEqualTo(result2.Count));
     }
 
 
@@ -222,7 +223,7 @@ public class UsersCrudsEf
     {
         var result = _unitOfWorkEf.Users.SingleOrDefault(x => x.Id == 1);
 
-        Assert.NotNull(result);
+        Assert.That(result, Is.Not.Null);
     }
 
 
@@ -231,7 +232,7 @@ public class UsersCrudsEf
     {
         var result = _unitOfWorkEf.Users.GetAllQueryble();
 
-        Assert.NotNull(result);
+        Assert.That(result, Is.Not.Null);
     }
 
 
@@ -240,7 +241,7 @@ public class UsersCrudsEf
     {
         var result = _unitOfWorkEf.Users.GetDateTimeOfCachingOfCurrentEntity();
 
-        Assert.NotNull(result);
+        Assert.That(result, Is.Not.Null);
     }
 
     [Test]
@@ -263,11 +264,11 @@ public class UsersCrudsEf
 
             var result2 = _unitOfWorkEf.Users.GetAll().ToList();
 
-            Assert.AreEqual(result.Count, result2.Count + 1);
+            Assert.That(result.Count, Is.EqualTo(result2.Count + 1));
         }
 
         var dateResult2 = _unitOfWorkEf.Users.GetDateTimeOfCachingOfCurrentEntity();
 
-        Assert.AreNotEqual(dateResult, dateResult2);
+        Assert.That(dateResult, Is.Not.EqualTo(dateResult2));
     }
 }

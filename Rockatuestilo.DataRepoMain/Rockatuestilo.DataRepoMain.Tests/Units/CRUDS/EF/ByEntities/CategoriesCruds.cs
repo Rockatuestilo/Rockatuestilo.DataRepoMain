@@ -66,25 +66,25 @@ public class CategoriesCruds
         _unitOfWorkEf.Complete();
 
 
-        Assert.NotNull(savedCategory);
-        Assert.AreEqual(category1.CategoryOwner, savedCategory.CategoryOwner);
-        Assert.AreEqual(category1.CreatedById, savedCategory.CreatedById);
-        Assert.AreEqual(category1.CreatedDate, savedCategory.CreatedDate);
-        Assert.AreEqual(category1.LevelCategory, savedCategory.LevelCategory);
+        Assert.That(savedCategory, Is.Not.Null);
+        Assert.That(savedCategory.CategoryOwner, Is.EqualTo(category1.CategoryOwner));
+        Assert.That(savedCategory.CreatedById, Is.EqualTo(category1.CreatedById));
+        Assert.That(savedCategory.CreatedDate, Is.EqualTo(category1.CreatedDate));
+        Assert.That(savedCategory.LevelCategory, Is.EqualTo(category1.LevelCategory));
 
-        Assert.AreEqual(category1.UpdatedById, savedCategory.UpdatedById);
-        Assert.AreEqual(category1.UpdatedDate, savedCategory.UpdatedDate);
-        Assert.AreEqual(category1.Guid, savedCategory.Guid);
-        
+        Assert.That(savedCategory.UpdatedById, Is.EqualTo(category1.UpdatedById));
+        Assert.That(savedCategory.UpdatedDate, Is.EqualTo(category1.UpdatedDate));
+        Assert.That(savedCategory.Guid, Is.EqualTo(category1.Guid));
+
         // and guid not empty
-        Assert.AreNotEqual(category1.Guid, Guid.Empty);
+        Assert.That(category1.Guid, Is.Not.EqualTo(Guid.Empty)); 
         
 
         var savedCategory2 = _unitOfWorkEf.Categories.Find(x => x.CategoryName == savedCategory.CategoryName)
             .FirstOrDefault();
 
 
-        Assert.AreEqual(savedCategory2.Id, savedCategory.Id);
+        Assert.That(savedCategory2.Id, Is.EqualTo(savedCategory.Id));
     }
     
     
@@ -122,20 +122,21 @@ public class CategoriesCruds
         _unitOfWorkEf.Complete();
 
 
-        Assert.NotNull(savedCategory);
-        Assert.AreEqual(category1.CategoryOwner, savedCategory.CategoryOwner);
-        Assert.AreEqual(category1.CreatedById, savedCategory.CreatedById);
-        Assert.AreEqual(category1.CreatedDate, savedCategory.CreatedDate);
-        Assert.AreEqual(category1.LevelCategory, savedCategory.LevelCategory);
+        Assert.That(savedCategory, Is.Not.Null);
+        Assert.That(savedCategory.CategoryOwner, Is.EqualTo(category1.CategoryOwner));
+        Assert.That(savedCategory.CreatedById, Is.EqualTo(category1.CreatedById));
+        Assert.That(savedCategory.CreatedDate, Is.EqualTo(category1.CreatedDate));
+        Assert.That(savedCategory.LevelCategory, Is.EqualTo(category1.LevelCategory));
 
-        Assert.AreEqual(category1.UpdatedById, savedCategory.UpdatedById);
-        Assert.AreEqual(category1.UpdatedDate, savedCategory.UpdatedDate);
+        Assert.That(savedCategory.UpdatedById, Is.EqualTo(category1.UpdatedById));
+        Assert.That(savedCategory.UpdatedDate, Is.EqualTo(category1.UpdatedDate)); 
 
         var savedCategory2 = _unitOfWorkEf.Categories.Find(x => x.CategoryName == savedCategory.CategoryName)
             .FirstOrDefault();
 
 
-        Assert.AreEqual(savedCategory2.Id, savedCategory.Id);
+        Assert.That(savedCategory2.Id, Is.EqualTo(savedCategory.Id));
+   
     }
 
    
