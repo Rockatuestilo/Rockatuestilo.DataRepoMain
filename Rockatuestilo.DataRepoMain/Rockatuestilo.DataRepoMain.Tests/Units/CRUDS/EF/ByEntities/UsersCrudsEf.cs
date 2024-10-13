@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
-using Rockatuestilo.DataRepoMain.Tests.FakedData;
 using Rockatuestilo.DataRepoMain.Tests.TestData.Users;
 using UoWRepo.Core.EFDomain;
 using UoWRepo.Persistence.UnitiesOfWork;
@@ -15,9 +14,34 @@ public class UsersCrudsEf
 {
     private IUnitOfWorkEf _unitOfWorkEf;
     private List<Users> bugusUsers = new();
-
+    
     [SetUp]
-    public IUnitOfWorkEf Setup(IUnitOfWorkEf unitOfWorkEf = null)
+    public void Setup()
+    {
+        var value = new ContextGenerator().CreateInMysql();
+
+        _unitOfWorkEf = new UnityOfWorkEf(value);
+       
+    }
+    
+    // add teardown
+    [TearDown]
+    public void TearDown()
+    {
+        var all = _unitOfWorkEf.Users.GetAll().ToList();
+        if (all.Count > 0)
+        {
+            _unitOfWorkEf.Users.RemoveRange(all);
+            _unitOfWorkEf.Complete();
+        }
+        
+        _unitOfWorkEf = null;
+    }
+    
+    
+
+    
+    public IUnitOfWorkEf SetupManual(IUnitOfWorkEf unitOfWorkEf = null)
     {
         if (unitOfWorkEf != null)
         {
