@@ -5,6 +5,7 @@ using UoWRepo.Core.BaseDomain;
 
 namespace UoWRepo.Core.LinqDomain;
 
+[Obsolete("This class is deprecated. Use BaseTEntity instead.")]
 [Table(Name = "Articles")] // Updated table name
 public class ArticleDataModel : Linq2DbEntity, IArticleDataModel, IBaseTEntity
 {

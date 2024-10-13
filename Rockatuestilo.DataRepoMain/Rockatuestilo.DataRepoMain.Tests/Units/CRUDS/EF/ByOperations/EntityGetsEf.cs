@@ -13,7 +13,7 @@ public class EntityGetsEf
     public void GetUsers()
     {
         UsersCrudsEf usersCrudsEf = new();
-        usersCrudsEf.Setup();
+        usersCrudsEf.SetupManual();
         usersCrudsEf.Test1_TryGetAnyUsersWithoutErrors();
         
         Assert.Pass();
@@ -33,7 +33,7 @@ public class EntityGetsEf
     public void GetUsersV2()
     {
         UsersCrudsEf usersCrudsEf = new();
-        usersCrudsEf.Setup();
+        usersCrudsEf.SetupManual();
         usersCrudsEf.Test1_TryGetAnyUsersWithoutErrors();
         
         Assert.Pass();

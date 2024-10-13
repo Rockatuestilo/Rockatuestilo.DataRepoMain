@@ -99,7 +99,8 @@ public class TestDataUsers1
                 CreatedBy = 0,
                 UpdatedBy = 0,
                 Email = "scherenhaenden@hotmail.com",
-                VerifiedAccount = true
+                VerifiedAccount = true,
+                Guid = Guid.NewGuid()
             },
             new()
             {
@@ -115,7 +116,8 @@ public class TestDataUsers1
                 CreatedBy = 0,
                 UpdatedBy = 0,
                 Email = "testemail1@email.com",
-                VerifiedAccount = false
+                VerifiedAccount = false,
+                Guid = Guid.NewGuid()
             },
             new()
             {
@@ -131,7 +133,8 @@ public class TestDataUsers1
                 CreatedBy = 0,
                 UpdatedBy = 0,
                 Email = "testemail2@email.com",
-                VerifiedAccount = false
+                VerifiedAccount = false,
+                Guid = Guid.NewGuid()
             }
         };
 
