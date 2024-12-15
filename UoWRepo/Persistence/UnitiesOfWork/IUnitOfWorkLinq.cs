@@ -6,7 +6,7 @@ using UoWRepo.Core.Repositories;
 
 namespace UoWRepo.Persistence.UnitiesOfWork;
 
-
+[Obsolete("Use IUnitOfWorkEF instead")]
 public interface IUnitOfWorkLinq : IDisposable
 {
     IRepository<ArticleDataModel> ArticleDataModel { get; }

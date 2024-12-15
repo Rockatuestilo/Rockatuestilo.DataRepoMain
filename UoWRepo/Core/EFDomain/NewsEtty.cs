@@ -7,14 +7,15 @@ namespace UoWRepo.Core.EFDomain;
 
 //public class NewsEtty : Linq2DbEntity, INewsEtty, IBaseTEntity
 
+[Obsolete("This class is deprecated. Use ArticleDataModel instead.")]
 [Table("tb_news")]
 public class NewsEtty : TEntity,INewsEtty, ITEntity
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [Column("newsID")]
+    [Column("newsID")] // Kept the column name the same due to the backward-compatible view
     public new int Id { get; set; }
-    
+        
     [Column("newsOwner")] public int UserIdOwner { get; set; }
 
     [StringLength(2000)]
@@ -45,7 +46,7 @@ public class NewsEtty : TEntity,INewsEtty, ITEntity
     [Required]
     [Column("OwnerUsersGuid")] 
     public Guid OwnerUsersGuid { get; set; }
-    
+        
     // NOT NULL
     [Required]
     [Column("GUID")]
