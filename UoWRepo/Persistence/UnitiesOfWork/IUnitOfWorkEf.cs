@@ -1,3 +1,4 @@
+using System;
 using UoWRepo.Core.EFDomain;
 using UoWRepo.Core.Repositories;
 
@@ -23,6 +24,7 @@ public interface IUnitOfWorkEf
     IMemoryRepository<Galleries> Galleries { get; }
     IMemoryRepository<Users> Users { get; }
 
+    [Obsolete("Use ArticleDataModel instead")]
     IMemoryRepository<NewsEtty> News { get; }
 
     IMemoryRepository<RoleModels> Roles { get; }
