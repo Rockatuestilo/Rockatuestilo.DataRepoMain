@@ -64,7 +64,7 @@ public class EFContext : DbContext, ICommonContext
     public DbSet<Subjects> Subjects { get; set; }
     public DbSet<Media> Media { get; set; }
     public DbSet<SubjectMedia> SubjectMedia { get; set; }
-    public DbSet<ContentMedia> ContentMedia { get; set; }
+    public DbSet<SubjectRelationships> SubjectRelationships { get; set; }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

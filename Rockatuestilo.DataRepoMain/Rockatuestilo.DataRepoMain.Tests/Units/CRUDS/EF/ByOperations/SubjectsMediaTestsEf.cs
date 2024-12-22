@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using NUnit.Framework;
 using Rockatuestilo.DataRepoMain.Tests.DbInit;
+using UoWRepo.Core.EFDomain;
 using UoWRepo.Persistence.UnitiesOfWork;
 
 namespace Rockatuestilo.DataRepoMain.Tests.Units.CRUDS.EF.ByOperations;
@@ -15,18 +16,15 @@ public class SubjectsMediaTestsEf
     {
         var testFileName = "test_SubjectsMediaTestsEf.db";
         
-        //delete file is exists
+        // Delete file if it exists
         if (System.IO.File.Exists(testFileName))
         {
             System.IO.File.Delete(testFileName);
         }
         
-        //var context = new ContextGenerator().CreateInSqlite(testFileName);
         var context = new ContextGenerator().CreateInMysql();
         _unitOfWorkEf = new UnityOfWorkEf(context);
     }
-
-  
 
     [Test]
     public void Test_AddSubject()
@@ -44,6 +42,7 @@ public class SubjectsMediaTestsEf
 
         var result = _unitOfWorkEf.Subjects.GetAll().ToList();
 
+        Assert.That(result, Is.Not.Null);
         Assert.That(result.Count, Is.EqualTo(1));
         Assert.That(result[0].Name, Is.EqualTo("Test Subject"));
     }
@@ -56,6 +55,8 @@ public class SubjectsMediaTestsEf
             Guid = Guid.NewGuid(),
             FilePath = "/path/to/file.jpg",
             MediaType = "Image",
+            Author = "John Doe",
+            License = "CC BY-SA",
             CreatedDate = DateTime.UtcNow
         };
 
@@ -64,6 +65,7 @@ public class SubjectsMediaTestsEf
 
         var result = _unitOfWorkEf.Media.GetAll().ToList();
 
+        Assert.That(result, Is.Not.Null);
         Assert.That(result.Count, Is.GreaterThanOrEqualTo(1));
         Assert.That(result[0].FilePath, Is.EqualTo("/path/to/file.jpg"));
     }
@@ -82,7 +84,9 @@ public class SubjectsMediaTestsEf
         {
             Guid = Guid.NewGuid(),
             FilePath = "/path/to/file.jpg",
-            MediaType = "Image"
+            MediaType = "Image",
+            Author = "John Doe",
+            License = "CC BY-SA"
         };
 
         _unitOfWorkEf.Subjects.Add(subject);
@@ -102,61 +106,26 @@ public class SubjectsMediaTestsEf
 
         var result = _unitOfWorkEf.SubjectMedia.GetAll().ToList();
 
+        Assert.That(result, Is.Not.Null);
         Assert.That(result.Count, Is.EqualTo(1));
         Assert.That(result[0].IsFeatured, Is.True);
     }
 
-    [Test]
-    public void Test_AddContentMedia()
-    {
-        var media = new Media
-        {
-            Guid = Guid.NewGuid(),
-            FilePath = "/path/to/file.jpg",
-            MediaType = "Image"
-        };
-
-        var contentGuid = Guid.NewGuid();
-
-        _unitOfWorkEf.Media.Add(media);
-        _unitOfWorkEf.Complete();
-
-        var contentMedia = new ContentMedia
-        {
-            Guid = Guid.NewGuid(),
-            ContentGuid = contentGuid,
-            MediaGuid = media.Guid,
-            Role = "Featured"
-        };
-
-        _unitOfWorkEf.ContentMedia.Add(contentMedia);
-        _unitOfWorkEf.Complete();
-
-        var result = _unitOfWorkEf.ContentMedia.GetAll().ToList();
-
-        Assert.That(result.Count, Is.EqualTo(1));
-        Assert.That(result[0].Role, Is.EqualTo("Featured"));
-    }
-    
     [OneTimeTearDown]
     public void TearDown()
     {
         var allSubjects = _unitOfWorkEf.Subjects.GetAll().ToList();
         var allMedia = _unitOfWorkEf.Media.GetAll().ToList();
         var allSubjectMedia = _unitOfWorkEf.SubjectMedia.GetAll().ToList();
-        var allContentMedia = _unitOfWorkEf.ContentMedia.GetAll().ToList();
 
-        if (allSubjects.Count > 0)
+        if (allSubjects.Any())
             _unitOfWorkEf.Subjects.RemoveRange(allSubjects);
 
-        if (allMedia.Count > 0)
+        if (allMedia.Any())
             _unitOfWorkEf.Media.RemoveRange(allMedia);
 
-        if (allSubjectMedia.Count > 0)
+        if (allSubjectMedia.Any())
             _unitOfWorkEf.SubjectMedia.RemoveRange(allSubjectMedia);
-
-        if (allContentMedia.Count > 0)
-            _unitOfWorkEf.ContentMedia.RemoveRange(allContentMedia);
 
         _unitOfWorkEf.Complete();
         _unitOfWorkEf = null;
