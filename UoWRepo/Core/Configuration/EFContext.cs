@@ -73,9 +73,7 @@ public class EFContext : DbContext, ICommonContext
         {
             if (string.IsNullOrEmpty(connectionString)) return;
 
-            optionsBuilder.UseMySql(connectionString,
-                new MariaDbServerVersion(new Version(10, 5, 8))
-            );
+            optionsBuilder.UseMySQL(connectionString);
         }
         catch (TypeLoadException exception)
         {
