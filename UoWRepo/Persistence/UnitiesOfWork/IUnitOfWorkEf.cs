@@ -23,7 +23,7 @@ public interface IUnitOfWorkEf
     IRepositoryGuid<Media> Media { get; }
     
     IRepositoryGuid<SubjectMedia> SubjectMedia { get; }
-    IRepositoryGuid<ContentMedia> ContentMedia { get; }
+    IRepositoryGuid<SubjectRelationships> SubjectRelationships { get; } 
 
 
     

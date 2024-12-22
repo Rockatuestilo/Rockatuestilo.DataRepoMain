@@ -42,7 +42,7 @@ public class UnityOfWorkEf : IUnitOfWorkEf
         Subjects = InitObjectsGuid<Subjects>();
         Media = InitObjectsGuid<Media>();
         SubjectMedia = InitObjectsGuid<SubjectMedia>();
-        ContentMedia = InitObjectsGuid<ContentMedia>();
+        SubjectRelationships = InitObjectsGuid<SubjectRelationships>();
 
         
     }
@@ -55,7 +55,8 @@ public class UnityOfWorkEf : IUnitOfWorkEf
     //public IMemoryRepository<Associations> Associations { get; }
     
     //public IMemoryRepository<TypeAssociation> TypeAssociations { get; }
-    public IRepositoryGuid<ContentMedia> ContentMedia { get; }
+    
+    public IRepositoryGuid<SubjectRelationships> SubjectRelationships { get; }
     public IMemoryRepository<HashTagsNews> HashTagsNews { get; }
     
     public IRepositoryGuid<Associations> Associations { get; }
