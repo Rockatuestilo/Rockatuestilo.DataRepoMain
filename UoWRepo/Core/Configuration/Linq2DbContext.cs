@@ -1,4 +1,5 @@
-﻿using LinqToDB;
+﻿using System;
+using LinqToDB;
 using LinqToDB.Data;
 using LinqToDB.DataProvider;
 using UoWRepo.Core.LinqDomain;
@@ -7,7 +8,7 @@ namespace UoWRepo.Core.Configuration;
 
 
 
-
+[Obsolete("This class is obsolete, use EFContext instead")]
 public class Linq2DbContext : DataConnection, ICommonContext
 {
    

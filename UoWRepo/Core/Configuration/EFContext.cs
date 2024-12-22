@@ -60,6 +60,12 @@ public class EFContext : DbContext, ICommonContext
     
     public DbSet<TypeAssociation> TypeAssociation { get; set; }
     public DbSet<Associations> Associations { get; set; }
+    
+    public DbSet<Subjects> Subjects { get; set; }
+    public DbSet<Media> Media { get; set; }
+    public DbSet<SubjectMedia> SubjectMedia { get; set; }
+    public DbSet<ContentMedia> ContentMedia { get; set; }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
