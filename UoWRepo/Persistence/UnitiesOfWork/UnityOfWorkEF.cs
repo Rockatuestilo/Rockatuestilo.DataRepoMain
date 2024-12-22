@@ -39,6 +39,11 @@ public class UnityOfWorkEf : IUnitOfWorkEf
         
         Associations = InitObjectsGuid<Associations>();
         TypeAssociations = InitObjectsGuid<TypeAssociation>();
+        Subjects = InitObjectsGuid<Subjects>();
+        Media = InitObjectsGuid<Media>();
+        SubjectMedia = InitObjectsGuid<SubjectMedia>();
+        ContentMedia = InitObjectsGuid<ContentMedia>();
+
         
     }
 
@@ -50,11 +55,15 @@ public class UnityOfWorkEf : IUnitOfWorkEf
     //public IMemoryRepository<Associations> Associations { get; }
     
     //public IMemoryRepository<TypeAssociation> TypeAssociations { get; }
+    public IRepositoryGuid<ContentMedia> ContentMedia { get; }
     public IMemoryRepository<HashTagsNews> HashTagsNews { get; }
     
     public IRepositoryGuid<Associations> Associations { get; }
     
     public IRepositoryGuid<TypeAssociation> TypeAssociations { get; }
+    public IRepositoryGuid<Subjects> Subjects { get; }
+    public IRepositoryGuid<Media> Media { get; }
+    public IRepositoryGuid<SubjectMedia> SubjectMedia { get; }
     public IMemoryRepository<NewsPublicationType> PublicationType { get; }
     public IMemoryRepository<Galleries> Galleries { get; }
     public IMemoryRepository<Users> Users { get; }

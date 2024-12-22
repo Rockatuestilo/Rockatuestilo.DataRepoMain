@@ -18,6 +18,15 @@ public interface IUnitOfWorkEf
     
     IRepositoryGuid<TypeAssociation> TypeAssociations { get; }
     
+ 
+    IRepositoryGuid<Subjects> Subjects { get; }
+    IRepositoryGuid<Media> Media { get; }
+    
+    IRepositoryGuid<SubjectMedia> SubjectMedia { get; }
+    IRepositoryGuid<ContentMedia> ContentMedia { get; }
+
+
+    
     
     IMemoryRepository<HashTagsNews> HashTagsNews { get; }
     IMemoryRepository<NewsPublicationType> PublicationType { get; }
