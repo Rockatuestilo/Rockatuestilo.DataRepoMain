@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-using LinqToDB.Data;
+//using LinqToDB.Data;
 using Microsoft.EntityFrameworkCore;
 using UoWRepo.Core.Configuration;
 
@@ -100,11 +100,6 @@ public class ContextGenerator
             "Server=localhost;Port=3306;charset=utf8;Database=BLAZARES_V1;charset=utf8;Uid=root;Pwd=blueberrywater4;charset=utf8;SslMode=none;Convert Zero Datetime=True; Pooling=true;";
 
 
-        /*var context =
-            new EFContext(
-                "Server=localhost;Port=13306;Database=cmsbackup_tests;Uid=root;Pwd=password;charset=utf8;SslMode=Required;Convert Zero Datetime=True; Pooling=true;");#
-            */
-            
             
             
         var serverVersion = new MySqlServerVersion(new Version(8, 0, 31));
@@ -120,83 +115,20 @@ public class ContextGenerator
 
         var tourManagerContext = new EFContext(options.Options);
         
-        //tourManagerContext.Database.EnsureDeleted();
-        //tourManagerContext.Database.EnsureCreated();
+        tourManagerContext.Database.EnsureDeleted();
+        tourManagerContext.Database.EnsureCreated();
         //Server=localhost;Port=3306;Database=cmsbackup5;Uid=cms;Pwd=albanicus$5$;ConnectionTimeout=600;DefaultCommandTimeout=600;SslMode=None;Pooling=true;
 
 
         return tourManagerContext;
     }
     
-    public (Linq2DbContext, string) CreateContextAndStringByEnvironment(string environment = "SQLite")
-    {
-        
-        
-        environment = environment.ToLower();
-        
-        if (environment == "SQLite".ToLower())
-        {
-            return CreateLinq2DbSqlite();
-        }
-        else if (environment == "MySQL".ToLower())
-        {
-            
-            
-            return CreateLinq2DbMysql();
-        }
-        /*else if (environment == "InMemory")
-        {
-            return CreateInMemoryLinq2Db();
-        }*/
-        
-        return CreateLinq2DbSqlite();
-    }
-
-    private (Linq2DbContext, string) CreateLinq2DbMysql()
-    {
-        var cc = "server=localhost;user=root;password=blueberrywater4;database=cmsbackup604_test;Pooling=true;";
-        cc = _nameOfFileForDatabaseOrStringConnection;
-        if (Created)
-        {
-            var linq2DbContext_ = new Linq2DbContext("MySql.Data.MySqlClient",$"{cc}");
-        
-            return (linq2DbContext_, "");
-        }
-
-        Created = true;
-        
-        var generationScript = CreateAndGetGenerationScriptForMySQL();
-        
-       
-        
-        
-        /*using (var db = new Linq2DbContext("MySql.Data.MySqlClient",$"{cc}"))
-        {
-            var usersList = db.Query<dynamic>(generationScript);
-        }*/
-        
-        var linq2DbContext = new Linq2DbContext("MySql.Data.MySqlClient",$"{cc}");
-        
-        return (linq2DbContext, generationScript);
-    }
 
 
-    public (Linq2DbContext, string) CreateLinq2DbSqlite()
-    {
-        if (File.Exists(_nameOfFileForDatabaseOrStringConnection)) File.Delete(_nameOfFileForDatabaseOrStringConnection);
-
-        var generationScript = CreateAndGetGenerationScriptForEFSqlite();
-        var linq2DbContext = new Linq2DbContext("SQLite", $"Data Source={_nameOfFileForDatabaseOrStringConnection}");
 
 
-        using (var db = new Linq2DbContext("SQLite", $"Data Source={_nameOfFileForDatabaseOrStringConnection}"))
-        {
-            var usersList = db.Query<dynamic>(generationScript);
-        }
 
-
-        return (linq2DbContext, generationScript);
-    }
+   
 
     public string CreateAndGetGenerationScriptForEFSqlite()
     {
