@@ -72,16 +72,14 @@ public class ContextGenerator
             version = new Version(8, 0, 31);
         }
         
-            
-            
-        var serverVersion = new MySqlServerVersion(version);
         
+    
         var options = new DbContextOptionsBuilder<EFContext>();
         /*options.UseMySql(
             ServerVersion.AutoDetect(
                 "Server=localhost;Port=3306;Database=cmsbackup604;user=root;password=blueberrywater4"));*/
 
-        options.UseMySql(connection, serverVersion);
+        options.UseMySQL(connection);
             
             
 
@@ -102,14 +100,13 @@ public class ContextGenerator
 
             
             
-        var serverVersion = new MySqlServerVersion(new Version(8, 0, 31));
-        
+          
         var options = new DbContextOptionsBuilder<EFContext>();
         /*options.UseMySql(
             ServerVersion.AutoDetect(
                 "Server=localhost;Port=3306;Database=cmsbackup604;user=root;password=blueberrywater4"));*/
 
-        options.UseMySql(connection, serverVersion);
+        options.UseMySQL(connection);
             
             
 
@@ -147,14 +144,13 @@ public class ContextGenerator
     {
         var connectionString = "server=localhost;user=root;password=blueberrywater4;database=cmsbackup604_test";
         connectionString = _nameOfFileForDatabaseOrStringConnection;
-        var serverVersion = new MySqlServerVersion(new Version(8, 0, 31));
-        
+      
         var options = new DbContextOptionsBuilder<EFContext>();
         /*options.UseMySql(
             ServerVersion.AutoDetect(
                 "Server=localhost;Port=3306;Database=cmsbackup604;user=root;password=blueberrywater4"));*/
 
-        options.UseMySql(connectionString, serverVersion);
+        options.UseMySQL(connectionString);
             
             
 

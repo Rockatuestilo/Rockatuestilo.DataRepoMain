@@ -17,12 +17,12 @@ public class EfCoreDbContextCreator
                 return new EFContext(options);
             case LinqDatabaseType.MySQL:
                 options = new DbContextOptionsBuilder<EFContext>()
-                    .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+                    .UseMySQL(connectionString)
                     .Options;
                 return new EFContext(options);
             default:
                 options = new DbContextOptionsBuilder<EFContext>()
-                    .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+                    .UseMySQL(connectionString)
                     .Options;
                 return new EFContext(options);
         }
