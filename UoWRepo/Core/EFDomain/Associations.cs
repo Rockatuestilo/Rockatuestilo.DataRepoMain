@@ -29,3 +29,8 @@ namespace UoWRepo.Core.EFDomain
         public new int UpdatedById { get; set; }
     }
 }
+
+
+// Entity class for Media
+
+// Entity class for ContentMedia
