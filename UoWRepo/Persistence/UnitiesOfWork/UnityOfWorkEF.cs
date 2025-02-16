@@ -21,28 +21,25 @@ public class UnityOfWorkEf : IUnitOfWorkEf
     {
         _context = context;
 
-        //Users = new RepositoryEf<Users>(_context);
-        Users = InitObjects<Users>();
-        News = InitObjects<NewsEtty>();
-        HashTags = InitObjects<HashTags>();
-        ArticlesViewForUI = InitObjects<ArticlesViewForUi>();
-        Categories = InitObjects<Categories>();
-        HashTagsNews = InitObjects<HashTagsNews>();
 
-        PublicationType = InitObjects<NewsPublicationType>();
-        Galleries = InitObjects<Galleries>();
-
-
-        Roles = InitObjects<RoleModels>();
-        UsersToRoles = InitObjects<UsersToRoles>();
-        ArticleDataModel = InitObjects<ArticleDataModel>();
-        
         Associations = InitObjectsGuid<Associations>();
-        TypeAssociations = InitObjectsGuid<TypeAssociation>();
-        Subjects = InitObjectsGuid<Subjects>();
+        ArticlesViewForUI = InitObjects<ArticlesViewForUi>();
+        ArticleDataModel = InitObjects<ArticleDataModel>();
+        Categories = InitObjects<Categories>();
+        Galleries = InitObjects<Galleries>();
+        HashTags = InitObjects<HashTags>();
+        HashTagsNews = InitObjects<HashTagsNews>();
         Media = InitObjectsGuid<Media>();
+        News = InitObjects<NewsEtty>();
+        PublicationType = InitObjects<NewsPublicationType>();
+        Roles = InitObjects<RoleModels>();
         SubjectMedia = InitObjectsGuid<SubjectMedia>();
         SubjectRelationships = InitObjectsGuid<SubjectRelationships>();
+        Subjects = InitObjectsGuid<Subjects>();
+        TypeAssociations = InitObjectsGuid<TypeAssociation>();
+        Users = InitObjects<Users>();
+        UsersToRoles = InitObjects<UsersToRoles>();
+
 
         
     }
