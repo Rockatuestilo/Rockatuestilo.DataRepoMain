@@ -10,7 +10,7 @@ public class ArticleDataModel : TEntity, IArticleDataModel, ITEntity
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [Column("ID")] // Updated column name to ID
+    [Column("Id")] // Updated column name to ID
     public new int Id { get; set; }
     
     [Column("Owner")] // Updated column name to Owner
@@ -54,11 +54,20 @@ public class ArticleDataModel : TEntity, IArticleDataModel, ITEntity
 
     [Column("ArticleVersion")] // Column name ArticleVersion remains unchanged
     [StringLength(2)]
-    public string? ArticleVersion { get; set; } // Assuming ArticleVersion is a string based on the previous correction. Update type if necessary.
+    public int? ArticleVersion { get; set; } // Assuming ArticleVersion is a int based on the previous correction. Update type if necessary.
 
     [Column("CreatedDate")] // Column name CreatedDate remains unchanged
     public DateTime CreatedDate { get; set; } // No change needed
 
     [Column("LastUpdateDate")] // Updated column name to LastUpdateDate
     public new DateTime UpdatedDate { get; set; } // No change needed
+    
+    // NOT NULL
+    [Required]
+    [Column("GUID")]
+    public Guid Guid { get; set; }
+    
+    [Required]
+    [Column("OwnerUsersGuid")] 
+    public Guid OwnerUsersGuid { get; set; }
 }
