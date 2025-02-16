@@ -12,7 +12,7 @@ public class ArticleDataModel : Linq2DbEntity, IArticleDataModel, IBaseTEntity
     [Column(Name = "ArticleVersion")]
     [StringLength(2)]
     [Nullable]
-    public string? ArticleVersion { get; set; } // Assuming ArticleVersion is a string. Update type if necessary.
+    public int? ArticleVersion { get; set; } // Assuming ArticleVersion is a string. Update type if necessary.
 
     [PrimaryKey, Identity]
     [Column(Name = "ID")] // Updated column name
