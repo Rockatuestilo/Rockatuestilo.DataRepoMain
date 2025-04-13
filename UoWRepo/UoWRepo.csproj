@@ -11,9 +11,9 @@
         <PackageTags>rockatuestilo rock metal</PackageTags>
         <Company>rockatuestilo</Company>
         <Product>Rockatuestilo.DataRepoMain</Product>
-        <AssemblyVersion>9.0.2</AssemblyVersion>
-        <PackageVersion>9.0.2</PackageVersion>
-        <FileVersion>9.0.2</FileVersion>
+        <AssemblyVersion>10.0.0.0</AssemblyVersion>
+        <PackageVersion>10.0.0.0</PackageVersion>
+        <FileVersion>10.0.0.0</FileVersion>
         <LangVersion>latestmajor</LangVersion>
         <Nullable>enable</Nullable>
     </PropertyGroup>
@@ -23,9 +23,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="linq2db" Version="5.4.1" />
-        <PackageReference Include="linq2db.MySql" Version="5.4.1" />
-        <PackageReference Include="linq2db.SQLite" Version="5.4.1" />
         <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="9.0.2" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
         <PackageReference Include="FluentMigrator" Version="6.2.0" />
@@ -47,6 +44,7 @@
     <ItemGroup>
         <Folder Include="Core\"/>
         <Folder Include="Core\Configuration\Domain\" />
+        <Folder Include="Migrations\Manual\" />
         <Folder Include="Persistence\"/>
         <Folder Include="Core\Configuration\CacheSystem\"/>
     </ItemGroup>

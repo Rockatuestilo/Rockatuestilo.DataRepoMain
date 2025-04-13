@@ -19,10 +19,10 @@ public class TestDataRoles1
     }
 
 
-    public List<UoWRepo.Core.LinqDomain.RoleModels> GetRolesStatic()
+    public List<UoWRepo.Core.EFDomain.RoleModels> GetRolesStatic()
     {
         // Admin role has full access to the system
-        var adminRole = new UoWRepo.Core.LinqDomain.RoleModels
+        var adminRole = new UoWRepo.Core.EFDomain.RoleModels
         {
             Active = true,
             Name = "Administrator",
@@ -31,7 +31,7 @@ public class TestDataRoles1
         };
 
 // Editor role can create, edit, and publish articles
-        var editorRole = new UoWRepo.Core.LinqDomain.RoleModels
+        var editorRole = new UoWRepo.Core.EFDomain.RoleModels
         {
             Active = true,
             Name = "Editor",
@@ -40,7 +40,7 @@ public class TestDataRoles1
         };
 
 // Writer role can create and edit their own articles, but not publish them
-        var writerRole = new UoWRepo.Core.LinqDomain.RoleModels
+        var writerRole = new UoWRepo.Core.EFDomain.RoleModels
         {
             Active = true,
             Name = "Writer",
@@ -49,7 +49,7 @@ public class TestDataRoles1
         };
 
 // Reviewer role can review articles and send them back to writers for revision
-        var reviewerRole = new UoWRepo.Core.LinqDomain.RoleModels
+        var reviewerRole = new UoWRepo.Core.EFDomain.RoleModels
         {
             Active = true,
             Name = "Reviewer",
@@ -58,7 +58,7 @@ public class TestDataRoles1
         };
 
 // Reader role can only read published articles
-        var readerRole = new UoWRepo.Core.LinqDomain.RoleModels
+        var readerRole = new UoWRepo.Core.EFDomain.RoleModels
         {
             Active = true,
             Name = "Reader",
@@ -66,6 +66,6 @@ public class TestDataRoles1
             Description = "This role can only read published articles."
         };
 
-        return new List<UoWRepo.Core.LinqDomain.RoleModels> { adminRole, editorRole, writerRole, reviewerRole, readerRole };
+        return new List<UoWRepo.Core.EFDomain.RoleModels> { adminRole, editorRole, writerRole, reviewerRole, readerRole };
     }
 }
