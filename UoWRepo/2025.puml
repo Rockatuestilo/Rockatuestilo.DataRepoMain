@@ -1,0 +1,414 @@
+@startuml
+
+' --- Settings ---
+hide empty members
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+skinparam ClassBorderColor Black
+skinparam ClassBackgroundColor White
+skinparam ArrowColor Black
+skinparam shadowing false
+
+' --- Entities (Tables based on DDL V2) ---
+
+' Section 1: Users, Roles & Permissions
+entity "users" as users {
+  + guid : BINARY(16) <<PK>>
+  --
+  username : VARCHAR(100) <<NN>> <<UNIQUE>>
+  email : VARCHAR(255) <<NN>> <<UNIQUE>>
+  password_hash : VARCHAR(255) <<NN>>
+  first_name : VARCHAR(100)
+  last_name : VARCHAR(100)
+  is_active : BOOLEAN <<NN>>
+  is_verified : BOOLEAN <<NN>>
+  last_login_at : DATETIME(6)
+  two_factor_secret : VARCHAR(255)
+  two_factor_enabled : BOOLEAN <<NN>>
+  sso_provider : VARCHAR(50)
+  sso_user_id : VARCHAR(255)
+  profile_data : JSON
+  created_at : DATETIME(6) <<NN>>
+  updated_at : DATETIME(6) <<NN>>
+}
+
+entity "roles" as roles {
+  + guid : BINARY(16) <<PK>>
+  --
+  name : VARCHAR(100) <<NN>> <<UNIQUE>>
+  description : TEXT
+  is_system_role : BOOLEAN <<NN>>
+  created_at : DATETIME(6) <<NN>>
+  updated_at : DATETIME(6) <<NN>>
+}
+
+entity "user_roles" as user_roles {
+  user_guid : BINARY(16) <<PK>> <<FK>>
+  role_guid : BINARY(16) <<PK>> <<FK>>
+}
+
+entity "permissions" as permissions {
+  + guid : BINARY(16) <<PK>>
+  --
+  action_code : VARCHAR(255) <<NN>> <<UNIQUE>>
+  description : TEXT
+  module_owner : VARCHAR(100)
+  created_at : DATETIME(6) <<NN>>
+}
+
+entity "role_permissions" as role_permissions {
+  role_guid : BINARY(16) <<PK>> <<FK>>
+  permission_guid : BINARY(16) <<PK>> <<FK>>
+}
+
+entity "object_permissions" as object_permissions {
+  + guid : BINARY(16) <<PK>>
+  --
+  target_object_guid : BINARY(16) <<NN>>
+  target_object_type : VARCHAR(50) <<NN>>
+  principal_guid : BINARY(16) <<NN>>
+  principal_type : ENUM('user', 'role') <<NN>>
+  permission_guid : BINARY(16) <<NN>> <<FK>>
+  is_allowed : BOOLEAN <<NN>>
+  created_at : DATETIME(6) <<NN>>
+  created_by_user_guid : BINARY(16) <<FK>>
+}
+
+' Section 2: Multilingual Support
+entity "languages" as languages {
+  + code : VARCHAR(10) <<PK>>
+  --
+  name : VARCHAR(100) <<NN>>
+  is_active : BOOLEAN <<NN>>
+  is_default : BOOLEAN <<NN>>
+  fallback_language_code : VARCHAR(10) <<FK>>
+}
+
+' Section 3: Core Content Engine
+entity "content_types" as content_types {
+  + guid : BINARY(16) <<PK>>
+  --
+  name : VARCHAR(100) <<NN>>
+  api_identifier : VARCHAR(100) <<NN>> <<UNIQUE>>
+  description : TEXT
+  is_component : BOOLEAN <<NN>>
+  is_page_type : BOOLEAN <<NN>>
+  icon : VARCHAR(50)
+  created_at : DATETIME(6) <<NN>>
+  updated_at : DATETIME(6) <<NN>>
+  created_by_user_guid : BINARY(16) <<FK>>
+  updated_by_user_guid : BINARY(16) <<FK>>
+}
+
+entity "content_fields" as content_fields {
+  + guid : BINARY(16) <<PK>>
+  --
+  content_type_guid : BINARY(16) <<NN>> <<FK>>
+  name : VARCHAR(100) <<NN>>
+  api_identifier : VARCHAR(100) <<NN>>
+  field_type : VARCHAR(50) <<NN>>
+  description : TEXT
+  settings : JSON
+  is_translatable : BOOLEAN <<NN>>
+  sort_order : INT <<NN>>
+  created_at : DATETIME(6) <<NN>>
+  updated_at : DATETIME(6) <<NN>>
+  created_by_user_guid : BINARY(16) <<FK>>
+  updated_by_user_guid : BINARY(16) <<FK>>
+  ' Unique constraint on (content_type_guid, api_identifier)
+}
+
+entity "content_items" as content_items {
+  + guid : BINARY(16) <<PK>>
+  --
+  content_type_guid : BINARY(16) <<NN>> <<FK>>
+  current_version_id : BIGINT UNSIGNED <<FK>>
+  status : VARCHAR(50) <<NN>>
+  published_at : DATETIME(6)
+  scheduled_publish_at : DATETIME(6)
+  scheduled_unpublish_at : DATETIME(6)
+  created_at : DATETIME(6) <<NN>>
+  updated_at : DATETIME(6) <<NN>>
+  created_by_user_guid : BINARY(16) <<FK>>
+  updated_by_user_guid : BINARY(16) <<FK>>
+}
+
+entity "content_item_versions" as content_item_versions {
+  + id : BIGINT UNSIGNED <<PK>> AUTO_INCREMENT
+  --
+  content_item_guid : BINARY(16) <<NN>> <<FK>>
+  version_number : INT UNSIGNED <<NN>>
+  status_at_save : VARCHAR(50) <<NN>>
+  change_description : TEXT
+  created_at : DATETIME(6) <<NN>>
+  created_by_user_guid : BINARY(16) <<FK>>
+  ' Unique constraint on (content_item_guid, version_number)
+}
+
+entity "field_values" as field_values {
+  content_item_version_id : BIGINT UNSIGNED <<PK>> <<FK>>
+  field_guid : BINARY(16) <<PK>> <<FK>>
+  language_code : VARCHAR(10) <<PK>> <<FK>>
+  --
+  value_string : VARCHAR(2000)
+  value_text : MEDIUMTEXT
+  value_longtext : LONGTEXT
+  value_integer : BIGINT
+  value_decimal : DECIMAL(19, 4)
+  value_boolean : BOOLEAN
+  value_datetime : DATETIME(6)
+  value_reference_guid : BINARY(16) ' FK depends on field_type
+  value_json : JSON
+}
+
+entity "relationship_types" as relationship_types {
+  + guid : BINARY(16) <<PK>>
+  --
+  name : VARCHAR(100) <<NN>>
+  api_identifier : VARCHAR(100) <<NN>> <<UNIQUE>>
+  description : TEXT
+  created_at : DATETIME(6) <<NN>>
+}
+
+entity "content_relationships" as content_relationships {
+  + guid : BINARY(16) <<PK>>
+  --
+  from_content_item_guid : BINARY(16) <<NN>> <<FK>>
+  to_content_item_guid : BINARY(16) <<NN>> <<FK>>
+  relationship_type_guid : BINARY(16) <<NN>> <<FK>>
+  metadata : JSON
+  created_at : DATETIME(6) <<NN>>
+  created_by_user_guid : BINARY(16) <<FK>>
+}
+
+' Section 4: Digital Asset Management (DAM)
+entity "licenses" as licenses {
+  + guid : BINARY(16) <<PK>>
+  --
+  name : VARCHAR(255) <<NN>> <<UNIQUE>>
+  description : TEXT
+  url : VARCHAR(2000)
+  created_at : DATETIME(6) <<NN>>
+}
+
+entity "media_assets" as media_assets {
+  + guid : BINARY(16) <<PK>>
+  --
+  original_filename : VARCHAR(255) <<NN>>
+  mime_type : VARCHAR(100) <<NN>>
+  file_size_bytes : BIGINT UNSIGNED <<NN>>
+  author : VARCHAR(255)
+  license_guid : BINARY(16) <<FK>>
+  width : INT UNSIGNED
+  height : INT UNSIGNED
+  duration_seconds : DECIMAL(10, 3)
+  metadata_extracted : JSON
+  ai_tags : JSON
+  storage_info : JSON <<NN>>
+  focal_point : JSON
+  created_at : DATETIME(6) <<NN>>
+  updated_at : DATETIME(6) <<NN>>
+  created_by_user_guid : BINARY(16) <<FK>>
+  updated_by_user_guid : BINARY(16) <<FK>>
+}
+
+entity "media_asset_translations" as media_asset_translations {
+  media_asset_guid : BINARY(16) <<PK>> <<FK>>
+  language_code : VARCHAR(10) <<PK>> <<FK>>
+  --
+  title : VARCHAR(255)
+  description : TEXT
+  alt_text : VARCHAR(1000)
+}
+
+entity "media_renditions" as media_renditions {
+  + guid : BINARY(16) <<PK>>
+  --
+  media_asset_guid : BINARY(16) <<NN>> <<FK>>
+  name : VARCHAR(100) <<NN>>
+  mime_type : VARCHAR(100) <<NN>>
+  file_size_bytes : BIGINT UNSIGNED <<NN>>
+  width : INT UNSIGNED
+  height : INT UNSIGNED
+  storage_info : JSON <<NN>>
+  generation_info : JSON
+  created_at : DATETIME(6) <<NN>>
+}
+
+' Section 5: Auditing and Logs
+entity "audit_log_entries" as audit_log_entries {
+  + id : BIGINT UNSIGNED <<PK>> AUTO_INCREMENT
+  --
+  timestamp : DATETIME(6) <<NN>>
+  user_guid : BINARY(16) <<FK>>
+  action : VARCHAR(255) <<NN>>
+  target_object_guid : BINARY(16)
+  target_object_type : VARCHAR(50)
+  description : TEXT
+  details : JSON
+}
+
+' Section 6: Extensibility & Configuration
+entity "settings" as settings {
+  + key : VARCHAR(255) <<PK>>
+  --
+  value : LONGTEXT
+  description : TEXT
+  is_editable_in_ui : BOOLEAN <<NN>>
+  group_name : VARCHAR(100)
+  module_owner : VARCHAR(100)
+  updated_at : DATETIME(6) <<NN>>
+}
+
+entity "plugins" as plugins {
+  + guid : BINARY(16) <<PK>>
+  --
+  name : VARCHAR(100) <<NN>> <<UNIQUE>>
+  version : VARCHAR(30) <<NN>>
+  is_active : BOOLEAN <<NN>>
+  settings : JSON
+  installed_at : DATETIME(6) <<NN>>
+  updated_at : DATETIME(6) <<NN>>
+}
+
+entity "webhooks" as webhooks {
+  + guid : BINARY(16) <<PK>>
+  --
+  event_name : VARCHAR(255) <<NN>>
+  target_url : VARCHAR(2000) <<NN>>
+  secret : VARCHAR(255)
+  is_active : BOOLEAN <<NN>>
+  last_triggered_at : DATETIME(6)
+  last_failure_at : DATETIME(6)
+  retry_count : INT UNSIGNED <<NN>>
+  created_at : DATETIME(6) <<NN>>
+  updated_at : DATETIME(6) <<NN>>
+}
+
+' Section 7: Workflows & Collaboration
+entity "workflow_definitions" as workflow_definitions {
+  + guid : BINARY(16) <<PK>>
+  --
+  name : VARCHAR(100) <<NN>> <<UNIQUE>>
+  description : TEXT
+  initial_step_guid : BINARY(16) <<FK>>
+  applies_to_content_type_guid : BINARY(16) <<FK>>
+  is_active : BOOLEAN <<NN>>
+  created_at : DATETIME(6) <<NN>>
+  updated_at : DATETIME(6) <<NN>>
+}
+
+entity "workflow_steps" as workflow_steps {
+  + guid : BINARY(16) <<PK>>
+  --
+  workflow_definition_guid : BINARY(16) <<NN>> <<FK>>
+  name : VARCHAR(100) <<NN>>
+  description : TEXT
+  sort_order : INT <<NN>>
+  assignable_to_role_guid : BINARY(16) <<FK>>
+  settings : JSON
+  is_final_step : BOOLEAN <<NN>>
+  created_at : DATETIME(6) <<NN>>
+}
+
+entity "workflow_transitions" as workflow_transitions {
+  + guid : BINARY(16) <<PK>>
+  --
+  workflow_definition_guid : BINARY(16) <<NN>> <<FK>>
+  from_step_guid : BINARY(16) <<FK>>
+  to_step_guid : BINARY(16) <<NN>> <<FK>>
+  name : VARCHAR(100) <<NN>>
+  condition_expression : TEXT
+  created_at : DATETIME(6) <<NN>>
+}
+
+entity "content_item_workflow_state" as content_item_workflow_state {
+  content_item_guid : BINARY(16) <<PK>> <<FK>>
+  --
+  workflow_definition_guid : BINARY(16) <<NN>> <<FK>>
+  current_step_guid : BINARY(16) <<NN>> <<FK>>
+  assigned_to_user_guid : BINARY(16) <<FK>>
+  state_metadata : JSON
+  entered_step_at : DATETIME(6) <<NN>>
+  updated_at : DATETIME(6) <<NN>>
+}
+
+entity "comments" as comments {
+  + guid : BINARY(16) <<PK>>
+  --
+  target_object_guid : BINARY(16) <<NN>>
+  target_object_type : VARCHAR(50) <<NN>>
+  user_guid : BINARY(16) <<FK>>
+  parent_comment_guid : BINARY(16) <<FK>>
+  text_content : TEXT <<NN>>
+  status : VARCHAR(50) <<NN>>
+  metadata : JSON
+  created_at : DATETIME(6) <<NN>>
+  updated_at : DATETIME(6) <<NN>>
+}
+
+
+' --- Relationships ---
+
+' Users, Roles, Permissions
+users ||--o{ user_roles : User
+roles ||--o{ user_roles : Role
+roles ||--o{ role_permissions : Role
+permissions ||--o{ role_permissions : Permission
+permissions }o--|| object_permissions : Permission
+users ||--o{ object_permissions : "Created By"
+' Note: object_permissions principal/target relations are polymorphic (not directly linkable here)
+
+' Languages
+languages }o--|| languages : "Fallback"
+
+' Core Content Engine
+content_types }o--|| content_fields : Contains
+users }o--|| content_types : "Created By"
+users }o--|| content_types : "Updated By"
+users }o--|| content_fields : "Created By"
+users }o--|| content_fields : "Updated By"
+content_types }o--|| content_items : "Type Of"
+users }o--|| content_items : "Created By"
+users }o--|| content_items : "Updated By"
+content_items ||--o{ content_item_versions : "Versions Of"
+content_item_versions }o--|| content_items : "Current Version" ' 1 to 0..1
+users }o--|| content_item_versions : "Created By"
+content_item_versions ||--o{ field_values : Values
+content_fields ||--o{ field_values : "Field Definition"
+languages ||--o{ field_values : Language
+content_items }o--|| content_relationships : "From Item"
+content_items }o--|| content_relationships : "To Item"
+relationship_types }o--|| content_relationships : "Type Of"
+users }o--|| content_relationships : "Created By"
+
+' Digital Asset Management (DAM)
+licenses }o--|| media_assets : License
+users }o--|| media_assets : "Created By"
+users }o--|| media_assets : "Updated By"
+media_assets ||--o{ media_asset_translations : Translations
+languages ||--o{ media_asset_translations : Language
+media_assets ||--o{ media_renditions : Renditions
+
+' Audit Log
+users }o--|| audit_log_entries : "User Action" ' 0..1 to many
+
+' Extensibility
+' No direct FK relations shown for settings, plugins, webhooks (conceptual)
+
+' Workflows & Collaboration
+workflow_definitions ||--o{ workflow_steps : Steps
+workflow_steps }o--|| workflow_definitions : "Initial Step" ' 1 to 0..1
+content_types }o--|| workflow_definitions : "Applies To" ' 0..1 to many
+roles }o--|| workflow_steps : "Assignable Role"
+workflow_definitions ||--o{ workflow_transitions : Transitions
+workflow_steps }o--|| workflow_transitions : "From Step" ' 0..1 to many
+workflow_steps }o--|| workflow_transitions : "To Step"
+content_items ||--|| content_item_workflow_state : "Workflow State" ' 1 to 1
+workflow_definitions }o--|| content_item_workflow_state : Definition
+workflow_steps }o--|| content_item_workflow_state : "Current Step"
+users }o--|| content_item_workflow_state : "Assigned User"
+users }o--|| comments : Author ' 0..1 to many
+comments }o--|| comments : Parent ' 0..1 to many
+
+@enduml

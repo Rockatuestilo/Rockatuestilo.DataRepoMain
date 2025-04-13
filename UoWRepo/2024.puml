@@ -1,0 +1,426 @@
+@startuml
+
+' --- Settings ---
+hide empty members
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+skinparam ClassBorderColor Black
+skinparam ClassBackgroundColor White
+skinparam ArrowColor Black
+
+' --- Entities (Tables) ---
+
+entity "Users" as users {
+  + Id : int <<PK>>
+  --
+  Name : varchar(60) <<NN>>
+  LastName : varchar(60) <<NN>>
+  LoginName : varchar(60) <<NN>> <<UNIQUE>>
+  CreatedDate : timestamp <<NN>>
+  UpdatedDate : timestamp <<NN>>
+  Password : varchar(1500) <<NN>>
+  LastLogin : datetime <<NN>>
+  UserRoleLevel : int <<NN>>
+  CreatedBy : int <<NN>>
+  UpdatedBy : int <<NN>>
+  Email : varchar(255) <<UNIQUE>>
+  VerifiedAccount : bit
+  Guid : char(36) <<NN>> <<UNIQUE>>
+}
+
+entity "Roles" as roles {
+  + Id : int <<PK>>
+  --
+  Name : varchar(30) <<NN>> <<UNIQUE>>
+  Code : varchar(255) <<NN>> <<UNIQUE>>
+  Description : varchar(255) <<NN>>
+  Active : bit <<NN>>
+  CreatedDate : datetime <<NN>>
+  UpdatedDate : datetime <<NN>>
+}
+
+' Note: UsersToRoles table is missing in the snippet; "UserRoleLevel" presumably links to Roles.Id.
+
+entity "Articles" as articles {
+  + Id : int <<PK>>
+  --
+  Owner : int <<FK>> <<NN>>
+  Title : varchar(2000)
+  Content : longtext
+  CreatedDate : datetime <<NN>>
+  LastUpdateDate : datetime <<NN>>
+  Permission : int
+  ChangedById : int <<FK>>
+  CategoryId : int <<FK>>
+  PublicationType : int <<FK>>
+  GalleryId : int <<FK>>
+  Presentation : longtext
+  PublicationDate : timestamp <<NN>>
+  TitleForUrl : varchar(500)
+
+  HashtagsArticleId : int <<FK>>
+  ' Possibly links to HashtagsNews, but naming is ambiguous
+
+  ArticleVersion : int
+  OwnerUsersGuid : char(36) <<FK>> <<NN>>
+  Guid : char(36) <<NN>>
+}
+
+entity "Categories" as categories {
+  + news_categoriesID : int <<PK>>
+  ' Assuming this is the PK despite default 0
+
+  --
+  categoryOwner : int <<FK>> <<NN>>
+  news_categoryName : varchar(255)
+  levelCategory : int <<FK>>
+  CreatedByID : int <<FK>>
+  UpdatedByID : int <<FK>>
+  CreatedDate : datetime
+  updatedDate : datetime
+  Guid : char(36) <<NN>>
+}
+
+entity "categorylevels" as categorylevels {
+  + category_level_id : int <<PK>>
+  --
+  category_level : int <<NN>>
+  categoryname : varchar(100) <<NN>> <<UNIQUE>>
+  CreatedByID : int <<FK>> <<NN>>
+  UpdatedByID : int <<FK>> <<NN>>
+  CreatedDate : datetime <<NN>>
+  updatedDate : datetime <<NN>>
+}
+
+entity "NewsPublicationType" as newpublicationtype {
+  + NewsPublicationTypeID : int <<PK>>
+  --
+  TypeOfPublication : varchar(255) <<NN>>
+  LevelUser : int
+  ' Potentially links to Roles or a user-level concept
+  CreatedByID : int <<FK>>
+  UpdatedByID : int <<FK>>
+  CreatedDate : datetime
+  updatedDate : datetime
+}
+
+entity "galleries" as galleries {
+  + galleryID : int <<PK>>
+  --
+  galleryOwner : int <<FK>> <<NN>>
+  galleryName : varchar(255) <<UNIQUE>>
+  galleryPath : varchar(255) <<NN>>
+  CreatedByID : int <<FK>>
+  UpdatedByID : int <<FK>>
+  CreatedDate : datetime
+  updatedDate : datetime
+  categorylevel : int <<FK>>
+  publishtype : int <<FK>>
+}
+
+entity "Hashtags" as hashtags {
+  + Id : int <<PK>>
+  --
+  HashtagWord : varchar(255) <<NN>>
+  Allowed : tinyint <<NN>>
+  CreatedByID : int <<FK>>
+  UpdatedByID : int <<FK>>
+  CreatedDate : datetime
+  updatedDate : datetime
+}
+
+entity "HashtagsNews" as hashtagsnews {
+  + Id : int <<PK>>
+  --
+  NewsID : int <<FK>>
+  HashtagID : int <<FK>>
+  CreatedByID : int <<FK>>
+  UpdatedByID : int <<FK>>
+  CreatedDate : datetime
+  updatedDate : datetime
+}
+
+entity "ArticlesViewForUI" as articlesviewforui {
+  + Id : int <<PK>>
+  --
+  ArticleId : int <<FK>> <<NN>> <<UNIQUE>>
+  UIString : text
+  CreatedByID : int <<FK>> <<NN>>
+  UpdatedById : int <<FK>> <<NN>>
+  CreatedDate : datetime <<NN>>
+  UpdatedDate : datetime <<NN>>
+  LastUpdateOfArticle : datetime <<NN>>
+}
+
+entity "Artists" as artists {
+  + ArtistID : char(36) <<PK>>
+  --
+  ArtistName : varchar(255) <<NN>>
+  Inserted : datetime <<NN>>
+  InsertedByUserID : int <<FK>> <<NN>>
+  Updated : datetime <<NN>>
+  UpdatedByUserID : int <<FK>> <<NN>>
+}
+
+entity "GenericPreviewImages" as genericpreviewimages {
+  + id : int <<PK>>
+  --
+  Base64String : longtext <<NN>>
+  Inserted : datetime <<NN>>
+  InsertedByUserID : int <<FK>> <<NN>>
+  Updated : datetime <<NN>>
+  UpdatedByUserID : int <<FK>> <<NN>>
+  MaxSize : int <<NN>>
+  PathToImage : varchar(255)
+}
+
+entity "ArtistPreviewImage" as artistpreviewimage {
+  + ArtistPreviewImageID : char(36) <<PK>>
+  --
+  ArtistID : char(36) <<FK>> <<NN>>
+  PreviewImageID : int <<FK>> <<NN>>
+}
+
+entity "Media" as media {
+  + Guid : char(36) <<PK>>
+  --
+  FilePath : varchar(500) <<NN>>
+  MediaType : enum('Image', 'Video', 'Audio', 'Document') <<NN>>
+  Author : varchar(255)
+  License : varchar(255)
+  CreatedDate : timestamp
+  UpdatedDate : timestamp
+}
+
+entity "Subjects" as subjects {
+  + Guid : char(36) <<PK>>
+  --
+  Name : varchar(255) <<NN>>
+  Type : enum('Artist', 'Person', 'Object') <<NN>>
+  Description : text
+  CreatedDate : timestamp
+  UpdatedDate : timestamp
+}
+
+entity "SubjectMedia" as subjectmedia {
+  + Guid : char(36) <<PK>>
+  --
+  SubjectGuid : char(36) <<FK>> <<NN>>
+  MediaGuid : char(36) <<FK>> <<NN>>
+  IsFeatured : tinyint(1)
+  CreatedDate : timestamp
+  UpdatedDate : timestamp
+}
+
+entity "SubjectRelationships" as subjectrelationships {
+  + Guid : char(36) <<PK>>
+  --
+  FromSubjectGuid : char(36) <<FK>> <<NN>>
+  ToSubjectGuid : char(36) <<FK>> <<NN>>
+  RelationshipType : enum('Related', 'PartOf', 'Member') <<NN>>
+  CreatedDate : timestamp
+  UpdatedDate : timestamp
+}
+
+entity "Types" as types {
+  + Guid : char(36) <<PK>>
+  --
+  TypeName : varchar(255) <<NN>>
+  CreatedDate : datetime <<NN>>
+  UpdatedDate : datetime <<NN>>
+}
+
+entity "Associations" as associations {
+  + Guid : char(36) <<PK>>
+  --
+  Id : int <<NN>>
+  ' Ambiguous role, not PK?
+
+  CreatedDate : datetime <<NN>>
+  UpdatedDate : datetime <<NN>>
+  CreatedById : int <<FK>> <<NN>>
+  UpdatedById : int <<FK>> <<NN>>
+  AssociatedTypeGuid : char(36) <<FK>> <<NN>>
+  ObjectTypeGuid : char(36) <<FK>> <<NN>>
+  ObjectGuid : char(36) <<NN>>
+  ' Refers to an object via GUID
+
+  AssociatedGuid : char(36) <<NN>>
+  ' Refers to another object via GUID
+}
+
+entity "SharedObject" as sharedobject {
+  + ID : int <<PK>>
+  --
+  SharingSocialNetworkID : int <<FK>> <<NN>>
+  Note : varchar(255)
+  CreatedDate : datetime
+  updatedDate : datetime
+  IdOfSharedElement : int
+  ' Potentially FK to various tables (e.g., Articles.Id)
+  typeId : int
+  ' Potentially FK to Types.Id or a similar concept
+}
+
+entity "SharingSocialNetwork" as sharingsocialnetwork {
+  + ID : int <<PK>>
+  --
+  NameOfSocialNetwork : varchar(255) <<UNIQUE>>
+  CreatedDate : datetime
+  updatedDate : datetime
+}
+
+' --- Other Tables (Less connected or utility) ---
+
+entity "CMSLog" as cmslog {
+  + Id : int <<PK>>
+  --
+  Date : datetime <<NN>>
+  Thread : varchar(255) <<NN>>
+  Level : varchar(50) <<NN>>
+  Logger : varchar(255) <<NN>>
+  Message : varchar(4000) <<NN>>
+  Exception : varchar(2000)
+}
+
+entity "VersionInfo" as versioninfo {
+  Version : bigint <<NN>> <<UNIQUE>>
+}
+
+entity "pendingRegistration" as pendingregistration {
+  + pendingID : int <<PK>>
+  --
+  userIDTableKey : int <<NN>> <<UNIQUE>>
+  ' Potentially FK to Users.Id after registration
+
+  UserName : varchar(60) <<NN>>
+  UserLastName : varchar(60) <<NN>>
+  UserLoginName : varchar(60) <<NN>>
+  UserCreatedDate : timestamp <<NN>>
+  UserUpdatedDate : timestamp <<NN>>
+  email : varchar(255) <<NN>>
+  id1 : varchar(300)
+  id2 : varchar(300)
+  id3 : varchar(300)
+  id4 : varchar(300)
+  emailMD5 : varchar(300) <<NN>>
+  UserLoginNameMD5 : varchar(300) <<NN>>
+}
+
+entity "news_categories_backup" as news_categories_backup {
+  + news_categoriesID : int <<PK>>
+  ' Assuming this is the PK despite default 0
+
+  --
+  categoryOwner : int <<NN>>
+  news_categoryName : varchar(255)
+  levelCategory : int
+  CreatedByID : int
+  UpdatedByID : int
+  CreatedDate : datetime
+  updatedDate : datetime
+  Guid : char(36) <<NN>>
+}
+
+entity "tb_news_backup" as tb_news_backup {
+  + Guid : char(36) <<PK>>
+  ' Assuming GUID is PK based on pattern
+
+  --
+  newsID : int <<NN>>
+  newsOwner : int <<NN>>
+  newsTittel : varchar(2000)
+  newsContent : text
+  newsCreatedDate : datetime <<NN>>
+  newsLastUpdateDate : datetime <<NN>>
+  newsPermission : int
+  newsChangedByID : int
+  category_id : int
+  publicationType : int
+  galleryID : int
+  newsPresentation : varchar(2000)
+  publicationdate : timestamp <<NN>>
+  titleforURL : varchar(500)
+  HashtagsNewsId : int
+  ArticleVersion : int
+  OwnerUsersGuid : char(36) <<NN>>
+}
+
+' --- Relationships ---
+
+' Articles Relationships
+users        ||--o{ articles          : "Owner"
+users        ||--o{ articles          : "ChangedById (User who changed)"
+users        ||--o{ articles          : "OwnerUsersGuid (Guid)"
+categories   }o--|| articles          : "CategoryId"
+newpublicationtype }o--|| articles    : "PublicationType"
+galleries    }o--|| articles          : "GalleryId"
+
+' HashtagsNews is a linking table: Articles <-> Hashtags
+articles     ||--o{ hashtagsnews      : "NewsID"
+hashtags     ||--o{ hashtagsnews      : "HashtagID"
+
+' Articles View UI Relationship
+articles     ||--|| articlesviewforui : "ArticleId"
+users        ||--o{ articlesviewforui : "CreatedByID"
+users        ||--o{ articlesviewforui : "UpdatedById"
+
+' Categories Relationships
+users        ||--o{ categories        : "categoryOwner"
+users        ||--o{ categories        : "CreatedByID"
+users        ||--o{ categories        : "UpdatedByID"
+categorylevels }o--|| categories      : "levelCategory"
+
+' Category Levels Relationship
+users        ||--o{ categorylevels    : "CreatedByID"
+users        ||--o{ categorylevels    : "UpdatedByID"
+
+' Galleries Relationships
+users        ||--o{ galleries         : "galleryOwner"
+users        ||--o{ galleries         : "CreatedByID"
+users        ||--o{ galleries         : "UpdatedByID"
+categorylevels }o--|| galleries       : "categorylevel"
+newpublicationtype }o--|| galleries   : "publishtype"
+
+' Hashtags Relationships
+users        ||--o{ hashtags          : "CreatedByID"
+users        ||--o{ hashtags          : "UpdatedByID"
+
+' HashtagsNews Relationships
+users        ||--o{ hashtagsnews      : "CreatedByID"
+users        ||--o{ hashtagsnews      : "UpdatedByID"
+
+' NewsPublicationType Relationships
+users        ||--o{ newpublicationtype : "CreatedByID"
+users        ||--o{ newpublicationtype : "UpdatedByID"
+
+' Artists Relationships
+users        ||--o{ artists           : "InsertedByUserID"
+users        ||--o{ artists           : "UpdatedByUserID"
+
+' GenericPreviewImages Relationships
+users        ||--o{ genericpreviewimages : "InsertedByUserID"
+users        ||--o{ genericpreviewimages : "UpdatedByUserID"
+
+' ArtistPreviewImage (Linking Table Artists <-> GenericPreviewImages)
+artists            ||--o{ artistpreviewimage    : "ArtistID"
+genericpreviewimages ||--o{ artistpreviewimage  : "PreviewImageID"
+
+' Subjects, Media, and their relationships
+subjects      ||--o{ subjectmedia : "SubjectGuid"
+media         ||--o{ subjectmedia : "MediaGuid"
+
+' A self-relationship entity
+subjects      -- subjectrelationships : "FromSubjectGuid"
+subjects      -- subjectrelationships : "ToSubjectGuid"
+
+' Associations (Complex linking table)
+types         }o--|| associations  : "AssociatedTypeGuid"
+types         }o--|| associations  : "ObjectTypeGuid"
+users         ||--o{ associations  : "CreatedById"
+users         ||--o{ associations  : "UpdatedById"
+
+' Shared Object Relationships
+sharingsocialnetwork ||--o{ sharedobject : "SharingSocialNetworkID"
+
+@enduml
