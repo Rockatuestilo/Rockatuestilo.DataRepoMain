@@ -1,8 +1,6 @@
 using Bogus;
 using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.EFDomain;
-using UoWRepo.Core.LinqDomain;
-
 
 namespace UoWRepo.Tests.Units.Core.BaseDomain;
 
@@ -76,7 +74,6 @@ public class ArticlesViewForUiTests
         var values = CreateTestValuesValid<ArticlesViewForUi>(50);
         
         var json = System.Text.Json.JsonSerializer.Serialize(values);
-        var newsEttyLinq2DBs = System.Text.Json.JsonSerializer.Deserialize<List<ArticlesViewForUi>>(json);
         var newsEttyEfCores = System.Text.Json.JsonSerializer.Deserialize<List<ArticlesViewForUi>>(json);
             
 
@@ -85,22 +82,13 @@ public class ArticlesViewForUiTests
         for (int i = 0; i < values.Count; i++)
         {
             // Arrange
-            var newsEttyLinq2Db = newsEttyLinq2DBs?[i];
+       
             var newsEttyEfCore = newsEttyEfCores?[i];
 
             // Act
-            var isValidLinq2DB = DynamicValidator.TryValidateObject(newsEttyLinq2Db!, out var validationErrorsLinq2Db);
             var isValidEfCore = DynamicValidator.TryValidateObject(newsEttyEfCore!, out var validationErrorsEfCore);
             //var isValid = newsEtty.IsValid();
-            
-            // both are equal
-            Assert.That(isValidEfCore, Is.EqualTo(isValidLinq2DB));
-
-            if (!isValidLinq2DB)
-            {
-                Console.WriteLine(string.Join("\n", validationErrorsLinq2Db));
-            }
-
+     
             if (!isValidEfCore)
             {
                 Console.WriteLine(string.Join("\n", validationErrorsEfCore));
@@ -109,7 +97,6 @@ public class ArticlesViewForUiTests
 
 
             // Assert are equal
-            Assert.That(isValidLinq2DB, Is.False);
             Assert.That(isValidEfCore, Is.False);
         }
 
