@@ -1,6 +1,5 @@
 using UoWRepo.Core.BaseDomain;
-using HashTags = UoWRepo.Core.LinqDomain.HashTags; // Adjust namespace based on your project structure
-using Hashtagsv2 = UoWRepo.Core.EFDomain.HashTags;
+using UoWRepo.Core.EFDomain;
 // Adjust namespace based on your project structure
 
 namespace UoWRepo.Tests.Units.Core.BaseDomain
@@ -24,7 +23,7 @@ namespace UoWRepo.Tests.Units.Core.BaseDomain
         
         public IHashTags GetHashTagVersion2()
         {
-            return new Hashtagsv2
+            return new HashTags
             {
                 Id = 1,
                 HashtagWord = "test",

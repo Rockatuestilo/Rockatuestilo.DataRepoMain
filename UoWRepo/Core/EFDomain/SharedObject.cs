@@ -7,24 +7,24 @@ namespace UoWRepo.Core.EFDomain;
 [Table("SharedObject")]
 public class SharedObjectLinqDB : TEntity, ITEntity
 {
-    [LinqToDB.Mapping.Column("Sharingsocialnetworkid")]
+    [Column("Sharingsocialnetworkid")]
     public int Sharingsocialnetworkid { get; set; }
 
-    [LinqToDB.Mapping.Column("Note")] public string Note { get; set; }
+    [Column("Note")] public string Note { get; set; }
 
-    [LinqToDB.Mapping.Column("IdOfSharedelement")]
+    [Column("IdOfSharedelement")]
     public int IdOfSharedelement { get; set; }
 
-    [LinqToDB.Mapping.Column("Typeid")] public int Typeid { get; set; }
+    [Column("Typeid")] public int Typeid { get; set; }
 
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [LinqToDB.Mapping.Column("Id")]
+    [Column("Id")]
     public new int Id { get; set; }
 
-    [LinqToDB.Mapping.Column("Createddate")]
+    [Column("Createddate")]
     public DateTime CreatedDate { get; set; }
 
-    [LinqToDB.Mapping.Column("Updateddate")]
+    [Column("Updateddate")]
     public new DateTime UpdatedDate { get; set; }
 }

@@ -1,5 +1,6 @@
 using Bogus;
 using UoWRepo.Core.BaseDomain;
+using UoWRepo.Core.EFDomain;
 using UoWRepo.Core.LinqDomain;
 
 
@@ -71,6 +72,7 @@ public class ArticlesViewForUiTests
 
     public void ItShouldBeValid()
     {
+        
         var values = CreateTestValuesValid<ArticlesViewForUi>(50);
         
         var json = System.Text.Json.JsonSerializer.Serialize(values);
