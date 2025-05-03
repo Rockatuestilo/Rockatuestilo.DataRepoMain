@@ -8,8 +8,7 @@ using UoWRepo.Core.EFDomain;
 using UoWRepo.Core.Repositories;
 using UoWRepo.Migrations;
 using UoWRepo.Persistence.RepositoriesEf;
-//using UoWRepo.Core.Domain;
-//using UoWRepo.Persistence.Repositories;
+
 
 namespace UoWRepo.Persistence.UnitiesOfWork;
 
