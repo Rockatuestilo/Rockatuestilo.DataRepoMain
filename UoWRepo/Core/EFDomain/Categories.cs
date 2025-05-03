@@ -19,10 +19,6 @@ public class Categories : TEntity, ITEntity
     [Column("CreatedByID")] public int CreatedById { get; set; }
 
     [Column("UpdatedByID")] public int UpdatedById { get; set; }
-
-    [Column("CreatedDate")] public DateTime CreatedDate { get; set; }
-
-    [Column("updatedDate")] public new DateTime UpdatedDate { get; set; }
     
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

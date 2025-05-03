@@ -25,8 +25,4 @@ public class Galleries : TEntity, ITEntity
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Column("galleryID")]
     public new int Id { get; set; }
-
-    [Column("CreatedDate")] public DateTime? CreatedDate { get; set; }
-
-    [Column("updatedDate")] public new DateTime? UpdatedDate { get; set; }
 }

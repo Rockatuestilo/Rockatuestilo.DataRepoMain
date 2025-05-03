@@ -14,16 +14,5 @@ public class HashTagsNews : TEntity, ITEntity
     [Column("CreatedByID")] public int CreatedById { get; set; }
 
     [Column("UpdatedByID")] public int UpdatedById { get; set; }
-
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [Column("Id")]
-    public new int Id { get; set; }
-
-    [Column("updatedDate")] public new DateTime UpdatedDate { get; set; }
-
-    public static explicit operator HashTagsNews(int v)
-    {
-        throw new NotImplementedException();
-    }
+    
 }

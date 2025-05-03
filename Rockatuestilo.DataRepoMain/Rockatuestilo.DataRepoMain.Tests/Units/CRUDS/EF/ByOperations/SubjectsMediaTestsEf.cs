@@ -33,7 +33,7 @@ public class SubjectsMediaTestsEf
         {
             Guid = Guid.NewGuid(),
             Name = "Test Subject",
-            Type = "Artist",
+         
             Description = "A test subject description."
         };
 
@@ -77,7 +77,6 @@ public class SubjectsMediaTestsEf
         {
             Guid = Guid.NewGuid(),
             Name = "Test Subject",
-            Type = "Person",
             Description = "Description"
         };
         var media = new Media

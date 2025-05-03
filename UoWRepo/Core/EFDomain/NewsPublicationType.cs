@@ -19,8 +19,4 @@ public class NewsPublicationType : TEntity, ITEntity
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Column("NewsPublicationTypeID")]
     public new int Id { get; set; }
-
-    [Column("CreatedDate")] public DateTime CreatedDate { get; set; }
-
-    [Column("updatedDate")] public new DateTime UpdatedDate { get; set; }
 }
