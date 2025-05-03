@@ -12,7 +12,7 @@ namespace UoWRepo.Core.EFDomain
         [ForeignKey("AssociatedType")]
         [Column("AssociatedTypeGuid")]
         public Guid AssociatedTypeGuid { get; set; }
-        public virtual TypeAssociation AssociatedType { get; set; }
+        //public virtual TypeAssociation AssociatedType { get; set; }
 
         [Column("ObjectGuid")]
         public Guid ObjectGuid { get; set; }
@@ -20,7 +20,7 @@ namespace UoWRepo.Core.EFDomain
         [ForeignKey("ObjectType")]
         [Column("ObjectTypeGuid")]
         public Guid ObjectTypeGuid { get; set; }
-        public virtual TypeAssociation ObjectType { get; set; }
+        //public virtual TypeAssociation ObjectType { get; set; }
         
         [Column("CreatedById")]
         public new int CreatedById { get; set; }

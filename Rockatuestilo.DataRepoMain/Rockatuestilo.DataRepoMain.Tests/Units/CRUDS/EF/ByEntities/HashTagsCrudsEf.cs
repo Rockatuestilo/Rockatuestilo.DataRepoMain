@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using NUnit.Framework;
+using Rockatuestilo.DataRepoMain.Tests.TestData.Users;
 using Rockatuestilo.DataRepoMain.Tests.Tools.Contexts;
 using UoWRepo.Core.EFDomain;
 using UoWRepo.Persistence.UnitiesOfWork;
@@ -34,7 +35,7 @@ public class HashTagsCrudsEf
 
         if (result.Count == 0)
         {
-            //var users = new TestDataUsers1().GetDataEf();
+            var users = new TestDataUsers1().GetDataEf();
 
             _unitOfWorkEf.HashTags.Add(value);
             _unitOfWorkEf.Complete();
