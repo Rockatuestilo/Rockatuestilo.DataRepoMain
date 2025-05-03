@@ -30,7 +30,7 @@ public class Subjects : TEntityGuid // Inherits Guid, CreatedDate, UpdatedDate
 
     // --- Navigation Property ---
     // Optional but recommended: Navigation property to the related SubjectTypes entity
-    public virtual SubjectTypes? SubjectType { get; set; }
+    //public virtual SubjectTypes? SubjectType { get; set; }
 
     // Optional: Collection of SubjectMedia linking this Subject to Media
     // public virtual ICollection<SubjectMedia>? MediaLinks { get; set; }

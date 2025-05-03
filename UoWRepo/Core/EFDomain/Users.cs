@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -38,4 +39,6 @@ public class Users : TEntity, ITEntity
     [Column("GUID")]
     public Guid Guid { get; set; }
     public bool VerifiedAccount { get; set; }
+    
+    //public virtual ICollection<Authors> Authors { get; set; } = new List<Authors>();
 }

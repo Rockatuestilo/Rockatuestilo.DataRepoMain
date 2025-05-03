@@ -51,7 +51,7 @@ public class Media : TEntityGuid
     // --- Navigation Properties ---
 
     // Optional: Navigation property to the actual Author entity
-    public virtual Authors? AuthorRef { get; set; }
+    //public virtual Authors? AuthorRef { get; set; }
 
     // Optional: Navigation property to the User who uploaded it
     // public virtual Users? UploadedByUser { get; set; }

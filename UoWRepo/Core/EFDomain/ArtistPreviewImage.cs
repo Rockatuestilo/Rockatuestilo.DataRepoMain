@@ -25,7 +25,7 @@ public class ArtistPreviewImage: TEntityGuid // No inheritance needed as it has 
     // --- Navigation Properties ---
     // Define these based on your actual entity class names
 
-    public virtual Artists? Artist { get; set; } // Assuming an 'Artists' entity exists
+    //public virtual Artists? Artist { get; set; } // Assuming an 'Artists' entity exists
 
-    public virtual GenericPreviewImages? PreviewImage { get; set; } // Assuming a 'GenericPreviewImages' entity exists
+    //public virtual GenericPreviewImages? PreviewImage { get; set; } // Assuming a 'GenericPreviewImages' entity exists
 }

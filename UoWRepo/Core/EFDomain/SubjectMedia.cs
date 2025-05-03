@@ -13,13 +13,13 @@ public class SubjectMedia : TEntityGuid // Inherits Guid, CreatedDate, UpdatedDa
     [ForeignKey("Subject")]
     [Column("SubjectGuid")]
     public Guid SubjectGuid { get; set; }
-    public virtual Subjects? Subject { get; set; } // Corrected Navigation Property
+    //public virtual Subjects? Subject { get; set; } // Corrected Navigation Property
 
     [Required]
     [ForeignKey("Media")]
     [Column("MediaGuid")]
     public Guid MediaGuid { get; set; }
-    public virtual Media? Media { get; set; } // Corrected Navigation Property
+    //public virtual Media? Media { get; set; } // Corrected Navigation Property
 
     [Column("IsFeatured")]
     public bool IsFeatured { get; set; } = false;
