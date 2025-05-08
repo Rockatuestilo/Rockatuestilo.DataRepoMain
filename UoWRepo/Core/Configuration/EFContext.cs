@@ -65,6 +65,16 @@ public class EFContext : DbContext, ICommonContext
     public DbSet<Media> Media { get; set; }
     public DbSet<SubjectMedia> SubjectMedia { get; set; }
     public DbSet<SubjectRelationships> SubjectRelationships { get; set; }
+    
+    // 1) Entidad Authors
+    public DbSet<Authors> Authors { get; set; }
+
+    // 2) Entidad ArticleMedia (la tabla N:M Artículo–Media)
+    public DbSet<ArticleMedia> ArticleMedia { get; set; }
+
+    // 3) Entidad SubjectTypes (lookup de tipos de subject)
+    public DbSet<SubjectTypes> SubjectTypes { get; set; }
+    
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

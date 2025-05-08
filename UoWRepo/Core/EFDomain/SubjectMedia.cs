@@ -5,35 +5,63 @@ using UoWRepo.Core.BaseDomain;
 using UoWRepo.Core.EFDomain;
 
 [Table("SubjectMedia")]
-public class SubjectMedia : TEntityGuid // Inherits Guid, CreatedDate, UpdatedDate
-{
-    // Inherited: Guid (PK), CreatedDate, UpdatedDate
+    // Inherits: Guid (PK), CreatedDate, UpdatedDate
+    public class SubjectMedia : TEntityGuid
+    {
+        [Required]
+        [Column("SubjectGuid")]
+        public Guid SubjectGuid { get; set; }
 
-    [Required]
-    [ForeignKey("Subject")]
-    [Column("SubjectGuid")]
-    public Guid SubjectGuid { get; set; }
-    //public virtual Subjects? Subject { get; set; } // Corrected Navigation Property
+        [Required]
+        [Column("MediaGuid")]
+        public Guid MediaGuid { get; set; }
 
-    [Required]
-    [ForeignKey("Media")]
-    [Column("MediaGuid")]
-    public Guid MediaGuid { get; set; }
-    //public virtual Media? Media { get; set; } // Corrected Navigation Property
+        [Column("IsFeatured")]
+        public bool IsFeatured { get; set; } = false;
 
-    [Column("IsFeatured")]
-    public bool IsFeatured { get; set; } = false;
+        [Column("CreatedByGuid")]
+        public Guid? CreatedByGuid { get; set; }
 
-    // --- ADD THESE MISSING PROPERTIES ---
-    [Column("CreatedByGuid")]
-    // Optional: Add [ForeignKey("CreatedByUser")] if defining that navigation property
-    public Guid? CreatedByGuid { get; set; } // Nullable Guid
+        [Column("UpdatedByGuid")]
+        public Guid? UpdatedByGuid { get; set; }
 
-    [Column("UpdatedByGuid")]
-    // Optional: Add [ForeignKey("UpdatedByUser")] if defining that navigation property
-    public Guid? UpdatedByGuid { get; set; } // Nullable Guid
+        // --- Navigation Properties ---
 
-    // --- Optional Navigation Properties for User Guids ---
-    // public virtual Users? CreatedByUser { get; set; } // Assuming Users has Guid PK
-    // public virtual Users? UpdatedByUser { get; set; }
-}
+        /// <summary>
+        /// El subject al que está vinculado este medio.
+        /// Asegúrate de que Subjects tenga:
+        /// [InverseProperty(nameof(SubjectMedia.Subject))]
+        /// public virtual ICollection&lt;SubjectMedia&gt;? SubjectMediaItems { get; set; }
+        /// </summary>
+        [ForeignKey(nameof(SubjectGuid))]
+        [InverseProperty(nameof(Subjects.SubjectMediaItems))]
+        public virtual Subjects? Subject { get; set; }
+
+        /// <summary>
+        /// El medio vinculado al subject.
+        /// Asegúrate de que Media tenga:
+        /// [InverseProperty(nameof(SubjectMedia.Media))]
+        /// public virtual ICollection&lt;SubjectMedia&gt;? SubjectMediaItems { get; set; }
+        /// </summary>
+        [ForeignKey(nameof(MediaGuid))]
+        [InverseProperty(nameof(Media.SubjectMediaItems))]
+        public virtual Media? Media { get; set; }
+
+        /// <summary>
+        /// Opcional: Usuario que creó esta relación.
+        /// Asegúrate de que Users tenga:
+        /// [InverseProperty(nameof(SubjectMedia.CreatedByUser))]
+        /// public virtual ICollection&lt;SubjectMedia&gt;? CreatedSubjectMedia { get; set; }
+        /// </summary>
+        [ForeignKey(nameof(CreatedByGuid))]
+        public virtual Users? CreatedByUser { get; set; }
+
+        /// <summary>
+        /// Opcional: Usuario que actualizó esta relación por última vez.
+        /// Asegúrate de que Users tenga:
+        /// [InverseProperty(nameof(SubjectMedia.UpdatedByUser))]
+        /// public virtual ICollection&lt;SubjectMedia&gt;? UpdatedSubjectMedia { get; set; }
+        /// </summary>
+        [ForeignKey(nameof(UpdatedByGuid))]
+        public virtual Users? UpdatedByUser { get; set; }
+    }
