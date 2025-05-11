@@ -39,15 +39,15 @@ public class Media : TEntityGuid
     [Column("AuthorGuid")]
     public Guid? AuthorGuid { get; set; }
 
-    [ForeignKey(nameof(AuthorGuid))]
+    /*[ForeignKey(nameof(AuthorGuid))]
     [InverseProperty(nameof(Authors.MediaItems))]
-    public virtual Authors? Author { get; set; }
+    public virtual Authors? Author { get; set; }*/
 
     // --- Navigation collections ---
 
-    [InverseProperty(nameof(SubjectMedia.Media))]
-    public virtual ICollection<SubjectMedia>? SubjectMediaItems { get; set; }
+    //[InverseProperty(nameof(SubjectMedia.Media))]
+    //public virtual ICollection<SubjectMedia>? SubjectMediaItems { get; set; }
 
-    [InverseProperty(nameof(ArticleMedia.Media))]
-    public virtual ICollection<ArticleMedia>? ArticleMediaItems { get; set; }
+    //[InverseProperty(nameof(ArticleMedia.Media))]
+    //public virtual ICollection<ArticleMedia>? ArticleMediaItems { get; set; }
 }

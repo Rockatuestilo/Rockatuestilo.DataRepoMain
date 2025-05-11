@@ -25,7 +25,7 @@ using UoWRepo.Core.EFDomain;
         [Column("UpdatedByGuid")]
         public Guid? UpdatedByGuid { get; set; }
 
-        // --- Navigation Properties ---
+        /*// --- Navigation Properties ---
 
         /// <summary>
         /// El subject al que está vinculado este medio.
@@ -63,5 +63,5 @@ using UoWRepo.Core.EFDomain;
         /// public virtual ICollection&lt;SubjectMedia&gt;? UpdatedSubjectMedia { get; set; }
         /// </summary>
         [ForeignKey(nameof(UpdatedByGuid))]
-        public virtual Users? UpdatedByUser { get; set; }
+        public virtual Users? UpdatedByUser { get; set; }*/
     }
