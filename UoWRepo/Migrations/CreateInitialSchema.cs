@@ -161,10 +161,10 @@ namespace UoWRepo.Migrations // Adjust your namespace if needed
                  .WithColumn("UpdatedDate").AsDateTime().NotNullable()
                  .WithColumn("LastUpdateOfArticle").AsDateTime().NotNullable();
 
-            // --- Section: GUID-based Entities (Subjects, Media, etc.) ---
+            // --- Section: GUID-based Entities (SubjectsDatamodel, Media, etc.) ---
 
-            // Create Subjects table
-            Create.Table("Subjects")
+            // Create SubjectsDatamodel table
+            Create.Table("SubjectsDatamodel")
                 .WithColumn("Guid").AsFixedLengthString(36).NotNullable().PrimaryKey("pk_subjects") // CHAR(36)
                 .WithColumn("Name").AsString(255).NotNullable()
                 .WithColumn("Type").AsString(50).NotNullable() // ENUM stored as string
@@ -185,7 +185,7 @@ namespace UoWRepo.Migrations // Adjust your namespace if needed
              // Create SubjectMedia linking table
              Create.Table("SubjectMedia")
                  .WithColumn("Guid").AsFixedLengthString(36).NotNullable().PrimaryKey("pk_subjectmedia")
-                 .WithColumn("SubjectGuid").AsFixedLengthString(36).NotNullable().ForeignKey("fk_subjectmedia_subject", "Subjects", "Guid").Indexed()
+                 .WithColumn("SubjectGuid").AsFixedLengthString(36).NotNullable().ForeignKey("fk_subjectmedia_subject", "SubjectsDatamodel", "Guid").Indexed()
                  .WithColumn("MediaGuid").AsFixedLengthString(36).NotNullable().ForeignKey("fk_subjectmedia_media", "Media", "Guid").Indexed()
                  .WithColumn("IsFeatured").AsBoolean().Nullable().WithDefaultValue(false) // tinyint(1)
                  .WithColumn("CreatedDate").AsDateTime().Nullable().WithDefault(SystemMethods.CurrentDateTime) // TIMESTAMP
@@ -194,8 +194,8 @@ namespace UoWRepo.Migrations // Adjust your namespace if needed
              // Create SubjectRelationships table
              Create.Table("SubjectRelationships")
                  .WithColumn("Guid").AsFixedLengthString(36).NotNullable().PrimaryKey("pk_subjectrelationships")
-                 .WithColumn("FromSubjectGuid").AsFixedLengthString(36).NotNullable().ForeignKey("fk_subjectrel_from", "Subjects", "Guid").Indexed()
-                 .WithColumn("ToSubjectGuid").AsFixedLengthString(36).NotNullable().ForeignKey("fk_subjectrel_to", "Subjects", "Guid").Indexed()
+                 .WithColumn("FromSubjectGuid").AsFixedLengthString(36).NotNullable().ForeignKey("fk_subjectrel_from", "SubjectsDatamodel", "Guid").Indexed()
+                 .WithColumn("ToSubjectGuid").AsFixedLengthString(36).NotNullable().ForeignKey("fk_subjectrel_to", "SubjectsDatamodel", "Guid").Indexed()
                  .WithColumn("RelationshipType").AsString(50).NotNullable() // ENUM stored as string
                  .WithColumn("CreatedDate").AsDateTime().Nullable().WithDefault(SystemMethods.CurrentDateTime) // TIMESTAMP
                  .WithColumn("UpdatedDate").AsDateTime().Nullable().WithDefault(SystemMethods.CurrentDateTime); // ON UPDATE?
@@ -281,7 +281,7 @@ namespace UoWRepo.Migrations // Adjust your namespace if needed
             Delete.Table("SubjectRelationships");
             Delete.Table("SubjectMedia");
             Delete.Table("Media");
-            Delete.Table("Subjects");
+            Delete.Table("SubjectsDatamodel");
             Delete.Table("ArticlesViewForUI");
             Delete.Table("HashtagsNews");
             Delete.Table("Hashtags");

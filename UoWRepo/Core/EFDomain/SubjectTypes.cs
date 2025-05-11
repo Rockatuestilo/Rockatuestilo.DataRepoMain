@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -7,33 +8,32 @@ using UoWRepo.Core.BaseDomain;
 namespace UoWRepo.Core.EFDomain;
 
 [Table("SubjectTypes")]
-[Index(nameof(Code), IsUnique = true)] // Defines the unique constraint on Code
-public class SubjectTypes : TEntityGuid // Inherits Guid PK and CreatedDate/UpdatedDate
+[Index(nameof(Code), IsUnique = true)]
+public class SubjectTypes : TEntityGuid  // Hereda: Guid PK, CreatedDate, UpdatedDate
 {
-
     [Required]
     [StringLength(50)]
     [Column("Code")]
     public string Code { get; set; } = null!;
 
-    [Column("Description", TypeName = "text")] // Explicitly mapping for TEXT
+    [Column("Description", TypeName = "text")]
     public string? Description { get; set; }
 
     [Column("CreatedByGuid")]
-    // Optionally add ForeignKey attribute if you have a navigation property to Users using GUIDs
-    // [ForeignKey("CreatedByUser")]
-    public Guid? CreatedByGuid { get; set; } // Nullable
+    public Guid? CreatedByGuid { get; set; }
+
+    [ForeignKey(nameof(CreatedByGuid))]
+    [InverseProperty(nameof(Users.CreatedSubjectTypes))]
+    public virtual Users? CreatedByUser { get; set; }
 
     [Column("UpdatedByGuid")]
-    // Optionally add ForeignKey attribute if you have a navigation property to Users using GUIDs
-    // [ForeignKey("UpdatedByUser")]
-    public Guid? UpdatedByGuid { get; set; } // Nullable
+    public Guid? UpdatedByGuid { get; set; }
 
-    // --- Navigation Properties (Optional) ---
-    // Assuming you have a Users entity with a Guid PK
-    // public virtual Users? CreatedByUser { get; set; }
-    // public virtual Users? UpdatedByUser { get; set; }
+    [ForeignKey(nameof(UpdatedByGuid))]
+    [InverseProperty(nameof(Users.UpdatedSubjectTypes))]
+    public virtual Users? UpdatedByUser { get; set; }
 
-    // Optional: Collection of Subjects of this type
-    // public virtual ICollection<Subjects>? Subjects { get; set; }
+    // Inversa a SubjectsDatamodel.SubjectType
+    [InverseProperty(nameof(SubjectsDatamodel.SubjectType))]
+    public virtual ICollection<SubjectsDatamodel>? RelatedSubjects { get; set; }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using UoWRepo.Core.BaseDomain;
@@ -8,6 +9,8 @@ namespace UoWRepo.Core.EFDomain;
 [Table("Articles")] // Updated table name to Articles
 public class ArticleDataModel : TEntity, IArticleDataModel, ITEntity
 {
+    
+
     [Column("Owner")] // Updated column name to Owner
     public int OwnerId { get; set; } // Updated property name to OwnerId
 
@@ -58,4 +61,10 @@ public class ArticleDataModel : TEntity, IArticleDataModel, ITEntity
     [Required]
     [Column("OwnerUsersGuid")] 
     public Guid OwnerUsersGuid { get; set; }
+    
+    /// <summary>
+    /// Navegación a los medios asociados a este artículo.
+    /// </summary>
+    [InverseProperty(nameof(ArticleMedia.Article))]
+    public virtual ICollection<ArticleMedia>? ArticleMediaItems { get; set; }
 }

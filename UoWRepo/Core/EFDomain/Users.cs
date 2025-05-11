@@ -11,6 +11,8 @@ namespace UoWRepo.Core.EFDomain;
 [Index(nameof(Email), IsUnique = true)]
 public class Users : TEntity, ITEntity
 {
+    
+
     [Required]
     [Column("Name")] public string Name { get; set; }
 
@@ -40,5 +42,24 @@ public class Users : TEntity, ITEntity
     public Guid Guid { get; set; }
     public bool VerifiedAccount { get; set; }
     
+    /// <summary>
+    /// Todos los Authors asociados a este User (cuando un autor coincide con un usuario de sistema).
+    /// </summary>
+    [InverseProperty(nameof(Authors.User))]
+    public virtual ICollection<Authors>? AuthoredItems { get; set; }
+    
     //public virtual ICollection<Authors> Authors { get; set; } = new List<Authors>();
+    
+    /// <summary>
+    /// Tipos de subject que creó este usuario.
+    /// </summary>
+    [InverseProperty(nameof(SubjectTypes.CreatedByUser))]
+    public virtual ICollection<SubjectTypes>? CreatedSubjectTypes { get; set; }
+
+    /// <summary>
+    /// Tipos de subject que actualizó por última vez este usuario.
+    /// </summary>
+    [InverseProperty(nameof(SubjectTypes.UpdatedByUser))]
+    public virtual ICollection<SubjectTypes>? UpdatedSubjectTypes { get; set; }
+    
 }

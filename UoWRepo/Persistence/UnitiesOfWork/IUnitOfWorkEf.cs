@@ -19,7 +19,7 @@ public interface IUnitOfWorkEf
     IRepositoryGuid<TypeAssociation> TypeAssociations { get; }
     
  
-    IRepositoryGuid<Subjects> Subjects { get; }
+    IRepositoryGuid<SubjectsDatamodel> Subjects { get; }
     IRepositoryGuid<Media> Media { get; }
     
     IRepositoryGuid<SubjectMedia> SubjectMedia { get; }

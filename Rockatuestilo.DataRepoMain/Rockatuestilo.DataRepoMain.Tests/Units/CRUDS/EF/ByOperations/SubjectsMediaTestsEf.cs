@@ -29,7 +29,7 @@ public class SubjectsMediaTestsEf
     [Test]
     public void Test_AddSubject()
     {
-        var subject = new Subjects
+        var subject = new SubjectsDatamodel
         {
             Guid = Guid.NewGuid(),
             Name = "Test Subject",
@@ -55,7 +55,7 @@ public class SubjectsMediaTestsEf
             Guid = Guid.NewGuid(),
             FilePath = "/path/to/file.jpg",
             MediaType = "Image",
-            Author = "John Doe",
+            //Author = "John Doe",
             License = "CC BY-SA",
             CreatedDate = DateTime.UtcNow
         };
@@ -73,7 +73,7 @@ public class SubjectsMediaTestsEf
     [Test]
     public void Test_AddSubjectMedia()
     {
-        var subject = new Subjects
+        var subject = new SubjectsDatamodel
         {
             Guid = Guid.NewGuid(),
             Name = "Test Subject",
@@ -84,7 +84,7 @@ public class SubjectsMediaTestsEf
             Guid = Guid.NewGuid(),
             FilePath = "/path/to/file.jpg",
             MediaType = "Image",
-            Author = "John Doe",
+            //Author = "John Doe",
             License = "CC BY-SA"
         };
 

@@ -5,31 +5,48 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace UoWRepo.Core.EFDomain; 
 
 [Table("ArticleMedia")]
-public class ArticleMedia : TEntityGuid  
+// Hereda Guid PK, CreatedDate, UpdatedDate; la clave compuesta se configurará vía Fluent API si lo deseas
+public class ArticleMedia : TEntityGuid
 {
-    // Composite Primary Key is typically configured using Fluent API in DbContext,
-    // not with [Key] attributes here.
-
+    // Scalar FK a Article
     [Required]
     [Column("ArticleGuid")]
     public Guid ArticleGuid { get; set; }
 
+    // Scalar FK a Media
     [Required]
     [Column("MediaGuid")]
     public Guid MediaGuid { get; set; }
 
+    // Rol del medio en el artículo
     [StringLength(50)]
     [Column("MediaRole")]
-    public string? MediaRole { get; set; } // Nullable as per DDL, has default in DB
+    public string? MediaRole { get; set; }   // nullable con default en BD
 
+    // Orden de aparición
     [Column("SortOrder")]
-    public int? SortOrder { get; set; } // Nullable as per DDL, has default in DB
+    public int? SortOrder { get; set; }      // nullable con default en BD
 
-    // Navigation properties (optional but recommended for EF Core relationships)
-    // Ensure Article and Media classes exist and have matching Guid properties.
-    // [ForeignKey("ArticleGuid")]
-    // public virtual ArticleDataModel? Article { get; set; } // Or whatever your Article entity is named
+    // --- Propiedades de navegación ---
 
-    // [ForeignKey("MediaGuid")]
-    // public virtual Media? Media { get; set; }
+    /// <summary>
+    /// El artículo al que pertenece este medio.
+    /// Asegúrate de que ArticleDataModel (o tu clase Articles) tenga:
+    /// [InverseProperty(nameof(ArticleMedia.Article))]
+    /// public virtual ICollection<ArticleMedia>? ArticleMediaItems { get; set; }
+    /// </summary>
+    [ForeignKey(nameof(ArticleGuid))]
+    [InverseProperty(nameof(ArticleDataModel.ArticleMediaItems))]
+    public virtual ArticleDataModel? Article { get; set; }
+
+    /// <summary>
+    /// El medio que se asocia al artículo.
+    /// Asegúrate de que Media tenga:
+    /// [InverseProperty(nameof(ArticleMedia.Media))]
+    /// public virtual ICollection<ArticleMedia>? ArticleMediaItems { get; set; }
+    /// </summary>
+    [ForeignKey(nameof(MediaGuid))]
+    [InverseProperty(nameof(Media.ArticleMediaItems))]
+    public virtual Media? Media { get; set; }
+    
 }
