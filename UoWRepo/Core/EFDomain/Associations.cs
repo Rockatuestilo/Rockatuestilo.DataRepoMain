@@ -9,15 +9,15 @@ namespace UoWRepo.Core.EFDomain
         [Column("AssociatedGuid")]
         public Guid AssociatedGuid { get; set; }
 
-        [ForeignKey("AssociatedType")]
+        /*[ForeignKey("AssociatedType")]
         [Column("AssociatedTypeGuid")]
         public Guid AssociatedTypeGuid { get; set; }
-        //public virtual TypeAssociation AssociatedType { get; set; }
+        //public virtual TypeAssociation AssociatedType { get; set; }*/
 
         [Column("ObjectGuid")]
         public Guid ObjectGuid { get; set; }
 
-        [ForeignKey("ObjectType")]
+        //[ForeignKey("ObjectType")]
         [Column("ObjectTypeGuid")]
         public Guid ObjectTypeGuid { get; set; }
         //public virtual TypeAssociation ObjectType { get; set; }

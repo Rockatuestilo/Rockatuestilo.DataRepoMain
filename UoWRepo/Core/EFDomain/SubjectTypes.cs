@@ -22,18 +22,18 @@ public class SubjectTypes : TEntityGuid  // Hereda: Guid PK, CreatedDate, Update
     [Column("CreatedByGuid")]
     public Guid? CreatedByGuid { get; set; }
 
-    [ForeignKey(nameof(CreatedByGuid))]
+    /*[ForeignKey(nameof(CreatedByGuid))]
     [InverseProperty(nameof(Users.CreatedSubjectTypes))]
-    public virtual Users? CreatedByUser { get; set; }
+    public virtual Users? CreatedByUser { get; set; }*/
 
     [Column("UpdatedByGuid")]
     public Guid? UpdatedByGuid { get; set; }
 
-    [ForeignKey(nameof(UpdatedByGuid))]
+    /*[ForeignKey(nameof(UpdatedByGuid))]
     [InverseProperty(nameof(Users.UpdatedSubjectTypes))]
-    public virtual Users? UpdatedByUser { get; set; }
+    public virtual Users? UpdatedByUser { get; set; }*/
 
     // Inversa a SubjectsDatamodel.SubjectType
-    [InverseProperty(nameof(SubjectsDatamodel.SubjectType))]
-    public virtual ICollection<SubjectsDatamodel>? RelatedSubjects { get; set; }
+    /*[InverseProperty(nameof(SubjectsDatamodel.SubjectType))]
+    public virtual ICollection<SubjectsDatamodel>? RelatedSubjects { get; set; }*/
 }

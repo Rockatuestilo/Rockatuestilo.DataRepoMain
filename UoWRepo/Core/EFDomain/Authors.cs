@@ -31,9 +31,9 @@ public class Authors : TEntityGuid
     [Column("UserGuid")]
     public Guid? UserGuid { get; set; }
 
-    [ForeignKey(nameof(UserGuid))]
+    /*[ForeignKey(nameof(UserGuid))]
     [InverseProperty(nameof(Users.AuthoredItems))]
-    public virtual Users? User { get; set; }
+    public virtual Users? User { get; set; }*/
 
     /*/// <summary>
     /// Collection of Media items this author created

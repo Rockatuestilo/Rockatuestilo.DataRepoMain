@@ -12,15 +12,15 @@ public class ArtistPreviewImage: TEntityGuid // No inheritance needed as it has 
     [Column("ArtistPreviewImageID")]
     public Guid ArtistPreviewImageID { get; set; }
 
-    [Required]
+    /*[Required]
     [Column("ArtistID")]
     [ForeignKey("Artist")] // Links to the Artist navigation property
-    public Guid ArtistID { get; set; }
+    public Guid ArtistID { get; set; }*/
 
-    [Required]
+    /*[Required]
     [Column("PreviewImageID")]
     [ForeignKey("PreviewImage")] // Links to the PreviewImage navigation property
-    public int PreviewImageID { get; set; }
+    public int PreviewImageID { get; set; }*/
 
     // --- Navigation Properties ---
     // Define these based on your actual entity class names
