@@ -21,9 +21,9 @@ public class SubjectsDatamodel : TEntityGuid  // Hereda: Guid PK, CreatedDate, U
     public string? Description { get; set; }
 
     // Navegación al lookup
-    [ForeignKey(nameof(SubjectTypeGuid))]
+    /*[ForeignKey(nameof(SubjectTypeGuid))]
     [InverseProperty(nameof(SubjectTypes.RelatedSubjects))]
-    public virtual SubjectTypes SubjectType { get; set; }
+    public virtual SubjectTypes SubjectType { get; set; }*/
     
     // Medios asociados
     /*[InverseProperty(nameof(SubjectMedia.Subject))]
