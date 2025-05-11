@@ -26,7 +26,7 @@ public class SubjectsDatamodel : TEntityGuid  // Hereda: Guid PK, CreatedDate, U
     public virtual SubjectTypes SubjectType { get; set; }
     
     // Medios asociados
-    [InverseProperty(nameof(SubjectMedia.Subject))]
+    /*[InverseProperty(nameof(SubjectMedia.Subject))]
     public virtual ICollection<SubjectMedia>? SubjectMediaItems { get; set; }
 
     // Relaciones “desde”
@@ -35,5 +35,5 @@ public class SubjectsDatamodel : TEntityGuid  // Hereda: Guid PK, CreatedDate, U
 
     // Relaciones “hacia”
     [InverseProperty(nameof(SubjectRelationships.ToSubjectDatamodel))]
-    public virtual ICollection<SubjectRelationships>? RelationshipsTo { get; set; }
+    public virtual ICollection<SubjectRelationships>? RelationshipsTo { get; set; }*/
 }

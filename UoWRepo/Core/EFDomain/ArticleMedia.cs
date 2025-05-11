@@ -35,9 +35,9 @@ public class ArticleMedia : TEntityGuid
     /// [InverseProperty(nameof(ArticleMedia.Article))]
     /// public virtual ICollection<ArticleMedia>? ArticleMediaItems { get; set; }
     /// </summary>
-    [ForeignKey(nameof(ArticleGuid))]
+    /*[ForeignKey(nameof(ArticleGuid))]
     [InverseProperty(nameof(ArticleDataModel.ArticleMediaItems))]
-    public virtual ArticleDataModel? Article { get; set; }
+    public virtual ArticleDataModel? Article { get; set; }*/
 
     /// <summary>
     /// El medio que se asocia al artículo.
@@ -45,8 +45,8 @@ public class ArticleMedia : TEntityGuid
     /// [InverseProperty(nameof(ArticleMedia.Media))]
     /// public virtual ICollection<ArticleMedia>? ArticleMediaItems { get; set; }
     /// </summary>
-    [ForeignKey(nameof(MediaGuid))]
+    /*[ForeignKey(nameof(MediaGuid))]
     [InverseProperty(nameof(Media.ArticleMediaItems))]
-    public virtual Media? Media { get; set; }
+    public virtual Media? Media { get; set; }*/
     
 }

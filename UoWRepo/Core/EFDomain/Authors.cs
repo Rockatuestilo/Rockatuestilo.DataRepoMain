@@ -35,9 +35,9 @@ public class Authors : TEntityGuid
     [InverseProperty(nameof(Users.AuthoredItems))]
     public virtual Users? User { get; set; }
 
-    /// <summary>
+    /*/// <summary>
     /// Collection of Media items this author created
     /// </summary>
     [InverseProperty(nameof(Media.Author))]
-    public virtual ICollection<Media>? MediaItems { get; set; }
+    public virtual ICollection<Media>? MediaItems { get; set; }*/
 }

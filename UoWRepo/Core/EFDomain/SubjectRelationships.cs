@@ -12,18 +12,18 @@ public class SubjectRelationships : TEntityGuid // Hereda Guid PK, CreatedDate, 
     [Column("FromSubjectGuid")]
     public Guid FromSubjectGuid { get; set; }
 
-    [ForeignKey(nameof(FromSubjectGuid))]
+    /*[ForeignKey(nameof(FromSubjectGuid))]
     [InverseProperty(nameof(SubjectsDatamodel.RelationshipsFrom))]
-    public virtual SubjectsDatamodel FromSubjectDatamodel { get; set; } = null!;
+    public virtual SubjectsDatamodel FromSubjectDatamodel { get; set; } = null!;*/
 
     // FK al subject de destino
     [Required]
     [Column("ToSubjectGuid")]
     public Guid ToSubjectGuid { get; set; }
 
-    [ForeignKey(nameof(ToSubjectGuid))]
+    /*[ForeignKey(nameof(ToSubjectGuid))]
     [InverseProperty(nameof(SubjectsDatamodel.RelationshipsTo))]
-    public virtual SubjectsDatamodel ToSubjectDatamodel { get; set; } = null!;
+    public virtual SubjectsDatamodel ToSubjectDatamodel { get; set; } = null!;*/
 
     // Si tienes más campos, p. ej. tipo de relación o sort order:
     [StringLength(50)]
