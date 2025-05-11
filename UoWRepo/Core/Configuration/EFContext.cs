@@ -61,7 +61,7 @@ public class EFContext : DbContext, ICommonContext
     public DbSet<TypeAssociation> TypeAssociation { get; set; }
     public DbSet<Associations> Associations { get; set; }
     
-    public DbSet<Subjects> Subjects { get; set; }
+    public DbSet<SubjectsDatamodel> Subjects { get; set; }
     public DbSet<Media> Media { get; set; }
     public DbSet<SubjectMedia> SubjectMedia { get; set; }
     public DbSet<SubjectRelationships> SubjectRelationships { get; set; }

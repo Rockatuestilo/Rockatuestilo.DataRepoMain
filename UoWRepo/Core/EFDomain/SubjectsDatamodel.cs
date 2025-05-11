@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using UoWRepo.Core.EFDomain;
 
 [Table("Subjects")]
-public class Subjects : TEntityGuid  // Hereda: Guid PK, CreatedDate, UpdatedDate
+public class SubjectsDatamodel : TEntityGuid  // Hereda: Guid PK, CreatedDate, UpdatedDate
 {
     [Required]
     [StringLength(1024)]
@@ -23,17 +23,17 @@ public class Subjects : TEntityGuid  // Hereda: Guid PK, CreatedDate, UpdatedDat
     // Navegación al lookup
     [ForeignKey(nameof(SubjectTypeGuid))]
     [InverseProperty(nameof(SubjectTypes.RelatedSubjects))]
-    public virtual SubjectTypes? SubjectType { get; set; }
-
+    public virtual SubjectTypes SubjectType { get; set; }
+    
     // Medios asociados
     [InverseProperty(nameof(SubjectMedia.Subject))]
     public virtual ICollection<SubjectMedia>? SubjectMediaItems { get; set; }
 
     // Relaciones “desde”
-    [InverseProperty(nameof(SubjectRelationships.FromSubject))]
+    [InverseProperty(nameof(SubjectRelationships.FromSubjectDatamodel))]
     public virtual ICollection<SubjectRelationships>? RelationshipsFrom { get; set; }
 
     // Relaciones “hacia”
-    [InverseProperty(nameof(SubjectRelationships.ToSubject))]
+    [InverseProperty(nameof(SubjectRelationships.ToSubjectDatamodel))]
     public virtual ICollection<SubjectRelationships>? RelationshipsTo { get; set; }
 }

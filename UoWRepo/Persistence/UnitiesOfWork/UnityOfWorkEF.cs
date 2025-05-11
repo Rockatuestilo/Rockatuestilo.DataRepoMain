@@ -34,7 +34,7 @@ public class UnityOfWorkEf : IUnitOfWorkEf
         Roles = InitObjects<RoleModels>();
         SubjectMedia = InitObjectsGuid<SubjectMedia>();
         SubjectRelationships = InitObjectsGuid<SubjectRelationships>();
-        Subjects = InitObjectsGuid<Subjects>();
+        Subjects = InitObjectsGuid<SubjectsDatamodel>();
         TypeAssociations = InitObjectsGuid<TypeAssociation>();
         Users = InitObjects<Users>();
         UsersToRoles = InitObjects<UsersToRoles>();
@@ -58,7 +58,7 @@ public class UnityOfWorkEf : IUnitOfWorkEf
     public IRepositoryGuid<Associations> Associations { get; }
     
     public IRepositoryGuid<TypeAssociation> TypeAssociations { get; }
-    public IRepositoryGuid<Subjects> Subjects { get; }
+    public IRepositoryGuid<SubjectsDatamodel> Subjects { get; }
     public IRepositoryGuid<Media> Media { get; }
     public IRepositoryGuid<SubjectMedia> SubjectMedia { get; }
     public IMemoryRepository<NewsPublicationType> PublicationType { get; }
