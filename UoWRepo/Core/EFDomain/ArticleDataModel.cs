@@ -65,6 +65,6 @@ public class ArticleDataModel : TEntity, IArticleDataModel, ITEntity
     /// <summary>
     /// Navegación a los medios asociados a este artículo.
     /// </summary>
-    [InverseProperty(nameof(ArticleMedia.Article))]
-    public virtual ICollection<ArticleMedia>? ArticleMediaItems { get; set; }
+    //[InverseProperty(nameof(ArticleMedia.Article))]
+    //public virtual ICollection<ArticleMedia>? ArticleMediaItems { get; set; }
 }
