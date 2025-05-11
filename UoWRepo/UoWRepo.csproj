@@ -16,6 +16,7 @@
         <FileVersion>10.0.6</FileVersion>
         <LangVersion>latestmajor</LangVersion>
         <Nullable>enable</Nullable>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -40,6 +41,7 @@
         <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.4" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.11"/>
         <PackageReference Include="SQLite" Version="3.13.0"/>
+        <None Include="README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Core\"/>
@@ -47,5 +49,10 @@
         <Folder Include="Migrations\Manual\" />
         <Folder Include="Persistence\"/>
         <Folder Include="Core\Configuration\CacheSystem\"/>
+    </ItemGroup>
+    <ItemGroup>
+      <None Update="README.md">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 </Project>
