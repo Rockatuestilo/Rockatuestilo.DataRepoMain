@@ -29,7 +29,7 @@ public class SubjectsMediaTestsEf
     [Test]
     public void Test_AddSubject()
     {
-        var subject = new SubjectsDatamodel
+        var subject = new SubjectsDataModel
         {
             Guid = Guid.NewGuid(),
             Name = "Test Subject",
@@ -73,7 +73,7 @@ public class SubjectsMediaTestsEf
     [Test]
     public void Test_AddSubjectMedia()
     {
-        var subject = new SubjectsDatamodel
+        var subject = new SubjectsDataModel
         {
             Guid = Guid.NewGuid(),
             Name = "Test Subject",
