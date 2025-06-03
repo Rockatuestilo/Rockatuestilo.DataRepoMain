@@ -14,10 +14,10 @@ public class SubjectsDataModelTests
             return Validator.TryValidateObject(obj, context, results, validateAllProperties: true);
         }
 
-        // Genera una lista de SubjectsDatamodel válidos
-        public List<SubjectsDatamodel> CreateValidSubjects(int count = 50)
+        // Genera una lista de SubjectsDataModel válidos
+        public List<SubjectsDataModel> CreateValidSubjects(int count = 50)
         {
-            var faker = new Faker<SubjectsDatamodel>()
+            var faker = new Faker<SubjectsDataModel>()
                 .RuleFor(s => s.Guid, _ => Guid.NewGuid())
                 .RuleFor(s => s.Name, f => f.Random.String2(1, 1024))              // longitud ≤ 1024 :contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}
                 .RuleFor(s => s.SubjectTypeGuid, _ => Guid.NewGuid())             // FK requerido :contentReference[oaicite:2]{index=2}:contentReference[oaicite:3]{index=3}
@@ -30,10 +30,10 @@ public class SubjectsDataModelTests
             return faker.Generate(count);
         }
 
-        // Genera una lista de SubjectsDatamodel intencionalmente inválidos
-        public List<SubjectsDatamodel> CreateInvalidSubjects(int count = 50)
+        // Genera una lista de SubjectsDataModel intencionalmente inválidos
+        public List<SubjectsDataModel> CreateInvalidSubjects(int count = 50)
         {
-            var faker = new Faker<SubjectsDatamodel>()
+            var faker = new Faker<SubjectsDataModel>()
                 .RuleFor(s => s.Guid, _ => Guid.NewGuid())
                 // Nombre demasiado largo
                 .RuleFor(s => s.Name, f => f.Random.String2(1025))                // excede 1024 :contentReference[oaicite:4]{index=4}:contentReference[oaicite:5]{index=5}
@@ -54,7 +54,7 @@ public class SubjectsDataModelTests
             {
                 bool isValid = TryValidateObject(subject, out var errors);
                 Assert.That(isValid, Is.True, 
-                    $"Validation failed for valid SubjectsDatamodel: {string.Join("; ", errors.Select(e => e.ErrorMessage))}");
+                    $"Validation failed for valid SubjectsDataModel: {string.Join("; ", errors.Select(e => e.ErrorMessage))}");
             }
         }
 
@@ -66,7 +66,7 @@ public class SubjectsDataModelTests
             foreach (var subject in invalidSubjects)
             {
                 bool isValid = TryValidateObject(subject, out var errors);
-                Assert.That(isValid, Is.False, "Validation unexpectedly succeeded for invalid SubjectsDatamodel.");
+                Assert.That(isValid, Is.False, "Validation unexpectedly succeeded for invalid SubjectsDataModel.");
 
                 // Comprobamos que al menos haya un error de longitud en Name
                 Assert.That(errors.Any(e => e.MemberNames.Contains("Name") 

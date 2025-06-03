@@ -20,6 +20,9 @@ public class UnityOfWorkEf : IUnitOfWorkEf
     {
         _context = context;
 
+        Authors = InitObjectsGuid<Authors>();
+        ArticleMedia = InitObjectsGuid<ArticleMedia>();
+        SubjectTypes = InitObjectsGuid<SubjectTypes>();
 
         Associations = InitObjectsGuid<Associations>();
         ArticlesViewForUI = InitObjects<ArticlesViewForUi>();
@@ -29,17 +32,19 @@ public class UnityOfWorkEf : IUnitOfWorkEf
         HashTags = InitObjects<HashTags>();
         HashTagsNews = InitObjects<HashTagsNews>();
         Media = InitObjectsGuid<Media>();
-        News = InitObjects<NewsEtty>();
+
         PublicationType = InitObjects<NewsPublicationType>();
         Roles = InitObjects<RoleModels>();
         SubjectMedia = InitObjectsGuid<SubjectMedia>();
         SubjectRelationships = InitObjectsGuid<SubjectRelationships>();
-        Subjects = InitObjectsGuid<SubjectsDatamodel>();
+        Subjects = InitObjectsGuid<SubjectsDataModel>();
         SubjectTypes = InitObjectsGuid<SubjectTypes>();
         TypeAssociations = InitObjectsGuid<TypeAssociation>();
         Users = InitObjects<Users>();
         UsersToRoles = InitObjects<UsersToRoles>();
 
+        // Artists
+        Artists = InitObjectsGuid<Artists>();
 
         
     }
@@ -52,22 +57,25 @@ public class UnityOfWorkEf : IUnitOfWorkEf
     //public IMemoryRepository<Associations> Associations { get; }
     
     //public IMemoryRepository<TypeAssociation> TypeAssociations { get; }
-    
+
+    public IRepositoryGuid<Authors> Authors { get; }
     public IRepositoryGuid<SubjectTypes> SubjectTypes { get; }
-    
+    public IRepositoryGuid<Artists> Artists { get; }
+
     public IRepositoryGuid<SubjectRelationships> SubjectRelationships { get; }
     public IMemoryRepository<HashTagsNews> HashTagsNews { get; }
     
     public IRepositoryGuid<Associations> Associations { get; }
     
     public IRepositoryGuid<TypeAssociation> TypeAssociations { get; }
-    public IRepositoryGuid<SubjectsDatamodel> Subjects { get; }
+    public IRepositoryGuid<ArticleMedia> ArticleMedia { get; }
+    public IRepositoryGuid<SubjectsDataModel> Subjects { get; }
     public IRepositoryGuid<Media> Media { get; }
     public IRepositoryGuid<SubjectMedia> SubjectMedia { get; }
     public IMemoryRepository<NewsPublicationType> PublicationType { get; }
     public IMemoryRepository<Galleries> Galleries { get; }
     public IMemoryRepository<Users> Users { get; }
-    public IMemoryRepository<NewsEtty> News { get; }
+
     public IMemoryRepository<RoleModels> Roles { get; }
     public IMemoryRepository<UsersToRoles> UsersToRoles { get; }
 

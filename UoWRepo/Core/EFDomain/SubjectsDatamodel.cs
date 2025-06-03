@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using UoWRepo.Core.EFDomain;
 
 [Table("Subjects")]
-public class SubjectsDatamodel : TEntityGuid  // Hereda: Guid PK, CreatedDate, UpdatedDate
+public class SubjectsDataModel : TEntityGuid  // Hereda: Guid PK, CreatedDate, UpdatedDate
 {
     [Required]
     [StringLength(1024)]
@@ -19,6 +19,16 @@ public class SubjectsDatamodel : TEntityGuid  // Hereda: Guid PK, CreatedDate, U
 
     [Column("Description", TypeName = "text")]
     public string? Description { get; set; }
+    
+    [Column("CreatedByGuid")]
+    public Guid? CreatedByGuid { get; set; }
+
+    /*[ForeignKey(nameof(CreatedByGuid))]
+    [InverseProperty(nameof(Users.CreatedSubjectTypes))]
+    public virtual Users? CreatedByUser { get; set; }*/
+
+    [Column("UpdatedByGuid")]
+    public Guid? UpdatedByGuid { get; set; }
 
     // Navegación al lookup
     /*[ForeignKey(nameof(SubjectTypeGuid))]
