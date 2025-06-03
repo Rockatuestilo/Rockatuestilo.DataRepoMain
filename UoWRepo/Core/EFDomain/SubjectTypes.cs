@@ -33,7 +33,7 @@ public class SubjectTypes : TEntityGuid  // Hereda: Guid PK, CreatedDate, Update
     [InverseProperty(nameof(Users.UpdatedSubjectTypes))]
     public virtual Users? UpdatedByUser { get; set; }*/
 
-    // Inversa a SubjectsDatamodel.SubjectType
-    /*[InverseProperty(nameof(SubjectsDatamodel.SubjectType))]
-    public virtual ICollection<SubjectsDatamodel>? RelatedSubjects { get; set; }*/
+    // Inversa a SubjectsDataModel.SubjectType
+    /*[InverseProperty(nameof(SubjectsDataModel.SubjectType))]
+    public virtual ICollection<SubjectsDataModel>? RelatedSubjects { get; set; }*/
 }

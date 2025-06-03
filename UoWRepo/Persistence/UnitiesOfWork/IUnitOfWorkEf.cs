@@ -17,9 +17,19 @@ public interface IUnitOfWorkEf
     IRepositoryGuid<Associations> Associations { get; }
     
     IRepositoryGuid<TypeAssociation> TypeAssociations { get; }
+ 
+    IRepositoryGuid<ArticleMedia> ArticleMedia { get; }
+    
+    IRepositoryGuid<Authors> Authors { get; }
+    IRepositoryGuid<SubjectTypes> SubjectTypes { get; }
+    
+    // Artists
+    IRepositoryGuid<Artists> Artists { get; }
+    
+    
     
  
-    IRepositoryGuid<SubjectsDatamodel> Subjects { get; }
+    IRepositoryGuid<SubjectsDataModel> Subjects { get; }
     IRepositoryGuid<Media> Media { get; }
     
     IRepositoryGuid<SubjectMedia> SubjectMedia { get; }
@@ -33,8 +43,6 @@ public interface IUnitOfWorkEf
     IMemoryRepository<Galleries> Galleries { get; }
     IMemoryRepository<Users> Users { get; }
 
-    [Obsolete("Use ArticleDataModel instead")]
-    IMemoryRepository<NewsEtty> News { get; }
 
     IMemoryRepository<RoleModels> Roles { get; }
 

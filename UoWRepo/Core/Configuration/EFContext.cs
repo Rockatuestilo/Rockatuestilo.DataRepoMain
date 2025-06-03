@@ -6,7 +6,6 @@ using Categories = UoWRepo.Core.EFDomain.Categories;
 using Galleries = UoWRepo.Core.EFDomain.Galleries;
 using HashTags = UoWRepo.Core.EFDomain.HashTags;
 using HashTagsNews = UoWRepo.Core.EFDomain.HashTagsNews;
-using NewsEtty = UoWRepo.Core.EFDomain.NewsEtty;
 using NewsPublicationType = UoWRepo.Core.EFDomain.NewsPublicationType;
 using PendingRegistration = UoWRepo.Core.EFDomain.PendingRegistration;
 using RoleModels = UoWRepo.Core.EFDomain.RoleModels;
@@ -35,7 +34,7 @@ public class EFContext : DbContext, ICommonContext
     
     public DbSet<ArticleDataModel> ArticleDataModel { get; set; }
 
-    public DbSet<NewsEtty> NewsEtty { get; set; }
+
 
     public DbSet<Galleries> Galleries { get; set; }
 
@@ -61,7 +60,7 @@ public class EFContext : DbContext, ICommonContext
     public DbSet<TypeAssociation> TypeAssociation { get; set; }
     public DbSet<Associations> Associations { get; set; }
     
-    public DbSet<SubjectsDatamodel> Subjects { get; set; }
+    public DbSet<SubjectsDataModel> Subjects { get; set; }
     public DbSet<Media> Media { get; set; }
     public DbSet<SubjectMedia> SubjectMedia { get; set; }
     public DbSet<SubjectRelationships> SubjectRelationships { get; set; }
@@ -74,6 +73,9 @@ public class EFContext : DbContext, ICommonContext
 
     // 3) Entidad SubjectTypes (lookup de tipos de subject)
     public DbSet<SubjectTypes> SubjectTypes { get; set; }
+    
+    // Artists
+    public DbSet<Artists> Artists { get; set; }
     
 
 

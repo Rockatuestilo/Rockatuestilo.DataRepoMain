@@ -39,6 +39,7 @@
 
     <ItemGroup>
         <Folder Include="TestData\EFSpace"/>
+        <Folder Include="Units\Fields\" />
         <Folder Include="Units\UnitiesOfWork\" />
     </ItemGroup>
 

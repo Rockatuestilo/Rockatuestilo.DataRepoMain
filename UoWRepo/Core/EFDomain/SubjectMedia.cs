@@ -29,13 +29,13 @@ using UoWRepo.Core.EFDomain;
 
         /// <summary>
         /// El subject al que está vinculado este medio.
-        /// Asegúrate de que SubjectsDatamodel tenga:
+        /// Asegúrate de que SubjectsDataModel tenga:
         /// [InverseProperty(nameof(SubjectMedia.Subject))]
         /// public virtual ICollection&lt;SubjectMedia&gt;? SubjectMediaItems { get; set; }
         /// </summary>
         [ForeignKey(nameof(SubjectGuid))]
-        [InverseProperty(nameof(SubjectsDatamodel.SubjectMediaItems))]
-        public virtual SubjectsDatamodel? Subject { get; set; }
+        [InverseProperty(nameof(SubjectsDataModel.SubjectMediaItems))]
+        public virtual SubjectsDataModel? Subject { get; set; }
 
         /// <summary>
         /// El medio vinculado al subject.
