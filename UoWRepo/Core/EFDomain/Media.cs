@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using UoWRepo.Core.EFDomain;
@@ -38,6 +37,13 @@ public class Media : TEntityGuid
     // --- Foreign Key to Authors ---
     [Column("AuthorGuid")]
     public Guid? AuthorGuid { get; set; }
+    
+    
+    /*[Column("CreatedByGuid")] 
+    public Guid CreatedByGuid { get; set; }
+
+    [Column("UpdatedByGuid")] 
+    public Guid UpdatedByGuid { get; set; }*/
 
     /*[ForeignKey(nameof(AuthorGuid))]
     [InverseProperty(nameof(Authors.MediaItems))]
