@@ -83,6 +83,7 @@ public class UnityOfWorkEf : IUnitOfWorkEf
     //public IRepositorySharingSocialNetwork SharingSocialNetwork { get; }
     public int Complete()
     {
+        var responsed = _context.SaveChanges();
         return _context.SaveChanges();
     }
 
@@ -135,6 +136,6 @@ public class UnityOfWorkEf : IUnitOfWorkEf
 
     public void Dispose()
     {
-        throw new NotImplementedException();
+        _context.Dispose();
     }
 }
