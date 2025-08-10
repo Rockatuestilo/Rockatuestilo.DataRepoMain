@@ -10,7 +10,6 @@ namespace UoWRepo.Core.EFDomain;
 public class ArticleDataModel : TEntity, IArticleDataModel, ITEntity
 {
     
-
     [Column("Owner")] // Updated column name to Owner
     public int OwnerId { get; set; } // Updated property name to OwnerId
 
@@ -61,6 +60,13 @@ public class ArticleDataModel : TEntity, IArticleDataModel, ITEntity
     [Required]
     [Column("OwnerUsersGuid")] 
     public Guid OwnerUsersGuid { get; set; }
+    
+    
+    // NEW: binary mirrors (computed in DB)
+    [Column("Guid_bin", TypeName = "binary(16)")]
+    //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public byte[] GuidBin { get; set; } = default!;
+
     
     /// <summary>
     /// Navegación a los medios asociados a este artículo.

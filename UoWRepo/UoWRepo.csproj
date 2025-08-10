@@ -11,9 +11,9 @@
         <PackageTags>rockatuestilo rock metal</PackageTags>
         <Company>rockatuestilo</Company>
         <Product>Rockatuestilo.DataRepoMain</Product>
-        <AssemblyVersion>10.1.2</AssemblyVersion>
-        <PackageVersion>10.1.2</PackageVersion>
-        <FileVersion>10.1.2</FileVersion>
+        <AssemblyVersion>10.2.0</AssemblyVersion>
+        <PackageVersion>10.2.0</PackageVersion>
+        <FileVersion>10.2.0</FileVersion>
         <LangVersion>latestmajor</LangVersion>
         <Nullable>enable</Nullable>
         <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -24,21 +24,21 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="9.0.7" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.7" />
+        <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="9.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
         <PackageReference Include="FluentMigrator" Version="7.1.0" />
         <PackageReference Include="FluentMigrator.Runner.MySql" Version="7.1.0" />
         <PackageReference Include="FluentMigrator.Runner" Version="7.1.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="9.0.7" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="9.0.7" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.7" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.7" />
-        <PackageReference Include="MySql.Data" Version="9.3.0" />
-        <PackageReference Include="MySql.EntityFrameworkCore" Version="9.0.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="9.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="9.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.8" />
+        <PackageReference Include="MySql.Data" Version="9.4.0" />
+        <PackageReference Include="MySql.EntityFrameworkCore" Version="9.0.6" />
         <PackageReference Include="MySqlConnector" Version="2.4.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="Npgsql" Version="9.0.3" />
-        <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.7" />
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.8" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.11"/>
         <PackageReference Include="SQLite" Version="3.13.0"/>
         <None Include="README.md" Pack="true" PackagePath="\"/>
