@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UoWRepo.Core.EFDomain;
 
-[Table("news_categories")]
+[Table("Categories")]
 public class Categories : TEntity, ITEntity
 {
     [Column("categoryOwner")] 
