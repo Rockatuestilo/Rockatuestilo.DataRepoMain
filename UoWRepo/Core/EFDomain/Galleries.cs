@@ -26,13 +26,4 @@ public class Galleries : TEntity, ITEntity
     [Column("galleryID")]
     public new int Id { get; set; }
     
-    // NOT NULL
-    [Required]
-    [Column("GUID")]
-    public Guid Guid { get; set; }
-    
-    // NEW: binary mirrors (computed in DB)
-    [Column("Guid_bin", TypeName = "binary(16)")]
-    //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public byte[] GuidBin { get; set; } = default!;
 }

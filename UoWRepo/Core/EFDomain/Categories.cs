@@ -30,5 +30,12 @@ public class Categories : TEntity, ITEntity
     [Required]
     [Column("GUID")]
     public Guid Guid { get; set; }
+    
+    // NEW: binary mirrors (computed in DB)
+    [Column("Guid_bin", TypeName = "binary(16)")]
+    //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public byte[] GuidBin { get; set; } = default!;
+    
+    
 }
 
