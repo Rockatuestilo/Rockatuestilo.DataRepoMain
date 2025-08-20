@@ -66,6 +66,11 @@ public class ArticleDataModel : TEntity, IArticleDataModel, ITEntity
     [Column("Guid_bin", TypeName = "binary(16)")]
     //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public byte[] GuidBin { get; set; } = default!;
+    
+
+    [Column("CategoryGuid_bin", TypeName = "binary(16)")]
+    //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public byte[]? CategoryGuid_bin { get; set; } 
 
     
     /// <summary>
